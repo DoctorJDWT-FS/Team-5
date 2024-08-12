@@ -10,6 +10,7 @@ public class ZombieAI : MonoBehaviour, IDamage
 
     [Header("----- Damage Stats -----")]
     [SerializeField] int hitDamage;
+    [SerializeField] float HitRate;
 
     [Header("----- Model Items -----")]
     [SerializeField] NavMeshAgent agent;
@@ -26,7 +27,9 @@ public class ZombieAI : MonoBehaviour, IDamage
 
     //bool isShooting;
     bool playerInRange;
+    bool isAttacking;
     Color colorigin;
+    IDamage target;
     // Start is called before the first frame update
     void Start()
     {
@@ -48,7 +51,8 @@ public class ZombieAI : MonoBehaviour, IDamage
         if (playerInRange)
         {
             agent.SetDestination(gameManager.instance.player.transform.position);
-          
+
+           
         }
     }
 
@@ -70,16 +74,36 @@ public class ZombieAI : MonoBehaviour, IDamage
     }
 
 
+    IEnumerator Attack()
+    {
+        while (isAttacking)
+        {
+            target.takeDamage(hitDamage);
+            yield return new WaitForSeconds(HitRate);
+        }
+       
+    }
+
 
     //Trigger functions
     private void OnAttackRangeTriggerEnter(Collider other)
     {
 
+        target = other.GetComponent<IDamage>();
+        if (target != null)
+        {
+            isAttacking = true;
+            StartCoroutine(Attack());
+
+        }
+
     }
     private void OnAttackRangeTriggerExit(Collider other)
     {
-
+        target = null;
+        isAttacking = false;
     }
+
     private void OnVisionRangeTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))

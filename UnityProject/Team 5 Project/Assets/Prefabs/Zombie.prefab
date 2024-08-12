@@ -75,7 +75,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2085623919966115635}
-  - component: {fileID: 3840435922732969194}
+  - component: {fileID: 90774324197799543}
   - component: {fileID: 6754093285449368133}
   - component: {fileID: 1832427644781521472}
   - component: {fileID: 8940351266844850806}
@@ -104,7 +104,7 @@ Transform:
   - {fileID: 2734815972210373334}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3840435922732969194
+--- !u!114 &90774324197799543
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -113,11 +113,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8173488966011737160}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79cd9e51836579944be40eda46c66e81, type: 3}
+  m_Script: {fileID: 11500000, guid: 85903d447f308ea4dbe757ddc1b89bfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 0
-  hitDamage: 0
+  HP: 3
+  hitDamage: 1
+  HitRate: 1
   agent: {fileID: 6754093285449368133}
   model: {fileID: 8940351266844850806}
   colorDamage: {r: 0, g: 0, b: 0, a: 0}
