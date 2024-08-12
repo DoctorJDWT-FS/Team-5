@@ -3,31 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyAI : MonoBehaviour, IDamage
+public class ZombieAI : MonoBehaviour, IDamage
 {
     [Header("----- Enemy Stats -----")]
     [SerializeField] int HP;
 
+    [Header("----- Damage Stats -----")]
+    [SerializeField] int hitDamage;
+
     [Header("----- Model Items -----")]
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Renderer model;
-    [SerializeField] Transform shootPos;
 
     [Header("----- Damage Color -----")]
     [SerializeField] Color colorDamage;
 
-    [Header("----- Damage Stats -----")]
-    [SerializeField] GameObject bullet;
-    [SerializeField] float shootRate;
+   
 
-    bool isShooting;
+    [Header("---- Custom Trigger ----")]
+    [SerializeField] CustomTrigger attackRangeTrigger;
+    [SerializeField] CustomTrigger visionRangeTrigger;
+
+    //bool isShooting;
     bool playerInRange;
     Color colorigin;
     // Start is called before the first frame update
     void Start()
     {
+        //sets trigger
+        attackRangeTrigger.EnteredTrigger += OnAttackRangeTriggerEnter;
+        attackRangeTrigger.ExitTrigger += OnAttackRangeTriggerExit;
+        visionRangeTrigger.EnteredTrigger += OnVisionRangeTriggerEnter;
+        visionRangeTrigger.ExitTrigger += OnVisionRangeTriggerExit;
+
+
         colorigin = model.material.color;
         gameManager.instance.updateGameGoal(1);
+       
     }
 
     // Update is called once per frame
@@ -36,10 +48,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         if (playerInRange)
         {
             agent.SetDestination(gameManager.instance.player.transform.position);
-            if (!isShooting)
-            {
-                StartCoroutine(shoot());
-            }
+          
         }
     }
 
@@ -60,26 +69,30 @@ public class EnemyAI : MonoBehaviour, IDamage
         model.material.color = colorigin;
     }
 
-    IEnumerator shoot()
-    {
-        isShooting = true;
 
-        Instantiate(bullet, shootPos.position, transform.rotation);
-        yield return new WaitForSeconds(shootRate);
-        isShooting = false;
+
+    //Trigger functions
+    private void OnAttackRangeTriggerEnter(Collider other)
+    {
+
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnAttackRangeTriggerExit(Collider other)
+    {
+
+    }
+    private void OnVisionRangeTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
         }
     }
-    private void OnTriggerExit(Collider other)
+    private void OnVisionRangeTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
         }
     }
+    
 }
