@@ -11,16 +11,16 @@ public class gameManager : MonoBehaviour
     public GameObject player;
     //public playerController playerScript;
     void Awake()
-    { 
+    {
         instance = this;
         player = GameObject.FindWithTag("Player");
-       // playerScript = player.GetComponent<playerController>();
+        // playerScript = player.GetComponent<playerController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void updateGameGoal(int amount)

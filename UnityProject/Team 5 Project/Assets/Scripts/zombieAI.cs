@@ -19,7 +19,7 @@ public class ZombieAI : MonoBehaviour, IDamage
     [Header("----- Damage Color -----")]
     [SerializeField] Color colorDamage;
 
-   
+
 
     [Header("---- Custom Trigger ----")]
     [SerializeField] CustomTrigger attackRangeTrigger;
@@ -42,7 +42,7 @@ public class ZombieAI : MonoBehaviour, IDamage
 
         colorigin = model.material.color;
         gameManager.instance.updateGameGoal(1);
-       
+
     }
 
     // Update is called once per frame
@@ -52,7 +52,7 @@ public class ZombieAI : MonoBehaviour, IDamage
         {
             agent.SetDestination(gameManager.instance.player.transform.position);
 
-           
+
         }
     }
 
@@ -81,7 +81,7 @@ public class ZombieAI : MonoBehaviour, IDamage
             target.takeDamage(hitDamage);
             yield return new WaitForSeconds(HitRate);
         }
-       
+
     }
 
 
@@ -118,5 +118,6 @@ public class ZombieAI : MonoBehaviour, IDamage
             playerInRange = false;
         }
     }
-    
+
 }
+

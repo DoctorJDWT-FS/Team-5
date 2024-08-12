@@ -14,6 +14,6 @@ public class CustomTrigger : MonoBehaviour
     }
     void OnTriggerExit(Collider other)
     {
-        ExitTrigger?.Invoke(other); 
+        ExitTrigger?.Invoke(other);
     }
 }
