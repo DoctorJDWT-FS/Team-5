@@ -30,10 +30,14 @@ public class playerController : MonoBehaviour, IDamage
     bool isSprinting;
     bool isShooting;
 
+    private Animator myAnimator;
+
     // Start is called before the first frame update
     void Start()
     {
         HPOrig = HP;
+
+        myAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -49,11 +53,13 @@ public class playerController : MonoBehaviour, IDamage
 
     void movement()
     {
+
         if (controller.isGrounded)
         {
             jumpCount = 0;
             playerVel = Vector3.zero;
         }
+
 
         move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         transform.position += move * speed * Time.deltaTime;
@@ -80,11 +86,13 @@ public class playerController : MonoBehaviour, IDamage
         if (Input.GetButtonDown("Sprint"))
         {
             speed *= sprintMod;
+            myAnimator.SetInteger("Status", 1);
             isSprinting = true;
         }
         else if (Input.GetButtonUp("Sprint"))
         {
             speed /= sprintMod;
+            myAnimator.SetInteger("Status", 0);
             isSprinting = false;
         }
     }
