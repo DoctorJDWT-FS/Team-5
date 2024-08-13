@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.EditorCoroutines.Editor;
 using UnityEngine;
 
 public class playerController : MonoBehaviour, IDamage
 {
+    [Header("----- Components -----")]
     [SerializeField] CharacterController controller;
     [SerializeField] LayerMask ignoreMask;
 
+    [Header("----- Player Stats -----")]
     [SerializeField] int HP;
     [SerializeField] int speed;
     [SerializeField] int sprintMod;
@@ -15,6 +16,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] int jumpSpeed;
     [SerializeField] int gravity;
 
+    [Header("----- Guns -----")]
     [SerializeField] int shootDamage;
     [SerializeField] float shootRate;
     [SerializeField] int shootDist;
@@ -37,10 +39,10 @@ public class playerController : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
-        //if (!gameManager.instance.isPaused)
-        //{
+        if (!gameManager.instance.isPaused)
+        {
             movement();
-        //}
+        }
 
         sprint();
     }
@@ -53,8 +55,8 @@ public class playerController : MonoBehaviour, IDamage
             playerVel = Vector3.zero;
         }
 
-        //move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        //transform.position += move * speed * Time.deltaTime;
+        move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        transform.position += move * speed * Time.deltaTime;
 
         move = Input.GetAxis("Vertical") * transform.forward +
                Input.GetAxis("Horizontal") * transform.right;
@@ -113,7 +115,7 @@ public class playerController : MonoBehaviour, IDamage
         // I'm dead!
         if (HP <= 0)
         {
-            //gameManager.instance.youLose();
+            gameManager.instance.youLose();
         }
     }
 }

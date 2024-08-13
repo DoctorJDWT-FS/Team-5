@@ -6,7 +6,7 @@ public class cameraController : MonoBehaviour
 {
     [SerializeField] int sens;
     [SerializeField] int lockVertMin, lockVertMax;
-    [SerializeField] bool invertY;
+    [SerializeField] public bool invertY;
 
     float rotX;
 
@@ -37,5 +37,9 @@ public class cameraController : MonoBehaviour
 
         //rotate the PLAYER on the y-axis
         transform.parent.Rotate(Vector3.up * mouseX);
+    }
+    public void SetSensitivity(int newSensitivity)
+    {
+        sens = newSensitivity;
     }
 }
