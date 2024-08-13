@@ -15,6 +15,7 @@ public class ZombieAI : MonoBehaviour, IDamage
     [Header("----- Model Items -----")]
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Renderer model;
+    [SerializeField] Renderer modelHead;
 
     [Header("----- Damage Color -----")]
     [SerializeField] Color colorDamage;
@@ -29,7 +30,10 @@ public class ZombieAI : MonoBehaviour, IDamage
     bool playerInRange;
     bool isAttacking;
     Color colorigin;
+    Color coloriginHead;
     IDamage target;
+    private Animator myAnimator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,8 +45,9 @@ public class ZombieAI : MonoBehaviour, IDamage
 
 
         colorigin = model.material.color;
-       gameManager.instance.updateGameGoal(1);
-
+        coloriginHead = modelHead.material.color;
+        //gameManager.instance.updateGameGoal(1);
+        myAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -52,8 +57,13 @@ public class ZombieAI : MonoBehaviour, IDamage
         {
             agent.SetDestination(gameManager.instance.player.transform.position);
 
-
         }
+        if (!playerInRange)
+        {
+            myAnimator.SetInteger("Chase", 0);
+        }
+        
+
     }
 
     public void takeDamage(int amount)
@@ -69,8 +79,10 @@ public class ZombieAI : MonoBehaviour, IDamage
     IEnumerator flashDamage()
     {
         model.material.color = colorDamage;
+        modelHead.material.color = colorDamage;
         yield return new WaitForSeconds(0.1f);
         model.material.color = colorigin;
+        modelHead.material.color = coloriginHead;
     }
 
 
@@ -92,6 +104,7 @@ public class ZombieAI : MonoBehaviour, IDamage
         target = other.GetComponent<IDamage>();
         if (target != null)
         {
+            myAnimator.SetInteger("Attack", 1);
             isAttacking = true;
             StartCoroutine(Attack());
 
@@ -100,6 +113,7 @@ public class ZombieAI : MonoBehaviour, IDamage
     }
     private void OnAttackRangeTriggerExit(Collider other)
     {
+        myAnimator.SetInteger("Attack", 0);
         target = null;
         isAttacking = false;
     }
@@ -108,11 +122,13 @@ public class ZombieAI : MonoBehaviour, IDamage
     {
         if (other.CompareTag("Player"))
         {
+            myAnimator.SetInteger("Chase", 1);
             playerInRange = true;
         }
     }
     private void OnVisionRangeTriggerExit(Collider other)
     {
+        
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
