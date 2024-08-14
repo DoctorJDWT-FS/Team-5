@@ -484,22 +484,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 558142074815402979, guid: d46c7614933ebf74db6b4c0036274c56, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: d4fe322fb3ed71f4f95d20c181097f2f, type: 2}
-    - target: {fileID: 1250919390888461378, guid: d46c7614933ebf74db6b4c0036274c56, type: 3}
-      propertyPath: modelHead
-      value: 
-      objectReference: {fileID: 2107779274653950819}
-    - target: {fileID: 1250919390888461378, guid: d46c7614933ebf74db6b4c0036274c56, type: 3}
-      propertyPath: sprintSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1250919390888461378, guid: d46c7614933ebf74db6b4c0036274c56, type: 3}
-      propertyPath: walkingSpeed
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 1779981757414147453, guid: d46c7614933ebf74db6b4c0036274c56, type: 3}
       propertyPath: m_LocalPosition.x
       value: -11.4
@@ -544,20 +528,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'zombie '
       objectReference: {fileID: 0}
-    - target: {fileID: 8549140215088199038, guid: d46c7614933ebf74db6b4c0036274c56, type: 3}
-      propertyPath: m_Speed
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d46c7614933ebf74db6b4c0036274c56, type: 3}
---- !u!137 &2107779274653950819 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 8162805643074758575, guid: d46c7614933ebf74db6b4c0036274c56, type: 3}
-  m_PrefabInstance: {fileID: 2107779274653950818}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
