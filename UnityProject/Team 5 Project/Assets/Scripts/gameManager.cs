@@ -28,6 +28,8 @@ public class gameManager : MonoBehaviour
     public GameObject player;
     public playerController playerScript;
     public cameraController cameraScript;
+    public Image PlayerHPBar;
+    public GameObject flashDamageScreen;
 
     int enemyCount;
     public bool invertY;
@@ -36,7 +38,7 @@ public class gameManager : MonoBehaviour
     {
         instance = this;
         player = GameObject.FindWithTag("Player");
-         playerScript = player.GetComponent<playerController>();
+        playerScript = player.GetComponent<playerController>();
     }
 
     // Update is called once per frame

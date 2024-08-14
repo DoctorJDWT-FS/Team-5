@@ -37,7 +37,7 @@ public class playerController : MonoBehaviour, IDamage
     void Start()
     {
         HPOrig = HP;
-
+        updatePlayerUI();
         myAnimator = GetComponent<Animator>();
     }
 
@@ -131,7 +131,7 @@ public class playerController : MonoBehaviour, IDamage
     public void takeDamage(int amount)
     {
         HP -= amount;
-
+        updatePlayerUI();
         // I'm dead!
         if (HP <= 0)
         {
@@ -152,6 +152,11 @@ public class playerController : MonoBehaviour, IDamage
 
         // Call the youLose method after the delay
         gameManager.instance.youLose();
+    }
+
+    public void updatePlayerUI()
+    {
+        gameManager.instance.PlayerHPBar.fillAmount = (float)HP / HPOrig;
     }
 
 }

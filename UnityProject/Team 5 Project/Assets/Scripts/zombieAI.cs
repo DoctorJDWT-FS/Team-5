@@ -49,7 +49,7 @@ public class ZombieAI : MonoBehaviour, IDamage
 
         colorigin = model.material.color;
         coloriginHead = modelHead.material.color;
-        //gameManager.instance.updateGameGoal(1);
+        gameManager.instance.updateGameGoal(1);
         myAnimator = GetComponent<Animator>();
     }
 
