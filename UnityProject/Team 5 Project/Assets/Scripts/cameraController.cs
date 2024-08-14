@@ -15,6 +15,9 @@ public class cameraController : MonoBehaviour
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+
+        // Set the camera to ignore the PlayerHead and PlayerTorso layers
+        Camera.main.cullingMask = ~(LayerMask.GetMask("Player Head", "Player Torso"));
     }
 
     // Update is called once per frame
