@@ -7,6 +7,9 @@ public class ZombieAI : MonoBehaviour, IDamage
 {
     [Header("----- Enemy Stats -----")]
     [SerializeField] int HP;
+    [SerializeField] int sprintSpeed;
+    [SerializeField] int walkingSpeed;
+
 
     [Header("----- Damage Stats -----")]
     [SerializeField] int hitDamage;
@@ -53,16 +56,15 @@ public class ZombieAI : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
-        if (playerInRange)
-        {
-            agent.SetDestination(gameManager.instance.player.transform.position);
-
-        }
+        agent.SetDestination(gameManager.instance.player.transform.position);
         if (!playerInRange)
         {
-            myAnimator.SetInteger("Chase", 0);
+            agent.speed = walkingSpeed;
         }
-        
+        if (playerInRange)
+        {
+            agent.speed = sprintSpeed;
+        }
 
     }
 
@@ -104,7 +106,7 @@ public class ZombieAI : MonoBehaviour, IDamage
         target = other.GetComponent<IDamage>();
         if (target != null)
         {
-            myAnimator.SetInteger("Attack", 1);
+            myAnimator.SetBool("Attack", true);
             isAttacking = true;
             StartCoroutine(Attack());
 
@@ -113,7 +115,7 @@ public class ZombieAI : MonoBehaviour, IDamage
     }
     private void OnAttackRangeTriggerExit(Collider other)
     {
-        myAnimator.SetInteger("Attack", 0);
+        myAnimator.SetBool("Attack", false);
         target = null;
         isAttacking = false;
     }
@@ -122,15 +124,16 @@ public class ZombieAI : MonoBehaviour, IDamage
     {
         if (other.CompareTag("Player"))
         {
-            myAnimator.SetInteger("Chase", 1);
+            myAnimator.SetBool("Chase", true);
             playerInRange = true;
         }
     }
     private void OnVisionRangeTriggerExit(Collider other)
     {
-        
+       
         if (other.CompareTag("Player"))
         {
+            myAnimator.SetBool("Chase", false);
             playerInRange = false;
         }
     }
