@@ -18,8 +18,6 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuSettings;
 
-    public bool isPaused;
-
     [Header("----- Text -----")]
     [SerializeField] TMP_Text enemyCountText;
     
@@ -28,17 +26,22 @@ public class gameManager : MonoBehaviour
     public GameObject player;
     public playerController playerScript;
     public cameraController cameraScript;
+    public GameObject playerSpawnPos;
+    public GameObject checkpointGet;
     public Image PlayerHPBar;
     public GameObject flashDamageScreen;
+    public bool invertY;
+    public bool isPaused;
+
 
     int enemyCount;
-    public bool invertY;
 
     void Awake()
     {
         instance = this;
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<playerController>();
+        playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
     }
 
     // Update is called once per frame

@@ -29,9 +29,10 @@ public class playerController : MonoBehaviour, IDamage
 
     bool isSprinting;
     bool isShooting;
-    bool isDead;
+    public bool isDead;
+    bool isInvincible;
 
-    private Animator myAnimator;
+    public Animator myAnimator;
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +40,40 @@ public class playerController : MonoBehaviour, IDamage
         HPOrig = HP;
         updatePlayerUI();
         myAnimator = GetComponent<Animator>();
+        spawnPlayer();
+    }
+
+    public void spawnPlayer()
+    {
+        HP = HPOrig;
+        updatePlayerUI();
+        transform.position = gameManager.instance.playerSpawnPos.transform.position;
+
+        myAnimator.SetBool("Dead", false);
+        myAnimator.SetTrigger("Idle");
+        myAnimator.Play("Idle");
+        isDead = false;
+
+        ZombieAI[] enemies = FindObjectsOfType<ZombieAI>();
+        foreach (ZombieAI enemy in enemies)
+        {
+            enemy.resetTriggers();
+        }
+
+        controller.enabled = false;
+        Collider playerCollider = GetComponent<Collider>();
+        if (playerCollider != null)
+        {
+            playerCollider.enabled = false;
+        }
+
+        if (playerCollider != null)
+        {
+            playerCollider.enabled = true;
+        }
+        controller.enabled = true;
+
+        StartCoroutine(InvincibilityPeriod());
     }
 
     // Update is called once per frame
@@ -109,6 +144,8 @@ public class playerController : MonoBehaviour, IDamage
         }
     }
 
+
+
     IEnumerator shoot()
     {
         isShooting = true;
@@ -130,27 +167,39 @@ public class playerController : MonoBehaviour, IDamage
 
     public void takeDamage(int amount)
     {
+        if (isInvincible)
+            return;
+
         HP -= amount;
         updatePlayerUI();
         // I'm dead!
         if (HP <= 0)
         {
+            isDead = true;
             StartCoroutine(HandleDeath());
+
         }
+    }
+
+    IEnumerator InvincibilityPeriod()
+    {
+        isInvincible = true;
+        yield return new WaitForSeconds(1.0f);
+        isInvincible = false;
     }
 
     private IEnumerator HandleDeath()
     {
         // Play death animation
-        myAnimator.SetBool("Dead", true);
+        myAnimator.SetBool("Dead", isDead);
 
         // Restrict movement
-        isDead = true;
 
         // Wait for 2 seconds 
         yield return new WaitForSeconds(4.0f);
 
         // Call the youLose method after the delay
+        Debug.Log("still in this for some reason");
         gameManager.instance.youLose();
     }
 

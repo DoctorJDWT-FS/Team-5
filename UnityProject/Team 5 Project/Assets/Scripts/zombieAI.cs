@@ -92,10 +92,19 @@ public class ZombieAI : MonoBehaviour, IDamage
     {
         while (isAttacking)
         {
-            target.takeDamage(hitDamage);
-            yield return new WaitForSeconds(HitRate);
+            if (target != null && !gameManager.instance.playerScript.isDead)
+            {
+                target.takeDamage(hitDamage);
+                yield return new WaitForSeconds(HitRate);
+            }
+            else
+            {
+                isAttacking = false;
+                myAnimator.SetBool("Attack", false);
+                myAnimator.SetBool("Chase", false);
+                yield break;
+            }
         }
-
     }
 
 
@@ -136,6 +145,15 @@ public class ZombieAI : MonoBehaviour, IDamage
             myAnimator.SetBool("Chase", false);
             playerInRange = false;
         }
+    }
+
+    public void resetTriggers()
+    {
+        myAnimator.SetBool("Attack", false);
+        myAnimator.SetBool("Chase", false);
+        target = null;
+        isAttacking = false;
+        playerInRange = false;
     }
 
 }

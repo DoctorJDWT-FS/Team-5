@@ -1821,7 +1821,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Restart
+  m_text: Respawn
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2686,7 +2686,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8265741120035955584}
         m_TargetAssemblyTypeName: buttonFunctions, Assembly-CSharp
-        m_MethodName: restart
+        m_MethodName: respawn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3178,14 +3178,16 @@ MonoBehaviour:
   menuWin: {fileID: 5855483631671998952}
   menuLose: {fileID: 9162501764397242256}
   menuSettings: {fileID: 545342403807074582}
-  isPaused: 0
   enemyCountText: {fileID: 2438056919985925545}
   player: {fileID: 0}
   playerScript: {fileID: 0}
   cameraScript: {fileID: 0}
+  playerSpawnPos: {fileID: 0}
+  checkpointGet: {fileID: 0}
   PlayerHPBar: {fileID: 3773681390201277200}
   flashDamageScreen: {fileID: 0}
   invertY: 0
+  isPaused: 0
 --- !u!114 &8265741120035955584
 MonoBehaviour:
   m_ObjectHideFlags: 0

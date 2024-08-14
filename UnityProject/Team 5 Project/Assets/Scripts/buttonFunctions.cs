@@ -18,6 +18,11 @@ public class buttonFunctions : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         gameManager.instance.stateUnpause();
     }
+    public void respawn()
+    {
+        gameManager.instance.playerScript.spawnPlayer();
+        gameManager.instance.stateUnpause();
+    }
     public void settings()
     {
         Debug.Log("Settings");
