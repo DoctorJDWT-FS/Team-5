@@ -29,6 +29,7 @@ public class playerController : MonoBehaviour, IDamage
 
     bool isSprinting;
     bool isShooting;
+    bool isDead;
 
     private Animator myAnimator;
 
@@ -43,7 +44,7 @@ public class playerController : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
-        if (!gameManager.instance.isPaused)
+        if (!gameManager.instance.isPaused && !isDead)
         {
             movement();
         }
@@ -53,15 +54,24 @@ public class playerController : MonoBehaviour, IDamage
 
     void movement()
     {
-
         if (controller.isGrounded)
         {
             jumpCount = 0;
             playerVel = Vector3.zero;
         }
 
-
         move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+
+        // Define a small threshold to ignore tiny movement inputs
+        float movementThreshold = 0.1f;
+
+        // Check if the player is actually moving beyond the threshold
+        bool isMoving = move.magnitude > movementThreshold;
+
+        // Set the Walking parameter in the animator
+        myAnimator.SetBool("Walking", isMoving);
+
+        // Apply the movement
         transform.position += move * speed * Time.deltaTime;
 
         move = Input.GetAxis("Vertical") * transform.forward +
@@ -78,21 +88,23 @@ public class playerController : MonoBehaviour, IDamage
         playerVel.y -= gravity * Time.deltaTime;
 
         if (Input.GetButton("Shoot") && !isShooting)
+        {
             StartCoroutine(shoot());
+        }
     }
 
     void sprint()
     {
         if (Input.GetButtonDown("Sprint"))
         {
+            myAnimator.SetBool("Sprint", true);
             speed *= sprintMod;
-            myAnimator.SetInteger("Status", 1);
             isSprinting = true;
         }
         else if (Input.GetButtonUp("Sprint"))
         {
+            myAnimator.SetBool("Sprint", false);
             speed /= sprintMod;
-            myAnimator.SetInteger("Status", 0);
             isSprinting = false;
         }
     }
@@ -123,7 +135,23 @@ public class playerController : MonoBehaviour, IDamage
         // I'm dead!
         if (HP <= 0)
         {
-            gameManager.instance.youLose();
+            StartCoroutine(HandleDeath());
         }
     }
+
+    private IEnumerator HandleDeath()
+    {
+        // Play death animation
+        myAnimator.SetBool("Dead", true);
+
+        // Restrict movement
+        isDead = true;
+
+        // Wait for 2 seconds 
+        yield return new WaitForSeconds(4.0f);
+
+        // Call the youLose method after the delay
+        gameManager.instance.youLose();
+    }
+
 }

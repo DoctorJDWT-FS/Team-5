@@ -887,10 +887,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 10
+  sprintSpeed: 5
+  walkingSpeed: 2
   hitDamage: 1
   HitRate: 1.5
   agent: {fileID: 8549140215088199038}
   model: {fileID: 7687395879770981894}
+  modelHead: {fileID: 8162805643074758575}
   colorDamage: {r: 0.6528301, g: 0.09775617, b: 0.09238153, a: 0}
   attackRangeTrigger: {fileID: 9139719332782997733}
   visionRangeTrigger: {fileID: 5809235043359408288}
@@ -904,7 +907,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 5
+  m_Speed: 2
   m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 600
@@ -926,7 +929,7 @@ Animator:
   m_GameObject: {fileID: 4088597403200703994}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 8f7380da49034cd488ddff94b1ac35d1, type: 3}
-  m_Controller: {fileID: 9100000, guid: b8582fb379a65344096c4d4d6c707b9c, type: 2}
+  m_Controller: {fileID: 9100000, guid: d4fe322fb3ed71f4f95d20c181097f2f, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -2094,6 +2097,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 141da45aec50f1f448840591cb6ac0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doorAnimator: {fileID: 0}
+  interactionText: {fileID: 0}
 --- !u!135 &2084044475825185172
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2160,6 +2165,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 141da45aec50f1f448840591cb6ac0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doorAnimator: {fileID: 0}
+  interactionText: {fileID: 0}
 --- !u!135 &8147342962606566752
 SphereCollider:
   m_ObjectHideFlags: 0
