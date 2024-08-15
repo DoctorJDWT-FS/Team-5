@@ -34,9 +34,12 @@ public class waveSpawner : MonoBehaviour
         for (int i = 0; i < spawnAmount;)
         {
             int randomSpawner = Random.Range(0, spawnPoints.Length);
+            //spawn random for enemy type 
+            int randomEnemyType = Random.Range(0, 3);
             if (spawnPoints[randomSpawner].playerInRange == false)
             {
-                spawnPoints[randomSpawner].spawn(enemyTypes[0]);
+                //replaced enemy0 to random
+                spawnPoints[randomSpawner].spawn(enemyTypes[randomEnemyType]);
                 i++;
             }
         }

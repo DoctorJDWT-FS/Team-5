@@ -30,15 +30,15 @@ public class ZombieAI : MonoBehaviour, IDamage
     [SerializeField] CustomTrigger visionRangeTrigger;
 
     //bool isShooting;
-    bool playerInRange;
-    bool isAttacking;
-    Color colorigin;
+     bool playerInRange;
+     bool isAttacking;
+     Color colorigin;
     Color coloriginHead;
     IDamage target;
-    private Animator myAnimator;
+    Animator myAnimator;
 
     // Start is called before the first frame update
-    void Start()
+    void  Start()
     {
         //sets trigger
         attackRangeTrigger.EnteredTrigger += OnAttackRangeTriggerEnter;
@@ -68,7 +68,7 @@ public class ZombieAI : MonoBehaviour, IDamage
 
     }
 
-    public void takeDamage(int amount)
+    public  void takeDamage(int amount)
     {
         HP -= amount;
         StartCoroutine(flashDamage());
@@ -92,7 +92,7 @@ public class ZombieAI : MonoBehaviour, IDamage
     {
         while (isAttacking)
         {
-            if (target != null && !gameManager.instance.playerScript.isDead)
+            if (!gameManager.instance.playerScript.isDead)
             {
                 target.takeDamage(hitDamage);
                 yield return new WaitForSeconds(HitRate);
@@ -100,10 +100,8 @@ public class ZombieAI : MonoBehaviour, IDamage
             else
             {
                 isAttacking = false;
-                myAnimator.SetBool("Attack", false);
-                myAnimator.SetBool("Chase", false);
-                yield break;
             }
+
         }
     }
 
@@ -113,7 +111,7 @@ public class ZombieAI : MonoBehaviour, IDamage
     {
 
         target = other.GetComponent<IDamage>();
-        if (target != null)
+        if (target != null && other.CompareTag("Player"))
         {
             myAnimator.SetBool("Attack", true);
             isAttacking = true;
@@ -124,9 +122,12 @@ public class ZombieAI : MonoBehaviour, IDamage
     }
     private void OnAttackRangeTriggerExit(Collider other)
     {
-        myAnimator.SetBool("Attack", false);
-        target = null;
-        isAttacking = false;
+        if (other.CompareTag("Player"))
+        {
+            myAnimator.SetBool("Attack", false);
+            target = null;
+            isAttacking = false;
+        }
     }
 
     private void OnVisionRangeTriggerEnter(Collider other)

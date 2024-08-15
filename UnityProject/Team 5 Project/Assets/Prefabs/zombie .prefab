@@ -886,11 +886,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faf172910ec8d8f4eb8c6e329d5791a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 10
-  sprintSpeed: 5
+  HP: 4
+  sprintSpeed: 4
   walkingSpeed: 2
   hitDamage: 1
-  HitRate: 1.5
+  HitRate: 0.5
   agent: {fileID: 8549140215088199038}
   model: {fileID: 7687395879770981894}
   modelHead: {fileID: 8162805643074758575}
@@ -2097,8 +2097,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 141da45aec50f1f448840591cb6ac0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorAnimator: {fileID: 0}
-  interactionText: {fileID: 0}
 --- !u!135 &2084044475825185172
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2165,8 +2163,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 141da45aec50f1f448840591cb6ac0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorAnimator: {fileID: 0}
-  interactionText: {fileID: 0}
 --- !u!135 &8147342962606566752
 SphereCollider:
   m_ObjectHideFlags: 0
