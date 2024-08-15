@@ -121,8 +121,15 @@ public class zombieCyborgAI : MonoBehaviour, IDamage
         //will lopp will player is in attacking range 
         while (isAttacking)
         {
+            if (!gameManager.instance.playerScript.isDead)
+            {
                 target.takeDamage(hitDamage);
                 yield return new WaitForSeconds(HitRate);
+            }
+            else
+            {
+                isAttacking = false;
+            }
            
         }
     }
