@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5575539880081421186}
   - component: {fileID: 432004286161037491}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: SK_Soldier_Torso
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,8 +113,8 @@ Transform:
   m_GameObject: {fileID: 3129164060156944244}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.13052596, z: -0, w: 0.99144495}
-  m_LocalPosition: {x: 0, y: 1.98, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 2, z: 0.13}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1713214405337235119}
@@ -132,8 +132,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sens: 500
-  lockVertMin: -90
-  lockVertMax: 90
+  lockVertMin: -60
+  lockVertMax: 50
   invertY: 0
 --- !u!20 &4475532091942030891
 Camera:
@@ -444,13 +444,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4766732665967344947}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5129242, y: 0.26123726, z: 0.13823152}
-  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
+  m_LocalRotation: {x: 0.68668884, y: -0.022950541, z: 0.063717015, w: -0.72379005}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.2499993, y: 1.2499995, z: 1.2499986}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 4122216417790352978}
-  m_Father: {fileID: 1713214405337235119}
+  m_Children: []
+  m_Father: {fileID: 6910825846356341499}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5612484110836673613
 GameObject:
@@ -553,7 +552,6 @@ Transform:
   - {fileID: 5296638088146053476}
   - {fileID: 5575539880081421186}
   - {fileID: 8552396468000771987}
-  - {fileID: 1486129425985392166}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &8472063011935269267
@@ -594,14 +592,16 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   HP: 30
-  speed: 5
+  speed: 4
   sprintMod: 2
   jumpMax: 2
   jumpSpeed: 12
   gravity: 28
   shootDamage: 1
-  shootRate: 0.5
+  shootRate: 5.5
   shootDist: 500
+  bullet: {fileID: 6235100777797261364, guid: cc8b33de2edd06f49bb4f0997282d871, type: 3}
+  shootPos: {fileID: 1486129425985392166}
   isDead: 0
 --- !u!143 &8832618226616588690
 CharacterController:
@@ -628,7 +628,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 0.99, z: 0}
 --- !u!1 &7344076774344490335
 GameObject:
   m_ObjectHideFlags: 0
@@ -657,7 +657,8 @@ Transform:
   m_LocalPosition: {x: 0.00000016905268, y: -0.73703206, z: 0.07459629}
   m_LocalScale: {x: 1, y: 0.99999976, z: 0.99999964}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1486129425985392166}
   m_Father: {fileID: 2707338903232828766}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7656846737579732863
@@ -670,7 +671,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8506244690974394450}
   - component: {fileID: 325644966427954215}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SK_Soldier_Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -745,65 +746,3 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.39364445, y: 0.008824348, z: 0.000000074505806}
     m_Extent: {x: 0.17740639, y: 0.19346918, z: 0.13846613}
   m_DirtyAABB: 0
---- !u!1001 &7945238217710181725
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1486129425985392166}
-    m_Modifications:
-    - target: {fileID: 6235100777797261364, guid: cc8b33de2edd06f49bb4f0997282d871, type: 3}
-      propertyPath: m_Name
-      value: Bullet
-      objectReference: {fileID: 0}
-    - target: {fileID: 6302266432211403535, guid: cc8b33de2edd06f49bb4f0997282d871, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6302266432211403535, guid: cc8b33de2edd06f49bb4f0997282d871, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6302266432211403535, guid: cc8b33de2edd06f49bb4f0997282d871, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6302266432211403535, guid: cc8b33de2edd06f49bb4f0997282d871, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6302266432211403535, guid: cc8b33de2edd06f49bb4f0997282d871, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6302266432211403535, guid: cc8b33de2edd06f49bb4f0997282d871, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6302266432211403535, guid: cc8b33de2edd06f49bb4f0997282d871, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6302266432211403535, guid: cc8b33de2edd06f49bb4f0997282d871, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6302266432211403535, guid: cc8b33de2edd06f49bb4f0997282d871, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6302266432211403535, guid: cc8b33de2edd06f49bb4f0997282d871, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: cc8b33de2edd06f49bb4f0997282d871, type: 3}
---- !u!4 &4122216417790352978 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6302266432211403535, guid: cc8b33de2edd06f49bb4f0997282d871, type: 3}
-  m_PrefabInstance: {fileID: 7945238217710181725}
-  m_PrefabAsset: {fileID: 0}

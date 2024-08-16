@@ -17,7 +17,7 @@ public class damage : MonoBehaviour
     {
         if(type == damageType.bullet)
         {
-            rb.velocity = transform.forward* speed;
+            rb.velocity = transform.forward * speed;
             Destroy(gameObject, destroyTime);
         }
     }
