@@ -23,13 +23,15 @@ public class gameManager : MonoBehaviour
     
     //player info
     [Header("----- Player -----")]
-    public GameObject player;
     public playerController playerScript;
     public cameraController cameraScript;
+
+    public GameObject player;
     public GameObject playerSpawnPos;
     public GameObject checkpointGet;
-    public Image PlayerHPBar;
     public GameObject flashDamageScreen;
+    public Image PlayerHPBar;
+
     public bool invertY;
     public bool isPaused;
 
