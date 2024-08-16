@@ -27,7 +27,7 @@ public class basicZombieAI : MonoBehaviour, IDamage
     [SerializeField] protected CustomTrigger attackRangeTrigger;
     [SerializeField] protected CustomTrigger visionRangeTrigger;
 
-    //bool isShooting;
+    //
     protected bool playerInRange;
     protected bool isAttacking;
     protected Color colorigin;
@@ -44,17 +44,21 @@ public class basicZombieAI : MonoBehaviour, IDamage
         visionRangeTrigger.EnteredTrigger += OnVisionRangeTriggerEnter;
         visionRangeTrigger.ExitTrigger += OnVisionRangeTriggerExit;
 
-
+        //sets  skin mesh for damage 
         colorigin = model.material.color;
         coloriginHead = modelHead.material.color;
+        //game goal update
         gameManager.instance.updateGameGoal(1);
+        //animator on charactor extractor 
         myAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     protected virtual void Update()
     {
+        //zombie will always be chasing player at different speed 
         agent.SetDestination(gameManager.instance.player.transform.position);
+        //if player is close, they will run else walk 
         agent.speed = playerInRange ? sprintSpeed : walkingSpeed;
 
     }
@@ -81,8 +85,10 @@ public class basicZombieAI : MonoBehaviour, IDamage
 
     protected IEnumerator Attack()
     {
+        // zombie will attack till player is dead or steps out of range 
         while (isAttacking)
         {
+            //if player isnt dead it will attack only the player  no zombies should be hit 
             if (!gameManager.instance.playerScript.isDead)
             {
                 target.takeDamage(hitDamage);
@@ -90,6 +96,7 @@ public class basicZombieAI : MonoBehaviour, IDamage
             }
             else
             {
+                //player must have died and will set attacking to false to break loop
                 isAttacking = false;
             }
 
@@ -100,11 +107,14 @@ public class basicZombieAI : MonoBehaviour, IDamage
     //Trigger functions
     protected virtual void OnAttackRangeTriggerEnter(Collider other)
     {
-
+        // grabs other compponent
         target = other.GetComponent<IDamage>();
+        //makes sure it is the player
         if (target != null && other.CompareTag("Player"))
         {
+            //set animation to attacking true 
             myAnimator.SetBool("Attack", true);
+            //starts attack
             isAttacking = true;
             StartCoroutine(Attack());
 
@@ -113,8 +123,10 @@ public class basicZombieAI : MonoBehaviour, IDamage
     }
     protected virtual void OnAttackRangeTriggerExit(Collider other)
     {
+        // check if the other is a player that has left the range 
         if (other.CompareTag("Player"))
         {
+            //stop attacking animation 
             myAnimator.SetBool("Attack", false);
             target = null;
             isAttacking = false;
@@ -123,6 +135,7 @@ public class basicZombieAI : MonoBehaviour, IDamage
 
     protected virtual void OnVisionRangeTriggerEnter(Collider other)
     {
+        //if other is player they will run and start the animation 
         if (other.CompareTag("Player"))
         {
             myAnimator.SetBool("Chase", true);
@@ -131,7 +144,7 @@ public class basicZombieAI : MonoBehaviour, IDamage
     }
     protected virtual void OnVisionRangeTriggerExit(Collider other)
     {
-
+        //if other is player they will start walking animation
         if (other.CompareTag("Player"))
         {
             myAnimator.SetBool("Chase", false);
