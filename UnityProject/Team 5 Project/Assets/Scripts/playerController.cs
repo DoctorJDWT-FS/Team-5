@@ -12,6 +12,7 @@ public class playerController : MonoBehaviour, IDamage
 
     [Header("----- Player Stats -----")]
     [SerializeField] int HP;
+    [SerializeField] int shield;
     [SerializeField] int speed;
     [SerializeField] int sprintMod;
     [SerializeField] int jumpMax;
@@ -30,6 +31,7 @@ public class playerController : MonoBehaviour, IDamage
 
     int jumpCount;
     int HPOrig;
+    int shieldOrig;
 
     bool isSprinting;
     bool isShooting;
@@ -42,6 +44,7 @@ public class playerController : MonoBehaviour, IDamage
     void Start()
     {
         HPOrig = HP;
+        shieldOrig = shield;
         updatePlayerUI();
         myAnimator = GetComponent<Animator>();
         deathCamera.gameObject.SetActive(false);
@@ -51,6 +54,7 @@ public class playerController : MonoBehaviour, IDamage
     public void spawnPlayer()
     {
         HP = HPOrig;
+        shield = shieldOrig;
         updatePlayerUI();
         transform.position = gameManager.instance.playerSpawnPos.transform.position;
        
@@ -182,15 +186,39 @@ public class playerController : MonoBehaviour, IDamage
     {
         if (isInvincible)
             return;
-
-        HP -= amount;
-        updatePlayerUI();
+        //if player has shield , player wont take damage 
+        if (shield <= 0)
+        {
+            HP -= amount;
+            StartCoroutine(flashDamage());
+            updatePlayerUI();
+        }
+        else
+        {
+            //player takes sheild damage
+            shield -= amount;
+            StartCoroutine(shieldDamage());
+            updatePlayerUI();
+        }
 
         // I'm dead!
         if (HP <= 0)
         {
             StartCoroutine(HandleDeath());
         }
+    }
+    //added flash damage script 
+    private IEnumerator flashDamage()
+    {
+        gameManager.instance.flashDamageScreen.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        gameManager.instance.flashDamageScreen.SetActive(false);
+    }
+    private IEnumerator shieldDamage()
+    {
+        gameManager.instance.flashShieldDamageScreen.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        gameManager.instance.flashShieldDamageScreen.SetActive(false);
     }
 
     IEnumerator InvincibilityPeriod()
@@ -221,6 +249,7 @@ public class playerController : MonoBehaviour, IDamage
     public void updatePlayerUI()
     {
         gameManager.instance.PlayerHPBar.fillAmount = (float)HP / HPOrig;
+        gameManager.instance.playerShieldBar.fillAmount = (float)shield / shieldOrig;
     }
 
 }

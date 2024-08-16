@@ -30,7 +30,9 @@ public class gameManager : MonoBehaviour
     public GameObject playerSpawnPos;
     public GameObject checkpointGet;
     public GameObject flashDamageScreen;
+    public GameObject flashShieldDamageScreen;
     public Image PlayerHPBar;
+    public Image playerShieldBar;
 
     public bool invertY;
     public bool isPaused;

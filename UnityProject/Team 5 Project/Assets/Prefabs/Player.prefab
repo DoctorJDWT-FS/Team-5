@@ -686,7 +686,8 @@ MonoBehaviour:
     m_Bits: 8
   mainCamera: {fileID: 4475532091942030891}
   deathCamera: {fileID: 8180282637996634153}
-  HP: 1
+  HP: 10
+  shield: 5
   speed: 4
   sprintMod: 2
   jumpMax: 2
