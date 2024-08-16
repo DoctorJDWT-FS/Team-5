@@ -134,7 +134,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5424213530958781425}
-  - component: {fileID: 6337145599540817156}
+  - component: {fileID: 5046229115541685801}
   - component: {fileID: 2331825258325208222}
   - component: {fileID: 1114171479294279337}
   - component: {fileID: 7556816624628367415}
@@ -167,7 +167,7 @@ Transform:
   - {fileID: 2558049849509486069}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 163.03, z: 0}
---- !u!114 &6337145599540817156
+--- !u!114 &5046229115541685801
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -176,7 +176,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 557673491167284001}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: faf172910ec8d8f4eb8c6e329d5791a9, type: 3}
+  m_Script: {fileID: 11500000, guid: 5d30a6c1f297e9a4bb24ab361c3b311b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 2
@@ -187,7 +187,7 @@ MonoBehaviour:
   agent: {fileID: 1114171479294279337}
   model: {fileID: 2012263775856719407}
   modelHead: {fileID: 2012263775856719407}
-  colorDamage: {r: 0.7207546, g: 0.05847626, b: 0.05847626, a: 0}
+  colorDamage: {r: 0.7283019, g: 0.10306148, b: 0.10306148, a: 0}
   attackRangeTrigger: {fileID: 5468858037211083463}
   visionRangeTrigger: {fileID: 5900713970086452587}
 --- !u!95 &2331825258325208222

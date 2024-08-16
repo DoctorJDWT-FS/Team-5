@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class InteraactionController : MonoBehaviour
 {
     [Header("---- KEY Button ----")]
-    [SerializeField] string keyButton;
+    [SerializeField] KeyCode keyButton;
     [Header("---- Object Info ----")]
     [SerializeField] string parameterName;
 
@@ -53,7 +53,7 @@ public class InteraactionController : MonoBehaviour
 
     void Update()
     {
-        if (playerInRange && Input.GetKeyDown(KeyCode.E))
+        if (playerInRange && Input.GetKeyDown(keyButton))
         {
             // flips current state of parameter
             currentstate = !currentstate;

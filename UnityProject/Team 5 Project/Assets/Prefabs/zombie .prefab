@@ -843,7 +843,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1779981757414147453}
-  - component: {fileID: 1250919390888461378}
+  - component: {fileID: 6359035068575848752}
   - component: {fileID: 8549140215088199038}
   - component: {fileID: 558142074815402979}
   - component: {fileID: 6073315060245536108}
@@ -874,7 +874,7 @@ Transform:
   - {fileID: 8680754358386348738}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1250919390888461378
+--- !u!114 &6359035068575848752
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -883,18 +883,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 4088597403200703994}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: faf172910ec8d8f4eb8c6e329d5791a9, type: 3}
+  m_Script: {fileID: 11500000, guid: 5d30a6c1f297e9a4bb24ab361c3b311b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 4
-  sprintSpeed: 4
-  walkingSpeed: 2
+  HP: 2
+  sprintSpeed: 2
+  walkingSpeed: 1
   hitDamage: 1
-  HitRate: 0.5
+  HitRate: 1.5
   agent: {fileID: 8549140215088199038}
   model: {fileID: 7687395879770981894}
   modelHead: {fileID: 8162805643074758575}
-  colorDamage: {r: 0.6528301, g: 0.09775617, b: 0.09238153, a: 0}
+  colorDamage: {r: 0.6830188, g: 0.10180839, b: 0.10180839, a: 0}
   attackRangeTrigger: {fileID: 9139719332782997733}
   visionRangeTrigger: {fileID: 5809235043359408288}
 --- !u!195 &8549140215088199038

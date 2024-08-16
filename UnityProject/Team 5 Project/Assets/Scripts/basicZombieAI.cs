@@ -3,42 +3,40 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class ZombieAI : MonoBehaviour, IDamage
+public class basicZombieAI : MonoBehaviour, IDamage 
 {
     [Header("----- Enemy Stats -----")]
-    [SerializeField] int HP;
-    [SerializeField] int sprintSpeed;
-    [SerializeField] int walkingSpeed;
+    [SerializeField] protected int HP;
+    [SerializeField] protected int sprintSpeed;
+    [SerializeField] protected int walkingSpeed;
 
 
     [Header("----- Damage Stats -----")]
-    [SerializeField] int hitDamage;
-    [SerializeField] float HitRate;
+    [SerializeField] protected int hitDamage;
+    [SerializeField] protected float HitRate;
 
     [Header("----- Model Items -----")]
-    [SerializeField] NavMeshAgent agent;
-    [SerializeField] Renderer model;
-    [SerializeField] Renderer modelHead;
+    [SerializeField] protected NavMeshAgent agent;
+    [SerializeField] protected Renderer model;
+    [SerializeField] protected Renderer modelHead;
 
     [Header("----- Damage Color -----")]
-    [SerializeField] Color colorDamage;
-
-
+    [SerializeField] protected Color colorDamage;
 
     [Header("---- Custom Trigger ----")]
-    [SerializeField] CustomTrigger attackRangeTrigger;
-    [SerializeField] CustomTrigger visionRangeTrigger;
+    [SerializeField] protected CustomTrigger attackRangeTrigger;
+    [SerializeField] protected CustomTrigger visionRangeTrigger;
 
     //bool isShooting;
-     bool playerInRange;
-     bool isAttacking;
-     Color colorigin;
-    Color coloriginHead;
-    IDamage target;
-    Animator myAnimator;
+    protected bool playerInRange;
+    protected bool isAttacking;
+    protected Color colorigin;
+    protected Color coloriginHead;
+    protected IDamage target;
+    protected Animator myAnimator;
 
     // Start is called before the first frame update
-    void  Start()
+    protected virtual void Start()
     {
         //sets trigger
         attackRangeTrigger.EnteredTrigger += OnAttackRangeTriggerEnter;
@@ -54,21 +52,14 @@ public class ZombieAI : MonoBehaviour, IDamage
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         agent.SetDestination(gameManager.instance.player.transform.position);
-        if (!playerInRange)
-        {
-            agent.speed = walkingSpeed;
-        }
-        if (playerInRange)
-        {
-            agent.speed = sprintSpeed;
-        }
+        agent.speed = playerInRange ? sprintSpeed : walkingSpeed;
 
     }
 
-    public  void takeDamage(int amount)
+    public virtual void takeDamage(int amount)
     {
         HP -= amount;
         StartCoroutine(flashDamage());
@@ -78,7 +69,7 @@ public class ZombieAI : MonoBehaviour, IDamage
             Destroy(gameObject);
         }
     }
-    IEnumerator flashDamage()
+    protected IEnumerator flashDamage()
     {
         model.material.color = colorDamage;
         modelHead.material.color = colorDamage;
@@ -88,7 +79,7 @@ public class ZombieAI : MonoBehaviour, IDamage
     }
 
 
-    IEnumerator Attack()
+    protected IEnumerator Attack()
     {
         while (isAttacking)
         {
@@ -107,7 +98,7 @@ public class ZombieAI : MonoBehaviour, IDamage
 
 
     //Trigger functions
-    private void OnAttackRangeTriggerEnter(Collider other)
+    protected virtual void OnAttackRangeTriggerEnter(Collider other)
     {
 
         target = other.GetComponent<IDamage>();
@@ -120,7 +111,7 @@ public class ZombieAI : MonoBehaviour, IDamage
         }
 
     }
-    private void OnAttackRangeTriggerExit(Collider other)
+    protected virtual void OnAttackRangeTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
@@ -130,7 +121,7 @@ public class ZombieAI : MonoBehaviour, IDamage
         }
     }
 
-    private void OnVisionRangeTriggerEnter(Collider other)
+    protected virtual void OnVisionRangeTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
@@ -138,9 +129,9 @@ public class ZombieAI : MonoBehaviour, IDamage
             playerInRange = true;
         }
     }
-    private void OnVisionRangeTriggerExit(Collider other)
+    protected virtual void OnVisionRangeTriggerExit(Collider other)
     {
-       
+
         if (other.CompareTag("Player"))
         {
             myAnimator.SetBool("Chase", false);
@@ -148,7 +139,7 @@ public class ZombieAI : MonoBehaviour, IDamage
         }
     }
 
-    public void resetTriggers()
+    public virtual void resetTriggers()
     {
         myAnimator.SetBool("Attack", false);
         myAnimator.SetBool("Chase", false);
