@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 7292796565130632706}
   - component: {fileID: 5200758540919715368}
   - component: {fileID: 6799916718883852605}
+  - component: {fileID: 5478672861008387424}
   - component: {fileID: 6755398876373203605}
   m_Layer: 0
   m_Name: Player
@@ -124,6 +125,20 @@ MonoBehaviour:
   bullet: {fileID: 6235100777797261364, guid: cc8b33de2edd06f49bb4f0997282d871, type: 3}
   shootPos: {fileID: 2625197244013539339}
   isDead: 0
+--- !u!114 &5478672861008387424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968769076385556213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c508b2b504537a48a6fdbeb40e9a32d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingCurrency: 10
+  currentCurrency: 0
 --- !u!143 &6755398876373203605
 CharacterController:
   m_ObjectHideFlags: 0
