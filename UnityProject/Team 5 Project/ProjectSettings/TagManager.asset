@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Player Spawn Pos
   - Zombie Home Pos
+  - DeathCamera
   layers:
   - Default
   - TransparentFX

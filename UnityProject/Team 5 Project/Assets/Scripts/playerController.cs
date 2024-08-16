@@ -7,6 +7,8 @@ public class playerController : MonoBehaviour, IDamage
     [Header("----- Components -----")]
     [SerializeField] CharacterController controller;
     [SerializeField] LayerMask ignoreMask;
+    [SerializeField] Camera mainCamera; 
+    [SerializeField] Camera deathCamera;
 
     [Header("----- Player Stats -----")]
     [SerializeField] int HP;
@@ -42,6 +44,7 @@ public class playerController : MonoBehaviour, IDamage
         HPOrig = HP;
         updatePlayerUI();
         myAnimator = GetComponent<Animator>();
+        deathCamera.gameObject.SetActive(false);
         spawnPlayer();
     }
 
@@ -147,8 +150,6 @@ public class playerController : MonoBehaviour, IDamage
         }
     }
 
-
-
     IEnumerator shoot()
     {
         isShooting = true;
@@ -205,6 +206,10 @@ public class playerController : MonoBehaviour, IDamage
 
         // Play death animation
         myAnimator.SetBool("Dead", true);
+
+        // Switch to the death camera
+        mainCamera.gameObject.SetActive(false);
+        deathCamera.gameObject.SetActive(true);
 
         // Call the youLose method after the delay
         yield return new WaitForSeconds(4.0f);

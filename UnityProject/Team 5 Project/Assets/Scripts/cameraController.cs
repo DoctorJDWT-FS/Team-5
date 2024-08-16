@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class cameraController : MonoBehaviour
 {
-    [SerializeField] int sens;
-    [SerializeField] int lockVertMin, lockVertMax;
-    [SerializeField] public bool invertY;
+    [SerializeField] int sens = 100;
+    [SerializeField] int lockVertMin = -60, lockVertMax = 60;
+    [SerializeField] public bool invertY = false;
 
     float rotX;
 
@@ -23,7 +23,7 @@ public class cameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //get input
+        // Normal camera controls
         float mouseY = Input.GetAxis("Mouse Y") * sens * Time.deltaTime;
         float mouseX = Input.GetAxis("Mouse X") * sens * Time.deltaTime;
 
@@ -32,15 +32,15 @@ public class cameraController : MonoBehaviour
         else
             rotX -= mouseY;
 
-        //clamp the rotx on the x-axis
         rotX = Mathf.Clamp(rotX, lockVertMin, lockVertMax);
 
-        //rotate the cam on the x-axis
+        // Rotate the camera on the x-axis
         transform.localRotation = Quaternion.Euler(rotX, 0, 0);
 
-        //rotate the PLAYER on the y-axis
+        // Rotate the PLAYER on the y-axis
         transform.parent.Rotate(Vector3.up * mouseX);
     }
+
     public void SetSensitivity(int newSensitivity)
     {
         sens = newSensitivity;
