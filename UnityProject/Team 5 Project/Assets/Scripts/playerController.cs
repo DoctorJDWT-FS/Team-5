@@ -123,6 +123,10 @@ public class playerController : MonoBehaviour, IDamage
         // Set the Speed parameter in the animator to control the Blend Tree
         myAnimator.SetFloat("Speed", velocity);
 
+        // Set the x and y parameters in the animator
+        myAnimator.SetFloat("LR", moveX);
+        myAnimator.SetFloat("FB", moveZ);
+
         // Handle jumping
         if (Input.GetButtonDown("Jump") && jumpCount < jumpMax)
         {
@@ -152,6 +156,11 @@ public class playerController : MonoBehaviour, IDamage
             speed /= sprintMod;
             isSprinting = false;
         }
+    }
+
+    void FootStep()
+    {
+        // Handle the footstep event, like playing a sound or spawning a particle.
     }
 
     IEnumerator shoot()
