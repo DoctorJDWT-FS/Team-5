@@ -53,17 +53,17 @@ public class playerController : MonoBehaviour, IDamage
         HP = HPOrig;
         updatePlayerUI();
         transform.position = gameManager.instance.playerSpawnPos.transform.position;
-
-        myAnimator.SetBool("Dead", false);
-        myAnimator.SetTrigger("Idle");
-        myAnimator.Play("Idle");
+       
         isDead = false;
+        myAnimator.SetBool("Dead", false);
+        myAnimator.Play("Grounded");
 
-        ZombieAI[] enemies = FindObjectsOfType<ZombieAI>();
-        foreach (ZombieAI enemy in enemies)
-        {
-            enemy.resetTriggers();
-        }
+
+        //ZombieAI[] enemies = FindObjectsOfType<ZombieAI>();
+        //foreach (ZombieAI enemy in enemies)
+        //{
+        //    enemy.resetTriggers();
+        //}
 
         controller.enabled = false;
         Collider playerCollider = GetComponent<Collider>();
@@ -213,8 +213,9 @@ public class playerController : MonoBehaviour, IDamage
 
         // Call the youLose method after the delay
         yield return new WaitForSeconds(4.0f);
-        Debug.Log("still in this for some reason");
         gameManager.instance.youLose();
+
+        // Debug.Log("still in this for some reason");
     }
 
     public void updatePlayerUI()
