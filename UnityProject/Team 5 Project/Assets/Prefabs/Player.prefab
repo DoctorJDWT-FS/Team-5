@@ -688,7 +688,9 @@ MonoBehaviour:
   deathCamera: {fileID: 8180282637996634153}
   HP: 10
   shield: 5
-  speed: 4
+  forwardSpeed: 2
+  backwardSpeed: 2
+  strafeSpeed: 2
   sprintMod: 2
   jumpMax: 2
   jumpSpeed: 12
