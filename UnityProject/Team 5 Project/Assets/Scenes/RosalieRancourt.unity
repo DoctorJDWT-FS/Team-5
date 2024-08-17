@@ -1886,17 +1886,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 621085715}
     - target: {fileID: 1047261992625395684, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
-      propertyPath: zombieHomePos
-      value: 
-      objectReference: {fileID: 1696230015}
-    - target: {fileID: 1047261992625395684, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
       propertyPath: playerSpawnPos
       value: 
       objectReference: {fileID: 966237736}
-    - target: {fileID: 1047261992625395684, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
-      propertyPath: zombieSpawnPos
-      value: 
-      objectReference: {fileID: 1696230015}
     - target: {fileID: 2273504044316298060, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
       propertyPath: m_Name
       value: UI
