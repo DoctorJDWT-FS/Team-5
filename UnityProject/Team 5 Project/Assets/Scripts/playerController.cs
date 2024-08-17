@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,11 +21,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] int gravity;
 
     [Header("----- Guns -----")]
-    [SerializeField] int shootDamage;
-    [SerializeField] float shootRate;
-    [SerializeField] int shootDist;
-    [SerializeField] GameObject bullet;
-    [SerializeField] Transform shootPos;
+    [SerializeField] private KeyCode reloadKey;
 
     Vector3 move;
     Vector3 playerVel;
@@ -37,6 +34,9 @@ public class playerController : MonoBehaviour, IDamage
     bool isShooting;
     public bool isDead;
     bool isInvincible;
+
+    public static Action shootInput;
+    public static Action reloadInput;
 
     private Animator myAnimator;
 
@@ -70,6 +70,7 @@ public class playerController : MonoBehaviour, IDamage
         //}
 
         controller.enabled = false;
+
         Collider playerCollider = GetComponent<Collider>();
         if (playerCollider != null)
         {
@@ -92,7 +93,7 @@ public class playerController : MonoBehaviour, IDamage
         {
             movement();
         }
-
+        TriggerPull();
         sprint();
     }
 
@@ -139,7 +140,7 @@ public class playerController : MonoBehaviour, IDamage
 
         if (Input.GetButton("Shoot") && !isShooting && !isSprinting)
         {
-            StartCoroutine(shoot());
+            
             myAnimator.SetTrigger("Shoot");
         }
     }
@@ -163,32 +164,19 @@ public class playerController : MonoBehaviour, IDamage
         // Handle the footstep event, like playing a sound or spawning a particle.
     }
 
-    IEnumerator shoot()
+    private void TriggerPull()
     {
-        isShooting = true;
+        if (Input.GetMouseButton(0) && !isSprinting)
+        {
+            //Debug.Log("Shoot Input Detected");
+            shootInput?.Invoke();
+        }
 
-        //RaycastHit hit;
-        //if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist, ~ignoreMask))
-        //{
-        //    //Debug.Log(hit.collider.name);
-        //    IDamage dmg = hit.collider.GetComponent<IDamage>();
-
-        //    if (dmg != null)
-        //    {
-        //        dmg.takeDamage(shootDamage);
-        //    }
-        //}
-
-        // Calculate the time between shots based on the bullets per second
-        float timeBetweenShots = 1f / shootRate;
-
-        // Determine the direction the player is aiming
-        Vector3 shootDirection = Camera.main.transform.forward;
-
-        Instantiate(bullet, shootPos.position, Quaternion.LookRotation(shootDirection));
-
-        yield return new WaitForSeconds(timeBetweenShots);
-        isShooting = false;
+        if (Input.GetKeyDown(reloadKey))
+        {
+            //Debug.Log("Shoot Input Detected");
+            reloadInput?.Invoke();
+        }
     }
 
     public void takeDamage(int amount)
