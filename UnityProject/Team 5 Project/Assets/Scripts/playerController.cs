@@ -137,7 +137,7 @@ public class playerController : MonoBehaviour, IDamage
         controller.Move(playerVel * Time.deltaTime);
         playerVel.y -= gravity * Time.deltaTime;
 
-        if (Input.GetButton("Shoot") && !isShooting)
+        if (Input.GetButton("Shoot") && !isShooting && !isSprinting)
         {
             StartCoroutine(shoot());
             myAnimator.SetTrigger("Shoot");
