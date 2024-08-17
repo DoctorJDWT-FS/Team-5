@@ -1886,21 +1886,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 621085715}
     - target: {fileID: 1047261992625395684, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
-      propertyPath: zombieHomePos
-      value: 
-      objectReference: {fileID: 1696230015}
-    - target: {fileID: 1047261992625395684, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
       propertyPath: playerSpawnPos
       value: 
       objectReference: {fileID: 966237736}
-    - target: {fileID: 1047261992625395684, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
-      propertyPath: zombieSpawnPos
-      value: 
-      objectReference: {fileID: 1696230015}
-    - target: {fileID: 1983955373226981455, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: a678da9c21a036d48a08dffb0b489904, type: 3}
     - target: {fileID: 2273504044316298060, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
       propertyPath: m_Name
       value: UI
@@ -1985,22 +1973,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3773681390201277200, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 9134102054451b14ab872cf8e16aba6b, type: 3}
-    - target: {fileID: 3919816513354889376, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 85
-      objectReference: {fileID: 0}
-    - target: {fileID: 7337310585412364707, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 9134102054451b14ab872cf8e16aba6b, type: 3}
-    - target: {fileID: 7577441197721526432, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: a678da9c21a036d48a08dffb0b489904, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
