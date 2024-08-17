@@ -6,6 +6,8 @@ using UnityEngine.AI;
 public class basicZombieAI : MonoBehaviour, IDamage 
 {
     [Header("----- Enemy Stats -----")]
+    [SerializeField] public int valuePoints;
+    [Header("----- Enemy Stats -----")]
     [SerializeField] protected int HP;
     [SerializeField] protected int sprintSpeed;
     [SerializeField] protected int walkingSpeed;
@@ -69,6 +71,7 @@ public class basicZombieAI : MonoBehaviour, IDamage
         StartCoroutine(flashDamage());
         if (HP <= 0)
         {
+            AddPoints();
             gameManager.instance.updateGameGoal(-1);
             Destroy(gameObject);
         }
@@ -160,6 +163,13 @@ public class basicZombieAI : MonoBehaviour, IDamage
         isAttacking = false;
         playerInRange = false;
     }
+    
+    protected virtual void AddPoints()
+    {
+        currencyManager.instance.AddCurrency(valuePoints);
+    }
+
+    
 
 }
 

@@ -5,7 +5,8 @@ using UnityEngine;
 public class currencyManager : MonoBehaviour
 {
     [SerializeField] int startingCurrency;
-
+    //this code will allow zombies to accese this wallet at all times
+    public static currencyManager instance;
     public int currentCurrency;
 
     // Event for updating the UI or notifying other systems
