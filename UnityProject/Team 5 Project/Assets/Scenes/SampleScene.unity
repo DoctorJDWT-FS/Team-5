@@ -377,6 +377,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 275377122}
+  - component: {fileID: 275377125}
   - component: {fileID: 275377123}
   - component: {fileID: 275377124}
   m_Layer: 0
@@ -408,12 +409,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 275377121}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 224deb83560809648a1c41ea9ffb009f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyButton: E
+  keyButton: 0
   parameterName: IsOpen
   interactionText: {fileID: 88134268}
   SecondText: 0
@@ -439,6 +440,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &275377125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275377121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04345c058d5034a4b82146b9c34cf12d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myDoor: {fileID: 752674679}
+  doorOpenAnimationName: glass_door_opened
+  pressEMessage: {fileID: 88134267}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -596,6 +612,11 @@ PrefabInstance:
 --- !u!4 &752674677 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 417258, guid: ac7a01ca06ca9044eb15b32cb7a936f8, type: 3}
+  m_PrefabInstance: {fileID: 752674676}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &752674679 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9575016, guid: ac7a01ca06ca9044eb15b32cb7a936f8, type: 3}
   m_PrefabInstance: {fileID: 752674676}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1189380295
@@ -786,7 +807,10 @@ MonoBehaviour:
   ignoreMask:
     serializedVersion: 2
     m_Bits: 0
+  mainCamera: {fileID: 0}
+  deathCamera: {fileID: 0}
   HP: 5
+  shield: 0
   speed: 5
   sprintMod: 2
   jumpMax: 0
@@ -795,6 +819,9 @@ MonoBehaviour:
   shootDamage: 0
   shootRate: 0
   shootDist: 0
+  bullet: {fileID: 0}
+  shootPos: {fileID: 0}
+  isDead: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
