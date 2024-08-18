@@ -140,7 +140,6 @@ public class playerController : MonoBehaviour, IDamage
 
         if (Input.GetButton("Shoot") && !isShooting && !isSprinting)
         {
-            
             myAnimator.SetTrigger("Shoot");
         }
     }

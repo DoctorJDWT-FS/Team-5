@@ -71,9 +71,9 @@ public class basicZombieAI : MonoBehaviour, IDamage
         StartCoroutine(flashDamage());
         if (HP <= 0)
         {
-            AddPoints();
             gameManager.instance.updateGameGoal(-1);
             Destroy(gameObject);
+            AddPoints();
         }
     }
     protected IEnumerator flashDamage()

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1c281ed41210724a98cbc682f9cabc0, type: 3}
+  m_Name: Gun
+  m_EditorClassIdentifier: 
+  name: 7.2 HaR
+  damage: 1
+  maxDistance: 100
+  accuracySpread: 1
+  currentAmmo: 12
+  magSize: 12
+  fireRate: 40
+  reloadTime: 2
+  reloading: 0

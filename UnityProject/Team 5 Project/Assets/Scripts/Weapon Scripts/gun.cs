@@ -5,10 +5,26 @@ using UnityEngine;
 
 public class gun : MonoBehaviour
 {
+    [Header("Info")]
+    public new string name;
+    [Header("Shooting")]
+    public float damage;
+    public float maxDistance;
+    public float accuracySpread;
+
+    [Header("Reloading")]
+    public int currentAmmo;
+    public int magSize;
+    public float fireRate;
+    public float reloadTime;
+    [HideInInspector]
+    public bool reloading;
+
     [Header("References")]
-    [SerializeField] private gunData gunData;
+   // [SerializeField] private gunData gunData;
     [SerializeField] private Transform muzzle;
     [SerializeField] private GameObject bullet;
+
 
     float timeSinceLastShot;
 
@@ -20,34 +36,34 @@ public class gun : MonoBehaviour
 
     public void StartReload()
     {
-        if(!gunData.reloading)
+        if(!reloading)
         {
             StartCoroutine(Reload());
         }
     }
     private IEnumerator Reload()
     {
-        gunData.reloading = true;
+        reloading = true;
 
-        yield return new WaitForSeconds(gunData.reloadTime);
+        yield return new WaitForSeconds(reloadTime);
 
-        gunData.currentAmmo = gunData.magSize;
+        currentAmmo = magSize;
 
-        gunData.reloading = false;
+        reloading = false;
     }
-    private bool canShoot() => !gunData.reloading && timeSinceLastShot > 1f / (gunData.fireRate / 60f);
+    private bool canShoot() => !reloading && timeSinceLastShot > 1f / (fireRate / 60f);
 
     public void Shoot()
     {
         // Use this to test if player is shooting
          Debug.Log("Shot Gun!");
-        Debug.Log("Current Ammo Before: " + gunData.currentAmmo);
+        Debug.Log("Current Ammo Before: " + currentAmmo);
 
-        if (gunData.currentAmmo > 0)
+        if (currentAmmo > 0)
         {
             if (canShoot())
             {
-                if (Physics.Raycast(muzzle.position, muzzle.forward, out RaycastHit hitInfo, gunData.maxDistance))
+                if (Physics.Raycast(muzzle.position, muzzle.forward, out RaycastHit hitInfo, maxDistance))
                 {
                     Debug.Log(hitInfo.transform.name);
                 }
@@ -57,7 +73,7 @@ public class gun : MonoBehaviour
                 }
                 GameObject bulletInstance = Instantiate(bullet, muzzle.position, muzzle.rotation);
 
-                gunData.currentAmmo--;
+                currentAmmo--;
                 timeSinceLastShot = 0;
                 onGunShot();
             }
@@ -67,7 +83,7 @@ public class gun : MonoBehaviour
     private void Update()
     {
         timeSinceLastShot += Time.deltaTime;
-        Debug.DrawRay(muzzle.position, muzzle.forward * gunData.maxDistance, Color.red);
+        Debug.DrawRay(muzzle.position, muzzle.forward * maxDistance, Color.red);
     }
 
     private void onGunShot()
