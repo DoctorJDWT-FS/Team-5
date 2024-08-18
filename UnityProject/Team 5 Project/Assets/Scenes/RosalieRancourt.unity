@@ -1881,6 +1881,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 475451949599480631, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 135
+      objectReference: {fileID: 0}
     - target: {fileID: 1047261992625395684, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
       propertyPath: cameraScript
       value: 
@@ -1972,6 +1976,58 @@ PrefabInstance:
     - target: {fileID: 3621125850506969293, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6781058071938674164, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
+      propertyPath: m_text
+      value: Credits
+      objectReference: {fileID: 0}
+    - target: {fileID: 6781058071938674164, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
+      propertyPath: m_fontSize
+      value: 25.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6781058071938674164, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 2cbe0684373cf2943892b6771c212fa0, type: 2}
+    - target: {fileID: 6781058071938674164, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
+      propertyPath: m_fontStyle
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6781058071938674164, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
+      propertyPath: m_lineSpacing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6781058071938674164, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
+      propertyPath: m_wordSpacing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6781058071938674164, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 25.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6781058071938674164, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 9153643292417532393, guid: 2cbe0684373cf2943892b6771c212fa0, type: 2}
+    - target: {fileID: 6781058071938674164, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
+      propertyPath: m_characterSpacing
+      value: 8.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6781058071938674164, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
+      propertyPath: m_paragraphSpacing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6781058071938674164, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 6781058071938674164, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7920467201216608816, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 146
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
