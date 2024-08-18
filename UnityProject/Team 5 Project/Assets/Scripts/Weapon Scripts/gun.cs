@@ -7,16 +7,20 @@ public class gun : MonoBehaviour
 {
     [Header("Info")]
     public new string name;
+
+    [Header("Type")]
+    public WeaponType weaponType;
+
     [Header("Shooting")]
-    public float damage;
     public float maxDistance;
     public float accuracySpread;
 
-    [Header("Reloading")]
+    [Header("Stats")]
     public int currentAmmo;
     public int magSize;
     public float fireRate;
     public float reloadTime;
+
     [HideInInspector]
     public bool reloading;
 
@@ -34,9 +38,17 @@ public class gun : MonoBehaviour
         playerController.reloadInput += StartReload;
     }
 
+    private void OnDisable() => reloading = false;
+
+    public enum WeaponType
+    {
+        Pistol,
+        Rifle
+    }
+
     public void StartReload()
     {
-        if(!reloading)
+        if(!reloading && this.gameObject.activeSelf)
         {
             StartCoroutine(Reload());
         }
