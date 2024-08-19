@@ -160,14 +160,14 @@ public class playerController : MonoBehaviour, IDamage
 
         if (Input.GetMouseButton(0) && !isSprinting && !isReloading)
         {
-            //Debug.Log("Shoot Input Detected");
+            Debug.Log("Shoot Input Detected");
             myAnimator.SetTrigger("Shoot");
             shootInput?.Invoke();
         }
 
         if (Input.GetKeyDown(reloadKey))
         {
-            //Debug.Log("Shoot Input Detected");
+            Debug.Log("Reload Input Detected");
             reloadInput?.Invoke();
             StartCoroutine(Reload());
         }

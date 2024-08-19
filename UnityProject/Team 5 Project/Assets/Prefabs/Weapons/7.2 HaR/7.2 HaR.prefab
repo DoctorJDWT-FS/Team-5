@@ -1206,7 +1206,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 3.5933275, y: 4.5144, z: 14.0235815}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 8, y: 8, z: 8}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2451730996886456980}
@@ -1238,10 +1238,10 @@ MonoBehaviour:
   weaponType: 1
   maxDistance: 50
   accuracySpread: 0.05
-  currentAmmo: 17
-  magSize: 17
-  fireRate: 600
-  reloadTime: 1.5
+  currentAmmo: 15
+  magSize: 15
+  fireRate: 400
+  reloadTime: 2
   reloading: 0
   muzzle: {fileID: 364830440478999306}
   bullet: {fileID: 6235100777797261364, guid: 427d423657315c847bb2b8f202011b94, type: 3}

@@ -69,13 +69,22 @@ public class basicZombieAI : MonoBehaviour, IDamage
     {
         HP -= amount;
         StartCoroutine(flashDamage());
+
         if (HP <= 0)
         {
             gameManager.instance.updateGameGoal(-1);
+
+            // Award credits to the player before destroying the object
+            iCredit creditComponent = GetComponent<iCredit>();
+            if (creditComponent != null)
+            {
+                creditComponent.AwardCredits();
+            }
+
             Destroy(gameObject);
-            AddPoints();
         }
     }
+
     protected IEnumerator flashDamage()
     {
         model.material.color = colorDamage;
@@ -163,13 +172,11 @@ public class basicZombieAI : MonoBehaviour, IDamage
         isAttacking = false;
         playerInRange = false;
     }
-    
-    protected virtual void AddPoints()
-    {
-        currencyManager.instance.AddCurrency(valuePoints);
-    }
 
-    
-
+    //Not used anymore in this way
+    //protected virtual void AddPoints()
+    //{
+    //    currencyManager.instance.AddCurrency(valuePoints);
+    //}   
 }
 
