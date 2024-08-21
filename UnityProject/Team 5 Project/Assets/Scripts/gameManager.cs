@@ -20,11 +20,13 @@ public class gameManager : MonoBehaviour
 
     [Header("----- Text -----")]
     [SerializeField] TMP_Text enemyCountText;
-    
+    [SerializeField] TMP_Text creditCountText;
+
     //player info
     [Header("----- Player -----")]
     public playerController playerScript;
     public cameraController cameraScript;
+    public iWallet playerWallet;
 
     public GameObject player;
     public GameObject playerSpawnPos;
@@ -33,6 +35,7 @@ public class gameManager : MonoBehaviour
     public GameObject flashShieldDamageScreen;
     public Image PlayerHPBar;
     public Image playerShieldBar;
+    public Image playerCreditCount;
 
     public bool invertY;
     public bool isPaused;
@@ -45,6 +48,7 @@ public class gameManager : MonoBehaviour
         instance = this;
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<playerController>();
+        playerWallet = player.GetComponent<iWallet>();
         playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
     }
 
@@ -62,7 +66,19 @@ public class gameManager : MonoBehaviour
             else if (menuActive == menuPause)
                 stateUnpause();
         }
+
+        UpdateCreditDisplay();
+
     }
+
+    public void UpdateCreditDisplay()
+    {
+        if (playerWallet != null && creditCountText != null)
+        {
+            creditCountText.text = playerWallet.Credits.ToString();
+        }
+    }
+
     public void statePause()
     {
         isPaused = !isPaused;
