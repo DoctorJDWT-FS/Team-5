@@ -8,6 +8,7 @@ public class HeadShot : MonoBehaviour, IDamage
     [Header("----- Enemy Stats -----")]
     [SerializeField] basicZombieAI parent;
 
+    
     public void takeDamage(int damage)
     {
         Debug.Log("Head-Shot!");
