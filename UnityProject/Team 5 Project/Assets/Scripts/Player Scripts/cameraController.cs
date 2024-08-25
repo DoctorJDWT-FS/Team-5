@@ -18,6 +18,8 @@ public class cameraController : MonoBehaviour
 
         // Set the camera to ignore the PlayerHead and PlayerTorso layers
         Camera.main.cullingMask = ~(LayerMask.GetMask("Player Head", "Player Torso"));
+        
+        applySettings();
     }
 
     // Update is called once per frame
@@ -44,5 +46,13 @@ public class cameraController : MonoBehaviour
     public void SetSensitivity(int newSensitivity)
     {
         sens = newSensitivity;
+    }
+    private void applySettings()
+    {
+        if (gameManager.instance != null)
+        {
+            sens = PlayerPrefs.GetInt("Sensitivity", sens);
+            invertY = PlayerPrefs.GetInt("InvertY", invertY ? 1 : 0) == 1;
+        }
     }
 }
