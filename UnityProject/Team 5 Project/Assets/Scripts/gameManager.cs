@@ -46,6 +46,8 @@ public class gameManager : MonoBehaviour
     void Awake()
     {
         instance = this;
+        
+
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<playerController>();
         playerWallet = player.GetComponent<iWallet>();
@@ -96,7 +98,7 @@ public class gameManager : MonoBehaviour
         menuActive.SetActive(isPaused);
         menuActive = null;
     }
-    public void OpenSettingsMenu()
+    public void openSettingsMenu()
     {
         menuActive.SetActive(false);
         menuActive = menuSettings;
@@ -126,10 +128,25 @@ public class gameManager : MonoBehaviour
         invertY = !invertY; 
         if (cameraScript != null)
             cameraScript.invertY = invertY;
+        PlayerPrefs.SetInt("InvertY", invertY ? 1 : 0);
+        PlayerPrefs.Save();
     }
     public void UpdateSliderValue(float sens)
     {
         int sensitivity = Mathf.RoundToInt(sens);
+        if (cameraScript != null)
+            cameraScript.SetSensitivity(sensitivity);
+        PlayerPrefs.SetInt("Sensitivity", sensitivity);
+        PlayerPrefs.Save();
+    }
+    public void loadSettings()
+    {
+        invertY = PlayerPrefs.GetInt("InvertY", 0) == 1;
+        if (cameraScript != null)
+            cameraScript.invertY = invertY;
+
+
+        int sensitivity = PlayerPrefs.GetInt("Sensitivity", 600);
         if (cameraScript != null)
             cameraScript.SetSensitivity(sensitivity);
     }

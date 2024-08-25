@@ -8,6 +8,13 @@ using UnityEngine.UI;
 public class buttonFunctions : MonoBehaviour
 {
     public Slider mainSlider;
+    public void StartButton()
+    {
+        gameManager.instance.UpdateSliderValue(mainSlider.value);
+        gameManager.instance.toggleInvertY();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+    
     public void resume()
     {
         gameManager.instance.stateUnpause();
@@ -23,21 +30,40 @@ public class buttonFunctions : MonoBehaviour
         gameManager.instance.playerScript.spawnPlayer();
         gameManager.instance.stateUnpause();
     }
+    public void back()
+    {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        if (currentSceneIndex == 0)
+            startManager.instance.closeSettingsMenu();
+    }
     public void settings()
     {
         Debug.Log("Settings");
-        gameManager.instance.OpenSettingsMenu();
+
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        if (currentSceneIndex == 0)
+            startManager.instance.openSettingsMenu();
+        else
+            gameManager.instance.openSettingsMenu();
     }
     public void onToggleChange()
     {
-        gameManager.instance.toggleInvertY();
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        if (currentSceneIndex == 0)
+            startManager.instance.toggleInvertY();
+        else
+            gameManager.instance.toggleInvertY();
     }
     public void OnSliderValueChanged()
     {
         if (mainSlider != null)
         {
             float sliderVal = mainSlider.value;
-            gameManager.instance.UpdateSliderValue(sliderVal);
+            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+            if (currentSceneIndex == 0)
+                startManager.instance.UpdateSliderValue(sliderVal);
+            else
+                gameManager.instance.UpdateSliderValue(sliderVal);
         }
         else
         {

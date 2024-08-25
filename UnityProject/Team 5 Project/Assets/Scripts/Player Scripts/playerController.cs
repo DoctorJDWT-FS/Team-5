@@ -78,6 +78,7 @@ public class playerController : MonoBehaviour, IDamage
         }
         controller.enabled = true;
 
+        gameManager.instance.loadSettings();
         StartCoroutine(InvincibilityPeriod());
     }
 
