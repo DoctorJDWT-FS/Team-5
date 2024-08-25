@@ -170,10 +170,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2823294014843151721, guid: bb3ec219994711d499ed027dfafc44aa, type: 3}
-      propertyPath: HP
-      value: 1000
-      objectReference: {fileID: 0}
     - target: {fileID: 3423192051991701679, guid: bb3ec219994711d499ed027dfafc44aa, type: 3}
       propertyPath: m_Name
       value: Player Aimable
@@ -385,30 +381,6 @@ PrefabInstance:
     - target: {fileID: 4088597403200703994, guid: d46c7614933ebf74db6b4c0036274c56, type: 3}
       propertyPath: m_Name
       value: 'zombie '
-      objectReference: {fileID: 0}
-    - target: {fileID: 6359035068575848752, guid: d46c7614933ebf74db6b4c0036274c56, type: 3}
-      propertyPath: speedTrans
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 6359035068575848752, guid: d46c7614933ebf74db6b4c0036274c56, type: 3}
-      propertyPath: sprintSpeed
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 6359035068575848752, guid: d46c7614933ebf74db6b4c0036274c56, type: 3}
-      propertyPath: walkingSpeed
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8549140215088199038, guid: d46c7614933ebf74db6b4c0036274c56, type: 3}
-      propertyPath: m_Speed
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8549140215088199038, guid: d46c7614933ebf74db6b4c0036274c56, type: 3}
-      propertyPath: m_AutoBraking
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8549140215088199038, guid: d46c7614933ebf74db6b4c0036274c56, type: 3}
-      propertyPath: m_Acceleration
-      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
