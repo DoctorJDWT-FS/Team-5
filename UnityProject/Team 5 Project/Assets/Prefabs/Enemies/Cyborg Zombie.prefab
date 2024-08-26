@@ -150,9 +150,9 @@ MonoBehaviour:
   attackRangeTrigger: {fileID: 7778830077814720242}
   visionRangeTrigger: {fileID: 3312619535445291763}
   meleeCol: {fileID: 1167367398235434230}
-  shootRate: 1.2
+  shootRate: 0.5
   shootRangeTrigger: {fileID: 6966036583705774811}
-  bullet: {fileID: 6235100777797261364, guid: cc8b33de2edd06f49bb4f0997282d871, type: 3}
+  bullet: {fileID: 6235100777797261364, guid: a513fd8448485374a8e0f68dba4396df, type: 3}
   shootPos: {fileID: 6126392785773942587}
   facePlayerSpeed: 5
   headPos: {fileID: 7752393500698653939}
