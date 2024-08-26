@@ -5,6 +5,8 @@ using UnityEngine;
 public class cyborgZombieAI : basicZombieAI
 {
     // shooting stats
+    [Header("----- MellStats -----")]
+    [SerializeField] Collider meleeCol;
     [Header("----- Shooting Stats -----")]
     [SerializeField] private float shootRate;
     [SerializeField] private CustomTrigger shootRangeTrigger;
@@ -16,8 +18,11 @@ public class cyborgZombieAI : basicZombieAI
     [SerializeField] private int facePlayerSpeed;
     [SerializeField] private Transform headPos;
 
+
+    private bool inShootingRange;
     private bool isShooting;
     private Vector3 playerDir;
+    float stoppingDis;
     protected override void Start()
     {
         //starts other trigger as well 
@@ -25,83 +30,109 @@ public class cyborgZombieAI : basicZombieAI
         // added shooting trigger for zombie
         shootRangeTrigger.EnteredTrigger += OnShootingRangeTriggerEnter;
         shootRangeTrigger.ExitTrigger += OnShootingRangeTriggerExit;
+        stoppingDis = agent.stoppingDistance;
     }
 
     protected override void Update()
     {
         //starts zombie basic update 
         base.Update();
-        //if zombie is shooting  will aim at player and face them 
-        if (isShooting)
+       //if the zombie start to attack it will chase the human and attack them at full speed 
+        if (playerInRange && isAttacking)
         {
-            playerDir = gameManager.instance.player.transform.position - headPos.position;
+           
             facePlayer();
+            agent.stoppingDistance = 1;
         }
+        if (playerInRange && !isAttacking && inShootingRange)
+        {
+            agent.stoppingDistance = stoppingDis;
+            facePlayer();
+            startAttacking();
+
+        }
+
+        
+
+        
     }
 
     // faces player  function
-    private void facePlayer()
+   protected virtual void facePlayer()
     {
+        playerDir = gameManager.instance.player.transform.position - headPos.position;
         Quaternion rot = Quaternion.LookRotation(playerDir);
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * facePlayerSpeed);
+
+    }
+    void startAttacking()
+    {
+        if (!isShooting)
+        {
+            StartCoroutine(Shoot());
+        }
     }
 
     private IEnumerator Shoot()
     {
         //will keep shooting till player is in eiter attacking range or  leave shooting range
-        while (isShooting)
-        {
-            Instantiate(bullet, shootPos.position, transform.rotation);
-            yield return new WaitForSeconds(shootRate);
-        }
+        isShooting = true;
+        myAnimator.SetTrigger("Shoot");
+
+        yield return new WaitForSeconds(shootRate);
+        isShooting = false;
     }
 
+    public void createBullet()
+    {
+        Instantiate(bullet, shootPos.position, transform.rotation);
+    }
 
     private void OnShootingRangeTriggerEnter(Collider other)
     {
         // if player is in range  sets it true 
         if (other.CompareTag("Player"))
         {
-            myAnimator.SetBool("Shoot", true);
-            isShooting = true;
-            StartCoroutine(Shoot());
+           inShootingRange = true;
         }
     }
 
     private void OnShootingRangeTriggerExit(Collider other)
     {
-        // if player is in range  sets it true 
         if (other.CompareTag("Player"))
         {
-            myAnimator.SetBool("Shoot", false);
-            isShooting = false;
+            inShootingRange = false;
         }
     }
-
     protected override void OnAttackRangeTriggerEnter(Collider other)
     {
-        // add fucntion if zombie enter attack range stop shooting 
-        if (target != null && other.CompareTag("Player"))
-        {
-            isShooting = false;
-            myAnimator.SetBool("Shoot", false);
-
-        }
-        //uses  base class function 
         base.OnAttackRangeTriggerEnter(other);
 
-       
-    }
-    protected override void OnAttackRangeTriggerExit(Collider other)
-    {
-        //stop attacking function 
-        base.OnAttackRangeTriggerExit(other);
-        // start shooting function
         if (other.CompareTag("Player"))
         {
-            myAnimator.SetBool("Shoot", true);
-            isShooting = true;
+            inShootingRange = false;
         }
 
     }
+
+    protected override void OnAttackRangeTriggerExit(Collider other)
+    {
+        base.OnAttackRangeTriggerExit(other);
+        if (other.CompareTag("Player"))
+        {
+            inShootingRange = true;
+        }
+
+    }
+
+    public void swordMeleeColOn()
+    {
+        meleeCol.enabled = true;
+    }
+    public void swordMeleeColOff()
+    {
+        meleeCol.enabled = false;
+    }
+
+
 }

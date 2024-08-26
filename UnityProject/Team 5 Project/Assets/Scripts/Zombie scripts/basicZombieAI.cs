@@ -18,8 +18,8 @@ public class basicZombieAI : MonoBehaviour, IDamage
     [Header("----- Damage Stats -----")]
     [SerializeField] protected int hitDamage;
     [SerializeField] protected float HitRate;
-    [SerializeField] Collider leftCol;
-    [SerializeField] Collider rightCol;
+    [SerializeField] private Collider leftCol;
+    [SerializeField] private Collider rightCol;
 
     [Header("----- Model Items -----")]
     [SerializeField] protected NavMeshAgent agent;
@@ -39,7 +39,7 @@ public class basicZombieAI : MonoBehaviour, IDamage
     protected Color colorigin;
     protected Color coloriginHead;
     protected Animator myAnimator;
-    protected IDamage target;
+    
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -72,6 +72,7 @@ public class basicZombieAI : MonoBehaviour, IDamage
         agent.SetDestination(gameManager.instance.player.transform.position);
        
     }
+
 
     public virtual void takeDamage(int amount)
     {
@@ -123,7 +124,7 @@ public class basicZombieAI : MonoBehaviour, IDamage
     //    }
     //}
 
-    public int getMeleeDmg()
+    public  virtual int getMeleeDmg()
     {
         return hitDamage;
     }
@@ -152,7 +153,7 @@ public class basicZombieAI : MonoBehaviour, IDamage
         {
             //set animation to attacking true 
             myAnimator.SetBool("Attack", true);
-          
+            isAttacking = true;
   
         }
 
@@ -164,7 +165,7 @@ public class basicZombieAI : MonoBehaviour, IDamage
         {
             //stop attacking animation 
             myAnimator.SetBool("Attack", false);
-           
+            isAttacking= false;
         }
     }
 
