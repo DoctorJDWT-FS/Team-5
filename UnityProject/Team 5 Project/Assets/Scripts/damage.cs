@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class damage : MonoBehaviour
 {
-    [SerializeField] enum damageType { bullet, stationary}
+    [SerializeField] enum damageType { bullet,enemyBullet, stationary}
     [SerializeField] damageType type;
     [SerializeField] Rigidbody rb;  
 
@@ -18,6 +18,11 @@ public class damage : MonoBehaviour
         if(type == damageType.bullet)
         {
             rb.velocity = transform.forward * speed;
+            Destroy(gameObject, destroyTime);
+        }
+        if(type == damageType.enemyBullet)
+        {
+            rb.velocity = (gameManager.instance.player.transform.position - (transform.position - new Vector3(0, 1, 0))).normalized * speed;
             Destroy(gameObject, destroyTime);
         }
     }

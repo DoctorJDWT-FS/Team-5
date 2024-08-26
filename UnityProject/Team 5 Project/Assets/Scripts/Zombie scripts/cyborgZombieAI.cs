@@ -48,7 +48,7 @@ public class cyborgZombieAI : basicZombieAI
         {
             agent.stoppingDistance = stoppingDis;
             facePlayer();
-            startAttacking();
+            startShooting();
 
         }
 
@@ -65,7 +65,7 @@ public class cyborgZombieAI : basicZombieAI
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * facePlayerSpeed);
 
     }
-    void startAttacking()
+    void startShooting()
     {
         if (!isShooting)
         {
