@@ -237,6 +237,23 @@ public class playerController : MonoBehaviour, IDamage
             StartCoroutine(HandleDeath());
         }
     }
+
+    public void addHealth(int health)
+    {
+        
+        if(HPOrig <= HP + health)
+        {
+            HP = HPOrig;
+            updatePlayerUI();
+        }
+        else
+        {
+            HP += health;
+            updatePlayerUI();
+        }
+        
+    }
+
     //added flash damage script 
     private IEnumerator flashDamage()
     {
