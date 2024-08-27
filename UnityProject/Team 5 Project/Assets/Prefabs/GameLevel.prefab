@@ -722,13 +722,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyTypes:
   - {fileID: 4088597403200703994, guid: d46c7614933ebf74db6b4c0036274c56, type: 3}
+  - {fileID: 557673491167284001, guid: 78e78430ac2cff24b805bf6262a88b90, type: 3}
+  - {fileID: 201154584813813494, guid: e21e4934c71f3934b85a2e995a70dc61, type: 3}
   spawnPoints:
   - {fileID: 7177512041247557272}
   - {fileID: 5327992697567866575}
   - {fileID: 5721996295207719098}
   - {fileID: 518626384925969197}
   startingEnemyAmount: 2
-  enemyIncreasePerWave: 1
+  enemyIncreasePerWave: 2
   timeBetweenWaves: 10
 --- !u!1 &7551562133984372440
 GameObject:
