@@ -106,8 +106,8 @@ public class gameManager : MonoBehaviour
     }
     public void updateGameGoal(int amount)
     {
-        enemyCount += amount;
-        enemyCountText.text = enemyCount.ToString("F0");
+        enemyCount += amount; 
+        // enemyCountText.text = enemyCount.ToString("F0");
         if (enemyCount <= 0)
         {
             // temp stuff if we do wave based if not then its not temp

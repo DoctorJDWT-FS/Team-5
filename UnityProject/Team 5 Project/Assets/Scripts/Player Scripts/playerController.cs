@@ -58,7 +58,7 @@ public class playerController : MonoBehaviour, IDamage
         HP = HPOrig;
         shield = shieldOrig;
         updatePlayerUI();
-        transform.position = gameManager.instance.playerSpawnPos.transform.position;
+        transform.position = gameManager.instance.playerSpawnPos.transform.position; 
        
         isDead = false;
         myAnimator.SetBool("Dead", false);
