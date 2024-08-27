@@ -11,7 +11,6 @@ public class spawnPoint : MonoBehaviour
         if (!playerInRange)
         {
             Instantiate(enemy, gameObject.transform);
-            gameManager.instance.updateGameGoal(1);
             return true;
         }
         else return false;
