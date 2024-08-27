@@ -111,9 +111,9 @@ public class gameManager : MonoBehaviour
         if (enemyCount <= 0)
         {
             // temp stuff if we do wave based if not then its not temp
-            statePause();
-            menuActive = menuWin;
-            menuActive.SetActive(isPaused);
+            //statePause();
+            //menuActive = menuWin;
+            //menuActive.SetActive(isPaused);
         }
     }
     public void youLose()

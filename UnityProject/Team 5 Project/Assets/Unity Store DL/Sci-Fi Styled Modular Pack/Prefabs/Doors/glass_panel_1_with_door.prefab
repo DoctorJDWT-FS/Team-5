@@ -299,7 +299,7 @@ MonoBehaviour:
   pressEMessage: {fileID: 0}
   costMessage: {fileID: 0}
   doorCostStatUI: {fileID: 0}
-  doorCost: 100
+  doorCost: 99
 --- !u!65 &8942057257087827948
 BoxCollider:
   m_ObjectHideFlags: 0
