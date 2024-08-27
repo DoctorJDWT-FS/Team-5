@@ -10,6 +10,7 @@ public class TriggerDoorController : MonoBehaviour
 
     private bool isPlayerInZone = false;
     private bool hasDoorOpened = false;
+    private iWallet playerWallet;
 
     // Reference to the UI Text for "Press E to open" message
     [SerializeField] private GameObject pressEMessage;
@@ -22,6 +23,11 @@ public class TriggerDoorController : MonoBehaviour
 
     // Set how much the door should cost. If free, set to 0
     [SerializeField] private int doorCost;
+
+    private void Start()
+    {
+        playerWallet = FindObjectOfType<iWallet>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -47,7 +53,7 @@ public class TriggerDoorController : MonoBehaviour
 
     private void Update()
     {
-        if (isPlayerInZone && Input.GetKeyDown(KeyCode.E) && !hasDoorOpened)
+        if (isPlayerInZone && Input.GetKeyDown(KeyCode.E) && !hasDoorOpened && playerWallet.Credits >= doorCost)
         {
             OpenDoor();
         }
@@ -55,6 +61,7 @@ public class TriggerDoorController : MonoBehaviour
 
     private void OpenDoor()
     {
+        playerWallet.SpendCredits(doorCost);
         myDoor.Play(doorOpenAnimationName, 0, 0.0f); // Play the specified animation
         hasDoorOpened = true;
         costMessage.SetActive(false); // Hide the cost
