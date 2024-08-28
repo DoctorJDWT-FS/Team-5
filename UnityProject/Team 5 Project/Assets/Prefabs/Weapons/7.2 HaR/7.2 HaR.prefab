@@ -1240,6 +1240,8 @@ MonoBehaviour:
   accuracySpread: 0.05
   currentAmmo: 15
   magSize: 15
+  currentMagazines: 5
+  maxMagazines: 5
   fireRate: 400
   reloadTime: 2
   reloading: 0
