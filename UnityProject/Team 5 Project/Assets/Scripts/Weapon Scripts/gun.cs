@@ -32,6 +32,7 @@ public class gun : MonoBehaviour
     [SerializeField] private AudioSource gunAudioSource;
     [SerializeField] private AudioClip shootClip;        
     [SerializeField] private AudioClip reloadClip;
+    [SerializeField] GameObject muzzleFlash;
 
     float timeSinceLastShot;
 
@@ -116,6 +117,7 @@ public class gun : MonoBehaviour
 
     private void onGunShot()
     {
+        StartCoroutine(flashMuzzle());
         PlaySound(shootClip);
     }
 
@@ -130,5 +132,12 @@ public class gun : MonoBehaviour
         {
             Debug.LogWarning("Audio source or clip is not assigned.");
         }
+    }
+
+    IEnumerator flashMuzzle()
+    {
+        muzzleFlash.SetActive(true);
+        yield return new WaitForSeconds(0.05f);
+        muzzleFlash.SetActive(false);
     }
 }
