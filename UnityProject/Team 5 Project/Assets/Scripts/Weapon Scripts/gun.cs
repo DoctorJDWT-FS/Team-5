@@ -29,6 +29,9 @@ public class gun : MonoBehaviour
     [Header("References")]
     [SerializeField] private Transform muzzle;
     [SerializeField] private GameObject bullet;
+    [SerializeField] private AudioSource gunAudioSource;
+    [SerializeField] private AudioClip shootClip;        
+    [SerializeField] private AudioClip reloadClip;
 
     float timeSinceLastShot;
 
@@ -57,6 +60,7 @@ public class gun : MonoBehaviour
     private IEnumerator Reload()
     {
         reloading = true;
+        PlaySound(reloadClip);
         yield return new WaitForSeconds(reloadTime);
 
         if (currentMagazines > 0)
@@ -112,6 +116,19 @@ public class gun : MonoBehaviour
 
     private void onGunShot()
     {
-        // Implement gunshot effects, sound, etc.
+        PlaySound(shootClip);
+    }
+
+    private void PlaySound(AudioClip clip)
+    {
+        if (gunAudioSource != null && clip != null)
+        {
+            gunAudioSource.clip = clip;
+            gunAudioSource.Play();
+        }
+        else
+        {
+            Debug.LogWarning("Audio source or clip is not assigned.");
+        }
     }
 }
