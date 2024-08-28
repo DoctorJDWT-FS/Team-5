@@ -158,6 +158,8 @@ public class playerController : MonoBehaviour, IDamage
 
     private void TriggerPull()
     {
+        if (gameManager.instance.isPaused)
+            return;
 
         if (Input.GetMouseButton(0) && !isSprinting && !isReloading)
         {
