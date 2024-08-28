@@ -253,6 +253,21 @@ public class playerController : MonoBehaviour, IDamage
         }
         
     }
+    public void addShield(int _shield)
+    {
+
+        if (shieldOrig <= shield + _shield)
+        {
+            shield = shieldOrig;
+            updatePlayerUI();
+        }
+        else
+        {
+            shield += _shield;
+            updatePlayerUI();
+        }
+
+    }
 
     //added flash damage script 
     private IEnumerator flashDamage()
