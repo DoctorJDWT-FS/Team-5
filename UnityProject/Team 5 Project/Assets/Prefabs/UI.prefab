@@ -4347,6 +4347,10 @@ MonoBehaviour:
   menuWin: {fileID: 5855483631671998952}
   menuLose: {fileID: 9162501764397242256}
   menuSettings: {fileID: 545342403807074582}
+  Items:
+  - {fileID: 0}
+  - {fileID: 0}
+  dropRate: 100
   enemyCountText: {fileID: 2438056919985925545}
   creditCountText: {fileID: 0}
   playerScript: {fileID: 0}

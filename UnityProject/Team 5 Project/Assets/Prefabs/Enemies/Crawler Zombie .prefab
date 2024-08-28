@@ -756,6 +756,8 @@ MonoBehaviour:
   agent: {fileID: 5569001636096316407}
   model: {fileID: 1664227896455026192}
   modelHead: {fileID: 1664227896455026192}
+  headPos: {fileID: 7445352433850271787}
+  facePlayerSpeed: 5
   colorDamage: {r: 1, g: 0.073584795, b: 0.073584795, a: 0}
   attackRangeTrigger: {fileID: 6311746247049714209}
   visionRangeTrigger: {fileID: 6410097364234279804}
@@ -1045,6 +1047,37 @@ Transform:
   m_Children:
   - {fileID: 5489015215636314477}
   m_Father: {fileID: 7345121801528885475}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2062581272925542810
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7445352433850271787}
+  m_Layer: 0
+  m_Name: crawler Head Pos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7445352433850271787
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2062581272925542810}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3813878307866447248}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2251303116602455973
 GameObject:
@@ -1556,6 +1589,7 @@ Transform:
   m_Children:
   - {fileID: 6930094720179383286}
   - {fileID: 2090879033882635614}
+  - {fileID: 7445352433850271787}
   m_Father: {fileID: 7336796132246161161}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3630328063106844956

@@ -15,13 +15,12 @@ public class cyborgZombieAI : basicZombieAI
     [Header("----- Shooting Info -----")]
     [SerializeField] private GameObject bullet;
     [SerializeField] private Transform shootPos;
-    [SerializeField] private int facePlayerSpeed;
-    [SerializeField] private Transform headPos;
+   
 
 
     private bool inShootingRange;
     private bool isShooting;
-    private Vector3 playerDir;
+   
     float stoppingDis;
     protected override void Start()
     {
@@ -40,7 +39,6 @@ public class cyborgZombieAI : basicZombieAI
        //if the zombie start to attack it will chase the human and attack them at full speed 
         if (playerInRange && isAttacking)
         {
-           
             facePlayer();
             agent.stoppingDistance = 1;
         }
@@ -57,14 +55,7 @@ public class cyborgZombieAI : basicZombieAI
         
     }
 
-    // faces player  function
-   protected virtual void facePlayer()
-    {
-        playerDir = gameManager.instance.player.transform.position - headPos.position;
-        Quaternion rot = Quaternion.LookRotation(playerDir);
-        transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * facePlayerSpeed);
-
-    }
+ 
     void startShooting()
     {
         if (!isShooting)

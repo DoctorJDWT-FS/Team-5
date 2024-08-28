@@ -388,11 +388,13 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7378302478582288123}
   - {fileID: 6942023979132583113}
   - {fileID: 8647225786438398836}
   - {fileID: 6675025630167774466}
   - {fileID: 6275986217388378354}
   - {fileID: 971413815711815666}
+  - {fileID: 84233200664088398}
   m_Father: {fileID: 9108489757108502587}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1681068947077610142
@@ -612,12 +614,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2394818747073145959}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalRotation: {x: -0.49999994, y: 0.50000006, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 0.12680791, y: 0.013799647, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1779981757414147453}
+  m_Father: {fileID: 7802824786380118823}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &7521656302834097521
 SphereCollider:
@@ -999,7 +1001,7 @@ Transform:
   m_GameObject: {fileID: 4088597403200703994}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.4, y: 0, z: -0.58095324}
+  m_LocalPosition: {x: -50.570286, y: 0.0773679, z: -14.545601}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1008,7 +1010,6 @@ Transform:
   - {fileID: 8983807424599978468}
   - {fileID: 1008917957158260985}
   - {fileID: 8680754358386348738}
-  - {fileID: 7378302478582288123}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5494939251214223656
@@ -1048,6 +1049,8 @@ MonoBehaviour:
   agent: {fileID: 8549140215088199038}
   model: {fileID: 7687395879770981894}
   modelHead: {fileID: 8162805643074758575}
+  headPos: {fileID: 84233200664088398}
+  facePlayerSpeed: 5
   colorDamage: {r: 0.6830188, g: 0.10180839, b: 0.10180839, a: 0}
   attackRangeTrigger: {fileID: 9139719332782997733}
   visionRangeTrigger: {fileID: 5809235043359408288}
@@ -2240,6 +2243,37 @@ Transform:
   m_Children:
   - {fileID: 695361794993885921}
   m_Father: {fileID: 2148299123946049980}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8852536508154649890
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 84233200664088398}
+  m_Layer: 0
+  m_Name: zombie head pos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &84233200664088398
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8852536508154649890}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7802824786380118823}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8985870706683630794
 GameObject:

@@ -25,6 +25,8 @@ public class basicZombieAI : MonoBehaviour, IDamage
     [SerializeField] protected NavMeshAgent agent;
     [SerializeField] protected Renderer model;
     [SerializeField] protected Renderer modelHead;
+    [SerializeField] protected Transform headPos;
+    [SerializeField] protected int facePlayerSpeed;
 
     [Header("----- Damage Color -----")]
     [SerializeField] protected Color colorDamage;
@@ -39,7 +41,8 @@ public class basicZombieAI : MonoBehaviour, IDamage
     protected Color colorigin;
     protected Color coloriginHead;
     protected Animator myAnimator;
-    
+
+    protected Vector3 playerDir;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -70,9 +73,23 @@ public class basicZombieAI : MonoBehaviour, IDamage
         myAnimator.SetFloat("Speed", Mathf.Lerp(myAnimator.GetFloat("Speed"), agentSpeed, Time.deltaTime * speedTrans));
         //zombie will always be chasing player at different speed 
         agent.SetDestination(gameManager.instance.player.transform.position);
-       
+
+        if (playerInRange && isAttacking)
+        {
+
+            facePlayer();
+           
+        }
+
     }
 
+    protected virtual void facePlayer()
+    {
+        playerDir = gameManager.instance.player.transform.position - headPos.position;
+        Quaternion rot = Quaternion.LookRotation(playerDir);
+        transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * facePlayerSpeed);
+
+    }
 
     public virtual void takeDamage(int amount)
     {
