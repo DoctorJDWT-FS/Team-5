@@ -5,6 +5,7 @@ using UnityEngine.Diagnostics;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class gameManager : MonoBehaviour
 {
@@ -17,6 +18,10 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuSettings;
+
+    [Header("----- item Drop rate-----")]
+    [SerializeField] GameObject[] Items;
+    [Range(0, 100)][SerializeField] int dropRate;
 
     [Header("----- Text -----")]
     [SerializeField] TMP_Text enemyCountText;
@@ -115,6 +120,24 @@ public class gameManager : MonoBehaviour
             //menuActive = menuWin;
             //menuActive.SetActive(isPaused);
         }
+    }
+    public void spawnItemDrop(Vector3 spawnPosition)
+    {
+        // Drop chance (dont change)
+        int itemChanceDrop = Random.Range(0, 100);
+
+        // Check if the item should be dropped based on the drop rate
+        if (itemChanceDrop <= dropRate)
+        {
+            // Randomly select an item to drop
+            int itemAcquired = Random.Range(0, Items.Length);
+
+            Vector3 adjustedPosition = spawnPosition + new Vector3(0, 1, 0);
+            // Instantiate the item at the provided spawn position
+            Instantiate(Items[itemAcquired], adjustedPosition, Quaternion.identity);
+        }
+        else return;
+
     }
     public void youLose()
     {

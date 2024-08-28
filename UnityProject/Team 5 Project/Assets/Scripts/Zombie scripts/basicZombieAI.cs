@@ -90,7 +90,12 @@ public class basicZombieAI : MonoBehaviour, IDamage
                 creditComponent.AwardCredits();
             }
 
+
+            gameManager.instance.spawnItemDrop(transform.position);
+
+
             Destroy(gameObject);
+           
         }
     }
 
@@ -191,6 +196,7 @@ public class basicZombieAI : MonoBehaviour, IDamage
         myAnimator.SetBool("Attack", false);
         playerInRange = false;
     }
+
 
    
 }
