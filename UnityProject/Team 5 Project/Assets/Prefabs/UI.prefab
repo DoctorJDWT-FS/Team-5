@@ -4348,8 +4348,8 @@ MonoBehaviour:
   menuLose: {fileID: 9162501764397242256}
   menuSettings: {fileID: 545342403807074582}
   Items:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1983386928226970714, guid: c55089d371b762c4b9eca2284a2e4f96, type: 3}
+  - {fileID: 5029210525199766798, guid: 1161b6c4ff8a2e8439c44f9236670a3f, type: 3}
   dropRate: 100
   enemyCountText: {fileID: 2438056919985925545}
   creditCountText: {fileID: 0}
