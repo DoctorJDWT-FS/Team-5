@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class buttonFunctions : MonoBehaviour
 {
+    public playerController player;
     public Slider mainSlider;
     public void StartButton()
     {
@@ -69,6 +70,23 @@ public class buttonFunctions : MonoBehaviour
         {
             Debug.LogWarning("mainSlider is not assigned.");
         }
+    }
+    public void healthUp()
+    {
+
+        gameManager.instance.playerScript.increaseMaxHealth(5);
+    }
+    public void shieldUp()
+    {
+        gameManager.instance.playerScript.increaseMaxShield(5);
+    }
+    public void ammoUp()
+    {
+        player.currentGun.magSize += 5;
+    }
+    public void fireRateUp()
+    {
+        player.currentGun.fireRate += player.currentGun.fireRateOrig/50;
     }
     public void quit()
     {

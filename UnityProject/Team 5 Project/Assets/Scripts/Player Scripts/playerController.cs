@@ -27,7 +27,7 @@ public class playerController : MonoBehaviour, IDamage
     Vector3 playerVel;
 
     int jumpCount;
-    int HPOrig;
+    public int HPOrig;
     int shieldOrig;
 
     bool isSprinting;
@@ -40,7 +40,7 @@ public class playerController : MonoBehaviour, IDamage
     public static Action reloadInput;
 
     private Animator myAnimator;
-    private gun currentGun;
+    public gun currentGun;
 
     
     // Start is called before the first frame update
@@ -160,7 +160,7 @@ public class playerController : MonoBehaviour, IDamage
 
     private void TriggerPull()
     {
-        if (gameManager.instance.isPaused)
+        if (gameManager.instance.isPaused || shopInteractable.instance.isPaused)
             return;
 
         if (Input.GetMouseButton(0) && !isSprinting && !isReloading)
@@ -296,6 +296,34 @@ public class playerController : MonoBehaviour, IDamage
             currentGun.currentAmmo += _Ammo;
         }
 
+    }
+
+    public void increaseMaxHealth(int amount)
+    {
+        HPOrig += amount;
+
+        HP += amount;
+
+        if (HP > HPOrig)
+        {
+            HP = HPOrig;
+        }
+        addHealth(HPOrig - HP);
+        updatePlayerUI(); 
+    }
+
+    public void increaseMaxShield(int amount)
+    {
+        shieldOrig += amount;
+
+        shield += amount;
+
+        if (shield > shieldOrig)
+        {
+            shield = shieldOrig;
+        }
+
+        updatePlayerUI();
     }
 
     //added flash damage script 

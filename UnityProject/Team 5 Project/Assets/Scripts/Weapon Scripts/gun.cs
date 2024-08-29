@@ -21,6 +21,7 @@ public class gun : MonoBehaviour
     public int currentMagazines;  // Current number of magazines available
     public int maxMagazines;      // Maximum number of magazines the player can carry
     public float fireRate;
+    public float fireRateOrig;
     public float reloadTime;
 
     [HideInInspector]
@@ -40,6 +41,7 @@ public class gun : MonoBehaviour
     {
         playerController.shootInput += Shoot;
         playerController.reloadInput += StartReload;
+        fireRateOrig = fireRate;
     }
 
     private void OnDisable() => reloading = false;
