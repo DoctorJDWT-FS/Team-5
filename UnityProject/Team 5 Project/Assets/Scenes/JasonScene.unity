@@ -529,6 +529,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cyborg Zombie
       objectReference: {fileID: 0}
+    - target: {fileID: 2124064881163896165, guid: e21e4934c71f3934b85a2e995a70dc61, type: 3}
+      propertyPath: creditValue
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8210010392596403642, guid: e21e4934c71f3934b85a2e995a70dc61, type: 3}
+      propertyPath: HP
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8210010392596403642, guid: e21e4934c71f3934b85a2e995a70dc61, type: 3}
+      propertyPath: hitDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8210010392596403642, guid: e21e4934c71f3934b85a2e995a70dc61, type: 3}
+      propertyPath: sprintSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8210010392596403642, guid: e21e4934c71f3934b85a2e995a70dc61, type: 3}
+      propertyPath: valuePoints
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 8532970372917122843, guid: e21e4934c71f3934b85a2e995a70dc61, type: 3}
       propertyPath: m_LocalPosition.x
       value: -45.790577
@@ -582,18 +602,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1047261992625395684, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
-      propertyPath: dropRate
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 1047261992625395684, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
-      propertyPath: Items.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1047261992625395684, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
-      propertyPath: Items.Array.data[2]
-      value: 
-      objectReference: {fileID: 579506411911024464, guid: d47d6f9da31ac964fa039b8a88de09a0, type: 3}
     - target: {fileID: 2273504044316298060, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
       propertyPath: m_Name
       value: UI

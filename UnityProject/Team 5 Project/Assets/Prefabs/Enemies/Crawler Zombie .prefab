@@ -744,12 +744,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d30a6c1f297e9a4bb24ab361c3b311b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  valuePoints: 5
-  HP: 2
-  sprintSpeed: 5
-  walkingSpeed: 2
+  valuePoints: 10
+  HP: 5
+  sprintSpeed: 7
+  walkingSpeed: 3
   speedTrans: 5
-  hitDamage: 1
+  hitDamage: 15
   HitRate: 1
   leftCol: {fileID: 8535323879586043809}
   rightCol: {fileID: 0}

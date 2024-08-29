@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de0a015dfb0724e48a36e7b6db6d8e4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  creditValue: 25
+  creditValue: 15
 --- !u!114 &8210010392596403642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,18 +134,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f277d828b228f5c4589dc080ee7135bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  valuePoints: 20
-  HP: 6
-  sprintSpeed: 6
+  valuePoints: 25
+  HP: 20
+  sprintSpeed: 4
   walkingSpeed: 1.5
   speedTrans: 4
-  hitDamage: 1
+  hitDamage: 10
   HitRate: 1
   leftCol: {fileID: 0}
   rightCol: {fileID: 0}
   agent: {fileID: 6998850733729223141}
   model: {fileID: 1597905304864076765}
   modelHead: {fileID: 6133253226010356449}
+  headPos: {fileID: 7752393500698653939}
+  facePlayerSpeed: 5
   colorDamage: {r: 0.8415094, g: 0, b: 0, a: 0}
   attackRangeTrigger: {fileID: 7778830077814720242}
   visionRangeTrigger: {fileID: 3312619535445291763}
@@ -154,8 +156,6 @@ MonoBehaviour:
   shootRangeTrigger: {fileID: 6966036583705774811}
   bullet: {fileID: 6235100777797261364, guid: a513fd8448485374a8e0f68dba4396df, type: 3}
   shootPos: {fileID: 6126392785773942587}
-  facePlayerSpeed: 5
-  headPos: {fileID: 7752393500698653939}
 --- !u!95 &2135017846534014795
 Animator:
   serializedVersion: 5
