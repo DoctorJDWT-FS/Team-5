@@ -6,7 +6,7 @@ public class spawnPoint : MonoBehaviour
 {
     public bool playerInRange;
 
-    public bool Spawn(GameObject enemy)
+    public bool spawn(GameObject enemy)
     {
         if (!playerInRange)
         {

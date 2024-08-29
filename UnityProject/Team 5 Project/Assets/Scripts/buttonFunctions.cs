@@ -9,6 +9,13 @@ public class buttonFunctions : MonoBehaviour
 {
     public playerController player;
     public Slider mainSlider;
+
+    private iWallet playerWallet;
+
+    public void Start()
+    {
+        playerWallet = FindObjectOfType<iWallet>();
+    }
     public void StartButton()
     {
         gameManager.instance.UpdateSliderValue(mainSlider.value);
@@ -73,19 +80,22 @@ public class buttonFunctions : MonoBehaviour
     }
     public void healthUp()
     {
-
+        playerWallet.SpendCredits(50);
         gameManager.instance.playerScript.increaseMaxHealth(5);
     }
     public void shieldUp()
     {
+        playerWallet.SpendCredits(50);
         gameManager.instance.playerScript.increaseMaxShield(5);
     }
     public void ammoUp()
     {
+        playerWallet.SpendCredits(25);
         player.currentGun.magSize += 5;
     }
     public void fireRateUp()
     {
+        playerWallet.SpendCredits(25);
         player.currentGun.fireRate += player.currentGun.fireRateOrig/50;
     }
     public void quit()

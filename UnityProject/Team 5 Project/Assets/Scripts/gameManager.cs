@@ -46,7 +46,7 @@ public class gameManager : MonoBehaviour
     public bool isPaused;
 
 
-    int enemyCount;
+    public int enemyCount;
 
     void Awake()
     {
@@ -143,6 +143,12 @@ public class gameManager : MonoBehaviour
     {
         statePause();
         menuActive = menuLose;
+        menuActive.SetActive(isPaused);
+    }
+    public void youWin()
+    {
+        statePause();
+        menuActive = menuWin;
         menuActive.SetActive(isPaused);
     }
 

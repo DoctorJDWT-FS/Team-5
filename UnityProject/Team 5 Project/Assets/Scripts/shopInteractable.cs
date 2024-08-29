@@ -14,8 +14,11 @@ public class shopInteractable : MonoBehaviour
     private bool shopOpen;
     public bool isPaused;
 
+    private iWallet playerWallet;
+
     void Awake()
     {
+        playerWallet = FindObjectOfType<iWallet>();
         instance = this;
     }
         // Update is called once per frame
@@ -64,7 +67,7 @@ public class shopInteractable : MonoBehaviour
         if (!shopOpen)
         {
             isPaused = false;
-            UIComplete.SetActive(true);
+            //UIComplete.SetActive(true);
             interact.SetActive(true);
             shopCanvas.SetActive(false);
             Time.timeScale = 1;
@@ -72,7 +75,7 @@ public class shopInteractable : MonoBehaviour
         else
         {
             isPaused = true;
-            UIComplete.SetActive(false);
+            //UIComplete.SetActive(false);
             interact.SetActive(false);
             shopCanvas.SetActive(true);
             Time.timeScale = 0;
