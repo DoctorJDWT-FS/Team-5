@@ -29,7 +29,7 @@ public class shopInteractable : MonoBehaviour
             shopInteraction();
         }
 
-        if (Input.GetButtonDown("Cancel"))
+        if (Input.GetButtonDown("Cancel") && shopOpen)
         {
             shopOpen = false;
             Cursor.visible = false;

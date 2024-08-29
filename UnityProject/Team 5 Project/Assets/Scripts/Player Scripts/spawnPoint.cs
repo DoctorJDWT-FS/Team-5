@@ -6,14 +6,19 @@ public class spawnPoint : MonoBehaviour
 {
     public bool playerInRange;
 
-    public bool spawn(GameObject enemy)
+    public bool Spawn(GameObject enemy)
     {
         if (!playerInRange)
         {
-            Instantiate(enemy, gameObject.transform);
+            // Adjust spawn position: setting y to 0, or adjust based on ground level.
+            Vector3 spawnPosition = new Vector3(transform.position.x, 0, transform.position.z);
+            Instantiate(enemy, spawnPosition, Quaternion.identity);
             return true;
         }
-        else return false;
+        else
+        {
+            return false;
+        }
     }
     private void OnTriggerEnter(Collider other)
     {

@@ -6,6 +6,5 @@ using UnityEngine;
 public class ammoStats : ScriptableObject
 {
     [Range(1, 10)] public int ammoRecover;
-    [Range(1, 2)] public int magRecover;
-
+    [Range(1, 10)] public int magRecover;
 }
