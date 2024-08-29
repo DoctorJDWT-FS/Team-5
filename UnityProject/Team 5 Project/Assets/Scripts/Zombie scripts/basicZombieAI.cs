@@ -125,27 +125,6 @@ public class basicZombieAI : MonoBehaviour, IDamage
         modelHead.material.color = coloriginHead;
     }
 
-
-    //protected IEnumerator Attack()
-    //{
-    //    // zombie will attack till player is dead or steps out of range 
-    //    while (isAttacking)
-    //    {
-    //        //if player isnt dead it will attack only the player  no zombies should be hit 
-    //        if (!gameManager.instance.playerScript.isDead)
-    //        {
-    //            target.takeDamage(hitDamage);
-    //            yield return new WaitForSeconds(HitRate);
-    //        }
-    //        else
-    //        {
-    //            //player must have died and will set attacking to false to break loop
-    //            isAttacking = false;
-    //        }
-
-    //    }
-    //}
-
     public  virtual int getMeleeDmg()
     {
         return hitDamage;
@@ -176,9 +155,7 @@ public class basicZombieAI : MonoBehaviour, IDamage
             //set animation to attacking true 
             myAnimator.SetBool("Attack", true);
             isAttacking = true;
-  
         }
-
     }
     protected virtual void OnAttackRangeTriggerExit(Collider other)
     {

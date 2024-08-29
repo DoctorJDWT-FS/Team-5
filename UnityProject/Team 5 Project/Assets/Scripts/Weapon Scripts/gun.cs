@@ -18,6 +18,8 @@ public class gun : MonoBehaviour
     [Header("Stats")]
     public int currentAmmo;
     public int magSize;
+    public int currentMagazines;  // Current number of magazines available
+    public int maxMagazines;      // Maximum number of magazines the player can carry
     public float fireRate;
     public float reloadTime;
 
@@ -25,10 +27,12 @@ public class gun : MonoBehaviour
     public bool reloading;
 
     [Header("References")]
-   // [SerializeField] private gunData gunData;
     [SerializeField] private Transform muzzle;
     [SerializeField] private GameObject bullet;
-
+    [SerializeField] private AudioSource gunAudioSource;
+    [SerializeField] private AudioClip shootClip;        
+    [SerializeField] private AudioClip reloadClip;
+    [SerializeField] GameObject muzzleFlash;
 
     float timeSinceLastShot;
 
@@ -48,27 +52,36 @@ public class gun : MonoBehaviour
 
     public void StartReload()
     {
-        if(!reloading && this.gameObject.activeSelf)
+        if (!reloading && this.gameObject.activeSelf && currentAmmo < magSize && currentMagazines > 0)
         {
             StartCoroutine(Reload());
         }
     }
+
     private IEnumerator Reload()
     {
         reloading = true;
-
+        PlaySound(reloadClip);
         yield return new WaitForSeconds(reloadTime);
 
-        currentAmmo = magSize;
+        if (currentMagazines > 0)
+        {
+            currentMagazines--;
+            currentAmmo = magSize;
+        }
+        else
+        {
+            Debug.Log("No magazines left!");
+        }
 
         reloading = false;
     }
+
     private bool canShoot() => !reloading && timeSinceLastShot > 1f / (fireRate / 60f);
 
     public void Shoot()
     {
-        // Use this to test if player is shooting
-         Debug.Log("Shot Gun!");
+        Debug.Log("Shot Gun!");
         Debug.Log("Current Ammo Before: " + currentAmmo);
 
         if (currentAmmo > 0)
@@ -83,12 +96,16 @@ public class gun : MonoBehaviour
                 {
                     Debug.Log("No hit detected");
                 }
-                GameObject bulletInstance = Instantiate(bullet, muzzle.position, muzzle.rotation);
 
+                GameObject bulletInstance = Instantiate(bullet, muzzle.position, muzzle.rotation);
                 currentAmmo--;
                 timeSinceLastShot = 0;
                 onGunShot();
             }
+        }
+        else
+        {
+            Debug.Log("Out of ammo, reload needed.");
         }
     }
 
@@ -100,7 +117,27 @@ public class gun : MonoBehaviour
 
     private void onGunShot()
     {
-        // Implement gunshot effects, sound, etc.
+        StartCoroutine(flashMuzzle());
+        PlaySound(shootClip);
+    }
 
+    private void PlaySound(AudioClip clip)
+    {
+        if (gunAudioSource != null && clip != null)
+        {
+            gunAudioSource.clip = clip;
+            gunAudioSource.Play();
+        }
+        else
+        {
+            Debug.LogWarning("Audio source or clip is not assigned.");
+        }
+    }
+
+    IEnumerator flashMuzzle()
+    {
+        muzzleFlash.SetActive(true);
+        yield return new WaitForSeconds(0.05f);
+        muzzleFlash.SetActive(false);
     }
 }

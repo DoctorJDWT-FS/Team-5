@@ -54,6 +54,8 @@ MonoBehaviour:
   accuracySpread: 1
   currentAmmo: 32
   magSize: 32
+  currentMagazines: 10
+  maxMagazines: 10
   fireRate: 600
   reloadTime: 2.4
   reloading: 0
