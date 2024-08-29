@@ -9,6 +9,7 @@ public class pickUp : MonoBehaviour
     [SerializeField] pickUpItem type;
     [SerializeField] private healthKitStats medkit = null;
     [SerializeField] private shieldStats shieldPack = null;
+    [SerializeField] private ammoStats ammoPack = null;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -28,6 +29,12 @@ public class pickUp : MonoBehaviour
             {
                 gameManager.instance.playerScript.addShield(shieldPack.shieldGain);
             }
+            if (type == pickUpItem.Ammo)
+            {
+                gameManager.instance.playerScript.addAmmo(ammoPack.ammoRecover, ammoPack.magRecover);
+            }
+
+
             Destroy(gameObject);
         }
         

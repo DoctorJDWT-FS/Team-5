@@ -42,6 +42,7 @@ public class playerController : MonoBehaviour, IDamage
     private Animator myAnimator;
     private gun currentGun;
 
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -51,6 +52,7 @@ public class playerController : MonoBehaviour, IDamage
         myAnimator = GetComponent<Animator>();
         deathCamera.gameObject.SetActive(false);
         spawnPlayer();
+       
     }
 
     public void spawnPlayer()
@@ -267,6 +269,31 @@ public class playerController : MonoBehaviour, IDamage
         {
             shield += _shield;
             updatePlayerUI();
+        }
+
+    }
+    public void addAmmo(int _Ammo,int _Mags)
+    {
+
+        if (currentGun.maxMagazines <= currentGun.currentMagazines + _Mags)
+        {
+           currentGun.currentMagazines = currentGun.maxMagazines;
+            updatePlayerUI();
+
+        }
+        else
+        {
+            currentGun.currentMagazines =+ _Mags; 
+            updatePlayerUI();
+        }
+        if(currentGun.magSize <= currentGun.currentAmmo + _Ammo)
+        {
+            currentGun.currentAmmo = currentGun.magSize;
+            updatePlayerUI();
+        }
+        else
+        {
+            currentGun.currentAmmo += _Ammo;
         }
 
     }
