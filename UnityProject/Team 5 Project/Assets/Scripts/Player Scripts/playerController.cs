@@ -155,12 +155,13 @@ public class playerController : MonoBehaviour, IDamage
 
     void FootStep()
     {
-        // Handle the footstep event, like playing a sound or spawning a particle.
+        // Handle the footstep event
     }
 
     private void TriggerPull()
     {
-        if (gameManager.instance.isPaused || shopInteractable.instance.isPaused)
+        // Check if the game is paused by the gameManager or if the shop exists and is paused
+        if (gameManager.instance.isPaused || (shopInteractable.instance != null && shopInteractable.instance.isPaused))
             return;
 
         if (Input.GetMouseButton(0) && !isSprinting && !isReloading)
