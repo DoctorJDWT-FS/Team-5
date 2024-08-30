@@ -10,10 +10,7 @@ public class spawnPoint : MonoBehaviour
     {
         if (!playerInRange)
         {
-            // Adjust spawn position: setting y to 0, or adjust based on ground level.
-            Vector3 spawnPosition = new Vector3(transform.position.x, 0, transform.position.z);
-            Instantiate(enemy, spawnPosition, Quaternion.identity);
-
+            Instantiate(enemy, gameObject.transform);
             return true;
         }
         else return false;
