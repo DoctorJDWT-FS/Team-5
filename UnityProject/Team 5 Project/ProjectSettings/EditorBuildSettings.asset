@@ -8,7 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/RosalieRancourt.unity
     guid: 508fbe65c06cfce459e4c28e3f52424f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Jacks Scene.unity
     guid: c1b3ed32a9b4af64ab80f8a5c4f01b4b
+  - enabled: 1
+    path: Assets/Scenes/Prototype II scene.unity
+    guid: 5deaf569e3d3c354485c7be7c710a9df
   m_configObjects: {}

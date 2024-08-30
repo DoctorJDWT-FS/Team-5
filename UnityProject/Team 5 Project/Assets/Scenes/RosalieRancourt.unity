@@ -504,6 +504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d58d5f8a2f1f76418f6983803b8716a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   mainSlider: {fileID: 1902211734}
 --- !u!224 &306160055
 RectTransform:

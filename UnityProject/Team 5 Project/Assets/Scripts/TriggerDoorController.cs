@@ -24,6 +24,9 @@ public class TriggerDoorController : MonoBehaviour
     // Set how much the door should cost. If free, set to 0
     [SerializeField] private int doorCost;
 
+    [SerializeField] private GameObject[] disableList;
+    [SerializeField] private GameObject[] enableList;
+
     private void Start()
     {
         playerWallet = FindObjectOfType<iWallet>();
@@ -66,5 +69,13 @@ public class TriggerDoorController : MonoBehaviour
         hasDoorOpened = true;
         costMessage.SetActive(false); // Hide the cost
         pressEMessage.SetActive(false); // Hide the message after the door is opened
+        for (int i = 0; i < disableList.Length; i++)
+        {
+            disableList[i].SetActive(false);
+        }
+        for (int i = 0; i < enableList.Length; i++)
+        {
+            enableList[i].SetActive(true);
+        }
     }
 }

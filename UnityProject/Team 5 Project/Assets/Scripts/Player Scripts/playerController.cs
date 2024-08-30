@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class playerController : MonoBehaviour, IDamage
@@ -22,6 +23,8 @@ public class playerController : MonoBehaviour, IDamage
 
     [Header("----- Guns -----")]
     [SerializeField] private KeyCode reloadKey;
+    [SerializeField] TMP_Text ammoCount;
+    [SerializeField] TMP_Text magCount;
 
     Vector3 move;
     Vector3 playerVel;
@@ -160,7 +163,8 @@ public class playerController : MonoBehaviour, IDamage
 
     private void TriggerPull()
     {
-        if (gameManager.instance.isPaused || shopInteractable.instance.isPaused)
+        // Check if the game is paused by the gameManager or if the shop exists and is paused
+        if (gameManager.instance.isPaused || (shopInteractable.instance != null && shopInteractable.instance.isPaused))
             return;
 
         if (Input.GetMouseButton(0) && !isSprinting && !isReloading)
@@ -201,11 +205,15 @@ public class playerController : MonoBehaviour, IDamage
         {
             myAnimator.SetBool("Pistol", true);
             myAnimator.SetBool("Rifle", false);
+            magCount.text = currentGun.currentMagazines + " ";
+            ammoCount.text = currentGun.currentAmmo + " ";
         }
         else if (currentGun.weaponType == gun.WeaponType.Rifle)
         {
             myAnimator.SetBool("Pistol", false);
             myAnimator.SetBool("Rifle", true);
+            magCount.text = currentGun.currentMagazines + " ";
+            ammoCount.text = currentGun.currentAmmo + " ";
         }
         else
         {
@@ -213,6 +221,7 @@ public class playerController : MonoBehaviour, IDamage
             myAnimator.SetBool("Pistol", false);
             myAnimator.SetBool("Rifle", false);
         }
+
     }
 
 
