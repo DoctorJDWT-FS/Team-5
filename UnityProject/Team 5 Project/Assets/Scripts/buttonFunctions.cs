@@ -18,9 +18,9 @@ public class buttonFunctions : MonoBehaviour
     }
     public void StartButton()
     {
-        gameManager.instance.UpdateSliderValue(mainSlider.value);
-        gameManager.instance.toggleInvertY();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        //gameManager.instance.UpdateSliderValue(mainSlider.value);
+        //gameManager.instance.toggleInvertY();
+        SceneManager.LoadScene(1);
     }
     
     public void resume()

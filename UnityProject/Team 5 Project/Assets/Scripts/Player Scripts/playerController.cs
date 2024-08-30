@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class playerController : MonoBehaviour, IDamage
@@ -22,6 +23,8 @@ public class playerController : MonoBehaviour, IDamage
 
     [Header("----- Guns -----")]
     [SerializeField] private KeyCode reloadKey;
+    [SerializeField] TMP_Text ammoCount;
+    [SerializeField] TMP_Text magCount;
 
     Vector3 move;
     Vector3 playerVel;
@@ -202,11 +205,15 @@ public class playerController : MonoBehaviour, IDamage
         {
             myAnimator.SetBool("Pistol", true);
             myAnimator.SetBool("Rifle", false);
+            magCount.text = currentGun.currentMagazines + " ";
+            ammoCount.text = currentGun.currentAmmo + " ";
         }
         else if (currentGun.weaponType == gun.WeaponType.Rifle)
         {
             myAnimator.SetBool("Pistol", false);
             myAnimator.SetBool("Rifle", true);
+            magCount.text = currentGun.currentMagazines + " ";
+            ammoCount.text = currentGun.currentAmmo + " ";
         }
         else
         {
@@ -214,6 +221,7 @@ public class playerController : MonoBehaviour, IDamage
             myAnimator.SetBool("Pistol", false);
             myAnimator.SetBool("Rifle", false);
         }
+
     }
 
 

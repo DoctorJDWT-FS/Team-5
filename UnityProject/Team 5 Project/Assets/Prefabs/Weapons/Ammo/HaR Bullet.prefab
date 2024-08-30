@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5226067683531511546}
   - component: {fileID: 898197619751296303}
   - component: {fileID: 1359392564439068786}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HaR Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,13 +146,13 @@ TrailRenderer:
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.01
+    widthMultiplier: 0.03
     widthCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.09456113
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -161,7 +161,7 @@ TrailRenderer:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 0.34728685
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 0

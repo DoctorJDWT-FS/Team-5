@@ -5,7 +5,6 @@ using UnityEngine.Diagnostics;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 
 public class gameManager : MonoBehaviour
 {
