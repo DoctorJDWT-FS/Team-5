@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8093395114399000099}
+  - component: {fileID: -1026186838955074945}
   - component: {fileID: 749326482829952100}
   - component: {fileID: 3561582515292058397}
   - component: {fileID: 5604558424958100873}
@@ -36,6 +37,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &-1026186838955074945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 579506411911024464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b48dcdb545b83140aab3452c853a197, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  degreeRotation: 45
+  rotationSpeed: 1
 --- !u!114 &749326482829952100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,7 +149,7 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 0.4943396, g: 0.48442948, b: 0.25649694, a: 1}
+  m_Color: {r: 0.33638301, g: 0.5999999, b: 0.20716976, a: 1}
   m_Intensity: 3
   m_Range: 1
   m_SpotAngle: 30

@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8319199576961256602}
+  - component: {fileID: -5549668106378525593}
   - component: {fileID: 8186955020513941326}
   - component: {fileID: 3444623705654832016}
   - component: {fileID: 7399604768595202757}
@@ -36,6 +37,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-5549668106378525593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5029210525199766798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b48dcdb545b83140aab3452c853a197, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  degreeRotation: 90
+  rotationSpeed: 1
 --- !u!114 &8186955020513941326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51,6 +66,7 @@ MonoBehaviour:
   type: 1
   medkit: {fileID: 11400000, guid: f4c77a4f65179cc41b50cc98997a0ddb, type: 2}
   shieldPack: {fileID: 0}
+  ammoPack: {fileID: 0}
 --- !u!33 &3444623705654832016
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -133,7 +149,7 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 0.031505853, g: 0.2830189, b: 0.119875334, a: 1}
+  m_Color: {r: 0.6137344, g: 0.6679245, b: 0.6428812, a: 1}
   m_Intensity: 3
   m_Range: 1
   m_SpotAngle: 30
