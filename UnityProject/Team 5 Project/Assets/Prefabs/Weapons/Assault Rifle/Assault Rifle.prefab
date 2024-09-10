@@ -52,15 +52,20 @@ MonoBehaviour:
   weaponType: 1
   maxDistance: 400
   accuracySpread: 1
-  currentAmmo: 32
-  magSize: 32
-  currentMagazines: 10
+  currentAmmo: 8
+  magSize: 8
+  currentMagazines: 4
   maxMagazines: 10
   fireRate: 600
+  fireRateOrig: 0
   reloadTime: 2.4
   reloading: 0
   muzzle: {fileID: 5851870578380489403}
   bullet: {fileID: 6235100777797261364, guid: cc8b33de2edd06f49bb4f0997282d871, type: 3}
+  gunAudioSource: {fileID: 0}
+  shootClip: {fileID: 0}
+  reloadClip: {fileID: 0}
+  muzzleFlash: {fileID: 0}
 --- !u!95 &4820983723659702468
 Animator:
   serializedVersion: 5
