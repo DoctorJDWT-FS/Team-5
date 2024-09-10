@@ -9,8 +9,8 @@ public class buttonFunctions : MonoBehaviour
 {
     public playerController player;
     public Slider mainSlider;
-
     private iWallet playerWallet;
+   
 
     public void Start()
     {

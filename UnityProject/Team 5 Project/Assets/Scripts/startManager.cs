@@ -5,6 +5,8 @@ using UnityEngine.Diagnostics;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Unity.VisualScripting;
+
 
 public class startManager : MonoBehaviour
 {
@@ -12,23 +14,29 @@ public class startManager : MonoBehaviour
 
 
     [Header("----- Menu Items -----")]
+  
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject startLabel;
     [SerializeField] GameObject settingsLabel;
+
+    
 
     [Header("----- Camera Items -----")]
     [SerializeField] int sensitivity = 600;
     [SerializeField] bool invertY = false;
 
-
+    
     public bool isPaused;
 
+    int MenuPosition;
+    private Image currentHighlight;
 
     void Awake()
     {
         instance = this;
+       
     }
-
+   
     public void statePause()
     {
         isPaused = !isPaused;
@@ -88,5 +96,6 @@ public class startManager : MonoBehaviour
 
 
     }
-
+   
+    
 }
