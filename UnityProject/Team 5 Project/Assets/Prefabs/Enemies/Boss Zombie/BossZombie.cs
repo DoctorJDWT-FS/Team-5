@@ -2,115 +2,169 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class BossZombieAI : MonoBehaviour
+public class BossZombieAI : MonoBehaviour, IDamage
 {
     [Header("----- Boss Stats -----")]
-    [SerializeField] private float walkingSpeed = 2f;      // Walking speed of the boss
-    [SerializeField] private float sprintSpeed = 5f;       // Sprint speed of the boss
-    [SerializeField] private float accelerationTime = 2f;  // Time it takes to accelerate to full speed
-    [SerializeField] private float decelerationTime = 2f;  // Time it takes to decelerate to zero speed
-    [SerializeField] private float attackRange = 1.5f;     // Range within which the boss can attack the player
-    [SerializeField] private float attackCooldown = 2f;    // Cooldown between attacks (time in seconds)
-    [SerializeField] private int attackDamage = 25;        // Damage dealt per attack
+    [SerializeField] private float walkingSpeed = 2f;
+    [SerializeField] private float sprintSpeed = 5f;
+    [SerializeField] private float accelerationTime = 2f;
+    [SerializeField] private float decelerationTime = 2f;
+    [SerializeField] private int maxHP = 500;
+
+    [Header("----- Attack 1 Settings -----")]
+    [SerializeField] private float attack1Range = 1.5f;           // Range for Attack1
+    [SerializeField] private float attack1Cooldown = 2f;          // Cooldown for Attack1
+    [SerializeField] private int attack1Damage = 25;              // Damage value for Attack1
 
     [Header("----- Components -----")]
-    [SerializeField] private NavMeshAgent agent;           // NavMeshAgent for movement
-    [SerializeField] private Animator myAnimator;          // Animator component for handling animations
+    [SerializeField] private NavMeshAgent agent;
+    [SerializeField] private Animator myAnimator;
+    [SerializeField] private Collider rightHandCollider;          // Reference to the right-hand collider
+    [SerializeField] private Collider leftHandCollider;           // Reference to the left-hand collider
 
     [Header("----- Player Tracking -----")]
-    private Transform playerTransform;                     // Reference to the player's transform
-    private float currentSpeed;                            // Current smoothed speed
-    private bool isAttacking = false;                      // Is the boss currently attacking
-    private float nextAttackTime = 0f;                     // Time for the next allowed attack
+    private Transform playerTransform;
+    private float currentSpeed;
+    private float nextAttack1Time = 0f;                           // Tracks when the next Attack1 can occur
+    private bool isDead = false;                                  // Tracks if the boss is dead
+    private int currentHP;
 
     private void Start()
     {
-        // Get the player transform from the game manager
         playerTransform = gameManager.instance.player.transform;
-
-        // Initialize the animator component
         myAnimator = GetComponent<Animator>();
-
-        // Set initial speed values
         currentSpeed = 0f;
         agent.speed = 0f;
+        currentHP = maxHP;
+
+        // Disable hand colliders initially
+        rightHandCollider.enabled = false;
+        leftHandCollider.enabled = false;
     }
 
     private void Update()
     {
-        // Always move toward the player
-        agent.SetDestination(playerTransform.position);
+        if (isDead) return;  // Stop all actions if dead
 
-        // Calculate the distance to the player
         float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
 
-        // Check if within attack range
-        if (distanceToPlayer <= attackRange)
+        if (distanceToPlayer <= attack1Range)
         {
-            // Handle attack logic
-            HandleAttack();
+            // Player is in attack range, try attacking
+            if (Time.time >= nextAttack1Time)
+            {
+                Attack1();
+            }
+            else
+            {
+                // While on cooldown, keep boss in idle state
+                myAnimator.SetFloat("Speed", 0f);
+                agent.speed = 0f;
+            }
         }
         else
         {
-            // Handle movement logic
+            // Player is out of attack range, handle movement
             HandleMovement(distanceToPlayer);
         }
     }
 
+    private void Attack1()
+    {
+        // Trigger attack animation
+        myAnimator.SetTrigger("Attack1");
+
+        // Set the next attack time after the cooldown
+        nextAttack1Time = Time.time + attack1Cooldown;
+
+        // Enable hand colliders to apply damage
+        rightHandCollider.enabled = true;
+        leftHandCollider.enabled = true;
+    }
+
     private void HandleMovement(float distanceToPlayer)
     {
-        // Reset attacking state if moving
-        isAttacking = false;
-        myAnimator.SetBool("isAttacking", false);
-
         // Adjust speed based on distance
         float targetSpeed = distanceToPlayer > 5f ? sprintSpeed : walkingSpeed;
 
-        // Smoothly transition the speed
+        // Smooth speed transition
         currentSpeed = Mathf.Lerp(currentSpeed, targetSpeed, Time.deltaTime / (targetSpeed > currentSpeed ? accelerationTime : decelerationTime));
 
-        // Apply the smoothed speed to the NavMeshAgent
         agent.speed = currentSpeed;
-
-        // Update the Animator parameter to control the blend tree
+        agent.SetDestination(playerTransform.position); // Move towards the player
         myAnimator.SetFloat("Speed", currentSpeed);
+        myAnimator.SetBool("isWalking", true); // Set isWalking to true when moving
     }
 
-    private void HandleAttack()
+    // Animation event method to enable hand colliders
+    public void EnableHandColliders()
     {
-        // Stop the movement when attacking
-        agent.speed = 0f;
-        myAnimator.SetFloat("Speed", 0f);
+        rightHandCollider.enabled = true;
+        leftHandCollider.enabled = true;
+    }
 
-        // Check for cooldown and whether the boss can attack
-        if (!isAttacking && Time.time >= nextAttackTime)
+    // Animation event method to disable hand colliders
+    public void DisableHandColliders()
+    {
+        rightHandCollider.enabled = false;
+        leftHandCollider.enabled = false;
+    }
+
+    // Method to get attack damage
+    public int GetAttackDamage()
+    {
+        return attack1Damage;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // Check if the trigger is from the hand colliders and the player is hit
+        if ((other == rightHandCollider || other == leftHandCollider) && other.CompareTag("Player"))
         {
-            // Trigger attack animation
-            myAnimator.SetTrigger("Attack1");
-
-            // Perform the attack after a delay
-            StartCoroutine(PerformAttack());
-
-            // Set the next attack time based on the cooldown
-            nextAttackTime = Time.time + attackCooldown;
+            IDamage playerDamage = other.GetComponent<IDamage>();
+            if (playerDamage != null)
+            {
+                playerDamage.takeDamage(GetAttackDamage()); // Use the method to get attack damage
+            }
         }
     }
 
-    private IEnumerator PerformAttack()
+    // Implementing the takeDamage method from IDamage interface
+    public void takeDamage(int amount)
     {
-        isAttacking = true;
+        if (isDead) return; // Don't take damage if already dead
 
-        // Wait for the attack animation to hit
-        yield return new WaitForSeconds(0.5f);
+        currentHP -= amount;
+        Debug.Log($"BossZombie takes {amount} damage!");
 
-        // Deal damage to the player
-        playerController player = gameManager.instance.player.GetComponent<playerController>();
-        if (player != null)
+        if (currentHP <= 0)
         {
-            player.takeDamage(attackDamage);
+            Die();
         }
+    }
 
-        // Reset attacking state
-        isAttacking = false;
+    private void Die()
+    {
+        isDead = true;  // Set the dead flag
+        myAnimator.SetBool("isDead", true);  // Set the 'isDead' boolean in the animator to true
+
+        // Disable components that should not be active after death
+        agent.enabled = false;  // Disable the NavMeshAgent to stop movement
+        rightHandCollider.enabled = false;
+        leftHandCollider.enabled = false;
+
+        Debug.Log("BossZombie has died.");
+
+        // Start a coroutine to destroy the object after the animation ends
+        StartCoroutine(DestroyAfterDeathAnimation());
+    }
+
+    private IEnumerator DestroyAfterDeathAnimation()
+    {
+        // Wait for the duration of the death animation
+        yield return new WaitForSeconds(myAnimator.GetCurrentAnimatorStateInfo(0).length);
+
+        // Destroy the GameObject
+        Destroy(gameObject);
     }
 }
