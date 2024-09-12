@@ -1179,6 +1179,7 @@ GameObject:
   m_Component:
   - component: {fileID: 152374560567787465}
   - component: {fileID: 2353229144212733786}
+  - component: {fileID: 2080928529483966168}
   - component: {fileID: 2466636926843170607}
   - component: {fileID: 2823294014843151721}
   - component: {fileID: 5888396753514558309}
@@ -1237,6 +1238,36 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2080928529483966168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3423192051991701679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2963bdc4959085498806d632be3f2e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprint: 304
+  slide: 99
+  dash: 306
+  jump: 32
+  moveForward: 119
+  moveBackward: 115
+  strafeLeft: 97
+  strafeRight: 100
+  enter: 13
+  exit: 27
+  up: 119
+  down: 115
+  left: 97
+  right: 100
+  shoot: 323
+  aim: 324
+  reload: 114
+  interact: 101
 --- !u!114 &2466636926843170607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1271,6 +1302,7 @@ MonoBehaviour:
   deathCamera: {fileID: 6651101482143446102}
   audioSource: {fileID: 1010188559744870041}
   myAnimator: {fileID: 2353229144212733786}
+  playerSettings: {fileID: 2080928529483966168}
   HP: 1000
   shield: 5
   speed: 4
@@ -1286,7 +1318,6 @@ MonoBehaviour:
   dashCooldown: 4.5
   slideSound: {fileID: 8300000, guid: 39159a939a9e81b4fae7eed10b88561f, type: 3}
   dashSound: {fileID: 8300000, guid: f65a82aa46096da4da915bf279fec207, type: 3}
-  reloadKey: 114
   ammoCount: {fileID: 0}
   magCount: {fileID: 0}
   HPOrig: 0

@@ -13,6 +13,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] Camera deathCamera; // Camera used when player dies
     [SerializeField] AudioSource audioSource; // Audio source for playing sound effects
     [SerializeField] Animator myAnimator; // Animator for handling player animations
+    [SerializeField] PlayerSettings playerSettings; // Reference to PlayerSettings
 
     [Header("----- Player Stats -----")]
     [SerializeField] int HP; // Player health points
@@ -34,7 +35,6 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] AudioClip dashSound; // Sound effect for dashing
 
     [Header("----- Guns -----")]
-    [SerializeField] private KeyCode reloadKey; // Key to reload weapon
     [SerializeField] TMP_Text ammoCount; // UI element to display ammo count
     [SerializeField] TMP_Text magCount; // UI element to display magazine count
 
@@ -147,7 +147,7 @@ public class playerController : MonoBehaviour, IDamage
         myAnimator.SetFloat("FB", moveZ);
 
         // Handle jumping
-        if (Input.GetButtonDown("Jump") && jumpCount < jumpMax)
+        if (Input.GetKeyDown(playerSettings.jump) && jumpCount < jumpMax)
         {
             jumpCount++;
             playerVel.y = jumpSpeed;
@@ -160,7 +160,7 @@ public class playerController : MonoBehaviour, IDamage
     void Slide()
     {
         // Slide only if the player is sprinting and not already sliding
-        if (Input.GetKeyDown(KeyCode.C) && canSlide && isSprinting && !isSliding)
+        if (Input.GetKeyDown(playerSettings.slide) && canSlide && isSprinting && !isSliding)
         {
             StartCoroutine(PerformSlide());
         }
@@ -196,15 +196,15 @@ public class playerController : MonoBehaviour, IDamage
     void HandleDashAndSprint()
     {
         // Dash on LeftShift press, sprint on hold
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash && !isSprinting && !isDashing)
+        if (Input.GetKeyDown(playerSettings.dash) && canDash && !isSprinting && !isDashing)
         {
             StartCoroutine(PerformDash());
         }
-        else if (Input.GetKey(KeyCode.LeftShift) && !isDashing && !isSliding && IsMovingForwardOnly())
+        else if (Input.GetKey(playerSettings.sprint) && !isDashing && !isSliding && IsMovingForwardOnly())
         {
             StartSprinting();
         }
-        else if (Input.GetKeyUp(KeyCode.LeftShift))
+        else if (Input.GetKeyUp(playerSettings.sprint))
         {
             StopSprinting();
         }
@@ -271,7 +271,6 @@ public class playerController : MonoBehaviour, IDamage
         return moveZ > 0 && moveX == 0; // True if moving forward and not strafing
     }
 
-
     void FootStep()
     {
         // Handle the footstep event, like playing a sound or spawning a particle.
@@ -283,14 +282,16 @@ public class playerController : MonoBehaviour, IDamage
         if (gameManager.instance.isPaused || (shopInteractable.instance != null && shopInteractable.instance.isPaused))
             return;
 
-        if (Input.GetMouseButton(0) && !isSprinting && !isReloading)
+        // Use the key from PlayerSettings for shooting
+        if (Input.GetKey(playerSettings.shoot) && !isSprinting && !isReloading)
         {
             Debug.Log("Shoot Input Detected");
             myAnimator.SetTrigger("Shoot");
             shootInput?.Invoke();
         }
 
-        if (Input.GetKeyDown(reloadKey))
+        // Use the key from PlayerSettings for reloading
+        if (Input.GetKeyDown(playerSettings.reload))
         {
             Debug.Log("Reload Input Detected");
             reloadInput?.Invoke();
@@ -312,11 +313,14 @@ public class playerController : MonoBehaviour, IDamage
         isReloading = false;
     }
 
+
     public void UpdateWeaponType()
     {
-        if (currentGun == null)
+        // If currentGun or magCount or ammoCount is null, return early and do nothing
+        if (currentGun == null || magCount == null || ammoCount == null)
             return;
 
+        // Check for specific weapon types
         if (currentGun.weaponType == gun.WeaponType.Pistol)
         {
             myAnimator.SetBool("Pistol", true);
@@ -333,13 +337,11 @@ public class playerController : MonoBehaviour, IDamage
         }
         else
         {
-            // If there are other weapon types, handle them here.
+            // Handle other weapon types or default to no weapon
             myAnimator.SetBool("Pistol", false);
             myAnimator.SetBool("Rifle", false);
         }
-
     }
-
 
     public void takeDamage(int amount)
     {
@@ -354,7 +356,7 @@ public class playerController : MonoBehaviour, IDamage
         }
         else
         {
-            //player takes sheild damage
+            //player takes shield damage
             shield -= amount;
             StartCoroutine(shieldDamage());
             updatePlayerUI();
@@ -369,8 +371,7 @@ public class playerController : MonoBehaviour, IDamage
 
     public void addHealth(int health)
     {
-        
-        if(HPOrig <= HP + health)
+        if (HPOrig <= HP + health)
         {
             HP = HPOrig;
             updatePlayerUI();
@@ -380,11 +381,10 @@ public class playerController : MonoBehaviour, IDamage
             HP += health;
             updatePlayerUI();
         }
-        
     }
+
     public void addShield(int _shield)
     {
-
         if (shieldOrig <= shield + _shield)
         {
             shield = shieldOrig;
@@ -395,23 +395,22 @@ public class playerController : MonoBehaviour, IDamage
             shield += _shield;
             updatePlayerUI();
         }
-
     }
-    public void addAmmo(int _Ammo,int _Mags)
-    {
 
+    public void addAmmo(int _Ammo, int _Mags)
+    {
         if (currentGun.maxMagazines <= currentGun.currentMagazines + _Mags)
         {
-           currentGun.currentMagazines = currentGun.maxMagazines;
+            currentGun.currentMagazines = currentGun.maxMagazines;
             updatePlayerUI();
-
         }
         else
         {
-            currentGun.currentMagazines =+ _Mags; 
+            currentGun.currentMagazines += _Mags;
             updatePlayerUI();
         }
-        if(currentGun.magSize <= currentGun.currentAmmo + _Ammo)
+
+        if (currentGun.magSize <= currentGun.currentAmmo + _Ammo)
         {
             currentGun.currentAmmo = currentGun.magSize;
             updatePlayerUI();
@@ -420,13 +419,11 @@ public class playerController : MonoBehaviour, IDamage
         {
             currentGun.currentAmmo += _Ammo;
         }
-
     }
 
     public void increaseMaxHealth(int amount)
     {
         HPOrig += amount;
-
         HP += amount;
 
         if (HP > HPOrig)
@@ -434,13 +431,12 @@ public class playerController : MonoBehaviour, IDamage
             HP = HPOrig;
         }
         addHealth(HPOrig - HP);
-        updatePlayerUI(); 
+        updatePlayerUI();
     }
 
     public void increaseMaxShield(int amount)
     {
         shieldOrig += amount;
-
         shield += amount;
 
         if (shield > shieldOrig)
@@ -451,13 +447,14 @@ public class playerController : MonoBehaviour, IDamage
         updatePlayerUI();
     }
 
-    //added flash damage script 
+    // Flash damage visual effect
     private IEnumerator flashDamage()
     {
         gameManager.instance.flashDamageScreen.SetActive(true);
         yield return new WaitForSeconds(0.1f);
         gameManager.instance.flashDamageScreen.SetActive(false);
     }
+
     private IEnumerator shieldDamage()
     {
         gameManager.instance.flashShieldDamageScreen.SetActive(true);
@@ -486,8 +483,6 @@ public class playerController : MonoBehaviour, IDamage
         // Call the youLose method after the delay
         yield return new WaitForSeconds(4.0f);
         gameManager.instance.youLose();
-
-        // Debug.Log("still in this for some reason");
     }
 
     public void updatePlayerUI()
@@ -495,5 +490,4 @@ public class playerController : MonoBehaviour, IDamage
         gameManager.instance.PlayerHPBar.fillAmount = (float)HP / HPOrig;
         gameManager.instance.playerShieldBar.fillAmount = (float)shield / shieldOrig;
     }
-
 }
