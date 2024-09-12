@@ -307,6 +307,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
+--- !u!82 &353451241 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3093064768487369275, guid: bb3ec219994711d499ed027dfafc44aa, type: 3}
+  m_PrefabInstance: {fileID: 378342306}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &378342306
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -355,11 +360,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3093064768487369275, guid: bb3ec219994711d499ed027dfafc44aa, type: 3}
+      propertyPath: m_Volume
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3423192051991701679, guid: bb3ec219994711d499ed027dfafc44aa, type: 3}
       propertyPath: m_Name
       value: Player Aimable
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5114801005215229874, guid: bb3ec219994711d499ed027dfafc44aa, type: 3}
+      propertyPath: gunAudioSource
+      value: 
+      objectReference: {fileID: 353451241}
+    - target: {fileID: 6154472553104061879, guid: bb3ec219994711d499ed027dfafc44aa, type: 3}
+      propertyPath: m_Volume
+      value: 0.45
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5568864257247735470, guid: bb3ec219994711d499ed027dfafc44aa, type: 3}
+    - {fileID: 7238274380095719390, guid: bb3ec219994711d499ed027dfafc44aa, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

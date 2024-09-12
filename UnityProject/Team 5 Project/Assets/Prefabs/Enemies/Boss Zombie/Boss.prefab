@@ -1664,13 +1664,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkingSpeed: 2
-  sprintSpeed: 5
-  accelerationTime: 2
+  sprintSpeed: 5.5
+  accelerationTime: 1
   decelerationTime: 2
-  maxHP: 500
-  attack1Range: 2
-  attack1Cooldown: 2
+  maxHP: 400
+  rageDuration: 12
+  rageMultiplier: 2
+  attack1Range: 5
+  attack1Cooldown: 8
   attack1Damage: 50
+  attack1AnimationDuration: 2
+  attack2MinRange: 5
+  attack2MaxRange: 8
+  attack2Cooldown: 15
+  attack2Damage: 75
+  attack2AnimationDuration: 2.2
+  attack3MinRange: 0
+  attack3MaxRange: 5
+  attack3Cooldown: 8
+  attack3Damage: 60
+  attack3AnimationDuration: 2.5
+  attack4Range: 4
+  attack4Cooldown: 8
+  attack4Damage: 60
+  attack4AnimationDuration: 3
   agent: {fileID: 2559680159837706875}
   myAnimator: {fileID: 6882156216496740359}
   rightHandCollider: {fileID: 1429331580660866845}
@@ -1689,13 +1706,13 @@ NavMeshAgent:
   m_Acceleration: 15
   avoidancePriority: 50
   m_AngularSpeed: 600
-  m_StoppingDistance: 1.5
+  m_StoppingDistance: 2.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 0
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 5
   m_ObstacleAvoidanceType: 4
 --- !u!136 &1029440158817250551
 CapsuleCollider:
@@ -2644,8 +2661,8 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1.5
+  m_Radius: 0.6
+  m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6915342979117332816
@@ -3758,8 +3775,8 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1.5
+  m_Radius: 0.6
+  m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5648793759582257041
