@@ -9,6 +9,7 @@ public class betterWaveSpawner : MonoBehaviour
     [Range(0,10)][SerializeField] int[] zombieWeights;
     [SerializeField] GameObject[] spawnPoints;
     [Range(1, 10)][SerializeField] int timeBetweenSpawns;
+    [Range(1, 10)][SerializeField] int timeBetweenWaves;
     [Range(1, 10)][SerializeField] int sizeOfSpawns;
     [Range(1, 10)][SerializeField] int startingSize;
     [Range(1, 10)][SerializeField] int spawnIncrease;
@@ -50,7 +51,7 @@ public class betterWaveSpawner : MonoBehaviour
         if (!isSpawning && gameManager.instance.enemyCount == 0)
         {
             currentSpawned = 0;
-            StartCoroutine(spawn());
+            StartCoroutine(waveCountDown());
             if (waveNumber != 0)
             {
                 numToSpawn += spawnIncrease;
@@ -60,7 +61,6 @@ public class betterWaveSpawner : MonoBehaviour
     }
     IEnumerator spawn()
     {
-        isSpawning = true;
         int correctedSpawn = sizeOfSpawns;
         if ((numToSpawn - currentSpawned) < sizeOfSpawns) 
         {
@@ -91,5 +91,11 @@ public class betterWaveSpawner : MonoBehaviour
         {
             isSpawning = false;
         }
+    }
+    IEnumerator waveCountDown()
+    {
+        isSpawning = true;
+        yield return new WaitForSeconds(timeBetweenWaves);
+        StartCoroutine(spawn());
     }
 }

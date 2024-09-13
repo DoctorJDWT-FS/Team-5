@@ -27,6 +27,7 @@ public class PlayerSettings : MonoBehaviour
     public KeyCode aim = KeyCode.Mouse1;
     public KeyCode reload = KeyCode.R;
     public KeyCode interact = KeyCode.E;
+    public KeyCode punch = KeyCode.V; // Added punch key
 
     void Start()
     {
@@ -55,6 +56,7 @@ public class PlayerSettings : MonoBehaviour
         aim = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("aim", aim.ToString()));
         reload = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("reload", reload.ToString()));
         interact = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("interact", interact.ToString()));
+        punch = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("punch", punch.ToString())); // Load punch key
     }
 
     public void SaveSettings()
@@ -78,6 +80,7 @@ public class PlayerSettings : MonoBehaviour
         PlayerPrefs.SetString("aim", aim.ToString());
         PlayerPrefs.SetString("reload", reload.ToString());
         PlayerPrefs.SetString("interact", interact.ToString());
+        PlayerPrefs.SetString("punch", punch.ToString()); // Save punch key
 
         // Ensure the settings are saved
         PlayerPrefs.Save();
