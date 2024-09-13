@@ -18,9 +18,7 @@ public class buttonFunctions : MonoBehaviour
     }
     public void StartButton()
     {
-        //gameManager.instance.UpdateSliderValue(mainSlider.value);
-        //gameManager.instance.toggleInvertY();
-        SceneManager.LoadScene(1);
+        startManager.instance.startGame();
     }
     
     public void resume()
@@ -97,6 +95,14 @@ public class buttonFunctions : MonoBehaviour
     {
         playerWallet.SpendCredits(25);
         player.currentGun.fireRate += player.currentGun.fireRateOrig/50;
+    }
+    public void showCredits()
+    {
+        startManager.instance.openCredits();
+    }
+    public void backFromCredits()
+    {
+        startManager.instance.closeCredits();
     }
     public void quit()
     {

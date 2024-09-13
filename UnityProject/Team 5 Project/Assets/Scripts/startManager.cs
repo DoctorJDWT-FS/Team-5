@@ -14,12 +14,11 @@ public class startManager : MonoBehaviour
 
 
     [Header("----- Menu Items -----")]
-  
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject startLabel;
     [SerializeField] GameObject settingsLabel;
-
-    
+    [SerializeField] GameObject creditsLabel;
+    [SerializeField] GameObject loadingScreen;
 
     [Header("----- Camera Items -----")]
     [SerializeField] int sensitivity = 600;
@@ -72,12 +71,24 @@ public class startManager : MonoBehaviour
         Time.timeScale = 1;
     }
 
+    public void openCredits()
+    {
+        startLabel.SetActive(false);
+        creditsLabel.SetActive(true);
+    }
+    public void closeCredits()
+    {
+        Debug.Log("Going back");
+        startLabel.SetActive(true);
+        creditsLabel.SetActive(false);
+    }
+
     public void toggleInvertY()
     {
         invertY = !invertY;
         PlayerPrefs.SetInt("InvertY", invertY ? 1 : 0);
         
-        Debug.Log(PlayerPrefs.GetInt("InvertY") + "hello");
+        Debug.Log(PlayerPrefs.GetInt("InvertY") + " hello");
         PlayerPrefs.Save();
 
     }
@@ -86,16 +97,24 @@ public class startManager : MonoBehaviour
         sensitivity = Mathf.RoundToInt(sens);
         PlayerPrefs.SetInt("Sensitivity", sensitivity);
         
-        Debug.Log(PlayerPrefs.GetInt("Sensitivity") + "hello");
+        Debug.Log(PlayerPrefs.GetInt("Sensitivity") + " hello");
         PlayerPrefs.Save();
     }
     public void loadSettings()
     {
         invertY = PlayerPrefs.GetInt("InvertY", 0) == 1;
         int sensitivity = PlayerPrefs.GetInt("Sensitivity", 600);
-
-
     }
-   
+    public void startGame()
+    {
+        StartCoroutine(load());
+    }
+   IEnumerator load()
+    {
+        loadingScreen.SetActive(true);
+        startLabel.SetActive(false);
+        yield return new WaitForSeconds(.5f);
+        SceneManager.LoadScene(1);
+    }
     
 }
