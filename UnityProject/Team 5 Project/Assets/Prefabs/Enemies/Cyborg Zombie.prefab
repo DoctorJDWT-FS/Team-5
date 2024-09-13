@@ -80,7 +80,7 @@ GameObject:
   - component: {fileID: 4505479450421135604}
   m_Layer: 0
   m_Name: Cyborg Zombie
-  m_TagString: Untagged
+  m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

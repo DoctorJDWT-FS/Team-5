@@ -9,6 +9,7 @@ TagManager:
   - DeathCamera
   - FxTemporaire
   - UI
+  - Zombie
   layers:
   - Default
   - TransparentFX

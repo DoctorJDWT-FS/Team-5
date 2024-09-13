@@ -61,7 +61,7 @@ public class MenuNavigation : MonoBehaviour
     {
         // Navigate the menu if the player press up moves the menu up or down
         Slider sliderToActivate = MenuList[MenuPosition].GetComponentInParent<Slider>();
-       
+         //p
         if (Input.GetKeyDown(KeyCode.UpArrow) && MenuPosition > 0)
         {
             MenuPosition--;

@@ -14,7 +14,6 @@ public class basicZombieAI : MonoBehaviour, IDamage
     [SerializeField] protected float speedTrans;
 
 
-
     [Header("----- Damage Stats -----")]
     [SerializeField] protected int hitDamage;
     [SerializeField] protected float HitRate;
@@ -43,6 +42,9 @@ public class basicZombieAI : MonoBehaviour, IDamage
     protected Animator myAnimator;
 
     protected Vector3 playerDir;
+
+    //helper bot code 
+    bool isDead = false;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -110,7 +112,7 @@ public class basicZombieAI : MonoBehaviour, IDamage
 
             gameManager.instance.spawnItemDrop(transform.position);
 
-
+            isDead = false;
             Destroy(gameObject);
            
         }
@@ -189,6 +191,11 @@ public class basicZombieAI : MonoBehaviour, IDamage
     {
         myAnimator.SetBool("Attack", false);
         playerInRange = false;
+    }
+    
+    public virtual bool isEliminated()
+    {
+        return isDead;
     }
 
 

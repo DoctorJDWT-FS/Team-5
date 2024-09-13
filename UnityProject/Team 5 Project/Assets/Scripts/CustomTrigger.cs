@@ -7,6 +7,7 @@ public class CustomTrigger : MonoBehaviour
 {
     public event System.Action<Collider> EnteredTrigger;
     public event System.Action<Collider> ExitTrigger;
+    public event System.Action<Collider> StayTrigger;
 
     void OnTriggerEnter(Collider other)
     {
@@ -20,6 +21,11 @@ public class CustomTrigger : MonoBehaviour
         ExitTrigger?.Invoke(other); // Trigger the event for other scripts
 
     }
+    void OnTriggerStay(Collider other)
+    {
+        StayTrigger?.Invoke(other); // Trigger the event for other scripts
 
-   
+    }
+
+
 }
