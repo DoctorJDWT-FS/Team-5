@@ -15,6 +15,13 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] Animator myAnimator; // Animator for handling player animations
     [SerializeField] PlayerSettings playerSettings; // Reference to PlayerSettings
 
+    [Header("----- Hand Collider -----")]
+    [SerializeField] Collider handCollider; // Reference to the hand collider
+
+    [Header("----- Punch Settings -----")]
+    [SerializeField] float punchDuration = 0.5f; // Duration the hand collider is enabled during a punch
+    [SerializeField] int punchDamage = 50; // Amount of damage the punch does
+
     [Header("----- Player Stats -----")]
     [SerializeField] int HP; // Player health points
     [SerializeField] int shield; // Player shield points
@@ -66,7 +73,6 @@ public class playerController : MonoBehaviour, IDamage
 
     public gun currentGun; // Current gun equipped by the player
 
-    // Start is called before the first frame update
     void Start()
     {
         // Initialize player stats and components
@@ -81,10 +87,16 @@ public class playerController : MonoBehaviour, IDamage
         // Store original values for speed and height
         originalSpeed = speed;
         originalHeight = controller.height;
-        dashTimer = dashCooldown; // Initialize dash timer
+        dashTimer = dashCooldown;
+
+        // Disable the hand collider at the start
+        if (handCollider != null)
+        {
+            handCollider.enabled = false;
+        }
     }
 
-    // Respawn player at the start of the game or after death
+    // Method to respawn the player at the start of the game or after death
     public void spawnPlayer()
     {
         HP = HPOrig;
@@ -116,16 +128,17 @@ public class playerController : MonoBehaviour, IDamage
         if (!gameManager.instance.isPaused && !isDead)
         {
             movement();
-            Slide(); // Handle sliding
-            HandleDashAndSprint(); // Handle dashing and sprinting input
-            UpdateDashTimer(); // Update the dash timer
+            Slide();
+            HandleDashAndSprint();
+            UpdateDashTimer();
+            HandlePunch();
         }
-        TriggerPull(); // Handle shooting input
-        currentGun = GetComponentInChildren<gun>(); // Get current gun
-        UpdateWeaponType(); // Update weapon UI
+        TriggerPull();
+        currentGun = GetComponentInChildren<gun>();
+        UpdateWeaponType();
     }
 
-    // Handle player movement and jumping
+    // Method to handle player movement and jumping
     void movement()
     {
         if (controller.isGrounded)
@@ -134,19 +147,16 @@ public class playerController : MonoBehaviour, IDamage
             playerVel = Vector3.zero;
         }
 
-        // Capture player input for movement
         float moveX = Input.GetAxis("Horizontal");
         float moveZ = Input.GetAxis("Vertical");
 
-        move = transform.right * moveX + transform.forward * moveZ; // Create movement vector
-        controller.Move(move * speed * Time.deltaTime); // Apply movement
+        move = transform.right * moveX + transform.forward * moveZ;
+        controller.Move(move * speed * Time.deltaTime);
 
-        // Update animator parameters for movement
         myAnimator.SetFloat("Speed", speed);
         myAnimator.SetFloat("LR", moveX);
         myAnimator.SetFloat("FB", moveZ);
 
-        // Handle jumping
         if (Input.GetKeyDown(playerSettings.jump) && jumpCount < jumpMax)
         {
             jumpCount++;
@@ -157,45 +167,42 @@ public class playerController : MonoBehaviour, IDamage
         playerVel.y -= gravity * Time.deltaTime;
     }
 
+    // Method to handle sliding input
     void Slide()
     {
-        // Slide only if the player is sprinting and not already sliding
         if (Input.GetKeyDown(playerSettings.slide) && canSlide && isSprinting && !isSliding)
         {
             StartCoroutine(PerformSlide());
         }
     }
 
+    // Coroutine to perform the sliding action
     private IEnumerator PerformSlide()
     {
         isSliding = true;
         canSlide = false;
 
-        // Play slide sound effect
         if (slideSound != null)
         {
             audioSource.PlayOneShot(slideSound);
         }
 
-        // Temporarily increase speed and reduce height
         speed *= slideMultiplier;
         controller.height = originalHeight / 2;
 
         yield return new WaitForSeconds(slideDuration);
 
-        // Reset speed and height to normal
         speed = originalSpeed;
         controller.height = originalHeight;
         isSliding = false;
 
-        // Wait for cooldown
         yield return new WaitForSeconds(slideCooldown);
         canSlide = true;
     }
 
+    // Method to handle dash and sprint input
     void HandleDashAndSprint()
     {
-        // Dash on LeftShift press, sprint on hold
         if (Input.GetKeyDown(playerSettings.dash) && canDash && !isSprinting && !isDashing)
         {
             StartCoroutine(PerformDash());
@@ -210,40 +217,40 @@ public class playerController : MonoBehaviour, IDamage
         }
     }
 
+    // Coroutine to perform the dash action
     private IEnumerator PerformDash()
     {
         isDashing = true;
         canDash = false;
-        dashTimer = 0; // Reset dash timer
+        dashTimer = 0;
 
-        // Play dash sound effect
         if (dashSound != null)
         {
             audioSource.PlayOneShot(dashSound);
         }
 
-        // Temporarily increase speed
         speed *= dashMultiplier;
 
         yield return new WaitForSeconds(dashDuration);
 
-        // Reset speed to normal
         speed = originalSpeed;
         isDashing = false;
     }
 
+    // Method to update the dash timer
     void UpdateDashTimer()
     {
         if (dashTimer < dashCooldown)
         {
-            dashTimer += Time.deltaTime; // Increment dash timer
+            dashTimer += Time.deltaTime;
         }
         else if (dashTimer >= dashCooldown)
         {
-            canDash = true; // Allow dashing again
+            canDash = true;
         }
     }
 
+    // Method to start sprinting
     void StartSprinting()
     {
         if (!isSprinting)
@@ -253,36 +260,80 @@ public class playerController : MonoBehaviour, IDamage
         }
     }
 
+    // Method to stop sprinting
     void StopSprinting()
     {
         if (isSprinting)
         {
-            speed = originalSpeed; // Reset speed after sprinting
+            speed = originalSpeed;
             isSprinting = false;
         }
     }
 
-    // Check if the player is moving forward only
+    // Check if the player is moving forward only (no strafing)
     bool IsMovingForwardOnly()
     {
         float moveZ = Input.GetAxis("Vertical");
         float moveX = Input.GetAxis("Horizontal");
 
-        return moveZ > 0 && moveX == 0; // True if moving forward and not strafing
+        return moveZ > 0 && moveX == 0;
     }
 
     void FootStep()
     {
-        // Handle the footstep event, like playing a sound or spawning a particle.
+        // Placeholder for footstep logic
     }
 
+    // Method to handle punch input
+    void HandlePunch()
+    {
+        if (Input.GetKeyDown(playerSettings.punch))
+        {
+            Punch();
+        }
+    }
+
+    // Method to perform a punch
+    void Punch()
+    {
+        myAnimator.SetTrigger("Punch");
+
+        if (handCollider != null)
+        {
+            handCollider.enabled = true; // Enable the hand collider
+            StartCoroutine(DisableHandColliderAfterPunch());
+        }
+    }
+
+    // Punch collision
+    private void OnTriggerEnter(Collider other)
+    {
+        if (handCollider != null && handCollider.enabled)
+        {
+            IDamage target = other.GetComponent<IDamage>();
+            if (target != null)
+            {
+                target.takeDamage(punchDamage); // Apply punch damage
+            }
+        }
+    }
+
+    // Coroutine to disable the hand collider after the punch duration
+    private IEnumerator DisableHandColliderAfterPunch()
+    {
+        yield return new WaitForSeconds(punchDuration);
+        if (handCollider != null)
+        {
+            handCollider.enabled = false;
+        }
+    }
+
+    // Method to handle shooting and reloading input
     private void TriggerPull()
     {
-        // Check if the game is paused by the gameManager or if the shop exists and is paused
         if (gameManager.instance.isPaused || (shopInteractable.instance != null && shopInteractable.instance.isPaused))
             return;
 
-        // Use the key from PlayerSettings for shooting
         if (Input.GetKey(playerSettings.shoot) && !isSprinting && !isReloading)
         {
             Debug.Log("Shoot Input Detected");
@@ -290,7 +341,6 @@ public class playerController : MonoBehaviour, IDamage
             shootInput?.Invoke();
         }
 
-        // Use the key from PlayerSettings for reloading
         if (Input.GetKeyDown(playerSettings.reload))
         {
             Debug.Log("Reload Input Detected");
@@ -299,6 +349,7 @@ public class playerController : MonoBehaviour, IDamage
         }
     }
 
+    // Coroutine to handle reloading logic
     private IEnumerator Reload()
     {
         if (currentGun == null)
@@ -313,14 +364,12 @@ public class playerController : MonoBehaviour, IDamage
         isReloading = false;
     }
 
-
+    // Update weapon UI based on current weapon type
     public void UpdateWeaponType()
     {
-        // If currentGun or magCount or ammoCount is null, return early and do nothing
         if (currentGun == null || magCount == null || ammoCount == null)
             return;
 
-        // Check for specific weapon types
         if (currentGun.weaponType == gun.WeaponType.Pistol)
         {
             myAnimator.SetBool("Pistol", true);
@@ -337,7 +386,6 @@ public class playerController : MonoBehaviour, IDamage
         }
         else
         {
-            // Handle other weapon types or default to no weapon
             myAnimator.SetBool("Pistol", false);
             myAnimator.SetBool("Rifle", false);
         }
@@ -347,7 +395,7 @@ public class playerController : MonoBehaviour, IDamage
     {
         if (isInvincible)
             return;
-        //if player has shield , player wont take damage 
+
         if (shield <= 0)
         {
             HP -= amount;
@@ -356,13 +404,11 @@ public class playerController : MonoBehaviour, IDamage
         }
         else
         {
-            //player takes shield damage
             shield -= amount;
             StartCoroutine(shieldDamage());
             updatePlayerUI();
         }
 
-        // I'm dead!
         if (HP <= 0)
         {
             StartCoroutine(HandleDeath());
@@ -447,7 +493,6 @@ public class playerController : MonoBehaviour, IDamage
         updatePlayerUI();
     }
 
-    // Flash damage visual effect
     private IEnumerator flashDamage()
     {
         gameManager.instance.flashDamageScreen.SetActive(true);
@@ -473,14 +518,11 @@ public class playerController : MonoBehaviour, IDamage
     {
         isDead = true;
 
-        // Play death animation
         myAnimator.SetBool("Dead", true);
 
-        // Switch to the death camera
         mainCamera.gameObject.SetActive(false);
         deathCamera.gameObject.SetActive(true);
 
-        // Call the youLose method after the delay
         yield return new WaitForSeconds(4.0f);
         gameManager.instance.youLose();
     }
