@@ -17,6 +17,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuSettings;
+    public AudioSource levelMusic;
 
     [Header("----- item Drop rate-----")]
     [SerializeField] GameObject[] Items;
@@ -54,7 +55,7 @@ public class gameManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-        
+        levelMusic.Play();
 
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<playerController>();
