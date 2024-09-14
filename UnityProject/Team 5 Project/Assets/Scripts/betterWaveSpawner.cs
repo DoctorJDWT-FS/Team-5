@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -14,7 +15,13 @@ public class betterWaveSpawner : MonoBehaviour
     [Range(1, 10)][SerializeField] int startingSize;
     [Range(1, 10)][SerializeField] int spawnIncrease;
 
+    [SerializeField] TMP_Text waveCountText;
+    [SerializeField] TMP_Text waveCountdownText;
+    [SerializeField] GameObject waveCountdown;
+
     private bool isSpawning;
+    private bool isCounting;
+    private float currentTime;
     private int[] assignedWeights;
     private int totalWeight;
     private int numToSpawn;
@@ -57,6 +64,17 @@ public class betterWaveSpawner : MonoBehaviour
                 numToSpawn += spawnIncrease;
             }
             waveNumber++;
+            waveCountText.text = waveNumber.ToString();
+        }
+        if (isCounting)
+        {
+            currentTime -= Time.deltaTime;
+
+            waveCountdownText.text = (float)(System.Math.Floor(currentTime * 10) / 10) + " ";
+            if (currentTime <= 0.1)
+            {
+                isCounting = false;
+            }
         }
     }
     IEnumerator spawn()
@@ -95,7 +113,11 @@ public class betterWaveSpawner : MonoBehaviour
     IEnumerator waveCountDown()
     {
         isSpawning = true;
+        currentTime = timeBetweenWaves;
+        isCounting = true;
+        waveCountdown.SetActive(true);
         yield return new WaitForSeconds(timeBetweenWaves);
+        waveCountdown.SetActive(false);
         StartCoroutine(spawn());
     }
 }

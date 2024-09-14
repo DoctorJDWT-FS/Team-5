@@ -25,6 +25,7 @@ public class countDown : MonoBehaviour
     {
         if (!won)
         {
+            gameManager.instance.currentObjective.text = "Survive";
             currentTime -= Time.deltaTime;
 
             textTimer.text = (float)(Math.Floor(currentTime * 10) / 10) + " ";
