@@ -271,6 +271,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4813315804832470092, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -370,6 +374,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &780487596 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2317782272232037284, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
+  m_PrefabInstance: {fileID: 329863898}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &809255649 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1305252416842322242, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
+  m_PrefabInstance: {fileID: 329863898}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &946689011
 GameObject:
   m_ObjectHideFlags: 0
@@ -576,9 +602,13 @@ MonoBehaviour:
   spawnPoints:
   - {fileID: 1812831191}
   timeBetweenSpawns: 5
+  timeBetweenWaves: 10
   sizeOfSpawns: 5
   startingSize: 5
   spawnIncrease: 1
+  waveCountText: {fileID: 780487596}
+  waveCountdownText: {fileID: 809255649}
+  waveCountdown: {fileID: 1823551426}
 --- !u!4 &1793941639
 Transform:
   m_ObjectHideFlags: 0
@@ -626,6 +656,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1793941639}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1823551426 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4813315804832470092, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
+  m_PrefabInstance: {fileID: 329863898}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
