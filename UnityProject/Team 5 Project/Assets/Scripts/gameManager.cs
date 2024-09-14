@@ -45,6 +45,7 @@ public class gameManager : MonoBehaviour
     public Image PlayerHPBar;
     public Image playerShieldBar;
     public Image playerCreditCount;
+    public TMP_Text currentObjective;
 
     public bool invertY;
     public bool isPaused;
@@ -116,7 +117,7 @@ public class gameManager : MonoBehaviour
     public void updateGameGoal(int amount)
     {
         enemyCount += amount; 
-        // enemyCountText.text = enemyCount.ToString("F0");
+        enemyCountText.text = enemyCount.ToString("F0");
         if (enemyCount <= 0)
         {
             // temp stuff if we do wave based if not then its not temp
