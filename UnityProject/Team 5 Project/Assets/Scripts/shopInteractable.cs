@@ -8,6 +8,7 @@ public class shopInteractable : MonoBehaviour
     public GameObject interact;
     public GameObject shopCanvas;
     public GameObject UIComplete;
+    
 
 
     private bool isPlayerInRange = false;

@@ -96,10 +96,22 @@ public class buttonFunctions : MonoBehaviour
         playerWallet.SpendCredits(25);
         player.currentGun.fireRate += player.currentGun.fireRateOrig/50;
     }
+    public void SpawnDrone()
+    {
+        if (gameManager.instance.Drone == null)
+        {
+            if (playerWallet.SpendCredits(500))
+            {
+                Instantiate(gameManager.instance.GetDrone(),gameManager.instance.GetDroneSpawn().transform.position, transform.rotation);
+            }
+        }
+    }
     public void showCredits()
     {
         startManager.instance.openCredits();
     }
+
+    
     public void backFromCredits()
     {
         startManager.instance.closeCredits();

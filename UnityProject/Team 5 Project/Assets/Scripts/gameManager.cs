@@ -33,10 +33,12 @@ public class gameManager : MonoBehaviour
     public cameraController cameraScript;
     public iWallet playerWallet;
 
-    [Header("-----Drone -----")]
-    public helperBot Drone;
+    [Header("----- Drone -----")]
+    public helperBot Drone = null;
+    public GameObject DroneModel ;
+    public GameObject DroneSpawnPoint;
 
-
+    [Header("----- other -----")]
     public GameObject player;
     public GameObject playerSpawnPos;
     public GameObject checkpointGet;
@@ -187,5 +189,13 @@ public class gameManager : MonoBehaviour
     public void SetDrone(helperBot bot)
     {
         Drone = bot;
+    }
+    public GameObject GetDrone()
+    {
+        return DroneModel;
+    }
+    public GameObject GetDroneSpawn()
+    {
+        return DroneSpawnPoint;
     }
 }
