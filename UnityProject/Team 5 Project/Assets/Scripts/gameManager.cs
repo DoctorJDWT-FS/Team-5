@@ -32,6 +32,10 @@ public class gameManager : MonoBehaviour
     public cameraController cameraScript;
     public iWallet playerWallet;
 
+    [Header("-----Drone -----")]
+    public helperBot Drone;
+
+
     public GameObject player;
     public GameObject playerSpawnPos;
     public GameObject checkpointGet;
@@ -177,5 +181,10 @@ public class gameManager : MonoBehaviour
         int sensitivity = PlayerPrefs.GetInt("Sensitivity", 600);
         if (cameraScript != null)
             cameraScript.SetSensitivity(sensitivity);
+    }
+
+    public void SetDrone(helperBot bot)
+    {
+        Drone = bot;
     }
 }

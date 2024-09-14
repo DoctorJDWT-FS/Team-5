@@ -21,6 +21,7 @@ public class zombieMelee : MonoBehaviour
         {
             //grabs that zombie hit damage
             dmg.takeDamage(parent.getMeleeDmg());
+            gameManager.instance.Drone.SetTarget(parent);
         }
     }
 }

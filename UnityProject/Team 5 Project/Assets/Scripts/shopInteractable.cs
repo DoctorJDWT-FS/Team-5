@@ -22,7 +22,7 @@ public class shopInteractable : MonoBehaviour
         instance = this;
     }
         // Update is called once per frame
-        void Update()
+    void Update()
     {
         if (isPlayerInRange && Input.GetKeyDown(KeyCode.E))
         {

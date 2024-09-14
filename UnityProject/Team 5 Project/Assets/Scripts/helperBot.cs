@@ -15,6 +15,7 @@ public class helperBot : MonoBehaviour
     [SerializeField] private int playerDistance;
 
     [Header("----- Shooting Info -----")]
+    [SerializeField] private int retargetZombieCD;
     [SerializeField] private GameObject bullet;
     [SerializeField] private Transform shootPos;
     [SerializeField] private float shootRate;
@@ -25,6 +26,8 @@ public class helperBot : MonoBehaviour
 
     bool playerinRange;
     bool isShooting;
+    bool retarget;
+    
 
     Vector3 zombieDir;
    
@@ -34,6 +37,7 @@ public class helperBot : MonoBehaviour
         AttackStayTrigger.ExitTrigger += OnAttackStayTriggerExit;
         PlayerRangeTrigger.EnteredTrigger += OnPlayerRangeTriggerEnter;
         PlayerRangeTrigger.ExitTrigger += OnPlayerRangeTriggerExit;
+        gameManager.instance.SetDrone(this);
 
     }
     private void Update()
@@ -41,20 +45,18 @@ public class helperBot : MonoBehaviour
         agent.stoppingDistance = playerinRange ? attackDistance : playerDistance;
         if (!playerinRange)
         {
-          
             agent.SetDestination(gameManager.instance.player.transform.position);
         }
         else if (playerinRange && currentTarget!= null) 
         {
-            Debug.Log("target track");
-            agent.SetDestination(target);
             faceZombie();
+            agent.SetDestination(target);
             if (!isShooting)
             {
-                Debug.Log("Shooting gun");
                 StartCoroutine(Shoot());
             }
         }
+
 
     }
     private void OnAttackStayTriggerEnter(Collider other)
@@ -68,15 +70,17 @@ public class helperBot : MonoBehaviour
 
         if(currentTarget != null)
         {
+           
             if (currentTarget.isEliminated())
             {
                 currentTarget = null;
-
+                Debug.Log("Target died");
             }
             else
             {
                 target = currentTarget.transform.position;
             }
+            
         }
     }
 
@@ -84,7 +88,11 @@ public class helperBot : MonoBehaviour
     {
         if (other.CompareTag("Zombie"))
         {
-
+            if (other.CompareTag("Zombie") && currentTarget != null && other.GetComponent<basicZombieAI>() == currentTarget)
+            {
+                currentTarget = null;
+                Debug.Log("Zombie left attack range.");
+            }
         }
 
     }
@@ -104,7 +112,6 @@ public class helperBot : MonoBehaviour
     }
     public void createBullet()
     {
-        Debug.Log("bullet spawn");
         Instantiate(bullet, shootPos.position, transform.rotation);
     }
 
@@ -120,11 +127,25 @@ public class helperBot : MonoBehaviour
     }
     private IEnumerator Shoot()
     {
-        //will keep shooting till player is in eiter attacking range or  leave shooting range
         isShooting = true;
         createBullet();
-        
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
+    }
+
+    public void SetTarget (basicZombieAI newtarget)
+    {
+        if (!retarget)
+        { 
+            currentTarget = newtarget;
+            StartCoroutine(newTarget());
+        }
+    }
+
+    private IEnumerator newTarget()
+    {
+        retarget = true;
+        yield return new WaitForSeconds(retargetZombieCD);
+        retarget = false;
     }
 }
