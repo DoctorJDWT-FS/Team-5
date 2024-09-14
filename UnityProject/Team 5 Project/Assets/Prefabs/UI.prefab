@@ -5611,6 +5611,8 @@ MonoBehaviour:
   cameraScript: {fileID: 0}
   playerWallet: {fileID: 0}
   Drone: {fileID: 0}
+  DroneModel: {fileID: 7795208907011177537, guid: 5ffe0258f6df8f74a9d4bb4e933289a2, type: 3}
+  DroneSpawnPoint: {fileID: 0}
   player: {fileID: 0}
   playerSpawnPos: {fileID: 0}
   checkpointGet: {fileID: 0}
@@ -5647,7 +5649,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 4df5b5e591a2ccb4f82b45f1e5dcff54, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 9e65841feb97f6740a5f9787b5db49cc, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.15
   m_Pitch: 1
