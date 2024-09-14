@@ -20,12 +20,14 @@ public class startManager : MonoBehaviour
     [SerializeField] GameObject creditsLabel;
     [SerializeField] GameObject loadingScreen;
 
+
     [Header("----- Camera Items -----")]
     [SerializeField] int sensitivity = 600;
     [SerializeField] bool invertY = false;
 
-    
-    public bool isPaused;
+    [Header("----- Audio -----")]
+    [SerializeField] AudioClip backgroundMusic;
+
 
     int MenuPosition;
     private Image currentHighlight;
@@ -33,42 +35,25 @@ public class startManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-       
+        
     }
-   
-    public void statePause()
+
+    private void Start()
     {
-        isPaused = !isPaused;
-        Time.timeScale = 0;
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.Confined;
+        AudioManager.instance.PlayMainMenuMusic();
     }
-    public void stateUnpause()
-    {
-        isPaused = !isPaused;
-        Time.timeScale = 1;
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        menuActive.SetActive(isPaused);
-        menuActive = null;
-    }
+
 
     public void openSettingsMenu()
     {
         startLabel.SetActive(false);
         settingsLabel.SetActive(true);
-
-        isPaused = true;
-        Time.timeScale = 0;
     }
 
     public void closeSettingsMenu()
     {
         startLabel.SetActive(true);
         settingsLabel.SetActive(false);
-
-        isPaused = false;
-        Time.timeScale = 1;
     }
 
     public void openCredits()
@@ -114,7 +99,9 @@ public class startManager : MonoBehaviour
         loadingScreen.SetActive(true);
         startLabel.SetActive(false);
         yield return new WaitForSeconds(.5f);
+        AudioManager.instance.StopMusic();
         SceneManager.LoadScene(1);
+        AudioManager.instance.PlayGameplayMusic();
     }
     
 }
