@@ -8,11 +8,13 @@ public class shopInteractable : MonoBehaviour
     public GameObject interact;
     public GameObject shopCanvas;
     public GameObject UIComplete;
+    public GameObject upgradeItems;
+    public GameObject weaponItems;
     
 
 
     private bool isPlayerInRange = false;
-    private bool shopOpen;
+    public bool shopOpen;
     public bool isPaused;
 
     private iWallet playerWallet;
@@ -22,26 +24,15 @@ public class shopInteractable : MonoBehaviour
         playerWallet = FindObjectOfType<iWallet>();
         instance = this;
     }
-        // Update is called once per frame
+    // Update is called once per frame
     void Update()
     {
         if (isPlayerInRange && Input.GetKeyDown(KeyCode.E))
         {
-            shopOpen = true;
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.Confined;
-            shopInteraction();
-        }
-
-        if (Input.GetButtonDown("Cancel") && shopOpen)
-        {
-            shopOpen = false;
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-            shopInteraction();
-
+            shopInteraction(true);
         }
     }
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -63,23 +54,33 @@ public class shopInteractable : MonoBehaviour
             shopCanvas.gameObject.SetActive(false);     // Close the shop UI if the player leaves the trigger zone
         }
     }
-    public void shopInteraction()
+    public void shopInteraction(bool open)
     {
-        if (!shopOpen)
+        if (!open)
         {
+            gameManager.instance.stateUnpause();
             isPaused = false;
-            //UIComplete.SetActive(true);
+            shopOpen = false;
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
             interact.SetActive(true);
             shopCanvas.SetActive(false);
-            Time.timeScale = 1;
+            upgradeItems.SetActive(false);
+            weaponItems.SetActive(false);
+            gameManager.instance.menuActive = null;
         }
         else
         {
             isPaused = true;
-            //UIComplete.SetActive(false);
+            shopOpen = true;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Confined;
             interact.SetActive(false);
             shopCanvas.SetActive(true);
-            Time.timeScale = 0;
+            upgradeItems.SetActive(true);
+            weaponItems.SetActive(false);
+            gameManager.instance.menuActive = shopCanvas;
+            gameManager.instance.statePause();
         }
     }
 }

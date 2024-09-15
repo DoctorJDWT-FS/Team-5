@@ -10,7 +10,8 @@ public class buttonFunctions : MonoBehaviour
     public playerController player;
     public Slider mainSlider;
     private iWallet playerWallet;
-   
+    private int x = 0, y = 0, z = 0;
+
 
     public void Start()
     {
@@ -20,7 +21,7 @@ public class buttonFunctions : MonoBehaviour
     {
         startManager.instance.startGame();
     }
-    
+
     public void resume()
     {
         gameManager.instance.stateUnpause();
@@ -103,7 +104,54 @@ public class buttonFunctions : MonoBehaviour
     public void fireRateUp()
     {
         playerWallet.SpendCredits(25);
-        player.currentGun.fireRate += player.currentGun.fireRateOrig/50;
+        player.currentGun.fireRate += player.currentGun.fireRateOrig / 50;
+    }
+    public void buyRifle() 
+    {
+        if (z == 0)
+        {
+            Debug.Log("Rifle Bought");
+            z++;
+        }
+        else
+            Debug.Log("Already Bought");
+    }
+
+    public void buyShotgun() 
+    {
+        if (x == 0)
+        {
+            Debug.Log("Shotgun Bought");
+            x++;
+        }
+        else
+            Debug.Log("Already Bought");
+    }
+
+    public void buyLauncher() 
+    {
+        if (y == 0)
+        {
+            Debug.Log("Grenade Launcher Bought");
+            y++;
+        }
+        else
+            Debug.Log("Already Bought");
+    }
+    public void buyGrenade(int kind)
+    {
+        if (kind == 1)
+        {
+            Debug.Log("Fire Grenade Bought");
+        }
+        else if (kind == 2)
+        {
+            Debug.Log("Ice Grenade Bought");
+        }
+        else
+        {
+            Debug.Log("EMP Grenade Bought");
+        }
     }
     public void SpawnDrone()
     {
@@ -111,9 +159,20 @@ public class buttonFunctions : MonoBehaviour
         {
             if (playerWallet.SpendCredits(500))
             {
-                Instantiate(gameManager.instance.GetDrone(),gameManager.instance.GetDroneSpawn().transform.position, transform.rotation);
+                Instantiate(gameManager.instance.GetDrone(), gameManager.instance.GetDroneSpawn().transform.position, transform.rotation);
             }
         }
+    }
+    public void exitShop()
+    {
+        shopInteractable.instance.shopInteraction(false);
+    }
+    public void shopMenuWeapons(){
+        gameManager.instance.shopMenu(false);
+    }
+    public void shopMenuUpgrades()
+    {
+        gameManager.instance.shopMenu(true);
     }
     public void showCredits()
     {

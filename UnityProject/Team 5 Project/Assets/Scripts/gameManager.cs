@@ -12,7 +12,7 @@ public class gameManager : MonoBehaviour
 
 
     [Header("----- Menu Items -----")]
-    [SerializeField] GameObject menuActive;
+    [SerializeField] public GameObject menuActive;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
@@ -205,7 +205,21 @@ public class gameManager : MonoBehaviour
         if (cameraScript != null)
             cameraScript.SetSensitivity(sensitivity);
     }
-
+    public void shopMenu(bool menu)
+    {
+        if (menu)
+        {
+            Debug.Log("In upgrades");
+            shopInteractable.instance.upgradeItems.SetActive(true);
+            shopInteractable.instance.weaponItems.SetActive(false);
+        }
+        else
+        {
+            Debug.Log("In weapons");
+            shopInteractable.instance.upgradeItems.SetActive(false);
+            shopInteractable.instance.weaponItems.SetActive(true);
+        }
+    }
 
     public void SetDrone(helperBot bot)
     {
