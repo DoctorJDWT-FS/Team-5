@@ -187,6 +187,7 @@ public class gameManager : MonoBehaviour
             cameraScript.SetSensitivity(sensitivity);
     }
 
+
     public void SetDrone(helperBot bot)
     {
         Drone = bot;

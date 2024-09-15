@@ -16,6 +16,7 @@ public class startManager : MonoBehaviour
     [Header("----- Menu Items -----")]
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject startLabel;
+    [SerializeField] GameObject Keybindings;
     [SerializeField] GameObject settingsLabel;
     [SerializeField] GameObject creditsLabel;
     [SerializeField] GameObject loadingScreen;
@@ -89,6 +90,11 @@ public class startManager : MonoBehaviour
     {
         invertY = PlayerPrefs.GetInt("InvertY", 0) == 1;
         int sensitivity = PlayerPrefs.GetInt("Sensitivity", 600);
+    }
+    public void ChangeKeybindings()
+    {
+        settingsLabel.SetActive(false);
+        Keybindings.SetActive(true);
     }
     public void startGame()
     {

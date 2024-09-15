@@ -52,6 +52,15 @@ public class buttonFunctions : MonoBehaviour
         else
             gameManager.instance.openSettingsMenu();
     }
+
+    public void ChangeKeybindings()
+    {
+        Debug.Log("Settings");
+
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        if (currentSceneIndex == 0)
+            startManager.instance.ChangeKeybindings();
+    }
     public void onToggleChange()
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
