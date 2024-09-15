@@ -23,8 +23,8 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] int punchDamage = 50; // Amount of damage the punch does
 
     [Header("----- Player Stats -----")]
-    [SerializeField] int HP; // Player health points
-    [SerializeField] int shield; // Player shield points
+    [SerializeField] public int HP; // Player health points
+    [SerializeField] public int shield; // Player shield points
     [SerializeField] float speed; // Base movement speed
     [SerializeField] int sprintMod; // Speed multiplier when sprinting
     [SerializeField] int jumpMax; // Maximum number of jumps allowed
@@ -530,6 +530,10 @@ public class playerController : MonoBehaviour, IDamage
     public void updatePlayerUI()
     {
         gameManager.instance.PlayerHPBar.fillAmount = (float)HP / HPOrig;
+        gameManager.instance.playerHp = HPOrig - HP;
         gameManager.instance.playerShieldBar.fillAmount = (float)shield / shieldOrig;
+        gameManager.instance.playerShield = shieldOrig - shield;
+        gameManager.instance.UpdateHealthCount();
+        gameManager.instance.UpdateSheildCount();
     }
 }

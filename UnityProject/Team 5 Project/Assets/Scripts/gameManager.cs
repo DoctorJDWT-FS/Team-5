@@ -26,6 +26,8 @@ public class gameManager : MonoBehaviour
     [Header("----- Text -----")]
     [SerializeField] TMP_Text enemyCountText;
     [SerializeField] TMP_Text creditCountText;
+    [SerializeField] TMP_Text playerHealthText;
+    [SerializeField] TMP_Text playerSheildText;
 
     //player info
     [Header("----- Player -----")]
@@ -52,7 +54,8 @@ public class gameManager : MonoBehaviour
     public bool invertY;
     public bool isPaused;
 
-
+    public int playerHp;
+    public int playerShield;
     public int enemyCount;
 
     void Awake()
@@ -90,6 +93,22 @@ public class gameManager : MonoBehaviour
         if (playerWallet != null && creditCountText != null)
         {
             creditCountText.text = playerWallet.Credits.ToString();
+        }
+    }
+
+    public void UpdateHealthCount()
+    { 
+        if (gameManager.instance.playerScript.HP != 0)
+        {
+            playerHealthText.text = gameManager.instance.playerScript.HP.ToString();
+        }
+    }
+
+    public void UpdateSheildCount()
+    {
+        if (gameManager.instance.playerScript.shield != 0)
+        {
+            playerSheildText.text = gameManager.instance.playerScript.shield.ToString();
         }
     }
 
