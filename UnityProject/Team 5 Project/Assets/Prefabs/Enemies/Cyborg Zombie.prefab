@@ -95,8 +95,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7189536077221204828}
   - {fileID: 3817012066217247725}
@@ -136,7 +136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   valuePoints: 25
   HP: 20
-  sprintSpeed: 4
+  sprintSpeed: 3
   walkingSpeed: 1.5
   speedTrans: 4
   hitDamage: 10
@@ -188,7 +188,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
-  m_Acceleration: 15
+  m_Acceleration: 10
   avoidancePriority: 50
   m_AngularSpeed: 600
   m_StoppingDistance: 6
@@ -2343,7 +2343,7 @@ Transform:
   m_GameObject: {fileID: 2433585584159177625}
   serializedVersion: 2
   m_LocalRotation: {x: -0.010396105, y: 0.01279076, z: 0.033020847, w: 0.9993188}
-  m_LocalPosition: {x: -0.094, y: -0.391, z: 0.172}
+  m_LocalPosition: {x: -0.094, y: -0.431, z: 0.191}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

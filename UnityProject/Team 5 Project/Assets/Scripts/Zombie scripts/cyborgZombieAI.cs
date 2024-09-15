@@ -40,7 +40,7 @@ public class cyborgZombieAI : basicZombieAI
         if (playerInRange && isAttacking)
         {
             facePlayer();
-            agent.stoppingDistance = 1;
+            agent.stoppingDistance = 3.5f;
         }
         if (playerInRange && !isAttacking && inShootingRange)
         {

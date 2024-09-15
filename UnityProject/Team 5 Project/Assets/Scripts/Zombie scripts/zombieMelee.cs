@@ -17,11 +17,15 @@ public class zombieMelee : MonoBehaviour
         }
         IDamage dmg = other.GetComponent<IDamage>();
 
+        
         if (other.CompareTag("Player") && dmg != null)
         {
             //grabs that zombie hit damage
             dmg.takeDamage(parent.getMeleeDmg());
-            gameManager.instance.Drone.SetTarget(parent);
+            if (gameManager.instance.Drone != null)
+            {
+                gameManager.instance.Drone.SetTarget(parent);
+            }
         }
     }
 }

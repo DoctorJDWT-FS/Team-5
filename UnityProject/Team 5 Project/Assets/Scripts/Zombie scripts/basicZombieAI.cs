@@ -68,19 +68,26 @@ public class basicZombieAI : MonoBehaviour, IDamage
     protected virtual void Update()
     {
         //if player is close, they will run else walk 
-        agent.speed = playerInRange ? sprintSpeed : walkingSpeed;
-        //get agent speed
-        float agentSpeed = agent.velocity.magnitude;
-        //lerp from one animation to the next
-        myAnimator.SetFloat("Speed", Mathf.Lerp(myAnimator.GetFloat("Speed"), agentSpeed, Time.deltaTime * speedTrans));
-        //zombie will always be chasing player at different speed 
-        agent.SetDestination(gameManager.instance.player.transform.position);
-
-        if (playerInRange && isAttacking)
+        if (!isDead)
         {
+            agent.speed = playerInRange ? sprintSpeed : walkingSpeed;
+            //get agent speed
+            float agentSpeed = agent.velocity.magnitude;
+            //lerp from one animation to the next
+            myAnimator.SetFloat("Speed", Mathf.Lerp(myAnimator.GetFloat("Speed"), agentSpeed, Time.deltaTime * speedTrans));
+            //zombie will always be chasing player at different speed 
+            agent.SetDestination(gameManager.instance.player.transform.position);
 
-            facePlayer();
-           
+            if (playerInRange && isAttacking)
+            {
+
+                facePlayer();
+
+            }
+        }
+        else
+        {
+            
         }
 
     }
@@ -95,6 +102,10 @@ public class basicZombieAI : MonoBehaviour, IDamage
 
     public virtual void takeDamage(int amount)
     {
+        if (isDead)
+        {
+            return;
+        }
         HP -= amount;
         StartCoroutine(flashDamage());
 
@@ -109,11 +120,11 @@ public class basicZombieAI : MonoBehaviour, IDamage
                 creditComponent.AwardCredits();
             }
 
-
-            gameManager.instance.spawnItemDrop(transform.position);
-
-            isDead = false;
-            Destroy(gameObject);
+            agent.isStopped = true; 
+            agent.enabled = false;
+            isDead = true;
+            myAnimator.SetTrigger("Death");
+            
            
         }
     }
@@ -152,7 +163,7 @@ public class basicZombieAI : MonoBehaviour, IDamage
     //Trigger functions
     protected virtual void OnAttackRangeTriggerEnter(Collider other)
     {
-        if ( other.CompareTag("Player"))
+        if ( other.CompareTag("Player")&& !isDead)
         {
             //set animation to attacking true 
             myAnimator.SetBool("Attack", true);
@@ -198,7 +209,13 @@ public class basicZombieAI : MonoBehaviour, IDamage
         return isDead;
     }
 
+    public virtual void PlayDeath ()
+    {
 
-   
+        gameManager.instance.spawnItemDrop(transform.position);
+        Destroy(gameObject);
+        
+    }
+
 }
 
