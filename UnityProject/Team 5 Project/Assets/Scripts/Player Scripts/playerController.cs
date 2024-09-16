@@ -25,7 +25,7 @@ public class playerController : MonoBehaviour, IDamage
     [Header("----- Player Stats -----")]
     [SerializeField] public int HP; // Player health points
     [SerializeField] public int shield; // Player shield points
-    [SerializeField] float speed; // Base movement speed
+    [SerializeField] public float speed; // Base movement speed
     [SerializeField] int sprintMod; // Speed multiplier when sprinting
     [SerializeField] int jumpMax; // Maximum number of jumps allowed
     [SerializeField] int jumpSpeed; // Vertical speed when jumping
@@ -101,6 +101,7 @@ public class playerController : MonoBehaviour, IDamage
     {
         HP = HPOrig;
         shield = shieldOrig;
+        speed = originalSpeed;
         updatePlayerUI();
         transform.position = gameManager.instance.playerSpawnPos.transform.position;
 
@@ -137,7 +138,16 @@ public class playerController : MonoBehaviour, IDamage
         currentGun = GetComponentInChildren<gun>();
         UpdateWeaponType();
     }
-
+    public void heavySlow()
+    {
+        speed = originalSpeed / 2;
+        return;
+    }
+    public void heavyReturn()
+    {
+        speed = originalSpeed;
+        return;
+    }
     // Method to handle player movement and jumping
     void movement()
     {

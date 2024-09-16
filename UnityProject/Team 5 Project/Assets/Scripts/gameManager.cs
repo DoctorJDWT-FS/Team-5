@@ -205,19 +205,27 @@ public class gameManager : MonoBehaviour
         if (cameraScript != null)
             cameraScript.SetSensitivity(sensitivity);
     }
-    public void shopMenu(bool menu)
+    public void shopMenu(int menu)
     {
-        if (menu)
+        if (menu == 1)
         {
             Debug.Log("In upgrades");
             shopInteractable.instance.upgradeItems.SetActive(true);
             shopInteractable.instance.weaponItems.SetActive(false);
+            shopInteractable.instance.powerupItems.SetActive(false);
         }
-        else
+        else if (menu == 2)
         {
             Debug.Log("In weapons");
             shopInteractable.instance.upgradeItems.SetActive(false);
             shopInteractable.instance.weaponItems.SetActive(true);
+            shopInteractable.instance.powerupItems.SetActive(false);
+        }
+        else
+        {
+            shopInteractable.instance.upgradeItems.SetActive(false);
+            shopInteractable.instance.weaponItems.SetActive(false);
+            shopInteractable.instance.powerupItems.SetActive(true);
         }
     }
 
