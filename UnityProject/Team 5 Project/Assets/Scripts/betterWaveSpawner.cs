@@ -8,7 +8,6 @@ public class betterWaveSpawner : MonoBehaviour
 {
     [SerializeField] GameObject[] zombies;
     [Range(0,10)][SerializeField] int[] zombieWeights;
-    [SerializeField] GameObject[] spawnPoints;
     [Range(1, 10)][SerializeField] int timeBetweenSpawns;
     [Range(1, 10)][SerializeField] int timeBetweenWaves;
     [Range(1, 10)][SerializeField] int sizeOfSpawns;
@@ -47,10 +46,6 @@ public class betterWaveSpawner : MonoBehaviour
                 assignedWeights[i] = totalWeight;
             }
         }
-        if (spawnPoints.Length == 0)
-        {
-            Debug.Log("No spawnpoints set!");
-        }
         numToSpawn = startingSize;
     }
     private void Update()
@@ -79,6 +74,7 @@ public class betterWaveSpawner : MonoBehaviour
     }
     IEnumerator spawn()
     {
+        GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag("Zombie spawn point");
         int correctedSpawn = sizeOfSpawns;
         if ((numToSpawn - currentSpawned) < sizeOfSpawns) 
         {

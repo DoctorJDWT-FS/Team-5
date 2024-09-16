@@ -30,7 +30,7 @@ public class countDown : MonoBehaviour
 
             textTimer.text = (float)(Math.Floor(currentTime * 10) / 10) + " ";
 
-            if (currentTime <= 0)
+            if (currentTime <= 0.1)
             {
                 won = true;
                 gameManager.instance.youWin();

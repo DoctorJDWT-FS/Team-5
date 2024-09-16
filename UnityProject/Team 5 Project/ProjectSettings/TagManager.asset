@@ -10,6 +10,7 @@ TagManager:
   - FxTemporaire
   - UI
   - Zombie
+  - Zombie spawn point
   layers:
   - Default
   - TransparentFX
