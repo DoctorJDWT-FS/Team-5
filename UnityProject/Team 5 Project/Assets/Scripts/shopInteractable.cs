@@ -10,7 +10,9 @@ public class shopInteractable : MonoBehaviour
     public GameObject UIComplete;
     public GameObject upgradeItems;
     public GameObject weaponItems;
-    
+    public GameObject powerupItems;
+    public List<GameObject> oneTimeButtons;
+
 
 
     private bool isPlayerInRange = false;

@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class buttonFunctions : MonoBehaviour
 {
     public playerController player;
+    public Powerups powerupScript;
     public Slider mainSlider;
     private iWallet playerWallet;
     private int x = 0, y = 0, z = 0;
@@ -110,46 +111,70 @@ public class buttonFunctions : MonoBehaviour
     {
         if (z == 0)
         {
+            playerWallet.SpendCredits(100);
             Debug.Log("Rifle Bought");
             z++;
+            shopInteractable.instance.oneTimeButtons[0].SetActive(false);
+            shopInteractable.instance.oneTimeButtons[3].SetActive(true);
         }
         else
+        {
             Debug.Log("Already Bought");
+            shopInteractable.instance.oneTimeButtons[0].SetActive(false);
+            shopInteractable.instance.oneTimeButtons[3].SetActive(true);
+        }
     }
 
     public void buyShotgun() 
     {
         if (x == 0)
         {
+            playerWallet.SpendCredits(150);
             Debug.Log("Shotgun Bought");
             x++;
+            shopInteractable.instance.oneTimeButtons[1].SetActive(false);
+            shopInteractable.instance.oneTimeButtons[4].SetActive(true);
         }
         else
+        {
             Debug.Log("Already Bought");
+            shopInteractable.instance.oneTimeButtons[1].SetActive(false);
+            shopInteractable.instance.oneTimeButtons[4].SetActive(true);
+        }
     }
 
-    public void buyLauncher() 
+    public void buyLauncher()
     {
         if (y == 0)
         {
+            playerWallet.SpendCredits(250);
             Debug.Log("Grenade Launcher Bought");
             y++;
+            shopInteractable.instance.oneTimeButtons[2].SetActive(false);
+            shopInteractable.instance.oneTimeButtons[5].SetActive(true);
         }
-        else
+        else { 
             Debug.Log("Already Bought");
+            shopInteractable.instance.oneTimeButtons[2].SetActive(false);
+            shopInteractable.instance.oneTimeButtons[5].SetActive(true);
+        }
     }
     public void buyGrenade(int kind)
     {
         if (kind == 1)
         {
+            playerWallet.SpendCredits(100);
             Debug.Log("Fire Grenade Bought");
         }
         else if (kind == 2)
         {
+            playerWallet.SpendCredits(100);
             Debug.Log("Ice Grenade Bought");
         }
         else
         {
+            playerWallet.SpendCredits(100);
+            
             Debug.Log("EMP Grenade Bought");
         }
     }
@@ -163,23 +188,43 @@ public class buttonFunctions : MonoBehaviour
             }
         }
     }
+    public void heavyPowerup()
+    {
+        powerupScript.ActivateHeavyPowerup();
+    }
+    public void forceFieldPowerup()
+    {
+
+    }
+    public void glassCannonPowerup()
+    {
+
+    }
+    public void tankPowerup()
+    {
+
+    }
     public void exitShop()
     {
         shopInteractable.instance.shopInteraction(false);
     }
-    public void shopMenuWeapons(){
-        gameManager.instance.shopMenu(false);
-    }
+
     public void shopMenuUpgrades()
     {
-        gameManager.instance.shopMenu(true);
+        gameManager.instance.shopMenu(1);
+    }
+    public void shopMenuWeapons()
+    {
+        gameManager.instance.shopMenu(2);
+    }
+    public void shopMenuPowerup()
+    {
+        gameManager.instance.shopMenu(3);
     }
     public void showCredits()
     {
         startManager.instance.openCredits();
     }
-
-    
     public void backFromCredits()
     {
         startManager.instance.closeCredits();
