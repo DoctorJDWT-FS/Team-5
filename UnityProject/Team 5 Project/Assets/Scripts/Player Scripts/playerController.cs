@@ -78,15 +78,15 @@ public class playerController : MonoBehaviour, IDamage
         // Initialize player stats and components
         HPOrig = HP;
         shieldOrig = shield;
-        updatePlayerUI();
+        originalSpeed = speed;
+        originalHeight = controller.height;
+        updatePlayerUI();   
         myAnimator = GetComponent<Animator>();
         deathCamera.gameObject.SetActive(false);
         spawnPlayer();
         audioSource = GetComponent<AudioSource>();
 
         // Store original values for speed and height
-        originalSpeed = speed;
-        originalHeight = controller.height;
         dashTimer = dashCooldown;
 
         // Disable the hand collider at the start
