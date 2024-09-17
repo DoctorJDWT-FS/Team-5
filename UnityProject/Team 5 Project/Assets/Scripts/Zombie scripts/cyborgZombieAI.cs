@@ -15,7 +15,11 @@ public class cyborgZombieAI : basicZombieAI
     [Header("----- Shooting Info -----")]
     [SerializeField] private GameObject bullet;
     [SerializeField] private Transform shootPos;
-   
+
+    [Header("----- Shooting audio ----")]
+    [SerializeField]  AudioClip audShoot;
+    [Range(0, 1)][SerializeField] float audShootVol;
+
 
 
     private bool inShootingRange;
@@ -64,6 +68,7 @@ public class cyborgZombieAI : basicZombieAI
     {
         //will keep shooting till player is in eiter attacking range or  leave shooting range
         isShooting = true;
+        
         myAnimator.SetTrigger("Shoot");
 
         yield return new WaitForSeconds(shootRate);
@@ -73,6 +78,7 @@ public class cyborgZombieAI : basicZombieAI
     public void createBullet()
     {
         Instantiate(bullet, shootPos.position, transform.rotation);
+        audPlayer.PlayOneShot(audShoot, audShootVol);
     }
 
     private void OnShootingRangeTriggerEnter(Collider other)

@@ -34,6 +34,10 @@ public class basicZombieAI : MonoBehaviour, IDamage
     [SerializeField] protected CustomTrigger attackRangeTrigger;
     [SerializeField] protected CustomTrigger visionRangeTrigger;
 
+    [Header("---- Audio ----")]
+    [SerializeField] protected AudioSource audPlayer;
+    
+
     //
     protected bool playerInRange;
     protected bool isAttacking;
