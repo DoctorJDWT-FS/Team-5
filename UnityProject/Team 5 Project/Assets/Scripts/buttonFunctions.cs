@@ -90,7 +90,9 @@ public class buttonFunctions : MonoBehaviour
     public void healthUp()
     {
         playerWallet.SpendCredits(50);
+        FindObjectOfType<tutorialManager>().Upgradebrought();
         gameManager.instance.playerScript.increaseMaxHealth(5);
+        
     }
     public void shieldUp()
     {

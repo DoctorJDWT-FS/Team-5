@@ -58,7 +58,9 @@ public class TriggerDoorController : MonoBehaviour
     {
         if (isPlayerInZone && Input.GetKeyDown(KeyCode.E) && !hasDoorOpened && playerWallet.Credits >= doorCost)
         {
+            FindObjectOfType<tutorialManager>().Doorbrought();
             OpenDoor();
+
         }
     }
 
@@ -77,5 +79,6 @@ public class TriggerDoorController : MonoBehaviour
         {
             enableList[i].SetActive(true);
         }
+
     }
 }
