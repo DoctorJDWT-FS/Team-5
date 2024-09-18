@@ -18,6 +18,7 @@ public class betterWaveSpawner : MonoBehaviour
     [SerializeField] TMP_Text waveCountdownText;
     [SerializeField] GameObject waveCountdown;
 
+    private GameObject[] spawnPoints;
     private bool isSpawning;
     private bool isCounting;
     private float currentTime;
@@ -74,7 +75,7 @@ public class betterWaveSpawner : MonoBehaviour
     }
     IEnumerator spawn()
     {
-        GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag("Zombie spawn point");
+        spawnPoints = GameObject.FindGameObjectsWithTag("Zombie spawn point");
         int correctedSpawn = sizeOfSpawns;
         if ((numToSpawn - currentSpawned) < sizeOfSpawns) 
         {
@@ -88,7 +89,7 @@ public class betterWaveSpawner : MonoBehaviour
             {
                 if (assignedWeights[j] >= zombieRand)
                 {
-                    int spawnRand = Random.Range(0, spawnPoints.Length - 1);
+                    int spawnRand = Random.Range(0, spawnPoints.Length);
                     //Debug.Log("Spawning zombie #" + j + " at spawn point #" + spawnRand);
                     Instantiate(zombies[j], spawnPoints[spawnRand].transform.position, spawnPoints[spawnRand].transform.rotation);
                     currentSpawned++;
