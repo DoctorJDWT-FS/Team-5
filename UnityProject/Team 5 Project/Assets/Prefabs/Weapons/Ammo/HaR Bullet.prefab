@@ -52,6 +52,8 @@ MonoBehaviour:
   damageAmount: 1
   speed: 20
   destroyTime: 3
+  bloodEffectvfx: {fileID: 1000013355911406, guid: d32aa916f50cac94db11e6f19821a58f, type: 3}
+  bleedChance: 0.277
 --- !u!135 &5226067683531511546
 SphereCollider:
   m_ObjectHideFlags: 0

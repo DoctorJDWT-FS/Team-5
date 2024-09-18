@@ -79,6 +79,7 @@ public class TriggerDoorController : MonoBehaviour
         {
             enableList[i].SetActive(true);
         }
+        
 
     }
 }

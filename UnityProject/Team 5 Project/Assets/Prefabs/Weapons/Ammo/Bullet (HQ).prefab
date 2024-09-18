@@ -160,6 +160,8 @@ MonoBehaviour:
   damageAmount: 1
   speed: 1
   destroyTime: 3
+  bloodEffectvfx: {fileID: 1000013355911406, guid: d32aa916f50cac94db11e6f19821a58f, type: 3}
+  bleedChance: 0.226
 --- !u!205 &227573741389447689
 LODGroup:
   m_ObjectHideFlags: 0

@@ -12,9 +12,14 @@ public class damage : MonoBehaviour
     [SerializeField] int speed;
     [SerializeField] int destroyTime;
 
+    [SerializeField] GameObject bloodEffectvfx; 
+    [Range(0, 1)][SerializeField] float bleedChance = 0.5f;
+
+
     // Start is called before the first frame update
     void Start()
     {
+
         if(type == damageType.bullet)
         {
             rb.velocity = transform.forward * speed;
@@ -41,11 +46,19 @@ public class damage : MonoBehaviour
 
         IDamage dmg = other.GetComponent<IDamage>();
 
-        if (dmg != null )
+        if (dmg != null && other.CompareTag("Zombie"))
         {
             dmg.takeDamage(damageAmount);
+            if (Random.value <= bleedChance)
+            {
+                //grabs the closest point on the shot position
+                Vector3 hitPoint = other.ClosestPointOnBounds(transform.position);
+                GameObject bloodEffect = Instantiate(bloodEffectvfx, hitPoint, Quaternion.identity);
+                //attaches to body of zombie
+                bloodEffect.transform.SetParent(other.transform);
+                Destroy(bloodEffect, 0.5f); 
+            }
         }
-
         Destroy(gameObject);
     }
 }
