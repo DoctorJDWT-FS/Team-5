@@ -63,26 +63,35 @@ public class BossZombieAI : MonoBehaviour, IDamage
     [SerializeField] private Color colorDamage = Color.red; // Color to flash when taking damage
     private Color originalColor; // Store the original color
 
-    [Header("----- Audio -----")]
+    [Header("----- Audio Settings -----")]
 
+    [Header("--- Audio Sources ---")]
+    // Voice audio source
+    [SerializeField] private AudioSource voiceAudioSource; // AudioSource to play voice sounds
+    [Range(0f, .1f)][SerializeField] private float voiceVolume = .08f; // Slider to control voice volume
     // Hand punch audio sources
-    [SerializeField] private AudioSource LHAudioSource; // AudioSource to play the punch sounds
-    [SerializeField] private AudioSource RHAudioSource; // AudioSource to play the punch sounds
-
-    [Header("----- Punch Sounds -----")]
-    [SerializeField] private AudioClip bossPunchSound; // Array to hold step sounds
-
+    [SerializeField] private AudioSource LHAudioSource; // AudioSource to play left-hand punch sounds
+    [SerializeField] private AudioSource RHAudioSource; // AudioSource to play right-hand punch sounds
+    [Range(0f, .1f)][SerializeField] private float punchVolume = .055f; // Slider to control punch volume
     // Footstep audio sources
-    [SerializeField] private AudioSource LFAudioSource; // AudioSource to play the step sounds
-    [SerializeField] private AudioSource RFAudioSource; // AudioSource to play the step sounds
+    [SerializeField] private AudioSource LFAudioSource; // AudioSource to play left footstep sounds
+    [SerializeField] private AudioSource RFAudioSource; // AudioSource to play right footstep sounds
+    [Range(0f, .2f)][SerializeField] private float footstepVolume = .15f; // Slider to control footstep volume
 
-    [Header("----- Step Sounds -----")]
+    [Header("--- Sound Clips ---")]
+    // Entrance Sound
+    [SerializeField] private AudioClip entranceSound; // Sound to play when the boss enters the scene
+    // Pain sounds
+    [SerializeField] private AudioClip[] painSounds; // Array to hold pain sounds
+    // Rage yell sound
+    [SerializeField] private AudioClip rageYellSound; // Sound to play when entering rage state
+    // Punch sound
+    [SerializeField] private AudioClip bossPunchSound; // Sound for the boss punch
+    // Step sounds
     [SerializeField] private AudioClip[] stepSounds; // Array to hold step sounds
-
-    [Header("----- Jump Sound -----")]
-    [SerializeField] private AudioClip bossJumpSound;
-    [SerializeField] private AudioClip bossLandingSound; 
-
+    // Jump and landing sounds
+    [SerializeField] private AudioClip bossJumpSound; // Sound for jump
+    [SerializeField] private AudioClip bossLandingSound; // Sound for landing
 
 
     // Rage state variables
@@ -91,12 +100,19 @@ public class BossZombieAI : MonoBehaviour, IDamage
 
     private void Start()
     {
+        // Set the volume based on slider values
+        voiceAudioSource.volume = voiceVolume;
+        LHAudioSource.volume = punchVolume;
+        RHAudioSource.volume = punchVolume;
+        LFAudioSource.volume = footstepVolume;
+        RFAudioSource.volume = footstepVolume;
+
+        PlayEntranceYell();
         playerTransform = gameManager.instance.player.transform;
         myAnimator = GetComponent<Animator>();
         currentSpeed = 0f;
         agent.speed = 0f;
         currentHP = maxHP;
-
         originalColor = model.material.color;
 
         // Disable hand colliders initially
@@ -108,6 +124,13 @@ public class BossZombieAI : MonoBehaviour, IDamage
     private void Update()
     {
         if (isDead) return;  // If dead, do nothing
+
+        // Dynamically update the volume
+        voiceAudioSource.volume = voiceVolume;
+        LHAudioSource.volume = punchVolume;
+        RHAudioSource.volume = punchVolume;
+        LFAudioSource.volume = footstepVolume;
+        RFAudioSource.volume = footstepVolume;
 
         // Countdown cooldowns for all attacks
         if (nextAttack1Time > 0) nextAttack1Time -= Time.deltaTime;
@@ -138,6 +161,19 @@ public class BossZombieAI : MonoBehaviour, IDamage
         }
     }
 
+    private void PlayEntranceYell()
+    {
+        // Play the entrance sound
+        if (entranceSound != null)
+        {
+            voiceAudioSource.clip = entranceSound;
+            voiceAudioSource.Play();
+        }
+        else
+        {
+            Debug.LogWarning("Entrance sound is not assigned.");
+        }
+    }
     private void CheckRageState()
     {
         // Check if it's time to enter rage state
@@ -159,6 +195,20 @@ public class BossZombieAI : MonoBehaviour, IDamage
 
         // Start coroutine to handle the rage animation and resume chasing
         StartCoroutine(HandleRageAnimation());
+    }
+
+    private void PlayRageYell()
+    {
+        // Play the rage yell sound
+        if (rageYellSound != null)
+        {
+            voiceAudioSource.clip = rageYellSound;
+            voiceAudioSource.Play();
+        }
+        else
+        {
+            Debug.LogWarning("Rage yell sound is not assigned.");
+        }
     }
 
     private IEnumerator HandleRageAnimation()
@@ -312,6 +362,18 @@ public class BossZombieAI : MonoBehaviour, IDamage
         }
     }
 
+    public void PlayVoiceSound()
+    {
+        // Play a random voice sound
+        if (voiceAudioSource != null)
+        {
+            voiceAudioSource.Play();
+        }
+        else
+        {
+            Debug.LogWarning("Voice audio source is not assigned.");
+        }
+    }
 
     private void PerformAttack1()
     {
