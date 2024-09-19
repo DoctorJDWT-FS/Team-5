@@ -67,36 +67,36 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.4393375
+      - time: 0.38110965
         functionName: PlayBossLanding
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.64006186
-        functionName: RHBossPunch
+      - time: 0.64871585
+        functionName: RightHandAttack
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.8330139
-        functionName: LHBossPunch
+      - time: 0.70700544
+        functionName: DisableHandColliders
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.66390574
-        functionName: RHBossPunch
+      - time: 0.82155406
+        functionName: LeftHandAttack
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.82615656
-        functionName: LHBossPunch
+      - time: 0.86634785
+        functionName: DisableHandColliders
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

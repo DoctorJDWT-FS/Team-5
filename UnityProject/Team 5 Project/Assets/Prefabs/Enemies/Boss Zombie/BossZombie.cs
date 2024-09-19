@@ -4,103 +4,101 @@ using UnityEngine.AI;
 
 public class BossZombieAI : MonoBehaviour, IDamage
 {
-    [Header("----- Boss Stats -----")]
-    [SerializeField] private float walkingSpeed = 4f; // Normal walking speed
-    [SerializeField] private float sprintSpeed = 5.5f; // Sprinting speed for chasing
-    [SerializeField] private float accelerationTime = 2f; // Time to reach max speed
-    [SerializeField] private float decelerationTime = 2f; // Time to stop
-    [SerializeField] private int maxHP = 300; // Maximum health points
-    [SerializeField] private float rageDuration = 15f; // Time before entering rage state
-    [SerializeField] private float rageMultiplier = 2f; // Speed multiplier in rage state
+    // Boss stats including movement speeds, acceleration/deceleration times, health points, and rage settings.
+    [Header("--- Boss Stats ---")]
+    [SerializeField] private float walkingSpeed = 4f;
+    [SerializeField] private float sprintSpeed = 5.5f;
+    [SerializeField] private float accelerationTime = 2f;
+    [SerializeField] private float decelerationTime = 2f;
+    [SerializeField] private int maxHP = 300;
+    [SerializeField] private float rageDuration = 15f;
+    [SerializeField] private float rageMultiplier = 2f;
 
-    [Header("----- Attack Settings -----")]
+    // Attack settings for different attacks, including range, cooldowns, damage, and animation durations.
+    [Header("--- Attack Settings ---")]
+    [Header("Attack 1")]
+    [SerializeField] private float attack1Range = 5f;
+    [SerializeField] private float attack1Cooldown = 8f;
+    [SerializeField] private int attack1Damage = 50;
+    [SerializeField] private float attack1AnimationDuration = 1.6f;
 
-    [Header("----- Attack 1 -----")]
-    [SerializeField] private float attack1Range = 5f; // Range for Attack 1
-    [SerializeField] private float attack1Cooldown = 8f; // Cooldown for Attack 1
-    [SerializeField] private int attack1Damage = 50; // Damage for Attack 1
-    [SerializeField] private float attack1AnimationDuration = 2f; // Animation duration for Attack 1
+    [Header("Attack 2")]
+    [SerializeField] private float attack2MinRange = 5f;
+    [SerializeField] private float attack2MaxRange = 8f;
+    [SerializeField] private float attack2Cooldown = 15f;
+    [SerializeField] private int attack2Damage = 75;
 
-    [Header("----- Attack 2 -----")]
-    [SerializeField] private float attack2MinRange = 5f; // Minimum range for Attack 2
-    [SerializeField] private float attack2MaxRange = 8f; // Maximum range for Attack 2
-    [SerializeField] private float attack2Cooldown = 15f; // Cooldown for Attack 2
-    [SerializeField] private int attack2Damage = 75; // Damage for Attack 2
-    [SerializeField] private float attack2AnimationDuration = 2.2f; // Animation duration for Attack 2
+    [Header("Attack 3")]
+    [SerializeField] private float attack3MinRange = 0f;
+    [SerializeField] private float attack3MaxRange = 5f;
+    [SerializeField] private float attack3Cooldown = 8f;
+    [SerializeField] private int attack3Damage = 60;
+    [SerializeField] private float attack3AnimationDuration = 2.5f;
 
-    [Header("----- Attack 3 -----")]
-    [SerializeField] private float attack3MinRange = 0f; // Minimum range for Attack 3
-    [SerializeField] private float attack3MaxRange = 5f; // Maximum range for Attack 3
-    [SerializeField] private float attack3Cooldown = 8f; // Cooldown for Attack 3
-    [SerializeField] private int attack3Damage = 60; // Damage for Attack 3
-    [SerializeField] private float attack3AnimationDuration = 2.5f; // Animation duration for Attack 3
+    [Header("Attack 4")]
+    [SerializeField] private float attack4MinRange = 1.5f;
+    [SerializeField] private float attack4MaxRange = 3f;
+    [SerializeField] private float attack4Cooldown = 8f;
+    [SerializeField] private int attack4Damage = 60;
+    [SerializeField] private float attack4AnimationDuration = 2.55f;
 
-    [Header("----- Attack 4 -----")]
-    [SerializeField] private float attack4Range = 4f; // Range for Attack 4
-    [SerializeField] private float attack4Cooldown = 8f; // Cooldown for Attack 4
-    [SerializeField] private int attack4Damage = 60; // Damage for Attack 4
-    [SerializeField] private float attack4AnimationDuration = 3f; // Animation duration for Attack 4
+    // References to key components, including the navigation agent, animator, and hand colliders.
+    [Header("--- Components ---")]
+    [SerializeField] private NavMeshAgent agent;
+    [SerializeField] private Animator myAnimator;
+    [SerializeField] private Collider rightHandCollider;
+    [SerializeField] private Collider leftHandCollider;
 
-    [Header("----- Components -----")]
-    [SerializeField] private NavMeshAgent agent; // Navigation component
-    [SerializeField] private Animator myAnimator; // Animator for handling animations
-    [SerializeField] private Collider rightHandCollider; // Collider for the right hand
-    [SerializeField] private Collider leftHandCollider; // Collider for the left hand
+    // Variables for tracking player position, attack cooldowns, boss state.
+    [Header("--- Player Tracking ---")]
+    private Transform playerTransform;
+    private float currentSpeed;
+    private float nextAttack1Time = 0f;
+    private float nextAttack2Time = 0f;
+    private float nextAttack3Time = 0f;
+    private float nextAttack4Time = 0f;
+    private bool isDead = false;
+    private int currentHP;
+    private bool isAttacking = false;
 
-    [Header("----- Player Tracking -----")]
-    private Transform playerTransform; // Reference to the player's position
-    private float currentSpeed; // Current movement speed
-    private float nextAttack1Time = 0f; // Cooldown timer for Attack 1
-    private float nextAttack2Time = 0f; // Cooldown timer for Attack 2
-    private float nextAttack3Time = 0f; // Cooldown timer for Attack 3
-    private float nextAttack4Time = 0f; // Cooldown timer for Attack 4
-    private bool isDead = false; // Tracks if the boss is dead
-    private int currentHP; // Current health points
-    private bool isAttacking = false; // Tracks if the boss is currently attacking
+    // Settings for the damage flash effect, including the model renderer and the color to flash when damaged.
+    [Header("--- Damage Flash Settings ---")]
+    [SerializeField] private Renderer model;
+    [SerializeField] private Color colorDamage = Color.red;
+    private Color originalColor;
 
-    [Header("----- Damage Flash Settings -----")]
-    [SerializeField] private Renderer model; // Renderer for the model
-    [SerializeField] private Color colorDamage = Color.red; // Color to flash when taking damage
-    private Color originalColor; // Store the original color
+    // Audio settings for various sound sources such as voice, punches, and footsteps, with volume control.
+    [Header("--- Audio Settings ---")]
+    [SerializeField] private AudioSource voiceAudioSource;
+    [Range(0f, .1f)][SerializeField] private float voiceVolume = .08f;
+    [SerializeField] private AudioSource LHAudioSource;
+    [SerializeField] private AudioSource RHAudioSource;
+    [Range(0f, .1f)][SerializeField] private float punchVolume = .055f;
+    [SerializeField] private AudioSource LFAudioSource;
+    [SerializeField] private AudioSource RFAudioSource;
+    [Range(0f, .2f)][SerializeField] private float footstepVolume = .15f;
 
-    [Header("----- Audio Settings -----")]
-
-    [Header("--- Audio Sources ---")]
-    // Voice audio source
-    [SerializeField] private AudioSource voiceAudioSource; // AudioSource to play voice sounds
-    [Range(0f, .1f)][SerializeField] private float voiceVolume = .08f; // Slider to control voice volume
-    // Hand punch audio sources
-    [SerializeField] private AudioSource LHAudioSource; // AudioSource to play left-hand punch sounds
-    [SerializeField] private AudioSource RHAudioSource; // AudioSource to play right-hand punch sounds
-    [Range(0f, .1f)][SerializeField] private float punchVolume = .055f; // Slider to control punch volume
-    // Footstep audio sources
-    [SerializeField] private AudioSource LFAudioSource; // AudioSource to play left footstep sounds
-    [SerializeField] private AudioSource RFAudioSource; // AudioSource to play right footstep sounds
-    [Range(0f, .2f)][SerializeField] private float footstepVolume = .15f; // Slider to control footstep volume
-
+    // Holds audio clips for various boss sounds, including entrance, pain, rage, punch, footsteps, jump, and landing.
     [Header("--- Sound Clips ---")]
-    // Entrance Sound
-    [SerializeField] private AudioClip entranceSound; // Sound to play when the boss enters the scene
-    // Pain sounds
-    [SerializeField] private AudioClip[] painSounds; // Array to hold pain sounds
-    // Rage yell sound
-    [SerializeField] private AudioClip rageYellSound; // Sound to play when entering rage state
-    // Punch sound
-    [SerializeField] private AudioClip bossPunchSound; // Sound for the boss punch
-    // Step sounds
-    [SerializeField] private AudioClip[] stepSounds; // Array to hold step sounds
-    // Jump and landing sounds
-    [SerializeField] private AudioClip bossJumpSound; // Sound for jump
-    [SerializeField] private AudioClip bossLandingSound; // Sound for landing
-
+    [SerializeField] private AudioClip entranceSound;
+    [SerializeField] private AudioClip[] painSounds;
+    [SerializeField] private AudioClip rageYellSound;
+    [SerializeField] private AudioClip bossPunchSound;
+    [SerializeField] private AudioClip[] stepSounds;
+    [SerializeField] private AudioClip bossJumpSound;
+    [SerializeField] private AudioClip bossLandingSound;
 
     // Rage state variables
-    private float timeSinceLastAttack = 0f; // Timer to track time since the last attack
-    private bool isInRageState = false; // Tracks if the boss is in rage state
+    private float timeSinceLastAttack = 0f;
+    private bool isInRageState = false;
+
+    // Pain state variables
+    private bool hasPlayed75PercentSound = false;
+    private bool hasPlayed50PercentSound = false;
+    private bool hasPlayed25PercentSound = false;
 
     private void Start()
     {
-        // Set the volume based on slider values
         voiceAudioSource.volume = voiceVolume;
         LHAudioSource.volume = punchVolume;
         RHAudioSource.volume = punchVolume;
@@ -114,321 +112,51 @@ public class BossZombieAI : MonoBehaviour, IDamage
         agent.speed = 0f;
         currentHP = maxHP;
         originalColor = model.material.color;
-
-        // Disable hand colliders initially
-        rightHandCollider.enabled = false;
-        leftHandCollider.enabled = false;
+        
+        DisableHandColliders();
     }
 
-
+    // Handles regular boss behavior such as checking attack cooldowns, 
+    // managing movement, rage state, and adjusting audio volumes. 
+    // It stops further actions if the boss is dead or currently attacking, 
+    // otherwise, it evaluates if an attack can be performed or handles movement.
     private void Update()
     {
-        if (isDead) return;  // If dead, do nothing
+        if (isDead) return;
 
-        // Dynamically update the volume
         voiceAudioSource.volume = voiceVolume;
         LHAudioSource.volume = punchVolume;
         RHAudioSource.volume = punchVolume;
         LFAudioSource.volume = footstepVolume;
         RFAudioSource.volume = footstepVolume;
 
-        // Countdown cooldowns for all attacks
         if (nextAttack1Time > 0) nextAttack1Time -= Time.deltaTime;
         if (nextAttack2Time > 0) nextAttack2Time -= Time.deltaTime;
         if (nextAttack3Time > 0) nextAttack3Time -= Time.deltaTime;
         if (nextAttack4Time > 0) nextAttack4Time -= Time.deltaTime;
 
-        // Update rage timer
         timeSinceLastAttack += Time.deltaTime;
-        CheckRageState(); // Check if the boss should enter rage state
+        CheckRageState();
 
-        float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position); // Calculate distance to player
+        float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
 
-        // If already attacking, wait until attack is complete
         if (isAttacking) return;
 
-        // Check for attack conditions
         if (CheckForAttack(distanceToPlayer)) return;
 
-        // Handle movement based on state
         if (isInRageState)
         {
-            HandleRageMovement(); // Handle movement in rage state
+            HandleRageMovement();
         }
         else
         {
-            HandleMovement(distanceToPlayer); // Normal movement
+            HandleMovement(distanceToPlayer);
         }
     }
 
-    private void PlayEntranceYell()
-    {
-        // Play the entrance sound
-        if (entranceSound != null)
-        {
-            voiceAudioSource.clip = entranceSound;
-            voiceAudioSource.Play();
-        }
-        else
-        {
-            Debug.LogWarning("Entrance sound is not assigned.");
-        }
-    }
-    private void CheckRageState()
-    {
-        // Check if it's time to enter rage state
-        if (timeSinceLastAttack >= rageDuration && !isInRageState)
-        {
-            EnterRageState();
-        }
-    }
-
-    private void EnterRageState()
-    {
-        isInRageState = true;
-        Debug.Log("BossZombie has entered Rage State!");
-
-        // Trigger rage animation and stop agent
-        myAnimator.SetTrigger("rage");
-        myAnimator.SetBool("isRaging", true); // Set the isRaging bool to true
-        agent.isStopped = true; // Stop the NavMeshAgent while rage animation plays
-
-        // Start coroutine to handle the rage animation and resume chasing
-        StartCoroutine(HandleRageAnimation());
-    }
-
-    private void PlayRageYell()
-    {
-        // Play the rage yell sound
-        if (rageYellSound != null)
-        {
-            voiceAudioSource.clip = rageYellSound;
-            voiceAudioSource.Play();
-        }
-        else
-        {
-            Debug.LogWarning("Rage yell sound is not assigned.");
-        }
-    }
-
-    private IEnumerator HandleRageAnimation()
-    {
-        // Wait until rage animation completes
-        while (!myAnimator.GetCurrentAnimatorStateInfo(0).IsName("rage"))
-        {
-            yield return null;
-        }
-
-        yield return new WaitForSeconds(myAnimator.GetCurrentAnimatorStateInfo(0).length);
-
-        // Resume chasing with increased speed after rage
-        agent.isStopped = false;
-        walkingSpeed *= rageMultiplier;
-        sprintSpeed *= rageMultiplier;
-        agent.speed = sprintSpeed;
-    }
-
-    private void HandleRageMovement()
-    {
-        // Continue chasing player at increased speed
-        agent.SetDestination(playerTransform.position);
-        myAnimator.SetFloat("Speed", agent.speed);
-    }
-
-    // Plays a random step sound
-    public void LeftStep()
-    {
-        if (stepSounds.Length > 0)
-        {
-            // Get a random index
-            int randomIndex = Random.Range(0, stepSounds.Length);
-
-            // Play the random sound
-            LFAudioSource.clip = stepSounds[randomIndex];
-            LFAudioSource.Play();
-        }
-        else
-        {
-            Debug.LogWarning("No step sounds assigned.");
-        }
-    }
-
-    public void RightStep()
-    {
-        if (stepSounds.Length > 0)
-        {
-            // Get a random index
-            int randomIndex = Random.Range(0, stepSounds.Length);
-
-            // Play the random sound
-            RFAudioSource.clip = stepSounds[randomIndex];
-            RFAudioSource.Play();
-        }
-        else
-        {
-            Debug.LogWarning("No step sounds assigned.");
-        }
-    }
-    public void PlayBossJump()
-    {
-        if (bossJumpSound != null)
-        {
-            RFAudioSource.clip = bossJumpSound; // Assign the jump sound to the AudioSource
-            RFAudioSource.Play(); // Play the jump sound
-        }
-        else
-        {
-            Debug.LogWarning("Boss jump sound is not assigned.");
-        }
-    }
-
-    public void PlayBossLanding()
-    {
-        if (bossJumpSound != null)
-        {
-            RFAudioSource.clip = bossLandingSound; // Assign the jump sound to the AudioSource
-            RFAudioSource.Play(); // Play the jump sound
-        }
-        else
-        {
-            Debug.LogWarning("Boss jump sound is not assigned.");
-        }
-    }
-
-    private void ExitRageState()
-    {
-        // Exit rage state and reset to normal speed
-        if (isInRageState)
-        {
-            isInRageState = false;
-            myAnimator.SetBool("isRaging", false); // Reset the bool
-            Debug.Log("BossZombie has exited Rage State.");
-            walkingSpeed /= rageMultiplier;
-            sprintSpeed /= rageMultiplier;
-            agent.speed = walkingSpeed;
-        }
-    }
-
-    private bool CheckForAttack(float distanceToPlayer)
-    {
-        // Determine which attack to perform based on distance and cooldowns
-        if (distanceToPlayer <= attack1Range && nextAttack1Time <= 0)
-        {
-            PerformAttack1();
-            return true;
-        }
-        else if (distanceToPlayer >= attack2MinRange && distanceToPlayer <= attack2MaxRange && nextAttack2Time <= 0)
-        {
-            PerformAttack2();
-            return true;
-        }
-        else if (distanceToPlayer >= attack3MinRange && distanceToPlayer <= attack3MaxRange && nextAttack3Time <= 0)
-        {
-            PerformAttack3();
-            return true;
-        }
-        else if (distanceToPlayer <= attack4Range && nextAttack4Time <= 0)
-        {
-            PerformAttack4();
-            return true;
-        }
-
-        return false; // No valid attack conditions met
-    }
-
-    public void LHBossPunch()
-    {
-        if (bossPunchSound != null)
-        {
-            LHAudioSource.clip = bossPunchSound; // Assign the punch sound to the left hand AudioSource
-            LHAudioSource.Play(); // Play the left hand punch sound
-        }
-        else
-        {
-            Debug.LogWarning("Boss punch sound is not assigned.");
-        }
-    }
-
-    public void RHBossPunch()
-    {
-        if (bossPunchSound != null)
-        {
-            RHAudioSource.clip = bossPunchSound; // Assign the punch sound to the right hand AudioSource
-            RHAudioSource.Play(); // Play the right hand punch sound
-        }
-        else
-        {
-            Debug.LogWarning("Boss punch sound is not assigned.");
-        }
-    }
-
-    public void PlayVoiceSound()
-    {
-        // Play a random voice sound
-        if (voiceAudioSource != null)
-        {
-            voiceAudioSource.Play();
-        }
-        else
-        {
-            Debug.LogWarning("Voice audio source is not assigned.");
-        }
-    }
-
-    private void PerformAttack1()
-    {
-        Debug.Log("Performing Attack 1");
-        myAnimator.SetTrigger("Attack1");
-        nextAttack1Time = attack1Cooldown;
-        isAttacking = true;
-        ResetRageState(); // Exit rage and reset the rage timer
-
-        StartCoroutine(ManageCollidersDuringAttack(attack1AnimationDuration));
-    }
-
-    private void PerformAttack2()
-    {
-        Debug.Log("Performing Attack 2");
-        myAnimator.SetTrigger("Attack2");
-        nextAttack2Time = attack2Cooldown;
-        isAttacking = true;
-        ResetRageState(); // Exit rage and reset the rage timer
-
-        StartCoroutine(ManageCollidersDuringAttack(attack2AnimationDuration));
-    }
-
-    private void PerformAttack3()
-    {
-        Debug.Log("Performing Attack 3");
-        myAnimator.SetTrigger("Attack3");
-        nextAttack3Time = attack3Cooldown;
-        isAttacking = true;
-        ResetRageState(); // Exit rage and reset the rage timer
-
-        StartCoroutine(ManageCollidersDuringAttack(attack3AnimationDuration));
-    }
-
-    private void PerformAttack4()
-    {
-        Debug.Log("Performing Attack 4");
-        myAnimator.SetTrigger("Attack4");
-        nextAttack4Time = attack4Cooldown;
-        isAttacking = true;
-        ResetRageState(); // Exit rage and reset the rage timer
-
-        StartCoroutine(ManageCollidersDuringAttack(attack4AnimationDuration));
-    }
-
-    private void ResetRageState()
-    {
-        // Reset the rage state and timer
-        timeSinceLastAttack = 0f;
-        ExitRageState();
-    }
-
+    // Handles movement based on the player's distance and state.
     private void HandleMovement(float distanceToPlayer)
     {
-        // Handle normal movement towards the player
         if (distanceToPlayer <= 2.5f && !isAttacking)
         {
             currentSpeed = Mathf.Lerp(currentSpeed, 0f, (Time.deltaTime / decelerationTime) * 3f);
@@ -452,29 +180,238 @@ public class BossZombieAI : MonoBehaviour, IDamage
         myAnimator.SetBool("isWalking", agent.remainingDistance > agent.stoppingDistance);
     }
 
-    private IEnumerator ManageCollidersDuringAttack(float animationDuration)
+    // Handles movement during the rage state by setting the destination to the player's position.
+    private void HandleRageMovement()
     {
-        // Enable hand colliders at the start of the attack
-        EnableHandColliders();
-        yield return new WaitForSeconds(0.1f);
-        yield return new WaitForSeconds(animationDuration - 0.1f);
-
-        // Disable hand colliders after attack is complete
-        DisableHandColliders();
-        ResetAttackParameters();
-        isAttacking = false;
-        CheckNextAttack();
+        agent.SetDestination(playerTransform.position);
+        myAnimator.SetFloat("Speed", agent.speed);
     }
 
+    // Plays the entrance yell sound if available.
+    private void PlayEntranceYell()
+    {
+        if (entranceSound != null)
+        {
+            voiceAudioSource.clip = entranceSound;
+            voiceAudioSource.Play();
+        }
+    }
+
+    // Plays a random pain sound from the array if available.
+    private void PlayPainSounds()
+    {
+        if (painSounds.Length > 0)
+        {
+            int randomIndex = Random.Range(0, painSounds.Length);
+            voiceAudioSource.clip = painSounds[randomIndex];
+            voiceAudioSource.Play();
+        }
+    }
+
+    // Checks if it's time to enter the rage state based on the time since the last attack.
+    private void CheckRageState()
+    {
+        if (timeSinceLastAttack >= rageDuration && !isInRageState)
+        {
+            EnterRageState();
+        }
+    }
+
+    // Enters the rage state by playing the rage yell sound and triggering the rage animation.
+    private void EnterRageState()
+    {
+        isInRageState = true;
+        myAnimator.SetTrigger("rage");
+        myAnimator.SetBool("isRaging", true);
+        agent.isStopped = true;
+        StartCoroutine(HandleRageAnimation());
+    }
+
+    // Plays the rage yell sound if available.
+    private void PlayRageYell()
+    {
+        if (rageYellSound != null)
+        {
+            voiceAudioSource.clip = rageYellSound;
+            voiceAudioSource.Play();
+        }
+    }
+
+    // Handles the rage animation by waiting for it to finish before increasing the boss's speed.
+    private IEnumerator HandleRageAnimation()
+    {
+        while (!myAnimator.GetCurrentAnimatorStateInfo(0).IsName("rage"))
+        {
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(myAnimator.GetCurrentAnimatorStateInfo(0).length);
+
+        agent.isStopped = false;
+        walkingSpeed *= rageMultiplier;
+        sprintSpeed *= rageMultiplier;
+        agent.speed = sprintSpeed;
+    }
+
+    // Plays the left footstep sound if available.
+    public void LeftStep()
+    {
+        if (stepSounds.Length > 0)
+        {
+            int randomIndex = Random.Range(0, stepSounds.Length);
+            LFAudioSource.clip = stepSounds[randomIndex];
+            LFAudioSource.Play();
+        }
+    }
+
+    // Plays the right footstep sound if available.
+    public void RightStep()
+    {
+        if (stepSounds.Length > 0)
+        {
+            int randomIndex = Random.Range(0, stepSounds.Length);
+            RFAudioSource.clip = stepSounds[randomIndex];
+            RFAudioSource.Play();
+        }
+    }
+
+    // Plays the boss jump sound if available.
+    public void PlayBossJump()
+    {
+        if (bossJumpSound != null)
+        {
+            RFAudioSource.clip = bossJumpSound;
+            RFAudioSource.Play();
+        }
+    }
+
+    // Plays the boss landing sound if available.
+    public void PlayBossLanding()
+    {
+        if (bossJumpSound != null)
+        {
+            RFAudioSource.clip = bossLandingSound;
+            RFAudioSource.Play();
+        }
+    }
+
+    // Exits the rage state by resetting the speed and disabling the rage animation.
+    private void ExitRageState()
+    {
+        if (isInRageState)
+        {
+            isInRageState = false;
+            myAnimator.SetBool("isRaging", false);
+            walkingSpeed /= rageMultiplier;
+            sprintSpeed /= rageMultiplier;
+            agent.speed = walkingSpeed;
+        }
+    }
+
+    // Checks for attack conditions based on the player's distance and triggers the appropriate attack if possible.
+    private bool CheckForAttack(float distanceToPlayer)
+    {
+        if (distanceToPlayer <= attack1Range && nextAttack1Time <= 0)
+        {
+            PerformAttack1();
+            return true;
+        }
+        else if (distanceToPlayer >= attack2MinRange && distanceToPlayer <= attack2MaxRange && nextAttack2Time <= 0)
+        {
+            PerformAttack2();
+            return true;
+        }
+        else if (distanceToPlayer >= attack3MinRange && distanceToPlayer <= attack3MaxRange && nextAttack3Time <= 0)
+        {
+            PerformAttack3();
+            return true;
+        }
+        else if (distanceToPlayer >= attack4MinRange && distanceToPlayer <= attack4MaxRange && nextAttack4Time <= 0)
+        {
+            PerformAttack4();
+            return true;
+        }
+
+        return false;
+    }
+
+    // Plays the voice sound for the boss.
+    public void PlayVoiceSound()
+    {
+        if (voiceAudioSource != null)
+        {
+            voiceAudioSource.Play();
+        }
+    }
+
+    // Performs Attack 1 by stopping movement, triggering the animation, and setting the cooldown timer.
+    private void PerformAttack1()
+    {
+        agent.isStopped = true;
+        myAnimator.SetTrigger("Attack1");
+        nextAttack1Time = attack1Cooldown;
+        isAttacking = true;
+        ResetRageState();
+        StartCoroutine(HandleEndOfAttack(attack1AnimationDuration));
+    }
+
+    // Performs Attack 2 by stopping movement, triggering the animation, and setting the cooldown timer.
+    private void PerformAttack2()
+    {
+        myAnimator.SetTrigger("Attack2");
+        nextAttack2Time = attack2Cooldown;
+        isAttacking = true;
+        ResetRageState();
+        isAttacking = false;
+    }
+
+    // Performs Attack 3 by stopping movement, triggering the animation, and setting the cooldown timer.
+    private void PerformAttack3()
+    {
+        agent.isStopped = true;
+        myAnimator.SetTrigger("Attack3");
+        nextAttack3Time = attack3Cooldown;
+        isAttacking = true;
+        ResetRageState();
+        StartCoroutine(HandleEndOfAttack(attack3AnimationDuration));
+    }
+
+    // Performs Attack 4 by stopping movement, triggering the animation, and setting the cooldown timer.
+    private void PerformAttack4()
+    {
+        agent.isStopped = true;
+        myAnimator.SetTrigger("Attack4");
+        nextAttack4Time = attack4Cooldown;
+        isAttacking = true;
+        ResetRageState();
+        StartCoroutine(HandleEndOfAttack(attack4AnimationDuration));
+    }
+
+    // Waits for the attack animation to finish before resuming movement and setting the attack state to false.
+    private IEnumerator HandleEndOfAttack(float attackDuration)
+    {
+        yield return new WaitForSeconds(attackDuration);
+        agent.isStopped = false;
+        isAttacking = false;
+    }
+
+    // Resets the rage state by exiting the rage animation and resetting the rage timer.
+    private void ResetRageState()
+    {
+        timeSinceLastAttack = 0f;
+        ExitRageState();
+    }
+
+    // Resets the attack triggers to prevent multiple attacks from being triggered simultaneously.
     private void ResetAttackParameters()
     {
-        // Reset all attack triggers to avoid repeated attacks
         myAnimator.ResetTrigger("Attack1");
         myAnimator.ResetTrigger("Attack2");
         myAnimator.ResetTrigger("Attack3");
         myAnimator.ResetTrigger("Attack4");
     }
 
+    // Checks if another attack can be performed based on the player's distance and current attack status.
     private void CheckNextAttack()
     {
         // Immediately check if another attack can be performed
@@ -482,23 +419,40 @@ public class BossZombieAI : MonoBehaviour, IDamage
         CheckForAttack(distanceToPlayer);
     }
 
-    public void EnableHandColliders()
+    // Enables the left hand collider and plays the punch sound if available for the left-hand attack.
+    public void LeftHandAttack()
     {
-        // Enable colliders on the boss's hands for attack hits
-        rightHandCollider.enabled = true;
         leftHandCollider.enabled = true;
+
+        if (bossPunchSound != null)
+        {
+            LHAudioSource.clip = bossPunchSound;
+            LHAudioSource.Play();
+        }
     }
 
+    // Enables the right hand collider and plays the punch sound if available for the right-hand attack.
+    public void RightHandAttack()
+    {
+        rightHandCollider.enabled = true;
+
+        if (bossPunchSound != null)
+        {
+            RHAudioSource.clip = bossPunchSound;
+            RHAudioSource.Play();
+        }
+    }
+
+    // Disables both hand colliders after an attack is completed.
     public void DisableHandColliders()
     {
-        // Disable colliders on the boss's hands after attacks
         rightHandCollider.enabled = false;
         leftHandCollider.enabled = false;
     }
 
+    // Returns the appropriate attack damage based on the current attack animation being played.
     public int GetAttackDamage()
     {
-        // Determine damage based on the current attack animation
         if (myAnimator.GetCurrentAnimatorStateInfo(0).IsName("Attack1"))
         {
             return attack1Damage;
@@ -518,9 +472,10 @@ public class BossZombieAI : MonoBehaviour, IDamage
         return 0;
     }
 
+    // Handles collision with the player during an attack. If the boss's hand colliders hit the player, 
+    // it inflicts damage by calling the player's takeDamage method.
     private void OnTriggerEnter(Collider other)
     {
-        // Handle damage to the player when the boss collides with the player during an attack
         if ((other == rightHandCollider || other == leftHandCollider) && other.CompareTag("Player"))
         {
             IDamage playerDamage = other.GetComponent<IDamage>();
@@ -531,14 +486,14 @@ public class BossZombieAI : MonoBehaviour, IDamage
         }
     }
 
+    // Handles taking damage by reducing health, triggering feedback, 
+    // and checking for death when health reaches zero.
     public void takeDamage(int amount)
     {
         if (isDead) return;
 
         currentHP -= amount;
-        Debug.Log($"BossZombie takes {amount} damage!");
-
-        // Flash red on damage
+        CheckHealthThresholds();
         StartCoroutine(flashDamage());
 
         if (currentHP <= 0)
@@ -547,29 +502,53 @@ public class BossZombieAI : MonoBehaviour, IDamage
         }
     }
 
-    private IEnumerator flashDamage()
+    // Checks health thresholds (75%, 50%, 25%) and plays pain sounds 
+    // when those thresholds are crossed for the first time.
+    private void CheckHealthThresholds()
     {
-        model.material.color = colorDamage; // Change to damage color
-        yield return new WaitForSeconds(0.1f); // Wait for 0.1 seconds
-        model.material.color = originalColor; // Revert to original color
+        float healthPercentage = (float)currentHP / maxHP;
+
+        if (healthPercentage <= 0.75f && !hasPlayed75PercentSound)
+        {
+            PlayPainSounds();
+            hasPlayed75PercentSound = true;
+        }
+
+        if (healthPercentage <= 0.50f && !hasPlayed50PercentSound)
+        {
+            PlayPainSounds();
+            hasPlayed50PercentSound = true;
+        }
+
+        if (healthPercentage <= 0.25f && !hasPlayed25PercentSound)
+        {
+            PlayPainSounds();
+            hasPlayed25PercentSound = true;
+        }
     }
 
+    // Temporarily changes the model's color to indicate damage and then resets it after a brief delay.
+    private IEnumerator flashDamage()
+    {
+        model.material.color = colorDamage;
+        yield return new WaitForSeconds(0.1f);
+        model.material.color = originalColor;
+    }
 
+    // Handles the boss's death by disabling movement, colliders, and starting the death animation.
     private void Die()
     {
-        // Handle the death of the boss
         isDead = true;
         myAnimator.SetBool("isDead", true);
         agent.enabled = false;
         rightHandCollider.enabled = false;
         leftHandCollider.enabled = false;
-        Debug.Log("BossZombie has died.");
         StartCoroutine(DestroyAfterDeathAnimation());
     }
 
+    // Waits for the death animation to finish before destroying the boss object.
     private IEnumerator DestroyAfterDeathAnimation()
     {
-        // Wait for the death animation to finish before destroying the object
         yield return new WaitForSeconds(myAnimator.GetCurrentAnimatorStateInfo(0).length);
         Destroy(gameObject);
     }

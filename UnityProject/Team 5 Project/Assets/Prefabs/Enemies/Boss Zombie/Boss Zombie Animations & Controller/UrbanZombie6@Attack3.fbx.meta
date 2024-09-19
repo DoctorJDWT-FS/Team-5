@@ -61,7 +61,14 @@ ModelImporter:
       curves: []
       events:
       - time: 0.48001987
-        functionName: RHBossPunch
+        functionName: RightHandAttack
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.5830644
+        functionName: DisableHandColliders
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
