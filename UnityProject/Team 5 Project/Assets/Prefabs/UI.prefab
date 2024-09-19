@@ -605,7 +605,7 @@ GameObject:
   - component: {fileID: 6858183156512083546}
   - component: {fileID: 6153137106041654869}
   m_Layer: 5
-  m_Name: Enemy Count
+  m_Name: Credit Count
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -625,10 +625,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4222419702690147905}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 142, y: 0}
-  m_SizeDelta: {x: 45, y: 50}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -15, y: 0}
+  m_SizeDelta: {x: 70, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6858183156512083546
 CanvasRenderer:
@@ -658,7 +658,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 00
+  m_text: 000
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -667,8 +667,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278255369
-  m_fontColor: {r: 0.034380913, g: 1, b: 0, a: 1}
+    rgba: 4278253823
+  m_fontColor: {r: 1, g: 0.97343755, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1488,7 +1488,7 @@ GameObject:
   - component: {fileID: 5452560103290920422}
   - component: {fileID: 1987898711880010893}
   m_Layer: 5
-  m_Name: Enemy Count Label
+  m_Name: Credit Count Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1509,9 +1509,9 @@ RectTransform:
   - {fileID: 3465729005950543937}
   m_Father: {fileID: 1774869402657020953}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 112, y: -50}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -40, y: 0}
   m_SizeDelta: {x: 230, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5452560103290920422
@@ -1542,7 +1542,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Enemies
+  m_text: Credits
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6e70983a93e3b034dbdb5e061786aa02, type: 2}
   m_sharedMaterial: {fileID: 2363523649197564576, guid: 6e70983a93e3b034dbdb5e061786aa02, type: 2}
@@ -5607,12 +5607,16 @@ MonoBehaviour:
   - {fileID: 579506411911024464, guid: d47d6f9da31ac964fa039b8a88de09a0, type: 3}
   dropRate: 30
   enemyCountText: {fileID: 6153137106041654869}
-  creditCountText: {fileID: 2438056919985925545}
+  creditCountText: {fileID: 6153137106041654869}
   playerHealthText: {fileID: 0}
   playerSheildText: {fileID: 0}
   playerScript: {fileID: 0}
   cameraScript: {fileID: 0}
   playerWallet: {fileID: 0}
+  reticleImage: {fileID: 1654256088309635420}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  zombieTargetColor: {r: 1, g: 0, b: 0, a: 1}
+  rayDistance: 100
   Drone: {fileID: 0}
   DroneModel: {fileID: 7795208907011177537, guid: 5ffe0258f6df8f74a9d4bb4e933289a2, type: 3}
   DroneSpawnPoint: {fileID: 0}
@@ -8087,7 +8091,7 @@ GameObject:
   - component: {fileID: 7863933226191386124}
   - component: {fileID: 2368895463079212494}
   m_Layer: 5
-  m_Name: Enemy Count
+  m_Name: Credit Count Bkg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8111,7 +8115,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 1668, y: 1018}
-  m_SizeDelta: {x: 301.6, y: 100}
+  m_SizeDelta: {x: 265, y: 65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7863933226191386124
 CanvasRenderer:
