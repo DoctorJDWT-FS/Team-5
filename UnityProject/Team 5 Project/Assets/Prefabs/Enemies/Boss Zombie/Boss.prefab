@@ -1670,21 +1670,21 @@ MonoBehaviour:
   maxHP: 100
   rageDuration: 8
   rageMultiplier: 2
-  attack1Range: 5
+  attack1Range: 2
   attack1Cooldown: 8
   attack1Damage: 50
   attack1AnimationDuration: 2
-  attack2MinRange: 5
-  attack2MaxRange: 8
+  attack2MinRange: 2
+  attack2MaxRange: 5
   attack2Cooldown: 15
   attack2Damage: 75
-  attack2AnimationDuration: 2.2
   attack3MinRange: 0
-  attack3MaxRange: 5
+  attack3MaxRange: 1.5
   attack3Cooldown: 8
   attack3Damage: 60
   attack3AnimationDuration: 2.5
-  attack4Range: 4
+  attack4MinRange: 1.5
+  attack4MaxRange: 3
   attack4Cooldown: 8
   attack4Damage: 60
   attack4AnimationDuration: 3
@@ -1731,7 +1731,7 @@ NavMeshAgent:
   m_Acceleration: 15
   avoidancePriority: 50
   m_AngularSpeed: 600
-  m_StoppingDistance: 2.5
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
