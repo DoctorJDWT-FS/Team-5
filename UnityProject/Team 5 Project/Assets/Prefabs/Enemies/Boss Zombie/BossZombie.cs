@@ -58,22 +58,30 @@ public class BossZombieAI : MonoBehaviour, IDamage
     private int currentHP; // Current health points
     private bool isAttacking = false; // Tracks if the boss is currently attacking
 
+    [Header("----- Damage Flash Settings -----")]
+    [SerializeField] private Renderer model; // Renderer for the model
+    [SerializeField] private Color colorDamage = Color.red; // Color to flash when taking damage
+    private Color originalColor; // Store the original color
+
     // Rage state variables
     private float timeSinceLastAttack = 0f; // Timer to track time since the last attack
     private bool isInRageState = false; // Tracks if the boss is in rage state
 
     private void Start()
     {
-        playerTransform = gameManager.instance.player.transform; // Get the player's transform
-        myAnimator = GetComponent<Animator>(); // Get the Animator component
-        currentSpeed = 0f; // Initialize speed
-        agent.speed = 0f; // Start with zero speed
-        currentHP = maxHP; // Set the current HP to max
+        playerTransform = gameManager.instance.player.transform;
+        myAnimator = GetComponent<Animator>();
+        currentSpeed = 0f;
+        agent.speed = 0f;
+        currentHP = maxHP;
+
+        originalColor = model.material.color;
 
         // Disable hand colliders initially
         rightHandCollider.enabled = false;
         leftHandCollider.enabled = false;
     }
+
 
     private void Update()
     {
@@ -359,11 +367,22 @@ public class BossZombieAI : MonoBehaviour, IDamage
         currentHP -= amount;
         Debug.Log($"BossZombie takes {amount} damage!");
 
+        // Flash red on damage
+        StartCoroutine(flashDamage());
+
         if (currentHP <= 0)
         {
             Die();
         }
     }
+
+    private IEnumerator flashDamage()
+    {
+        model.material.color = colorDamage; // Change to damage color
+        yield return new WaitForSeconds(0.1f); // Wait for 0.1 seconds
+        model.material.color = originalColor; // Revert to original color
+    }
+
 
     private void Die()
     {

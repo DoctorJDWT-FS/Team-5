@@ -1692,6 +1692,8 @@ MonoBehaviour:
   myAnimator: {fileID: 6882156216496740359}
   rightHandCollider: {fileID: 1429331580660866845}
   leftHandCollider: {fileID: 7430205742832484737}
+  model: {fileID: 6249928070321619073}
+  colorDamage: {r: 1, g: 0, b: 0, a: 1}
 --- !u!195 &2559680159837706875
 NavMeshAgent:
   m_ObjectHideFlags: 0
