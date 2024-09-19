@@ -71,15 +71,19 @@ public class TriggerDoorController : MonoBehaviour
         hasDoorOpened = true;
         costMessage.SetActive(false); // Hide the cost
         pressEMessage.SetActive(false); // Hide the message after the door is opened
-        for (int i = 0; i < disableList.Length; i++)
+        if (disableList != null)
         {
-            disableList[i].SetActive(false);
+            for (int i = 0; i < disableList.Length; i++)
+            {
+                disableList[i].SetActive(false);
+            }
         }
-        for (int i = 0; i < enableList.Length; i++)
+        if (enableList != null)
         {
-            enableList[i].SetActive(true);
+            for (int i = 0; i < enableList.Length; i++)
+            {
+                enableList[i].SetActive(true);
+            }
         }
-        
-
     }
 }
