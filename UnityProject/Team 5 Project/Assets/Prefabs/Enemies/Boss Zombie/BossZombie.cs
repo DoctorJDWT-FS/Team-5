@@ -63,6 +63,19 @@ public class BossZombieAI : MonoBehaviour, IDamage
     [SerializeField] private Color colorDamage = Color.red; // Color to flash when taking damage
     private Color originalColor; // Store the original color
 
+    [Header("----- Audio -----")]
+    [SerializeField] private AudioSource LFAudioSource; // AudioSource to play the step sounds
+    [SerializeField] private AudioSource RFAudioSource; // AudioSource to play the step sounds
+
+    [Header("----- Step Sounds -----")]
+    [SerializeField] private AudioClip[] stepSounds; // Array to hold step sounds
+
+
+    [Header("----- Jump Sound -----")]
+    [SerializeField] private AudioClip bossJumpSound;
+    [SerializeField] private AudioClip bossLandingSound; 
+
+
     // Rage state variables
     private float timeSinceLastAttack = 0f; // Timer to track time since the last attack
     private bool isInRageState = false; // Tracks if the boss is in rage state
@@ -161,6 +174,66 @@ public class BossZombieAI : MonoBehaviour, IDamage
         // Continue chasing player at increased speed
         agent.SetDestination(playerTransform.position);
         myAnimator.SetFloat("Speed", agent.speed);
+    }
+
+    // Plays a random step sound
+    public void LeftStep()
+    {
+        if (stepSounds.Length > 0)
+        {
+            // Get a random index
+            int randomIndex = Random.Range(0, stepSounds.Length);
+
+            // Play the random sound
+            LFAudioSource.clip = stepSounds[randomIndex];
+            LFAudioSource.Play();
+        }
+        else
+        {
+            Debug.LogWarning("No step sounds assigned.");
+        }
+    }
+
+    public void RightStep()
+    {
+        if (stepSounds.Length > 0)
+        {
+            // Get a random index
+            int randomIndex = Random.Range(0, stepSounds.Length);
+
+            // Play the random sound
+            RFAudioSource.clip = stepSounds[randomIndex];
+            RFAudioSource.Play();
+        }
+        else
+        {
+            Debug.LogWarning("No step sounds assigned.");
+        }
+    }
+    public void PlayBossJump()
+    {
+        if (bossJumpSound != null)
+        {
+            RFAudioSource.clip = bossJumpSound; // Assign the jump sound to the AudioSource
+            RFAudioSource.Play(); // Play the jump sound
+        }
+        else
+        {
+            Debug.LogWarning("Boss jump sound is not assigned.");
+        }
+    }
+
+    public void PlayBossLanding()
+    {
+        if (bossJumpSound != null)
+        {
+            RFAudioSource.clip = bossLandingSound; // Assign the jump sound to the AudioSource
+            RFAudioSource.Play(); // Play the jump sound
+        }
+        else
+        {
+            Debug.LogWarning("Boss jump sound is not assigned.");
+        }
     }
 
     private void ExitRageState()

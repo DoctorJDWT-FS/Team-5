@@ -59,14 +59,7 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events:
-      - time: 0.3191601
-        functionName: EnableHandColliders()
-        data: 
-        objectReferenceParameter: {fileID: 3325339711634270117, guid: 29bff51089299b743931df1fb1736d84, type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
+      events: []
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
