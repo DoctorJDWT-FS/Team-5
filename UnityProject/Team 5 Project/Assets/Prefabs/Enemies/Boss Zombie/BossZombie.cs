@@ -64,16 +64,25 @@ public class BossZombieAI : MonoBehaviour, IDamage
     private Color originalColor; // Store the original color
 
     [Header("----- Audio -----")]
+
+    // Hand punch audio sources
+    [SerializeField] private AudioSource LHAudioSource; // AudioSource to play the punch sounds
+    [SerializeField] private AudioSource RHAudioSource; // AudioSource to play the punch sounds
+
+    [Header("----- Punch Sounds -----")]
+    [SerializeField] private AudioClip bossPunchSound; // Array to hold step sounds
+
+    // Footstep audio sources
     [SerializeField] private AudioSource LFAudioSource; // AudioSource to play the step sounds
     [SerializeField] private AudioSource RFAudioSource; // AudioSource to play the step sounds
 
     [Header("----- Step Sounds -----")]
     [SerializeField] private AudioClip[] stepSounds; // Array to hold step sounds
 
-
     [Header("----- Jump Sound -----")]
     [SerializeField] private AudioClip bossJumpSound;
     [SerializeField] private AudioClip bossLandingSound; 
+
 
 
     // Rage state variables
@@ -276,6 +285,33 @@ public class BossZombieAI : MonoBehaviour, IDamage
 
         return false; // No valid attack conditions met
     }
+
+    public void LHBossPunch()
+    {
+        if (bossPunchSound != null)
+        {
+            LHAudioSource.clip = bossPunchSound; // Assign the punch sound to the left hand AudioSource
+            LHAudioSource.Play(); // Play the left hand punch sound
+        }
+        else
+        {
+            Debug.LogWarning("Boss punch sound is not assigned.");
+        }
+    }
+
+    public void RHBossPunch()
+    {
+        if (bossPunchSound != null)
+        {
+            RHAudioSource.clip = bossPunchSound; // Assign the punch sound to the right hand AudioSource
+            RHAudioSource.Play(); // Play the right hand punch sound
+        }
+        else
+        {
+            Debug.LogWarning("Boss punch sound is not assigned.");
+        }
+    }
+
 
     private void PerformAttack1()
     {
