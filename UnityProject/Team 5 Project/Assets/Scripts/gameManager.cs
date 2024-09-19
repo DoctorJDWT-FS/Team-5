@@ -35,6 +35,12 @@ public class gameManager : MonoBehaviour
     public cameraController cameraScript;
     public iWallet playerWallet;
 
+    [Header("----- Reticle -----")]
+    [SerializeField] private Image reticleImage; 
+    [SerializeField] private Color defaultColor = Color.white;  
+    [SerializeField] private Color zombieTargetColor = Color.red;  
+    [SerializeField] private float rayDistance = 100f;
+
     [Header("----- Drone -----")]
     public helperBot Drone = null;
     public GameObject DroneModel ;
@@ -72,6 +78,8 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        HandleReticleRaycast();
+
         if (Input.GetButtonDown("Cancel"))
         {
             if (menuActive == null)
@@ -86,6 +94,28 @@ public class gameManager : MonoBehaviour
 
         UpdateCreditDisplay();
 
+    }
+
+    private void HandleReticleRaycast()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, rayDistance))
+        {
+            if (hit.collider.CompareTag("Zombie"))
+            {
+                reticleImage.color = zombieTargetColor;
+            }
+            else
+            {
+                reticleImage.color = defaultColor;
+            }
+        }
+        else
+        {
+            reticleImage.color = defaultColor;
+        }
     }
 
     public void UpdateCreditDisplay()

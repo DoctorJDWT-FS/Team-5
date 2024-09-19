@@ -541,8 +541,7 @@ public class BossZombieAI : MonoBehaviour, IDamage
         isDead = true;
         myAnimator.SetBool("isDead", true);
         agent.enabled = false;
-        rightHandCollider.enabled = false;
-        leftHandCollider.enabled = false;
+        DisableHandColliders();
         StartCoroutine(DestroyAfterDeathAnimation());
     }
 
