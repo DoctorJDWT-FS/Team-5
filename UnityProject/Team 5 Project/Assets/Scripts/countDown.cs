@@ -8,16 +8,23 @@ using UnityEngine;
 
 public class countDown : MonoBehaviour
 {
-    [SerializeField] float startingTime;
+    [SerializeField] public float startingTime;
     [SerializeField] TMP_Text textTimer;
-
+    private GameObject escapeShuttle;
     public float currentTime;
     bool won;
 
     // Start is called before the first frame update
+    private void Awake()
+    {
+        escapeShuttle = GameObject.Find("Escape Shuttle");
+        escapeShuttle.GetComponent<Animator>().speed = 0;
+    }
     void Start()
     {
         currentTime = startingTime;
+        escapeShuttle.GetComponent<Animator>().speed = (1 / currentTime);
+
     }
 
     // Update is called once per frame

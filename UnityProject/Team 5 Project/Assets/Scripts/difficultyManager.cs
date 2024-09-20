@@ -34,7 +34,7 @@ public class difficultyManager : MonoBehaviour
         waveSpawner.spawnIncrease = (int)(waveSpawner.spawnIncrease * difficultyMod);
         waveSpawner.startingSize = (int)(waveSpawner.startingSize * difficultyMod);
 
-        counter.currentTime = (float)(counter.currentTime * difficultyMod);
+        counter.startingTime = (float)(counter.startingTime * difficultyMod);
 
         GameObject[] doors = GameObject.FindGameObjectsWithTag("Door");
         for (int i = 0; i < doors.Length; i++)
