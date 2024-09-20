@@ -102,6 +102,8 @@ public class basicZombieAI : MonoBehaviour, IDamage
 
     protected virtual void facePlayer()
     {
+        audPlayer.clip = walkingSounds;
+        audPlayer.Play();
         playerDir = gameManager.instance.player.transform.position - headPos.position;
         Quaternion rot = Quaternion.LookRotation(playerDir);
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * facePlayerSpeed);
@@ -115,6 +117,8 @@ public class basicZombieAI : MonoBehaviour, IDamage
             return;
         }
         HP -= amount;
+        audPlayer.clip = damagedSounds;
+        audPlayer.Play();
         StartCoroutine(StunnedState());
         StartCoroutine(flashDamage());
 
@@ -190,6 +194,8 @@ public class basicZombieAI : MonoBehaviour, IDamage
         if ( other.CompareTag("Player")&& !isDead)
         {
             //set animation to attacking true 
+            audPlayer.clip = attackingSounds;
+            audPlayer.Play();
             myAnimator.SetBool("Attack", true);
             isAttacking = true;
         }
@@ -210,6 +216,8 @@ public class basicZombieAI : MonoBehaviour, IDamage
         //if other is player they will run and start the animation 
         if (other.CompareTag("Player"))
         {
+            audPlayer.clip = runningSounds;
+            audPlayer.Play();
             playerInRange = true;
         }
     }
