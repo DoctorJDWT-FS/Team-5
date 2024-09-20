@@ -12,7 +12,9 @@ public class currencyManager : MonoBehaviour
     // Event for updating the UI or notifying other systems
     public delegate void OnCurrencyChanged(int newAmount);
     public event OnCurrencyChanged currencyChangedEvent;
-    [SerializeField] private AudioSource currencyAudio;
+    [SerializeField] private AudioSource currencySound;
+    [SerializeField] private AudioClip spentCurrencyAudio;
+    [SerializeField]private AudioClip nonSpentCurrencyAudio;
 
     // Start is called before the first frame update
     void Start()
@@ -32,11 +34,15 @@ public class currencyManager : MonoBehaviour
         if (currentCurrency >= amount)
         {
             currentCurrency -= amount;
+            currencySound.clip = spentCurrencyAudio;
+            currencySound.Play();
             NotifyCurrencyChanged();
             return true; // Transaction successful
         }
         else
         {
+            currencySound.clip = nonSpentCurrencyAudio;
+            currencySound.Play();
             return false; // Not enough currency
         }
     }
