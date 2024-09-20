@@ -89,35 +89,39 @@ public class buttonFunctions : MonoBehaviour
     }
     public void healthUp()
     {
-        playerWallet.SpendCredits(50);
-        FindObjectOfType<tutorialManager>().Upgradebrought();
-        gameManager.instance.playerScript.increaseMaxHealth(5);
+        if (playerWallet.SpendCredits(50))
+        {
+            FindObjectOfType<tutorialManager>().Upgradebrought();
+            gameManager.instance.playerScript.increaseMaxHealth(5);
+        }
         
     }
     public void shieldUp()
     {
-        playerWallet.SpendCredits(50);
-        gameManager.instance.playerScript.increaseMaxShield(5);
+        if (playerWallet.SpendCredits(50))
+            gameManager.instance.playerScript.increaseMaxShield(5);
     }
     public void ammoUp()
     {
-        playerWallet.SpendCredits(25);
+        if (playerWallet.SpendCredits(25))
         player.currentGun.magSize += 5;
     }
     public void fireRateUp()
     {
-        playerWallet.SpendCredits(25);
-        player.currentGun.fireRate += player.currentGun.fireRateOrig / 50;
+        if (playerWallet.SpendCredits(25))
+            player.currentGun.fireRate += player.currentGun.fireRateOrig / 50;
     }
     public void buyRifle() 
     {
         if (z == 0)
         {
-            playerWallet.SpendCredits(100);
-            Debug.Log("Rifle Bought");
-            z++;
-            shopInteractable.instance.oneTimeButtons[0].SetActive(false);
-            shopInteractable.instance.oneTimeButtons[3].SetActive(true);
+            if (playerWallet.SpendCredits(100))
+            {
+                Debug.Log("Rifle Bought");
+                z++;
+                shopInteractable.instance.oneTimeButtons[0].SetActive(false);
+                shopInteractable.instance.oneTimeButtons[3].SetActive(true);
+            }
         }
         else
         {
@@ -131,11 +135,14 @@ public class buttonFunctions : MonoBehaviour
     {
         if (x == 0)
         {
-            playerWallet.SpendCredits(150);
-            Debug.Log("Shotgun Bought");
-            x++;
-            shopInteractable.instance.oneTimeButtons[1].SetActive(false);
-            shopInteractable.instance.oneTimeButtons[4].SetActive(true);
+            if (playerWallet.SpendCredits(150))
+            {
+
+                Debug.Log("Shotgun Bought");
+                x++;
+                shopInteractable.instance.oneTimeButtons[1].SetActive(false);
+                shopInteractable.instance.oneTimeButtons[4].SetActive(true);
+            }
         }
         else
         {
@@ -149,11 +156,13 @@ public class buttonFunctions : MonoBehaviour
     {
         if (y == 0)
         {
-            playerWallet.SpendCredits(250);
-            Debug.Log("Grenade Launcher Bought");
-            y++;
-            shopInteractable.instance.oneTimeButtons[2].SetActive(false);
-            shopInteractable.instance.oneTimeButtons[5].SetActive(true);
+            if (playerWallet.SpendCredits(250))
+            {
+                Debug.Log("Grenade Launcher Bought");
+                y++;
+                shopInteractable.instance.oneTimeButtons[2].SetActive(false);
+                shopInteractable.instance.oneTimeButtons[5].SetActive(true);
+            }
         }
         else { 
             Debug.Log("Already Bought");
@@ -165,19 +174,18 @@ public class buttonFunctions : MonoBehaviour
     {
         if (kind == 1)
         {
-            playerWallet.SpendCredits(100);
-            Debug.Log("Fire Grenade Bought");
+            if(playerWallet.SpendCredits(100))
+               Debug.Log("Fire Grenade Bought");
         }
         else if (kind == 2)
         {
-            playerWallet.SpendCredits(100);
-            Debug.Log("Ice Grenade Bought");
+            if (playerWallet.SpendCredits(100))
+                Debug.Log("Ice Grenade Bought");
         }
         else
         {
-            playerWallet.SpendCredits(100);
-            
-            Debug.Log("EMP Grenade Bought");
+            if (playerWallet.SpendCredits(100))
+                Debug.Log("EMP Grenade Bought");
         }
     }
     public void SpawnDrone()

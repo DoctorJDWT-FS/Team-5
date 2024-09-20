@@ -58,8 +58,21 @@ public class TriggerDoorController : MonoBehaviour
     {
         if (isPlayerInZone && Input.GetKeyDown(KeyCode.E) && !hasDoorOpened && playerWallet.Credits >= doorCost)
         {
-            FindObjectOfType<tutorialManager>().Doorbrought();
-            OpenDoor();
+            //if the tutorial is false then this plays  
+            if (!FindObjectOfType<tutorialManager>().TutorialMode())
+            {
+                OpenDoor();
+            }
+            else
+            {  
+               if(FindObjectOfType<tutorialManager>().DoorMissionON())
+                {
+                    FindObjectOfType<tutorialManager>().Doorbrought();
+                    OpenDoor();
+                }
+
+            }
+            
 
         }
     }

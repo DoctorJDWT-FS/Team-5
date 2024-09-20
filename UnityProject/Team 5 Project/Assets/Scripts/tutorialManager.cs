@@ -24,8 +24,10 @@ public class tutorialManager : MonoBehaviour
     int currentObjective;
     bool purcheseUpgrade = false;
     bool doorOpen = false;
-    bool tutorialmode = true;
+    bool inTutorialMode = true;
+    bool doorMission = false;
     // Start is called before the first frame update
+
     void Start()
     {
         currentMission.text = objectives[currentObjective];
@@ -33,7 +35,7 @@ public class tutorialManager : MonoBehaviour
 
     private void Update()
     {
-        if (tutorialmode)
+        if (inTutorialMode)
         {
 
 
@@ -118,6 +120,8 @@ public class tutorialManager : MonoBehaviour
         if (purcheseUpgrade)
         {
             MissionComplete();
+            doorMission = true;
+
         }
     }
     void DoorMission()
@@ -139,13 +143,13 @@ public class tutorialManager : MonoBehaviour
         else
         {
             currentMission.text = "FIND AN EXIT";
-            tutorialmode = false;
+            inTutorialMode = false;
         }
 
     }
     public void Upgradebrought()
     {
-        if (!tutorialmode)
+        if (!inTutorialMode)
         {
             return;
         }
@@ -156,7 +160,7 @@ public class tutorialManager : MonoBehaviour
     }
     public void Doorbrought()
     {
-        if (!tutorialmode)
+        if (!inTutorialMode)
         {
             return;
         }
@@ -164,5 +168,14 @@ public class tutorialManager : MonoBehaviour
         {
             doorOpen = true;
         }
+    }
+    
+    public bool DoorMissionON()
+    {
+        return doorMission;
+    }
+    public bool TutorialMode()
+    {
+        return inTutorialMode;
     }
 }
