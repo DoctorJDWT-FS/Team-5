@@ -16,6 +16,11 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] PlayerSettings playerSettings; // Reference to PlayerSettings
     [SerializeField] Throwgrenade grenade; // Reference to ThrowGrenade
 
+    [Header("----- Shield Sound Effects -----")]
+    [SerializeField] private AudioClip shieldBreakSound;  
+    [SerializeField] private AudioClip shieldChargedSound;
+    [SerializeField] private AudioClip[] takeDamageSounds;
+
     [Header("----- Hand Collider -----")]
     [SerializeField] Collider handCollider; // Reference to the hand collider
 
@@ -409,6 +414,13 @@ public class playerController : MonoBehaviour, IDamage
         if (isInvincible)
             return;
 
+        // Play a random damage sound when the player takes damage
+        if (takeDamageSounds != null && takeDamageSounds.Length > 0)
+        {
+            int randomIndex = UnityEngine.Random.Range(0, takeDamageSounds.Length);
+            audioSource.PlayOneShot(takeDamageSounds[randomIndex]);
+        }
+
         if (shield <= 0)
         {
             HP -= amount;
@@ -418,6 +430,13 @@ public class playerController : MonoBehaviour, IDamage
         else
         {
             shield -= amount;
+
+            // Play shield break sound if the shield reaches 0
+            if (shield <= 0 && shieldBreakSound != null)
+            {
+                audioSource.PlayOneShot(shieldBreakSound);
+            }
+
             StartCoroutine(shieldDamage());
             updatePlayerUI();
         }

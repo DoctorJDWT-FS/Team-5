@@ -1265,11 +1265,13 @@ MonoBehaviour:
   down: 115
   left: 97
   right: 100
+  displayPlayerStats: 126
   shoot: 323
   aim: 324
   reload: 114
   interact: 101
   punch: 118
+  grenade: 103
 --- !u!114 &2466636926843170607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1305,6 +1307,7 @@ MonoBehaviour:
   audioSource: {fileID: 1010188559744870041}
   myAnimator: {fileID: 2353229144212733786}
   playerSettings: {fileID: 2080928529483966168}
+  grenade: {fileID: 0}
   handCollider: {fileID: 6357015570610349265}
   punchDuration: 0.5
   punchDamage: 50
@@ -1315,6 +1318,7 @@ MonoBehaviour:
   jumpMax: 2
   jumpSpeed: 12
   gravity: 28
+  grenadeThrowPos: {fileID: 0}
   slideMultiplier: 1.5
   slideDuration: 0.5
   slideCooldown: 1
@@ -1357,6 +1361,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingCurrency: 10
   currentCurrency: 1
+  currencySound: {fileID: 0}
+  spentCurrencyAudio: {fileID: 0}
+  nonSpentCurrencyAudio: {fileID: 0}
 --- !u!143 &1110267036986599471
 CharacterController:
   m_ObjectHideFlags: 0
