@@ -4234,6 +4234,14 @@ PrefabInstance:
       propertyPath: creditValue
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 6359035068575848752, guid: d46c7614933ebf74db6b4c0036274c56, type: 3}
+      propertyPath: sprintSpeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6359035068575848752, guid: d46c7614933ebf74db6b4c0036274c56, type: 3}
+      propertyPath: walkingSpeed
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11957,7 +11965,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8942057257087827948, guid: ac7a01ca06ca9044eb15b32cb7a936f8, type: 3}
+      propertyPath: m_Size.y
+      value: 8.086645
+      objectReference: {fileID: 0}
+    - target: {fileID: 8942057257087827948, guid: ac7a01ca06ca9044eb15b32cb7a936f8, type: 3}
+      propertyPath: m_Center.y
+      value: 4.0433216
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 6180575902493312809, guid: ac7a01ca06ca9044eb15b32cb7a936f8, type: 3}
     m_RemovedGameObjects:
     - {fileID: 127260, guid: ac7a01ca06ca9044eb15b32cb7a936f8, type: 3}
     m_AddedGameObjects: []
@@ -12508,7 +12525,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8942057257087827948, guid: ac7a01ca06ca9044eb15b32cb7a936f8, type: 3}
+      propertyPath: m_Size.y
+      value: 7.775323
+      objectReference: {fileID: 0}
+    - target: {fileID: 8942057257087827948, guid: ac7a01ca06ca9044eb15b32cb7a936f8, type: 3}
+      propertyPath: m_Center.y
+      value: 3.8876605
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 6180575902493312809, guid: ac7a01ca06ca9044eb15b32cb7a936f8, type: 3}
     m_RemovedGameObjects:
     - {fileID: 127260, guid: ac7a01ca06ca9044eb15b32cb7a936f8, type: 3}
     m_AddedGameObjects: []
@@ -14940,6 +14966,14 @@ PrefabInstance:
     - target: {fileID: 5494939251214223656, guid: d46c7614933ebf74db6b4c0036274c56, type: 3}
       propertyPath: creditValue
       value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6359035068575848752, guid: d46c7614933ebf74db6b4c0036274c56, type: 3}
+      propertyPath: sprintSpeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6359035068575848752, guid: d46c7614933ebf74db6b4c0036274c56, type: 3}
+      propertyPath: walkingSpeed
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -20913,6 +20947,14 @@ PrefabInstance:
       propertyPath: creditValue
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 6359035068575848752, guid: d46c7614933ebf74db6b4c0036274c56, type: 3}
+      propertyPath: sprintSpeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6359035068575848752, guid: d46c7614933ebf74db6b4c0036274c56, type: 3}
+      propertyPath: walkingSpeed
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -24380,7 +24422,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8942057257087827948, guid: ac7a01ca06ca9044eb15b32cb7a936f8, type: 3}
+      propertyPath: m_Size.y
+      value: 7.9754314
+      objectReference: {fileID: 0}
+    - target: {fileID: 8942057257087827948, guid: ac7a01ca06ca9044eb15b32cb7a936f8, type: 3}
+      propertyPath: m_Center.y
+      value: 3.9877148
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 6180575902493312809, guid: ac7a01ca06ca9044eb15b32cb7a936f8, type: 3}
     m_RemovedGameObjects:
     - {fileID: 127260, guid: ac7a01ca06ca9044eb15b32cb7a936f8, type: 3}
     m_AddedGameObjects: []
@@ -30699,6 +30750,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6904708496715708725}
+  - component: {fileID: 6904708496715708726}
   m_Layer: 0
   m_Name: BigRoom
   m_TagString: Untagged
@@ -31366,6 +31418,37 @@ Transform:
   - {fileID: 192220885}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6904708496715708726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6904708496715490151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.06666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: 3ecd20194ab19144e94540b09f31a668, type: 2}
+  m_BuildHeightMesh: 0
 --- !u!4 &6904708496715735275
 Transform:
   m_ObjectHideFlags: 0

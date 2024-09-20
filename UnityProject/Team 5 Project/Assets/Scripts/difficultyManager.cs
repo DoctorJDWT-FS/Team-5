@@ -24,10 +24,4 @@ public class difficultyManager : MonoBehaviour
         waveSpawner.spawnIncrease = (int)(waveSpawner.spawnIncrease * difficultyMod);
         waveSpawner.startingSize = (int)(waveSpawner.startingSize * difficultyMod);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -11,6 +11,7 @@ TagManager:
   - UI
   - Zombie
   - Zombie spawn point
+  - TrackingObject
   layers:
   - Default
   - TransparentFX
@@ -25,7 +26,7 @@ TagManager:
   - Player Head
   - Player Torso
   - Player Blocker
-  - 
+  - Zombie Blocker
   - 
   - 
   - 

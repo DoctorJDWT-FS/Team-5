@@ -761,6 +761,7 @@ MonoBehaviour:
   colorDamage: {r: 1, g: 0.073584795, b: 0.073584795, a: 0}
   attackRangeTrigger: {fileID: 6311746247049714209}
   visionRangeTrigger: {fileID: 6410097364234279804}
+  audPlayer: {fileID: 0}
 --- !u!95 &5801760763365038556
 Animator:
   serializedVersion: 5
