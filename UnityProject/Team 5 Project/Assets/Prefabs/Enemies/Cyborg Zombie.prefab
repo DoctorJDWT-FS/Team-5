@@ -153,6 +153,10 @@ MonoBehaviour:
   attackRangeTrigger: {fileID: 7778830077814720242}
   visionRangeTrigger: {fileID: 3312619535445291763}
   audPlayer: {fileID: 6134555576776465641}
+  walkingSounds: {fileID: 8300000, guid: ff8240148ee026c4babb53949381e1cd, type: 3}
+  runningSounds: {fileID: 8300000, guid: d108e9ae3908d4d479e1e41cca0188a3, type: 3}
+  attackingSounds: {fileID: 0}
+  damagedSounds: {fileID: 8300000, guid: 0547b940dba4d964e9e447af1dc0759a, type: 3}
   meleeCol: {fileID: 1167367398235434230}
   shootRate: 0.5
   shootRangeTrigger: {fileID: 6966036583705774811}

@@ -194,8 +194,6 @@ public class basicZombieAI : MonoBehaviour, IDamage
         if ( other.CompareTag("Player")&& !isDead)
         {
             //set animation to attacking true 
-            audPlayer.clip = attackingSounds;
-            audPlayer.Play();
             myAnimator.SetBool("Attack", true);
             isAttacking = true;
         }
