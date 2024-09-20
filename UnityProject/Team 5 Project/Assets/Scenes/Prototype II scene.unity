@@ -1189,6 +1189,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tutorial door
       objectReference: {fileID: 0}
+    - target: {fileID: 252640232121461609, guid: 54babaff30c691f489fba9e348517491, type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
     - target: {fileID: 2184036000471322593, guid: 54babaff30c691f489fba9e348517491, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.9004173
@@ -15805,7 +15809,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1092321856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16001,6 +16005,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 498280, guid: 8c10b28a5dc86904db537e28568805a9, type: 3}
   m_PrefabInstance: {fileID: 1095881678}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1102913398
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1102913400}
+  - component: {fileID: 1102913399}
+  m_Layer: 0
+  m_Name: Difficulty Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1102913399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1102913398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c06bec4ae9419404d96b5fbb980e5c66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  difficulty: 3
+--- !u!4 &1102913400
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1102913398}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 202, y: 1021, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1104070581
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18770,6 +18819,10 @@ PrefabInstance:
     - target: {fileID: 198422, guid: 2d927feb0fbf1a7429c095369d395de7, type: 3}
       propertyPath: m_Name
       value: Second Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 198422, guid: 2d927feb0fbf1a7429c095369d395de7, type: 3}
+      propertyPath: m_TagString
+      value: Door
       objectReference: {fileID: 0}
     - target: {fileID: 408632, guid: 2d927feb0fbf1a7429c095369d395de7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -23674,7 +23727,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1659071447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23689,6 +23742,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingTime: 30
   textTimer: {fileID: 9250120}
+  currentTime: 0
 --- !u!4 &1659071448
 Transform:
   m_ObjectHideFlags: 0
@@ -32853,6 +32907,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: First Door
       objectReference: {fileID: 0}
+    - target: {fileID: 252640232121461609, guid: 54babaff30c691f489fba9e348517491, type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
     - target: {fileID: 2184036000471322593, guid: 54babaff30c691f489fba9e348517491, type: 3}
       propertyPath: m_LocalPosition.x
       value: 46.150417
@@ -32949,3 +33007,4 @@ SceneRoots:
   - {fileID: 1923649424}
   - {fileID: 672160964}
   - {fileID: 1600649868}
+  - {fileID: 1102913400}

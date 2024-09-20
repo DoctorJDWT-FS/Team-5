@@ -13,6 +13,7 @@ TagManager:
   - Zombie spawn point
   - TrackingObject
   - Floor
+  - Door
   layers:
   - Default
   - TransparentFX

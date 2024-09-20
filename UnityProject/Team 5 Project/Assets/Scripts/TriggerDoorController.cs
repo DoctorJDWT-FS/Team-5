@@ -22,7 +22,7 @@ public class TriggerDoorController : MonoBehaviour
     private TMP_Text doorCostStatUI;
 
     // Set how much the door should cost. If free, set to 0
-    [SerializeField] private int doorCost;
+    [SerializeField] public int doorCost;
 
     [SerializeField] private GameObject[] disableList;
     [SerializeField] private GameObject[] enableList;

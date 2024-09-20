@@ -11,7 +11,7 @@ public class countDown : MonoBehaviour
     [SerializeField] float startingTime;
     [SerializeField] TMP_Text textTimer;
 
-    float currentTime;
+    public float currentTime;
     bool won;
 
     // Start is called before the first frame update
