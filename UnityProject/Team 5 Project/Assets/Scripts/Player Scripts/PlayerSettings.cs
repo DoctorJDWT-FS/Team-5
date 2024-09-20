@@ -21,6 +21,7 @@ public class PlayerSettings : MonoBehaviour
     public KeyCode down = KeyCode.S;
     public KeyCode left = KeyCode.A;
     public KeyCode right = KeyCode.D;
+    public KeyCode displayPlayerStats = KeyCode.Tilde; // added stat screen menu
 
     [Header("----- Combat Controls -----")]
     public KeyCode shoot = KeyCode.Mouse0;
@@ -58,6 +59,7 @@ public class PlayerSettings : MonoBehaviour
         interact = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("interact", interact.ToString()));
         punch = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("punch", punch.ToString())); // Load punch key
         grenade = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("grenade", grenade.ToString())); // Load grenade key
+        displayPlayerStats = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("displayPlayerStats", displayPlayerStats.ToString())); // Load stat menu key
     }
 
     public void SaveSettings()
@@ -83,6 +85,7 @@ public class PlayerSettings : MonoBehaviour
         PlayerPrefs.SetString("interact", interact.ToString());
         PlayerPrefs.SetString("punch", punch.ToString()); // Save punch key
         PlayerPrefs.SetString("grenade", grenade.ToString()); // Save grenade key
+        PlayerPrefs.SetString("displayPlayerStats", displayPlayerStats.ToString()); // save stat menu key
 
         // Ensure the settings are saved
         PlayerPrefs.Save();

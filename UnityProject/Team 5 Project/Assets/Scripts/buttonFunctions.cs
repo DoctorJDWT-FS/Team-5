@@ -57,7 +57,7 @@ public class buttonFunctions : MonoBehaviour
 
     public void ChangeKeybindings()
     {
-        Debug.Log("Settings");
+        Debug.Log("Keybindings");
 
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         if (currentSceneIndex == 0)

@@ -1265,11 +1265,13 @@ MonoBehaviour:
   down: 115
   left: 97
   right: 100
+  displayPlayerStats: 126
   shoot: 323
   aim: 324
   reload: 114
   interact: 101
   punch: 118
+  grenade: 103
 --- !u!114 &2466636926843170607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1305,16 +1307,29 @@ MonoBehaviour:
   audioSource: {fileID: 1010188559744870041}
   myAnimator: {fileID: 2353229144212733786}
   playerSettings: {fileID: 2080928529483966168}
+  grenade: {fileID: 0}
+  shieldBreakSound: {fileID: 8300000, guid: 9f9ec736ec0154c9b8b210d69cfc496e, type: 3}
+  shieldChargedSound: {fileID: 0}
+  takeDamageSounds:
+  - {fileID: 8300000, guid: 2c3341fb67abd4cbdbb51ae6723bbc22, type: 3}
+  - {fileID: 8300000, guid: 784741d96d76a4dfb8f264f7ae1a6c8d, type: 3}
+  - {fileID: 8300000, guid: 5f44800f6108d41faa3261a709b27f87, type: 3}
+  - {fileID: 8300000, guid: 85437f0b017b54f3a9c380c5d27c5c0b, type: 3}
+  - {fileID: 8300000, guid: 8ac0971a688744c14b0f0b2dd2635782, type: 3}
+  - {fileID: 8300000, guid: 2179b55f8434e4730a6a50b24a747491, type: 3}
+  - {fileID: 8300000, guid: e112b3993e3e04e55b7b119f97e3ff37, type: 3}
+  - {fileID: 8300000, guid: 1e6d76858bad34edb9eb15b988002366, type: 3}
   handCollider: {fileID: 6357015570610349265}
   punchDuration: 0.5
   punchDamage: 50
   HP: 1000
-  shield: 5
+  shield: 500
   speed: 4
   sprintMod: 2
   jumpMax: 2
   jumpSpeed: 12
   gravity: 28
+  grenadeThrowPos: {fileID: 0}
   slideMultiplier: 1.5
   slideDuration: 0.5
   slideCooldown: 1
@@ -1357,6 +1372,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingCurrency: 10
   currentCurrency: 1
+  currencySound: {fileID: 0}
+  spentCurrencyAudio: {fileID: 0}
+  nonSpentCurrencyAudio: {fileID: 0}
 --- !u!143 &1110267036986599471
 CharacterController:
   m_ObjectHideFlags: 0

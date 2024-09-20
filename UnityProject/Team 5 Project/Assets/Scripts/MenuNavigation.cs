@@ -96,7 +96,7 @@ public class MenuNavigation : MonoBehaviour
             
         }
 
-        //set the new menu position as the current highliht
+        //set the new menu position as the current highlight
         currentHighlight = MenuList[position];
         if (currentHighlight != null)
         {

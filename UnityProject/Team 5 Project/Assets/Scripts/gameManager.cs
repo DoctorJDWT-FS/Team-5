@@ -207,7 +207,7 @@ public class gameManager : MonoBehaviour
     {
         statePause();
         menuActive = menuWin;
-        menuActive.SetActive(isPaused);
+        menuActive.SetActive(true);
     }
 
     public void toggleInvertY()
