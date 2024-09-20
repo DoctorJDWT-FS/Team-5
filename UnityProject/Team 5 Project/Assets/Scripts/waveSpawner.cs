@@ -6,7 +6,7 @@ using UnityEngine.Analytics;
 
 public class waveSpawner : MonoBehaviour
 {
-    [SerializeField] GameObject[] enemyTypes;
+    public GameObject[] enemyTypes;
     public spawnPoint[] spawnPoints;
 
     [SerializeField] int startingEnemyAmount;

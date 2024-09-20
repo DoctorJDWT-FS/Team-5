@@ -6,13 +6,13 @@ using UnityEngine;
 
 public class betterWaveSpawner : MonoBehaviour
 {
-    [SerializeField] GameObject[] zombies;
+    [SerializeField] public GameObject[] zombies;
     [Range(0,10)][SerializeField] int[] zombieWeights;
-    [Range(1, 10)][SerializeField] int timeBetweenSpawns;
-    [Range(1, 10)][SerializeField] int timeBetweenWaves;
-    [Range(1, 10)][SerializeField] int sizeOfSpawns;
-    [Range(1, 10)][SerializeField] int startingSize;
-    [Range(1, 10)][SerializeField] int spawnIncrease;
+    [Range(1, 10)][SerializeField] public int timeBetweenSpawns;
+    [Range(1, 10)][SerializeField] public int timeBetweenWaves;
+    [Range(1, 10)][SerializeField] public int sizeOfSpawns;
+    [Range(1, 10)][SerializeField] public int startingSize;
+    [Range(1, 10)][SerializeField] public int spawnIncrease;
 
     [SerializeField] TMP_Text waveCountText;
     [SerializeField] TMP_Text waveCountdownText;
