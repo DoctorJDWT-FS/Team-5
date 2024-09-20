@@ -4539,9 +4539,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 306160053}
-        m_TargetAssemblyTypeName: buttonFunctions, Assembly-CSharp
-        m_MethodName: back
+      - m_Target: {fileID: 306160056}
+        m_TargetAssemblyTypeName: startManager, Assembly-CSharp
+        m_MethodName: ChangeKeybindings
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

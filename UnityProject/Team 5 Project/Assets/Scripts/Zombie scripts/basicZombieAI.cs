@@ -36,6 +36,10 @@ public class basicZombieAI : MonoBehaviour, IDamage
 
     [Header("---- Audio ----")]
     [SerializeField] protected AudioSource audPlayer;
+    [SerializeField] protected AudioClip walkingSounds;
+    [SerializeField] protected AudioClip runningSounds;
+    [SerializeField] protected AudioClip attackingSounds;
+    [SerializeField] protected AudioClip damagedSounds;
     
 
     //
