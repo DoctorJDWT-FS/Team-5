@@ -20,6 +20,8 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] private AudioClip shieldBreakSound;  
     [SerializeField] private AudioClip shieldChargedSound;
     [SerializeField] private AudioClip[] takeDamageSounds;
+    [SerializeField] private AudioClip shieldBeepSound;
+
 
     [Header("----- Hand Collider -----")]
     [SerializeField] Collider handCollider; // Reference to the hand collider
@@ -73,6 +75,8 @@ public class playerController : MonoBehaviour, IDamage
     private float originalSpeed; // Stores the player's original speed
     private float originalHeight; // Stores the player's original height
     private float dashTimer; // Timer to track dash cooldown
+    private Coroutine shieldBeepCoroutine;
+
 
     [Header("----- Player Actions -----")]
     public static Action shootInput; // Action event for shooting
@@ -431,10 +435,18 @@ public class playerController : MonoBehaviour, IDamage
         {
             shield -= amount;
 
-            // Play shield break sound if the shield reaches 0
-            if (shield <= 0 && shieldBreakSound != null)
+            // Play shield break sound and start beeping if the shield reaches 0
+            if (shield <= 0)
             {
-                audioSource.PlayOneShot(shieldBreakSound);
+                if (shieldBreakSound != null)
+                {
+                    audioSource.PlayOneShot(shieldBreakSound);
+                }
+
+                if (shieldBeepSound != null && shieldBeepCoroutine == null)
+                {
+                    shieldBeepCoroutine = StartCoroutine(PlayShieldBeep()); // Start beeping
+                }
             }
 
             StartCoroutine(shieldDamage());
@@ -446,6 +458,8 @@ public class playerController : MonoBehaviour, IDamage
             StartCoroutine(HandleDeath());
         }
     }
+
+
 
     public void addHealth(int health)
     {
@@ -472,6 +486,26 @@ public class playerController : MonoBehaviour, IDamage
         {
             shield += _shield;
             updatePlayerUI();
+        }
+
+        // Stop the shield beep if shield is restored
+        if (shield > 0 && shieldBeepCoroutine != null)
+        {
+            StopCoroutine(shieldBeepCoroutine);
+            shieldBeepCoroutine = null;
+        }
+    }
+
+    // Plays a beeping sound every 1 second while shield is 0 or less.
+    private IEnumerator PlayShieldBeep()
+    {
+        while (shield <= 0)
+        {
+            if (shieldBeepSound != null)
+            {
+                audioSource.PlayOneShot(shieldBeepSound);
+            }
+            yield return new WaitForSeconds(1f);
         }
     }
 
