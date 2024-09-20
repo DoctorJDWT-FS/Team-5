@@ -12,6 +12,7 @@ TagManager:
   - Zombie
   - Zombie spawn point
   - TrackingObject
+  - Floor
   layers:
   - Default
   - TransparentFX
@@ -27,7 +28,7 @@ TagManager:
   - Player Torso
   - Player Blocker
   - Zombie Blocker
-  - 
+  - Floor
   - 
   - 
   - 

@@ -14,6 +14,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] AudioSource audioSource; // Audio source for playing sound effects
     [SerializeField] Animator myAnimator; // Animator for handling player animations
     [SerializeField] PlayerSettings playerSettings; // Reference to PlayerSettings
+    [SerializeField] Throwgrenade grenade; // Reference to ThrowGrenade
 
     [Header("----- Hand Collider -----")]
     [SerializeField] Collider handCollider; // Reference to the hand collider
@@ -30,6 +31,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] int jumpMax; // Maximum number of jumps allowed
     [SerializeField] int jumpSpeed; // Vertical speed when jumping
     [SerializeField] int gravity; // Gravity applied to the player
+    [SerializeField] Transform grenadeThrowPos;
 
     [Header("----- Movement Mechanics -----")]
     [SerializeField] float slideMultiplier = 1.5f; // Multiplier to increase speed during slide
@@ -133,6 +135,7 @@ public class playerController : MonoBehaviour, IDamage
             HandleDashAndSprint();
             UpdateDashTimer();
             HandlePunch();
+            throwGrenade();
         }
         TriggerPull();
         currentGun = GetComponentInChildren<gun>();
@@ -501,6 +504,22 @@ public class playerController : MonoBehaviour, IDamage
         }
 
         updatePlayerUI();
+    }
+
+    public void throwGrenade()
+    {
+        if(!isDead)
+        {
+            if (Input.GetKeyDown(playerSettings.grenade)) 
+            {
+                grenade.startHoldingGrenade();
+            }
+            if (Input.GetKeyUp(playerSettings.grenade))
+            {
+                grenade.stopHoldingGrenade();
+            }
+        }
+
     }
 
     private IEnumerator flashDamage()

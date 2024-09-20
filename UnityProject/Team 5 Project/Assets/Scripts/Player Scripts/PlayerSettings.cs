@@ -28,7 +28,7 @@ public class PlayerSettings : MonoBehaviour
     public KeyCode reload = KeyCode.R;
     public KeyCode interact = KeyCode.E;
     public KeyCode punch = KeyCode.V; // Added punch key
-
+    public KeyCode grenade = KeyCode.G; // Added grenade key
     void Start()
     {
         // Load settings from player preferences
@@ -57,6 +57,7 @@ public class PlayerSettings : MonoBehaviour
         reload = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("reload", reload.ToString()));
         interact = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("interact", interact.ToString()));
         punch = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("punch", punch.ToString())); // Load punch key
+        grenade = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("grenade", grenade.ToString())); // Load grenade key
     }
 
     public void SaveSettings()
@@ -81,6 +82,7 @@ public class PlayerSettings : MonoBehaviour
         PlayerPrefs.SetString("reload", reload.ToString());
         PlayerPrefs.SetString("interact", interact.ToString());
         PlayerPrefs.SetString("punch", punch.ToString()); // Save punch key
+        PlayerPrefs.SetString("grenade", grenade.ToString()); // Save grenade key
 
         // Ensure the settings are saved
         PlayerPrefs.Save();
