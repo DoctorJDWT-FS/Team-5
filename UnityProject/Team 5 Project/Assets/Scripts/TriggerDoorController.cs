@@ -13,13 +13,13 @@ public class TriggerDoorController : MonoBehaviour
     private iWallet playerWallet;
 
     // Reference to the UI Text for "Press E to open" message
-    [SerializeField] private GameObject pressEMessage;
+    private GameObject pressEMessage;
 
     // Reference to the UI Text for "Cost:" message
-    [SerializeField] private GameObject costMessage;
+    private GameObject costMessage;
 
     // Reference to the UI Text for the cost of the door
-    [SerializeField] private TMP_Text doorCostStatUI;
+    private TMP_Text doorCostStatUI;
 
     // Set how much the door should cost. If free, set to 0
     [SerializeField] private int doorCost;
@@ -27,9 +27,19 @@ public class TriggerDoorController : MonoBehaviour
     [SerializeField] private GameObject[] disableList;
     [SerializeField] private GameObject[] enableList;
 
-    private void Start()
+    private void Awake()
     {
         playerWallet = FindObjectOfType<iWallet>();
+        GameObject doorcostobject = GameObject.Find("DoorCostStat");
+        doorCostStatUI = doorcostobject.GetComponent<TMP_Text>();
+        costMessage = GameObject.Find("Cost Message");
+        pressEMessage = GameObject.Find("Press E Message");
+    }
+
+    private void Start()
+    {
+        costMessage.SetActive(false);
+        pressEMessage.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
