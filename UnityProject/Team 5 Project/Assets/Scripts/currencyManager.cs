@@ -12,6 +12,7 @@ public class currencyManager : MonoBehaviour
     // Event for updating the UI or notifying other systems
     public delegate void OnCurrencyChanged(int newAmount);
     public event OnCurrencyChanged currencyChangedEvent;
+    [SerializeField] private AudioSource currencyAudio;
 
     // Start is called before the first frame update
     void Start()

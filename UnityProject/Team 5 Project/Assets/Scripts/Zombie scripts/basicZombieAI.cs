@@ -111,6 +111,7 @@ public class basicZombieAI : MonoBehaviour, IDamage
             return;
         }
         HP -= amount;
+        StartCoroutine(StunnedState());
         StartCoroutine(flashDamage());
 
         if (HP <= 0)
@@ -140,6 +141,21 @@ public class basicZombieAI : MonoBehaviour, IDamage
         yield return new WaitForSeconds(0.1f);
         model.material.color = colorigin;
         modelHead.material.color = coloriginHead;
+    }
+
+    protected IEnumerator StunnedState()
+    {
+        float tempSprintSpeed = sprintSpeed;
+        float tempWalkingSpeed = walkingSpeed;
+        float tempSpeedTrans = speedTrans;
+        sprintSpeed = 0;
+        walkingSpeed = 0;
+        speedTrans = 0;
+        yield return new WaitForSeconds(0.1f);
+        sprintSpeed = tempSprintSpeed;
+        walkingSpeed = tempWalkingSpeed;
+        speedTrans = tempSpeedTrans;
+
     }
 
     public  virtual int getMeleeDmg()

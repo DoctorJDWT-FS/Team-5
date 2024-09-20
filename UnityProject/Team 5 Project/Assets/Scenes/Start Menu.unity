@@ -2368,7 +2368,7 @@ MonoBehaviour:
   loadingScreen: {fileID: 311746098}
   sensitivity: 600
   invertY: 0
-  backgroundMusic: {fileID: 0}
+  backgroundMusic: {fileID: 8300000, guid: 755dbd80f017f98448e8d146fc59b5af, type: 3}
 --- !u!114 &306160058
 MonoBehaviour:
   m_ObjectHideFlags: 0
