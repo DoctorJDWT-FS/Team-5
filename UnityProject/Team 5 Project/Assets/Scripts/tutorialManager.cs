@@ -12,6 +12,8 @@ public class tutorialManager : MonoBehaviour
     [SerializeField] TMP_Text currentMission;
     [SerializeField] buttonFunctions buttonFuncScript;
     [SerializeField] PlayerSettings playerSettings;
+    [SerializeField] AudioSource audPlayer;
+    [SerializeField] AudioClip taskSound;
 
     List<string> objectives = new List<string>();
     int currentObjective;
@@ -20,6 +22,7 @@ public class tutorialManager : MonoBehaviour
     bool inTutorialMode = true;
     bool doorMission = false;
     bool storeMission = false;
+
     // Start is called before the first frame update
 
     void Start()
@@ -151,6 +154,7 @@ public class tutorialManager : MonoBehaviour
 
     void MissionComplete()
     {
+        audPlayer.PlayOneShot(taskSound);
         currentObjective++;
 
         if (currentObjective < objectives.Count)
