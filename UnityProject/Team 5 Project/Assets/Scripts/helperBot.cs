@@ -74,7 +74,6 @@ public class helperBot : MonoBehaviour
             if (currentTarget.isEliminated())
             {
                 currentTarget = null;
-                Debug.Log("Target died");
             }
             else
             {
@@ -91,7 +90,6 @@ public class helperBot : MonoBehaviour
             if (other.CompareTag("Zombie") && currentTarget != null && other.GetComponent<basicZombieAI>() == currentTarget)
             {
                 currentTarget = null;
-                Debug.Log("Zombie left attack range.");
             }
         }
 

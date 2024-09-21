@@ -10,7 +10,6 @@ public class laserDmg : MonoBehaviour
         IDamage dmg = other.GetComponent<IDamage>();
         if (other.CompareTag("Zombie"))
         {
-            Debug.Log("zombie damaged");
             dmg.takeDamage(laserDamage);
         }
     }
