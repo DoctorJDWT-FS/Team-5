@@ -49,6 +49,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] float dashCooldown = 4.5f; // Cooldown time before dashing again
     [SerializeField] AudioClip slideSound; // Sound effect for sliding
     [SerializeField] AudioClip dashSound; // Sound effect for dashing
+    [SerializeField] private AudioClip[] footstepSounds;  // Sound effect for footstep
 
     [Header("----- Guns -----")]
     [SerializeField] TMP_Text ammoCount; // UI element to display ammo count
@@ -607,6 +608,13 @@ public class playerController : MonoBehaviour, IDamage
 
         yield return new WaitForSeconds(4.0f);
         gameManager.instance.youLose();
+    }
+
+    //Play Footstep Sound
+    public void PlayFootstepSound()
+    {
+        int randomIndex = UnityEngine.Random.Range(0, footstepSounds.Length);
+        audioSource.PlayOneShot(footstepSounds[randomIndex]);
     }
 
     public void updatePlayerUI()

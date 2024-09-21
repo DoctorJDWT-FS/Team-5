@@ -688,6 +688,8 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 1
+  damageInterval: 0.5
+  damagePerInterval: 5
 --- !u!1 &2087157172225645421
 GameObject:
   m_ObjectHideFlags: 0
@@ -1375,7 +1377,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2179b55f8434e4730a6a50b24a747491, type: 3}
   - {fileID: 8300000, guid: e112b3993e3e04e55b7b119f97e3ff37, type: 3}
   - {fileID: 8300000, guid: 1e6d76858bad34edb9eb15b988002366, type: 3}
-  shieldBeepSound: {fileID: 0}
+  shieldBeepSound: {fileID: 8300000, guid: 99434f28794a22a4cb6e721918b7971d, type: 3}
   handCollider: {fileID: 6357015570610349265}
   punchDuration: 0.5
   punchDamage: 50
@@ -1395,6 +1397,37 @@ MonoBehaviour:
   dashCooldown: 4.5
   slideSound: {fileID: 8300000, guid: 39159a939a9e81b4fae7eed10b88561f, type: 3}
   dashSound: {fileID: 8300000, guid: f65a82aa46096da4da915bf279fec207, type: 3}
+  footstepSounds:
+  - {fileID: 8300000, guid: 5e265270fb85126479eef52d8fce3b08, type: 3}
+  - {fileID: 8300000, guid: 3701a5fdf99882f40bc00eb9053eec92, type: 3}
+  - {fileID: 8300000, guid: 2f949b40b7283404099a802630fb2077, type: 3}
+  - {fileID: 8300000, guid: dfff2b3c7dfb43c419592789f0a6ab81, type: 3}
+  - {fileID: 8300000, guid: 812100e3982e56842adb6ba5be867b7a, type: 3}
+  - {fileID: 8300000, guid: 83c58d64f2e240c41b1f2c2885b253a6, type: 3}
+  - {fileID: 8300000, guid: 3610d597db7918e44906d575bd074616, type: 3}
+  - {fileID: 8300000, guid: 149e8ca9df68d744e9722158daa78ab1, type: 3}
+  - {fileID: 8300000, guid: d25a8335420d09f43bedf446e2deffa0, type: 3}
+  - {fileID: 8300000, guid: cb111f071b2e63844afba5ac99aceb2b, type: 3}
+  - {fileID: 8300000, guid: 2c32dcddf9cd3a944a54728c2c878557, type: 3}
+  - {fileID: 8300000, guid: 2705e9a452d315940a37bf3403ce5927, type: 3}
+  - {fileID: 8300000, guid: e80de9a8752d20e4d97ab928d318adb3, type: 3}
+  - {fileID: 8300000, guid: 4290a2df9f7c8ee4fbe7fee539c5bf30, type: 3}
+  - {fileID: 8300000, guid: 63218441cc62b42499a5df11d6393821, type: 3}
+  - {fileID: 8300000, guid: e5b9a63e11f3a8b4a8fef1eb139cc786, type: 3}
+  - {fileID: 8300000, guid: 4ebaaf27aa23a0446b8fd874d60909e5, type: 3}
+  - {fileID: 8300000, guid: ab66dccbdeb63b5449db73ad92f21711, type: 3}
+  - {fileID: 8300000, guid: b2d0936410eda534bb65c5f1794cb663, type: 3}
+  - {fileID: 8300000, guid: d2b2858ce5c7ca9428bfd0e424d5a82d, type: 3}
+  - {fileID: 8300000, guid: 644dc4517bc1c9c40bf1e80d0b048f5b, type: 3}
+  - {fileID: 8300000, guid: 48470fafc45f3c04792793e1005e62e9, type: 3}
+  - {fileID: 8300000, guid: 403d45f89131a5a4f9afe643ccbf4f18, type: 3}
+  - {fileID: 8300000, guid: 9535c599feb8b7a4990789aebab305e4, type: 3}
+  - {fileID: 8300000, guid: b6da35e1befe0014da25418951455674, type: 3}
+  - {fileID: 8300000, guid: 7c85c1193002215499b462f763701072, type: 3}
+  - {fileID: 8300000, guid: 6b7628f8c05047a4fbef52fe3ed4729d, type: 3}
+  - {fileID: 8300000, guid: 65507879ee055e648b1de3581c284cca, type: 3}
+  - {fileID: 8300000, guid: 8a2c7093236272043805ca942d893d01, type: 3}
+  - {fileID: 8300000, guid: 5e0fe368d9a158a46b0fe96e660e78cc, type: 3}
   ammoCount: {fileID: 0}
   magCount: {fileID: 0}
   HPOrig: 0
@@ -1978,6 +2011,8 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 1
+  damageInterval: 0.5
+  damagePerInterval: 5
 --- !u!1 &4846398598160681904
 GameObject:
   m_ObjectHideFlags: 0
@@ -4012,6 +4047,8 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 1
+  damageInterval: 0.5
+  damagePerInterval: 5
 --- !u!1 &8856726918747861806
 GameObject:
   m_ObjectHideFlags: 0
