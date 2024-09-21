@@ -12,19 +12,15 @@ public class CustomTrigger : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         EnteredTrigger?.Invoke(other); // Trigger the event for other scripts
-
-       
     }
 
     void OnTriggerExit(Collider other)
     {
-        ExitTrigger?.Invoke(other); // Trigger the event for other scripts
-
+        ExitTrigger?.Invoke(other); // Trigger the event for other script
     }
     void OnTriggerStay(Collider other)
     {
         StayTrigger?.Invoke(other); // Trigger the event for other scripts
-
     }
 
 
