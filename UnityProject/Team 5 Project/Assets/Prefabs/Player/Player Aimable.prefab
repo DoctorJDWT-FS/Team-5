@@ -351,7 +351,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 1.8224729, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4423697698445456523}
   m_Father: {fileID: 152374560567787465}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &48806041691173699
@@ -632,6 +633,61 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1985423686793296104}
   m_Enabled: 1
+--- !u!1 &2068889140946742336
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6331144477083645728}
+  - component: {fileID: 538552108427565001}
+  m_Layer: 0
+  m_Name: EMP
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6331144477083645728
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2068889140946742336}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4423697698445456523}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &538552108427565001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2068889140946742336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36902decae3e78e4ca7eb5c2d57505a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerScript: {fileID: 2823294014843151721}
+  cameraScript: {fileID: 8077685216331894476}
+  grenadeThrowPos: {fileID: 2166709927435974102}
+  currentGrenadeStats: {fileID: 11400000, guid: 5b0bc351fa3f62d45b229c0d7902be29, type: 2}
+  grenadeLandingPrefab: {fileID: 8607466623545022079, guid: 94266c336f26fee4aa5cb161ffcd3fcf, type: 3}
+  destroyTime: 3
+  minThrowAngle: -0.3
+  minDistanceFromPlayer: 2.75
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!1 &2087157172225645421
 GameObject:
   m_ObjectHideFlags: 0
@@ -1307,7 +1363,7 @@ MonoBehaviour:
   audioSource: {fileID: 1010188559744870041}
   myAnimator: {fileID: 2353229144212733786}
   playerSettings: {fileID: 2080928529483966168}
-  grenade: {fileID: 0}
+  grenade: {fileID: 4699635609645507981}
   shieldBreakSound: {fileID: 8300000, guid: 9f9ec736ec0154c9b8b210d69cfc496e, type: 3}
   shieldChargedSound: {fileID: 0}
   takeDamageSounds:
@@ -1319,17 +1375,18 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2179b55f8434e4730a6a50b24a747491, type: 3}
   - {fileID: 8300000, guid: e112b3993e3e04e55b7b119f97e3ff37, type: 3}
   - {fileID: 8300000, guid: 1e6d76858bad34edb9eb15b988002366, type: 3}
+  shieldBeepSound: {fileID: 0}
   handCollider: {fileID: 6357015570610349265}
   punchDuration: 0.5
   punchDamage: 50
-  HP: 1000
-  shield: 500
+  HP: 100
+  shield: 50
   speed: 4
   sprintMod: 2
   jumpMax: 2
   jumpSpeed: 12
   gravity: 28
-  grenadeThrowPos: {fileID: 0}
+  grenadeThrowPos: {fileID: 2166709927435974102}
   slideMultiplier: 1.5
   slideDuration: 0.5
   slideCooldown: 1
@@ -1491,7 +1548,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.15
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1866,6 +1923,61 @@ Transform:
   - {fileID: 7143619858287347144}
   m_Father: {fileID: 5083045487205004147}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4791805267879460152
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1575386071313068112}
+  - component: {fileID: 4699635609645507981}
+  m_Layer: 0
+  m_Name: Fire
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1575386071313068112
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4791805267879460152}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4423697698445456523}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4699635609645507981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4791805267879460152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36902decae3e78e4ca7eb5c2d57505a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerScript: {fileID: 2823294014843151721}
+  cameraScript: {fileID: 8077685216331894476}
+  grenadeThrowPos: {fileID: 2166709927435974102}
+  currentGrenadeStats: {fileID: 11400000, guid: 671b99a26e7fe254197b407a8cd8de54, type: 2}
+  grenadeLandingPrefab: {fileID: 5239025729904925024}
+  destroyTime: 3
+  minThrowAngle: -0.3
+  minDistanceFromPlayer: 2.75
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!1 &4846398598160681904
 GameObject:
   m_ObjectHideFlags: 0
@@ -2026,6 +2138,83 @@ Transform:
   - {fileID: 938799184512609690}
   m_Father: {fileID: 1582603153155552268}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5265166540250356256
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2166709927435974102}
+  - component: {fileID: 4647465715578780484}
+  m_Layer: 0
+  m_Name: GrenadePos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2166709927435974102
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5265166540250356256}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.34707522, y: -0.6160671, z: -0.6160672, w: 0.34707534}
+  m_LocalPosition: {x: 6.5352545, y: 0.91934776, z: -18.690186}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4423697698445456523}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!61 &4647465715578780484
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5265166540250356256}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &5327609960422223451
 GameObject:
   m_ObjectHideFlags: 0
@@ -3121,6 +3310,42 @@ Transform:
   - {fileID: 1730545968124107578}
   m_Father: {fileID: 2441309862879165456}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7726738060357367053
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4423697698445456523}
+  m_Layer: 0
+  m_Name: Grenades
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4423697698445456523
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7726738060357367053}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.19020611, y: 0.6810446, z: 0.6810446, w: -0.19020611}
+  m_LocalPosition: {x: -3.8249006, y: 19.322737, z: -0.7423458}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2166709927435974102}
+  - {fileID: 5422004860618420974}
+  - {fileID: 6075231670621418962}
+  - {fileID: 1575386071313068112}
+  - {fileID: 6331144477083645728}
+  m_Father: {fileID: 4810343652495511113}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7810333383140173934
 GameObject:
   m_ObjectHideFlags: 0
@@ -3732,6 +3957,61 @@ CapsuleCollider:
   m_Height: 0.5
   m_Direction: 0
   m_Center: {x: -0.25, y: 0, z: 0}
+--- !u!1 &8789483859631899500
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6075231670621418962}
+  - component: {fileID: 1939051040844311671}
+  m_Layer: 0
+  m_Name: Ice
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6075231670621418962
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8789483859631899500}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4423697698445456523}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1939051040844311671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8789483859631899500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36902decae3e78e4ca7eb5c2d57505a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerScript: {fileID: 2823294014843151721}
+  cameraScript: {fileID: 8077685216331894476}
+  grenadeThrowPos: {fileID: 2166709927435974102}
+  currentGrenadeStats: {fileID: 11400000, guid: 8479616f824dee0498828785077976c0, type: 2}
+  grenadeLandingPrefab: {fileID: 5239025729904925024}
+  destroyTime: 3
+  minThrowAngle: -0.3
+  minDistanceFromPlayer: 2.75
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!1 &8856726918747861806
 GameObject:
   m_ObjectHideFlags: 0
@@ -3993,7 +4273,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.15
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -4081,6 +4361,77 @@ AudioSource:
 Transform:
   m_CorrespondingSourceObject: {fileID: 7080237792258267643, guid: 6be8e1c1dc5f5d947bf05ad5d4e5b137, type: 3}
   m_PrefabInstance: {fileID: 788105114605100219}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4595676505827430175
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4423697698445456523}
+    m_Modifications:
+    - target: {fileID: 8428992338250563057, guid: 94266c336f26fee4aa5cb161ffcd3fcf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8428992338250563057, guid: 94266c336f26fee4aa5cb161ffcd3fcf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8428992338250563057, guid: 94266c336f26fee4aa5cb161ffcd3fcf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8428992338250563057, guid: 94266c336f26fee4aa5cb161ffcd3fcf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8428992338250563057, guid: 94266c336f26fee4aa5cb161ffcd3fcf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8428992338250563057, guid: 94266c336f26fee4aa5cb161ffcd3fcf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8428992338250563057, guid: 94266c336f26fee4aa5cb161ffcd3fcf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8428992338250563057, guid: 94266c336f26fee4aa5cb161ffcd3fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8428992338250563057, guid: 94266c336f26fee4aa5cb161ffcd3fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8428992338250563057, guid: 94266c336f26fee4aa5cb161ffcd3fcf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8607466623545022079, guid: 94266c336f26fee4aa5cb161ffcd3fcf, type: 3}
+      propertyPath: m_Name
+      value: Grenade Circle
+      objectReference: {fileID: 0}
+    - target: {fileID: 8607466623545022079, guid: 94266c336f26fee4aa5cb161ffcd3fcf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 94266c336f26fee4aa5cb161ffcd3fcf, type: 3}
+--- !u!1 &5239025729904925024 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8607466623545022079, guid: 94266c336f26fee4aa5cb161ffcd3fcf, type: 3}
+  m_PrefabInstance: {fileID: 4595676505827430175}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5422004860618420974 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8428992338250563057, guid: 94266c336f26fee4aa5cb161ffcd3fcf, type: 3}
+  m_PrefabInstance: {fileID: 4595676505827430175}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7609986587047999130
 PrefabInstance:
@@ -4196,7 +4547,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.45
+  m_Volume: 0.15
   m_Pitch: 1
   Loop: 0
   Mute: 0

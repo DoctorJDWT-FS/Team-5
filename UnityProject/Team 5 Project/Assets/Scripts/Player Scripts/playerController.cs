@@ -561,7 +561,7 @@ public class playerController : MonoBehaviour, IDamage
 
     public void throwGrenade()
     {
-        if(!isDead)
+        if(!isDead && !isSprinting && !isDashing && !isShooting)
         {
             if (Input.GetKeyDown(playerSettings.grenade)) 
             {
