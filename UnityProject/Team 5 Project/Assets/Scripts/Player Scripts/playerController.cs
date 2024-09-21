@@ -29,6 +29,8 @@ public class playerController : MonoBehaviour, IDamage
     [Header("----- Punch Settings -----")]
     [SerializeField] float punchDuration = 0.5f; // Duration the hand collider is enabled during a punch
     [SerializeField] int punchDamage = 50; // Amount of damage the punch does
+    [SerializeField] float punchCooldownTime = 1.5f;
+    [SerializeField] private AudioClip shieldOverloadSound;
 
     [Header("----- Player Stats -----")]
     [SerializeField] public int HP; // Player health points
@@ -49,6 +51,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] float dashCooldown = 4.5f; // Cooldown time before dashing again
     [SerializeField] AudioClip slideSound; // Sound effect for sliding
     [SerializeField] AudioClip dashSound; // Sound effect for dashing
+    [SerializeField] private AudioClip[] footstepSounds;  // Sound effect for footstep
 
     [Header("----- Guns -----")]
     [SerializeField] TMP_Text ammoCount; // UI element to display ammo count
@@ -81,6 +84,7 @@ public class playerController : MonoBehaviour, IDamage
     [Header("----- Player Actions -----")]
     public static Action shootInput; // Action event for shooting
     public static Action reloadInput; // Action event for reloading
+    private bool canPunch = true;
 
     public gun currentGun; // Current gun equipped by the player
 
@@ -316,15 +320,35 @@ public class playerController : MonoBehaviour, IDamage
     }
 
     // Method to perform a punch
+    // Method to perform a punch
     void Punch()
     {
-        myAnimator.SetTrigger("Punch");
+        if (!canPunch)
+            return; // Exit if punch is on cooldown
 
+        // Play the shield overload sound when punching
+        if (shieldOverloadSound != null)
+        {
+            audioSource.PlayOneShot(shieldOverloadSound);
+        }
+
+        // Enable the hand collider for dealing damage
         if (handCollider != null)
         {
             handCollider.enabled = true; // Enable the hand collider
             StartCoroutine(DisableHandColliderAfterPunch());
         }
+
+        // Start cooldown for punch
+        StartCoroutine(PunchCooldown());
+    }
+
+    // Coroutine to manage the punch cooldown
+    private IEnumerator PunchCooldown()
+    {
+        canPunch = false; // Disable punching
+        yield return new WaitForSeconds(punchCooldownTime); // Wait for cooldown duration
+        canPunch = true; // Re-enable punching
     }
 
     // Punch collision
@@ -607,6 +631,13 @@ public class playerController : MonoBehaviour, IDamage
 
         yield return new WaitForSeconds(4.0f);
         gameManager.instance.youLose();
+    }
+
+    //Play Footstep Sound
+    public void PlayFootstepSound()
+    {
+        int randomIndex = UnityEngine.Random.Range(0, footstepSounds.Length);
+        audioSource.PlayOneShot(footstepSounds[randomIndex]);
     }
 
     public void updatePlayerUI()

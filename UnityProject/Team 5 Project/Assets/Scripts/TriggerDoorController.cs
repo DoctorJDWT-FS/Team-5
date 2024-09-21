@@ -14,6 +14,7 @@ public class TriggerDoorController : MonoBehaviour
 
     // Reference to the UI Text for "Press E to open" message
     private GameObject pressEMessage;
+    private TMP_Text pressEText;
 
     // Reference to the UI Text for "Cost:" message
     private GameObject costMessage;
@@ -28,6 +29,9 @@ public class TriggerDoorController : MonoBehaviour
     [SerializeField] private GameObject[] enableList;
     [SerializeField] protected AudioSource doorSounds;
     [SerializeField] protected AudioClip openDoor;
+    [SerializeField] protected bool isLaser;
+    [SerializeField] protected bool ignoreTutorial;
+    [SerializeField] protected int laserPersistTime;
 
     private void Awake()
     {
@@ -36,6 +40,7 @@ public class TriggerDoorController : MonoBehaviour
         doorCostStatUI = doorcostobject.GetComponent<TMP_Text>();
         costMessage = GameObject.Find("Cost Message");
         pressEMessage = GameObject.Find("Press E Message");
+        pressEText = GameObject.Find("PressEtoOpen").GetComponent<TMP_Text>();
     }
 
     private void Start()
@@ -46,6 +51,14 @@ public class TriggerDoorController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (isLaser && other.CompareTag("Player") && !hasDoorOpened)
+        {
+            pressEText.text = "Press E to activate!";
+        }
+        if (!isLaser && other.CompareTag("Player") && !hasDoorOpened)
+        {
+            pressEText.text = "Press E to open!";
+        }
         if (other.CompareTag("Player") && !hasDoorOpened)
         {
             isPlayerInZone = true;
@@ -84,17 +97,25 @@ public class TriggerDoorController : MonoBehaviour
                 }
 
             }
-            
-
+            if (ignoreTutorial)
+            {
+                OpenDoor();
+            }
         }
     }
 
     private void OpenDoor()
     {
         playerWallet.SpendCredits(doorCost);
-        doorSounds.clip = openDoor;
-        doorSounds.Play();
-        myDoor.Play(doorOpenAnimationName, 0, 0.0f); // Play the specified animation
+        if (doorSounds != null)
+        {
+            doorSounds.clip = openDoor;
+            doorSounds.Play();
+        }
+        if (myDoor != null)
+        {
+            myDoor.Play(doorOpenAnimationName, 0, 0.0f); // Play the specified animation
+        }
         hasDoorOpened = true;
         costMessage.SetActive(false); // Hide the cost
         pressEMessage.SetActive(false); // Hide the message after the door is opened
@@ -111,6 +132,20 @@ public class TriggerDoorController : MonoBehaviour
             {
                 enableList[i].SetActive(true);
             }
+        }
+        if (isLaser)
+        {
+            StartCoroutine(laser());
+        }
+    }
+
+    IEnumerator laser()
+    {
+        yield return new WaitForSeconds(laserPersistTime);
+        hasDoorOpened = false;
+        for (int i = 0; i < enableList.Length; ++i)
+        {
+            enableList[i].SetActive(false);
         }
     }
 }
