@@ -12,6 +12,7 @@ public class shopInteractable : MonoBehaviour
     public GameObject weaponItems;
     public GameObject powerupItems;
     public List<GameObject> oneTimeButtons;
+    public GameObject dronePosition;
 
 
 
@@ -43,6 +44,7 @@ public class shopInteractable : MonoBehaviour
         {
             isPlayerInRange = true;
             interact.gameObject.SetActive(true); // Show the "Press E to Interact" message
+            gameManager.instance.setDroneSpawn(dronePosition);
         }
     }
 

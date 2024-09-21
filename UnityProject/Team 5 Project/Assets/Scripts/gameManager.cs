@@ -273,4 +273,8 @@ public class gameManager : MonoBehaviour
     {
         return DroneSpawnPoint;
     }
+    public void setDroneSpawn(GameObject DroneSpawn)
+    {
+        DroneSpawnPoint = DroneSpawn;
+    }
 }
