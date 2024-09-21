@@ -13,11 +13,6 @@ public class iCredit : MonoBehaviour
         {
             // Add credits to the player's wallet
             playerWallet.AddCredits(creditValue);
-            Debug.Log($"Added {creditValue} credits to player's wallet.");
-        }
-        else
-        {
-            Debug.LogError("Player Wallet not found!");
         }
     }
 }

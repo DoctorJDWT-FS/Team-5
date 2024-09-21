@@ -30,25 +30,15 @@ public class betterWaveSpawner : MonoBehaviour
 
     void Start()
     {
-        if (zombieWeights.Length > zombies.Length)
+        assignedWeights = new int[zombieWeights.Length];
+        for (int i = 0; i < zombieWeights.Length; i++)
         {
-            Debug.Log("There are more zombie weights than there are zombies, the extra weights will be ignored.");
-        }
-        else if (zombies.Length > zombieWeights.Length)
-        {
-            Debug.Log("There are more zombies than there are weights, please make the lists equal lengths.");
-        }
-        else
-        {
-            assignedWeights = new int[zombieWeights.Length];
-            for (int i = 0; i < zombieWeights.Length; i++)
-            {
-                totalWeight += zombieWeights[i];
-                assignedWeights[i] = totalWeight;
-            }
+            totalWeight += zombieWeights[i];
+            assignedWeights[i] = totalWeight;
         }
         numToSpawn = startingSize;
     }
+
     private void Update()
     {
         if (!isSpawning && gameManager.instance.enemyCount == 0)
@@ -84,13 +74,13 @@ public class betterWaveSpawner : MonoBehaviour
         for (int i = 0; i < correctedSpawn; i++)
         {
             int zombieRand = Random.Range(0, totalWeight);
-            //Debug.Log("Random weight chosen: " + zombieRand);
+
             for (int j = 0; j < assignedWeights.Length; j++)
             {
                 if (assignedWeights[j] >= zombieRand)
                 {
                     int spawnRand = Random.Range(0, spawnPoints.Length);
-                    //Debug.Log("Spawning zombie #" + j + " at spawn point #" + spawnRand);
+
                     Instantiate(zombies[j], spawnPoints[spawnRand].transform.position, spawnPoints[spawnRand].transform.rotation);
                     currentSpawned++;
                     break;

@@ -64,7 +64,6 @@ public class startManager : MonoBehaviour
     }
     public void closeCredits()
     {
-        Debug.Log("Going back");
         startLabel.SetActive(true);
         creditsLabel.SetActive(false);
     }
@@ -73,8 +72,6 @@ public class startManager : MonoBehaviour
     {
         invertY = !invertY;
         PlayerPrefs.SetInt("InvertY", invertY ? 1 : 0);
-        
-        Debug.Log(PlayerPrefs.GetInt("InvertY") + " hello");
         PlayerPrefs.Save();
 
     }
@@ -83,7 +80,6 @@ public class startManager : MonoBehaviour
         sensitivity = Mathf.RoundToInt(sens);
         PlayerPrefs.SetInt("Sensitivity", sensitivity);
         
-        Debug.Log(PlayerPrefs.GetInt("Sensitivity") + " hello");
         PlayerPrefs.Save();
     }
     public void loadSettings()

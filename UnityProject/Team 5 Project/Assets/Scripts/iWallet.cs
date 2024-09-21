@@ -19,7 +19,6 @@ public class iWallet : MonoBehaviour
     {
         Credits += amount;
         currentCredits = Credits; // Update currentCredits to reflect the change
-        Debug.Log("Credits added: " + amount + ". Total Credits: " + Credits);
 
         // Update the credit display in the game manager
         if (gameManager.instance != null)
@@ -35,7 +34,6 @@ public class iWallet : MonoBehaviour
         {
             Credits -= amount;
             currentCredits = Credits; // Update currentCredits to reflect the change
-            Debug.Log("Credits spent: " + amount + ". Remaining Credits: " + Credits);
 
             // Update the credit display in the game manager
             if (gameManager.instance != null)
@@ -47,7 +45,6 @@ public class iWallet : MonoBehaviour
         }
         else
         {
-            Debug.Log("Not enough credits!");
             return false;
         }
     }

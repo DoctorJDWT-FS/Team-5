@@ -346,23 +346,25 @@ public class playerController : MonoBehaviour, IDamage
     // Coroutine to manage the punch cooldown
     private IEnumerator PunchCooldown()
     {
-        canPunch = false; // Disable punching
-        yield return new WaitForSeconds(punchCooldownTime); // Wait for cooldown duration
-        canPunch = true; // Re-enable punching
+        canPunch = false; 
+        yield return new WaitForSeconds(punchCooldownTime);
+        canPunch = true; 
     }
 
-    // Punch collision
+    // Punch collision detection
     private void OnTriggerEnter(Collider other)
     {
         if (handCollider != null && handCollider.enabled)
         {
             IDamage target = other.GetComponent<IDamage>();
+
             if (target != null)
             {
-                target.takeDamage(punchDamage); // Apply punch damage
+                target.takeDamage(punchDamage); 
             }
         }
     }
+
 
     // Coroutine to disable the hand collider after the punch duration
     private IEnumerator DisableHandColliderAfterPunch()
@@ -382,14 +384,12 @@ public class playerController : MonoBehaviour, IDamage
 
         if (Input.GetKey(playerSettings.shoot) && !isSprinting && !isReloading)
         {
-            Debug.Log("Shoot Input Detected");
             myAnimator.SetTrigger("Shoot");
             shootInput?.Invoke();
         }
 
         if (Input.GetKeyDown(playerSettings.reload))
         {
-            Debug.Log("Reload Input Detected");
             reloadInput?.Invoke();
             StartCoroutine(Reload());
         }

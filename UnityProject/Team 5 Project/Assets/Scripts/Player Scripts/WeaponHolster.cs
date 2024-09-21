@@ -31,7 +31,6 @@ public class WeaponHolster : MonoBehaviour
         // Ensure weaponParent is assigned
         if (weaponParent == null)
         {
-            Debug.LogError("Weapon parent (Weapon_R) is not assigned.");
             return;
         }
 
