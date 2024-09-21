@@ -449,18 +449,20 @@ public class playerController : MonoBehaviour, IDamage
             audioSource.PlayOneShot(takeDamageSounds[randomIndex]);
         }
 
-        if (shield <= 0)
+        // If the player has shield
+        if (shield > 0)
         {
-            HP -= amount;
-            StartCoroutine(flashDamage());
-            updatePlayerUI();
-        }
-        else
-        {
+            // Reduce the shield by the damage amount
             shield -= amount;
 
-            // Play shield break sound and start beeping if the shield reaches 0
-            if (shield <= 0)
+            // Clamp shield to 0 if it goes negative
+            if (shield < 0)
+            {
+                shield = 0;
+            }
+
+            // Play shield break sound if shield reaches 0
+            if (shield == 0)
             {
                 if (shieldBreakSound != null)
                 {
@@ -469,20 +471,26 @@ public class playerController : MonoBehaviour, IDamage
 
                 if (shieldBeepSound != null && shieldBeepCoroutine == null)
                 {
-                    shieldBeepCoroutine = StartCoroutine(PlayShieldBeep()); // Start beeping
+                    shieldBeepCoroutine = StartCoroutine(PlayShieldBeep());
                 }
             }
-
+            updatePlayerUI();
             StartCoroutine(shieldDamage());
+        }
+        else
+        {
+            // If no shield, apply damage to health
+            HP -= amount;
+            StartCoroutine(flashDamage());
             updatePlayerUI();
         }
 
+        // Check if player has died
         if (HP <= 0)
         {
             StartCoroutine(HandleDeath());
         }
     }
-
 
 
     public void addHealth(int health)
@@ -596,7 +604,6 @@ public class playerController : MonoBehaviour, IDamage
                 grenade.stopHoldingGrenade();
             }
         }
-
     }
 
     private IEnumerator flashDamage()
@@ -642,6 +649,10 @@ public class playerController : MonoBehaviour, IDamage
 
     public void updatePlayerUI()
     {
+        if (shield < 0)
+        {
+            shield = 0;
+        }
         gameManager.instance.PlayerHPBar.fillAmount = (float)HP / HPOrig;
         gameManager.instance.playerHp = HPOrig - HP;
         gameManager.instance.playerShieldBar.fillAmount = (float)shield / shieldOrig;

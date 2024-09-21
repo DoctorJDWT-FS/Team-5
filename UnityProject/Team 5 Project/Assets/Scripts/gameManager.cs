@@ -138,10 +138,7 @@ public class gameManager : MonoBehaviour
 
     public void UpdateSheildCount()
     {
-        if (gameManager.instance.playerScript.shield != 0)
-        {
-            playerSheildText.text = gameManager.instance.playerScript.shield.ToString();
-        }
+        playerSheildText.text = gameManager.instance.playerScript.shield.ToString();
     }
 
     public void statePause()
