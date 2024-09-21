@@ -4,25 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Security.Cryptography;
+using UnityEditor;
 
 public class tutorialManager : MonoBehaviour
 {
 
     [SerializeField] TMP_Text currentMission;
     [SerializeField] buttonFunctions buttonFuncScript;
+    [SerializeField] PlayerSettings playerSettings;
 
-    List<string> objectives = new List<string>
-    {
-        "Press W,A,S,D to Move Around",
-        "Press Left Shift to Sprint",
-         "Press Left Control to Dash",
-         "Press Space to Jump",
-         "Press V to Punch",
-         "Click Left mouse to Shoot",
-         "Buy a health upgrade at the store",
-         "Open a Door"
-
-    };
+    List<string> objectives = new List<string>();
     int currentObjective;
     bool purcheseUpgrade = false;
     bool doorOpen = false;
@@ -34,6 +25,17 @@ public class tutorialManager : MonoBehaviour
     void Start()
     {
         buttonFuncScript = FindObjectOfType<buttonFunctions>();
+        playerSettings = FindObjectOfType<PlayerSettings>();
+        //grabs the script from the player settng and adust the button 
+        objectives.Add($"Press {playerSettings.moveForward}, {playerSettings.strafeLeft}, {playerSettings.moveBackward}, {playerSettings.strafeRight} to Move Around");
+        objectives.Add($"Press {playerSettings.sprint} to Sprint");
+        objectives.Add($"Press {playerSettings.dash} to Dash");
+        objectives.Add($"Press {playerSettings.jump} to Jump");
+        objectives.Add($"Press {playerSettings.punch} to Punch");
+        objectives.Add($"Press {playerSettings.grenade} to throw a grenade");
+        objectives.Add($"Click {playerSettings.shoot} to Shoot");
+        objectives.Add("Buy a health upgrade at the store");
+        objectives.Add("Open a Door");
         currentMission.text = objectives[currentObjective];
     }
 
@@ -61,12 +63,15 @@ public class tutorialManager : MonoBehaviour
                     MeleeMission();
                     break;
                 case 5:
-                    ShootMission();
+                    GrenadeMission();
                     break;
                 case 6:
-                    StoreMission();
+                    ShootMission();
                     break;
                 case 7:
+                    StoreMission();
+                    break;
+                case 8:
                     DoorMission();
                     break;
 
@@ -76,14 +81,14 @@ public class tutorialManager : MonoBehaviour
 
     void movementMission()
     {
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+        if (Input.GetKey(playerSettings.moveForward) || Input.GetKey(playerSettings.strafeLeft) || Input.GetKey(playerSettings.moveBackward) || Input.GetKey(playerSettings.strafeRight))
         {
             MissionComplete();
         }
     }
     void SprintMission()
     {
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(playerSettings.sprint))
         {
             MissionComplete();
         }
@@ -91,14 +96,14 @@ public class tutorialManager : MonoBehaviour
 
     void DashMission()
     {
-        if (Input.GetKey(KeyCode.LeftControl))
+        if (Input.GetKey(playerSettings.dash))
         {
             MissionComplete();
         }
     }
     void JumpMission()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(playerSettings.jump))
         {
             MissionComplete();
         }
@@ -106,14 +111,21 @@ public class tutorialManager : MonoBehaviour
 
     void MeleeMission()
     {
-        if (Input.GetKey(KeyCode.V))
+        if (Input.GetKey(playerSettings.punch))
+        {
+            MissionComplete();
+        }
+    }
+    void GrenadeMission()
+    {
+        if (Input.GetKey(playerSettings.grenade))
         {
             MissionComplete();
         }
     }
     void ShootMission()
     {
-        if (Input.GetKey(KeyCode.Mouse0))
+        if (Input.GetKey(playerSettings.shoot))
         {
             MissionComplete();
             storeMission = true;
