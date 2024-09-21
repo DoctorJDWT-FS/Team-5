@@ -72,6 +72,8 @@ public class buttonFunctions : MonoBehaviour
     }
     public void settings()
     {
+        Debug.Log("Settings");
+
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         if (currentSceneIndex == 0)
             startManager.instance.openSettingsMenu();
@@ -81,6 +83,8 @@ public class buttonFunctions : MonoBehaviour
 
     public void ChangeKeybindings()
     {
+        Debug.Log("Keybindings");
+
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         if (currentSceneIndex == 0)
             startManager.instance.ChangeKeybindings();
@@ -103,6 +107,10 @@ public class buttonFunctions : MonoBehaviour
                 startManager.instance.UpdateSliderValue(sliderVal);
             else
                 gameManager.instance.UpdateSliderValue(sliderVal);
+        }
+        else
+        {
+            Debug.LogWarning("mainSlider is not assigned.");
         }
     }
     public void healthUp()
@@ -150,6 +158,7 @@ public class buttonFunctions : MonoBehaviour
         {
             if (playerWallet.SpendCredits(100))
             {
+                Debug.Log("Rifle Bought");
                 z++;
                 shopInteractable.instance.oneTimeButtons[0].SetActive(false);
                 shopInteractable.instance.oneTimeButtons[3].SetActive(true);
@@ -157,6 +166,7 @@ public class buttonFunctions : MonoBehaviour
         }
         else
         {
+            Debug.Log("Already Bought");
             shopInteractable.instance.oneTimeButtons[0].SetActive(false);
             shopInteractable.instance.oneTimeButtons[3].SetActive(true);
         }
@@ -168,6 +178,8 @@ public class buttonFunctions : MonoBehaviour
         {
             if (playerWallet.SpendCredits(150))
             {
+
+                Debug.Log("Shotgun Bought");
                 x++;
                 shopInteractable.instance.oneTimeButtons[1].SetActive(false);
                 shopInteractable.instance.oneTimeButtons[4].SetActive(true);
@@ -175,6 +187,7 @@ public class buttonFunctions : MonoBehaviour
         }
         else
         {
+            Debug.Log("Already Bought");
             shopInteractable.instance.oneTimeButtons[1].SetActive(false);
             shopInteractable.instance.oneTimeButtons[4].SetActive(true);
         }
@@ -186,6 +199,7 @@ public class buttonFunctions : MonoBehaviour
         {
             if (playerWallet.SpendCredits(250))
             {
+                Debug.Log("Grenade Launcher Bought");
                 y++;
                 shopInteractable.instance.oneTimeButtons[2].SetActive(false);
                 shopInteractable.instance.oneTimeButtons[5].SetActive(true);
@@ -193,6 +207,7 @@ public class buttonFunctions : MonoBehaviour
         }
         else
         {
+            Debug.Log("Already Bought");
             shopInteractable.instance.oneTimeButtons[2].SetActive(false);
             shopInteractable.instance.oneTimeButtons[5].SetActive(true);
         }
@@ -202,14 +217,17 @@ public class buttonFunctions : MonoBehaviour
         if (kind == 1)
         {
             if (playerWallet.SpendCredits(100))
+                Debug.Log("Fire Grenade Bought");
         }
         else if (kind == 2)
         {
             if (playerWallet.SpendCredits(100))
+                Debug.Log("Ice Grenade Bought");
         }
         else
         {
             if (playerWallet.SpendCredits(100))
+                Debug.Log("EMP Grenade Bought");
         }
     }
     public void SpawnDrone()

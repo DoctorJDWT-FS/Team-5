@@ -97,6 +97,8 @@ public class Throwgrenade : MonoBehaviour
         }
 
         StartCoroutine(HandleExplosionAfterGrenadeDestruction(grenade));
+
+        Debug.Log(currentGrenadeStats.grenadeType + " Grenade Thrown");
     }
 
 
