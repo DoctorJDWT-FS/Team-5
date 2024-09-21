@@ -475,7 +475,6 @@ Transform:
   - {fileID: 4214081814783577008}
   - {fileID: 3224461059502763068}
   - {fileID: 183163971264035294}
-  - {fileID: 4447681654628922511}
   m_Father: {fileID: 2740542314560718107}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1806984898984713551
@@ -1378,9 +1377,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e112b3993e3e04e55b7b119f97e3ff37, type: 3}
   - {fileID: 8300000, guid: 1e6d76858bad34edb9eb15b988002366, type: 3}
   shieldBeepSound: {fileID: 8300000, guid: 99434f28794a22a4cb6e721918b7971d, type: 3}
-  handCollider: {fileID: 6357015570610349265}
-  punchDuration: 0.5
+  handCollider: {fileID: 1960815250515979521}
+  punchDuration: 1
   punchDamage: 50
+  punchCooldownTime: 1.5
+  shieldOverloadSound: {fileID: 8300000, guid: 9c948aea551b94d95a15c3334ba83cd8, type: 3}
   HP: 100
   shield: 50
   speed: 4
@@ -2250,61 +2251,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!1 &5327609960422223451
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4447681654628922511}
-  - component: {fileID: 6357015570610349265}
-  m_Layer: 0
-  m_Name: Punch
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4447681654628922511
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5327609960422223451}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.020216964, y: -0.0017030196, z: 0.69278514, w: 0.7208587}
-  m_LocalPosition: {x: -0.1529997, y: 0.01699998, z: -0.0050000027}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7784393553867742192}
-  m_LocalEulerAnglesHint: {x: -1.535, y: -1.747, z: 87.748}
---- !u!136 &6357015570610349265
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5327609960422223451}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.2
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5352951540265717493
 GameObject:
   m_ObjectHideFlags: 0
@@ -3289,6 +3235,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8626051309287249813}
+  - component: {fileID: 1960815250515979521}
   m_Layer: 0
   m_Name: Bip001
   m_TagString: Untagged
@@ -3312,6 +3259,29 @@ Transform:
   - {fileID: 7046022874355782506}
   m_Father: {fileID: 152374560567787465}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &1960815250515979521
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7053695011438531347}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Height: 2.2
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7204995407073527784
 GameObject:
   m_ObjectHideFlags: 0
