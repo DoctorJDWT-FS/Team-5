@@ -26,6 +26,8 @@ public class TriggerDoorController : MonoBehaviour
 
     [SerializeField] private GameObject[] disableList;
     [SerializeField] private GameObject[] enableList;
+    [SerializeField] protected AudioSource doorSounds;
+    [SerializeField] protected AudioClip openDoor;
 
     private void Awake()
     {
@@ -90,6 +92,8 @@ public class TriggerDoorController : MonoBehaviour
     private void OpenDoor()
     {
         playerWallet.SpendCredits(doorCost);
+        doorSounds.clip = openDoor;
+        doorSounds.Play();
         myDoor.Play(doorOpenAnimationName, 0, 0.0f); // Play the specified animation
         hasDoorOpened = true;
         costMessage.SetActive(false); // Hide the cost
