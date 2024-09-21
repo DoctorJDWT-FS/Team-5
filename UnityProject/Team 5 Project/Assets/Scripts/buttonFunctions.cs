@@ -12,11 +12,37 @@ public class buttonFunctions : MonoBehaviour
     public Slider mainSlider;
     private iWallet playerWallet;
     private int x = 0, y = 0, z = 0;
+    public Button[] upgradeTutorialButtons;
+    public Color disableButtonColor = Color.gray;
+    public Color enableButtonColor = Color.white;
 
 
     public void Start()
     {
         playerWallet = FindObjectOfType<iWallet>();
+        DisableButtons(upgradeTutorialButtons);
+
+    }
+
+    private void DisableButtons(Button[] buttonList)
+    {
+        foreach (Button button in buttonList)
+        {
+            button.interactable = false;
+            ColorBlock cb = button.colors;
+            cb.disabledColor = disableButtonColor;
+            button.colors = cb;
+        }
+    }
+    private void EnableButtons(Button[] buttonList)
+    {
+        foreach (Button button in buttonList)
+        {
+            button.interactable = true;
+            ColorBlock cb = button.colors;
+            cb.normalColor = enableButtonColor;
+            button.colors = cb;
+        }
     }
     public void StartButton()
     {
@@ -89,12 +115,27 @@ public class buttonFunctions : MonoBehaviour
     }
     public void healthUp()
     {
-        if (playerWallet.SpendCredits(50))
+        if (!FindObjectOfType<tutorialManager>().TutorialMode())
         {
-            FindObjectOfType<tutorialManager>().Upgradebrought();
-            gameManager.instance.playerScript.increaseMaxHealth(5);
+            if (playerWallet.SpendCredits(50))
+            {
+
+                gameManager.instance.playerScript.increaseMaxHealth(5);
+            }
+
         }
-        
+        else
+        {
+            if (FindObjectOfType<tutorialManager>().StoreMissionON())
+            {
+                if (playerWallet.SpendCredits(50))
+                {
+                    FindObjectOfType<tutorialManager>().Upgradebrought();
+                    gameManager.instance.playerScript.increaseMaxHealth(5);
+                }
+            }
+        }
+
     }
     public void shieldUp()
     {
@@ -104,14 +145,14 @@ public class buttonFunctions : MonoBehaviour
     public void ammoUp()
     {
         if (playerWallet.SpendCredits(25))
-        player.currentGun.magSize += 5;
+            player.currentGun.magSize += 5;
     }
     public void fireRateUp()
     {
         if (playerWallet.SpendCredits(25))
             player.currentGun.fireRate += player.currentGun.fireRateOrig / 50;
     }
-    public void buyRifle() 
+    public void buyRifle()
     {
         if (z == 0)
         {
@@ -131,7 +172,7 @@ public class buttonFunctions : MonoBehaviour
         }
     }
 
-    public void buyShotgun() 
+    public void buyShotgun()
     {
         if (x == 0)
         {
@@ -164,7 +205,8 @@ public class buttonFunctions : MonoBehaviour
                 shopInteractable.instance.oneTimeButtons[5].SetActive(true);
             }
         }
-        else { 
+        else
+        {
             Debug.Log("Already Bought");
             shopInteractable.instance.oneTimeButtons[2].SetActive(false);
             shopInteractable.instance.oneTimeButtons[5].SetActive(true);
@@ -174,8 +216,8 @@ public class buttonFunctions : MonoBehaviour
     {
         if (kind == 1)
         {
-            if(playerWallet.SpendCredits(100))
-               Debug.Log("Fire Grenade Bought");
+            if (playerWallet.SpendCredits(100))
+                Debug.Log("Fire Grenade Bought");
         }
         else if (kind == 2)
         {
@@ -246,5 +288,15 @@ public class buttonFunctions : MonoBehaviour
 #else
                     Application.Quit();
 #endif
+    }
+
+    //this fucntion will be called after the tutorial is done 
+    public void TutorialModeON()
+    {
+        DisableButtons(upgradeTutorialButtons);
+    }
+    public void TutorialDone()
+    {
+        EnableButtons(upgradeTutorialButtons);
     }
 }

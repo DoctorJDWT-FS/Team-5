@@ -9,6 +9,8 @@ public class tutorialManager : MonoBehaviour
 {
 
     [SerializeField] TMP_Text currentMission;
+    [SerializeField] buttonFunctions buttonFuncScript;
+
     List<string> objectives = new List<string>
     {
         "Press W,A,S,D to Move Around",
@@ -26,10 +28,12 @@ public class tutorialManager : MonoBehaviour
     bool doorOpen = false;
     bool inTutorialMode = true;
     bool doorMission = false;
+    bool storeMission = false;
     // Start is called before the first frame update
 
     void Start()
     {
+        buttonFuncScript = FindObjectOfType<buttonFunctions>();
         currentMission.text = objectives[currentObjective];
     }
 
@@ -72,7 +76,7 @@ public class tutorialManager : MonoBehaviour
 
     void movementMission()
     {
-        if (Input.GetKey(KeyCode.W)|| Input.GetKey(KeyCode.A)|| Input.GetKey(KeyCode.S)|| Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
         {
             MissionComplete();
         }
@@ -112,9 +116,10 @@ public class tutorialManager : MonoBehaviour
         if (Input.GetKey(KeyCode.Mouse0))
         {
             MissionComplete();
+            storeMission = true;
         }
     }
-    
+
     void StoreMission()
     {
         if (purcheseUpgrade)
@@ -138,12 +143,13 @@ public class tutorialManager : MonoBehaviour
 
         if (currentObjective < objectives.Count)
         {
-            currentMission.text = objectives[currentObjective];  
+            currentMission.text = objectives[currentObjective];
         }
         else
         {
             currentMission.text = "FIND AN EXIT";
             inTutorialMode = false;
+            buttonFuncScript.TutorialDone();
         }
 
     }
@@ -169,10 +175,14 @@ public class tutorialManager : MonoBehaviour
             doorOpen = true;
         }
     }
-    
+
     public bool DoorMissionON()
     {
         return doorMission;
+    }
+    public bool StoreMissionON()
+    {
+        return storeMission;
     }
     public bool TutorialMode()
     {
