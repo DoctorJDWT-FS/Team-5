@@ -63,7 +63,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77240dd222c59664dbb05e1490e8fcd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
+  type: 2
   medkit: {fileID: 0}
   shieldPack: {fileID: 0}
   ammoPack: {fileID: 11400000, guid: 0a3e56eff388c9a429f47dbbff503244, type: 2}
