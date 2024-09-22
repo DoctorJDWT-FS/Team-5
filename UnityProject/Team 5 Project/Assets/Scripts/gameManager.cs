@@ -33,6 +33,7 @@ public class gameManager : MonoBehaviour
     [Header("----- Player -----")]
     public playerController playerScript;
     public cameraController cameraScript;
+    public PlayerSettings playerSettings;
     public iWallet playerWallet;
 
     [Header("----- Reticle -----")]
@@ -55,6 +56,7 @@ public class gameManager : MonoBehaviour
     public Image PlayerHPBar;
     public Image playerShieldBar;
     public Image playerCreditCount;
+    public KBmManager KBmManager;
     public TMP_Text currentObjective;
 
     [Header("----- Grenades -----")]
