@@ -70,6 +70,7 @@ public class playerController : MonoBehaviour, IDamage
     bool isInvincible; // Flag for temporary invincibility
 
     public bool regenEnabled;
+    public bool infiniteAmmo;
     private bool isRegenerating;
 
     [Header("----- Dash and Slide State Variables -----")]

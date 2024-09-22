@@ -100,7 +100,10 @@ public class gun : MonoBehaviour
                 }
 
                 GameObject bulletInstance = Instantiate(bullet, muzzle.position, muzzle.rotation);
-                currentAmmo--;
+                if (!gameManager.instance.playerScript.infiniteAmmo)
+                {
+                    currentAmmo--;
+                }
                 timeSinceLastShot = 0;
                 onGunShot();
             }
