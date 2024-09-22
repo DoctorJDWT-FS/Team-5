@@ -32,6 +32,27 @@ public class PlayerSettings : MonoBehaviour
     public KeyCode punch = KeyCode.V; // Added punch key
     public KeyCode grenade = KeyCode.G; // Added grenade key
 
+    [SerializeField] TMP_Text sprintKeyText;
+    [SerializeField] TMP_Text slideKeyText;
+    [SerializeField] TMP_Text dashKeyText;
+    [SerializeField] TMP_Text jumpKeyText;
+    [SerializeField] TMP_Text moveForwardKeyText;
+    [SerializeField] TMP_Text moveBackwardKeyText;
+    [SerializeField] TMP_Text strafeLeftKeyText;
+    [SerializeField] TMP_Text strafeRightKeyText;
+    [SerializeField] TMP_Text enterKeyText;
+    [SerializeField] TMP_Text exitKeyText;
+    [SerializeField] TMP_Text upKeyText;
+    [SerializeField] TMP_Text downKeyText;
+    [SerializeField] TMP_Text leftKeyText;
+    [SerializeField] TMP_Text rightKeyText;
+    [SerializeField] TMP_Text shootKeyText;
+    [SerializeField] TMP_Text aimKeyText;
+    [SerializeField] TMP_Text reloadKeyText;
+    [SerializeField] TMP_Text interactKeyText;
+    [SerializeField] TMP_Text punchKeyText;
+    [SerializeField] TMP_Text grenadeKeyText;
+    [SerializeField] TMP_Text displayPlayerStatsKeyText;
 
 
     void Start()
@@ -66,5 +87,32 @@ public class PlayerSettings : MonoBehaviour
         displayPlayerStats = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("displayPlayerStats", displayPlayerStats.ToString())); // Load stat menu key
     }
 
+    public void SaveSettings()
+    {
+        // Save each setting to player preferences
+        PlayerPrefs.SetString("sprint", sprint.ToString());
+        PlayerPrefs.SetString("slide", slide.ToString());
+        PlayerPrefs.SetString("dash", dash.ToString());
+        PlayerPrefs.SetString("jump", jump.ToString());
+        PlayerPrefs.SetString("moveForward", moveForward.ToString());
+        PlayerPrefs.SetString("moveBackward", moveBackward.ToString());
+        PlayerPrefs.SetString("strafeLeft", strafeLeft.ToString());
+        PlayerPrefs.SetString("strafeRight", strafeRight.ToString());
+        PlayerPrefs.SetString("enter", enter.ToString());
+        PlayerPrefs.SetString("exit", exit.ToString());
+        PlayerPrefs.SetString("up", up.ToString());
+        PlayerPrefs.SetString("down", down.ToString());
+        PlayerPrefs.SetString("left", left.ToString());
+        PlayerPrefs.SetString("right", right.ToString());
+        PlayerPrefs.SetString("shoot", shoot.ToString());
+        PlayerPrefs.SetString("aim", aim.ToString());
+        PlayerPrefs.SetString("reload", reload.ToString());
+        PlayerPrefs.SetString("interact", interact.ToString());
+        PlayerPrefs.SetString("punch", punch.ToString()); // Save punch key
+        PlayerPrefs.SetString("grenade", grenade.ToString()); // Save grenade key
+        PlayerPrefs.SetString("displayPlayerStats", displayPlayerStats.ToString()); // save stat menu key
 
+        // Ensure the settings are saved
+        PlayerPrefs.Save();
+    }
 }

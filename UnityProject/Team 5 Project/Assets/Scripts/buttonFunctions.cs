@@ -83,11 +83,6 @@ public class buttonFunctions : MonoBehaviour
             gameManager.instance.openSettingsMenu();
     }
 
-    public void SaveKeybindings()
-    {
-        gameManager.instance.KBmManager.SaveKeys();
-    }
-
     public void ChangeKeybindings()
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
