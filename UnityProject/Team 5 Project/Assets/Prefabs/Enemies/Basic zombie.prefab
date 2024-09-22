@@ -1043,7 +1043,7 @@ MonoBehaviour:
   sprintSpeed: 4
   walkingSpeed: 1
   speedTrans: 15
-  hitDamage: 3
+  hitDamage: 5
   HitRate: 2
   leftCol: {fileID: 5451966792785552583}
   rightCol: {fileID: 2450126552486717956}

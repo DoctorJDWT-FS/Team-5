@@ -8,6 +8,7 @@ public class trapDoor : MonoBehaviour
     private Animator animator;
     private betterWaveSpawner waveSpawner;
     private GameObject waveManager;
+    private bool activated;
 
     private void Awake()
     {
@@ -21,8 +22,9 @@ public class trapDoor : MonoBehaviour
     // Start is called before the first frame update
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !activated)
         {
+            activated = true;
             GameObject[] zombies = GameObject.FindGameObjectsWithTag("Zombie");
             for (int i = 0; i < zombies.Length; i++)
             {

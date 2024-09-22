@@ -69,6 +69,9 @@ public class playerController : MonoBehaviour, IDamage
     public bool isDead; // Flag to check if player is dead
     bool isInvincible; // Flag for temporary invincibility
 
+    public bool regenEnabled;
+    private bool isRegenerating;
+
     [Header("----- Dash and Slide State Variables -----")]
     private bool canSlide = true; // Tracks if the player can slide
     private bool isSliding = false; // Tracks if the player is currently sliding
@@ -85,7 +88,6 @@ public class playerController : MonoBehaviour, IDamage
     public static Action shootInput; // Action event for shooting
     public static Action reloadInput; // Action event for reloading
     private bool canPunch = true;
-
     public gun currentGun; // Current gun equipped by the player
 
     void Start()
@@ -149,6 +151,10 @@ public class playerController : MonoBehaviour, IDamage
             UpdateDashTimer();
             HandlePunch();
             throwGrenade();
+            if (!isRegenerating && shield <= (shieldOrig - 5))
+            {
+                StartCoroutine(Regen(3, 5));
+            }
         }
         TriggerPull();
         currentGun = GetComponentInChildren<gun>();
@@ -632,6 +638,14 @@ public class playerController : MonoBehaviour, IDamage
 
         yield return new WaitForSeconds(4.0f);
         gameManager.instance.youLose();
+    }
+
+    IEnumerator Regen(int delay, int amount)
+    {
+        isRegenerating = true;
+        yield return new WaitForSeconds(delay);
+        addShield(amount);
+        isRegenerating = false;
     }
 
     //Play Footstep Sound

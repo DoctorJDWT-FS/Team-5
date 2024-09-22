@@ -26,7 +26,6 @@ public class difficultyManager : MonoBehaviour
     void Start()
     {
         countdown.SetActive(false);
-        Debug.Log("Disabled Countdown");
         waveManager.SetActive(false);
         double difficultyMod = 1 + ((difficulty - 1.0) * 0.5);
         waveSpawner.timeBetweenWaves = (int)(waveSpawner.timeBetweenWaves / difficultyMod);

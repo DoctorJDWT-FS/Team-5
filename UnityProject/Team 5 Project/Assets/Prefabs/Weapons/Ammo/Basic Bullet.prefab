@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   rb: {fileID: 898197619751296303}
-  damageAmount: 5
+  damageAmount: 2
   speed: 100
   destroyTime: 4
   bloodEffectvfx: {fileID: 1000013355911406, guid: d32aa916f50cac94db11e6f19821a58f, type: 3}
