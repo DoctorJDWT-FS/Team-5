@@ -6155,9 +6155,14 @@ MonoBehaviour:
   maxFireGrenades: 3
   maxIceGrenades: 3
   maxEMPGrenades: 3
-  fireGrenadeCount: 0
-  iceGrenadeCount: 0
-  empGrenadeCount: 0
+  currentGrenadeIndex: 0
+  grenadeTypes:
+  - Fire
+  - Ice
+  - EMP
+  fireGrenade: {fileID: 4064101626962670618}
+  iceGrenade: {fileID: 656261704958676650}
+  empGrenade: {fileID: 18810250087506614}
   invertY: 0
   isPaused: 0
   playerHp: 0
