@@ -384,7 +384,6 @@ GameObject:
   m_Component:
   - component: {fileID: 934803411536925638}
   - component: {fileID: 5060885626961324834}
-  - component: {fileID: 139383650102306100}
   - component: {fileID: 4696628300149530923}
   - component: {fileID: 4602773439888017239}
   m_Layer: 0
@@ -431,19 +430,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &139383650102306100
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 439098582214599969}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 861898d16e8e3f64a93557b2570e6678, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
 --- !u!114 &4696628300149530923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -458,7 +444,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   throwGrenadeScript: {fileID: 0}
-  powerupScript: {fileID: 0}
   mainSlider: {fileID: 0}
   upgradeTutorialButtons: []
   disableButtonColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
