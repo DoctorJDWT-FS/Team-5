@@ -9,7 +9,6 @@ public class buttonFunctions : MonoBehaviour
 {
     public playerController player;
     public Throwgrenade throwGrenadeScript;
-    public Powerups powerupScript;
     public Slider mainSlider;
     private iWallet playerWallet;
     private int x = 0, y = 0, z = 0;
@@ -203,7 +202,41 @@ public class buttonFunctions : MonoBehaviour
     {
         if (playerWallet.SpendCredits(100))
         {
-            //throwGrenadeScript.BuyGrenade(kind);
+            switch (kind)
+            {
+                case 1:
+                    if (gameManager.instance.curFireGrenades < gameManager.instance.maxFireGrenades)
+                    {
+                        gameManager.instance.curFireGrenades += 3;
+                        if (gameManager.instance.curFireGrenades > gameManager.instance.maxFireGrenades)
+                            gameManager.instance.curFireGrenades = gameManager.instance.maxFireGrenades;
+                    }
+                    break;
+
+                case 2:
+                    if (gameManager.instance.curIceGrenades < gameManager.instance.maxIceGrenades)
+                    {
+                        gameManager.instance.curIceGrenades += 3;
+                        if (gameManager.instance.curIceGrenades > gameManager.instance.maxIceGrenades)
+                            gameManager.instance.curIceGrenades = gameManager.instance.maxIceGrenades;
+                    }
+                    break;
+
+                case 3:
+                    if (gameManager.instance.curEMPGrenades < gameManager.instance.maxEMPGrenades)
+                    {
+                        gameManager.instance.curEMPGrenades += 3;
+                        if (gameManager.instance.curEMPGrenades > gameManager.instance.maxEMPGrenades)
+                            gameManager.instance.curEMPGrenades = gameManager.instance.maxEMPGrenades;
+                    }
+                    break;
+            }
+
+            gameManager.instance.UpdateGrenadeCountDisplay();
+        }
+        else
+        {
+            Debug.Log("Not enough credits to buy grenades.");
         }
     }
 
@@ -217,22 +250,7 @@ public class buttonFunctions : MonoBehaviour
             }
         }
     }
-    public void heavyPowerup()
-    {
-        powerupScript.ActivateHeavyPowerup();
-    }
-    public void forceFieldPowerup()
-    {
-
-    }
-    public void glassCannonPowerup()
-    {
-
-    }
-    public void tankPowerup()
-    {
-
-    }
+    
     public void exitShop()
     {
         shopInteractable.instance.shopInteraction(false);

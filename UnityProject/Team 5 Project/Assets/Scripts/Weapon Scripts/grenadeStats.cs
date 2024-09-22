@@ -21,9 +21,6 @@ public class grenadeStats : ScriptableObject
     public GameObject floorEffectStyle;
     public AudioClip explosionSound;
     public float explosionVolume;
-
-    public bool damagesPlayer;
-    public bool affectsEnemiesOnly;
     public grenadeStats Clone()
     {
         return new grenadeStats
@@ -40,9 +37,6 @@ public class grenadeStats : ScriptableObject
             floorEffectStyle = this.floorEffectStyle,
             explosionSound = this.explosionSound,
             explosionVolume = this.explosionVolume,
-
-            damagesPlayer = this.damagesPlayer,
-            affectsEnemiesOnly = this.affectsEnemiesOnly,
 };
     }
 

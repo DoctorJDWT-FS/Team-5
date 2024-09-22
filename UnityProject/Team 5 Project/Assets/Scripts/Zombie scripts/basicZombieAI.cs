@@ -48,6 +48,9 @@ public class basicZombieAI : MonoBehaviour, IDamage
     protected Color colorigin;
     protected Color coloriginHead;
     protected Animator myAnimator;
+    protected bool isStunned;
+    protected float originalSpeedWalking;
+    protected float originalSpeedSprinting;
 
     protected Vector3 playerDir;
 
@@ -62,6 +65,9 @@ public class basicZombieAI : MonoBehaviour, IDamage
         attackRangeTrigger.ExitTrigger += OnAttackRangeTriggerExit;
         visionRangeTrigger.EnteredTrigger += OnVisionRangeTriggerEnter;
         visionRangeTrigger.ExitTrigger += OnVisionRangeTriggerExit;
+
+        originalSpeedSprinting = sprintSpeed;
+        originalSpeedWalking = walkingSpeed;
 
         //sets  skin mesh for damage 
         colorigin = model.material.color;
@@ -228,6 +234,35 @@ public class basicZombieAI : MonoBehaviour, IDamage
         {
             playerInRange = false;
         }
+    }
+
+    // Grenade effects
+    public void applySlow(float slowAmount, float duration)
+    {
+        walkingSpeed /= slowAmount;
+        sprintSpeed /= slowAmount;
+        StartCoroutine(RemoveSlowAfterDuration(duration));
+    }
+    public void applyStun(float duration)
+    {
+        isStunned = true;
+        StartCoroutine(RemoveStunAfterDuration(duration));
+    }
+    private IEnumerator RemoveSlowAfterDuration(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        walkingSpeed = originalSpeedWalking;
+        sprintSpeed = originalSpeedSprinting;
+    }
+
+    private IEnumerator RemoveStunAfterDuration(float duration)
+    {
+        walkingSpeed = 0;
+        sprintSpeed = 0;
+        yield return new WaitForSeconds(duration);
+        isStunned = false;
+        walkingSpeed = originalSpeedWalking;
+        sprintSpeed = originalSpeedSprinting;
     }
 
     public virtual void resetTriggers()

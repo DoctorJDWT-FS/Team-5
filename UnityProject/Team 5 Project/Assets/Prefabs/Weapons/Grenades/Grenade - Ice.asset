@@ -13,14 +13,13 @@ MonoBehaviour:
   m_Name: Grenade - Ice
   m_EditorClassIdentifier: 
   grenadeType: 1
-  grenadeModel: {fileID: 6556270204824609090, guid: aaa0258c484cf8649a15c410a124aceb, type: 3}
-  explosionDamage: 50
+  grenadeModel: {fileID: 3591238353466249508, guid: f5a8decfd50f73349b2f7a397f975a01, type: 3}
+  explosionDamage: 10
   explosionRadius: 5
   throwForce: 10
+  floorEffect: 2
   effectDuration: 8
   explosionEffect: {fileID: 100008, guid: 1ae4db7b36e51124b89d2b32303a7a0b, type: 3}
-  floorEffect: {fileID: 1223526616464650, guid: c590b17884b119046bc6412066500b7d, type: 3}
-  explosionSound: {fileID: 0}
+  floorEffectStyle: {fileID: 1223526616464650, guid: c590b17884b119046bc6412066500b7d, type: 3}
+  explosionSound: {fileID: 8300000, guid: b8f229f149025ed44b861035512caaa5, type: 3}
   explosionVolume: 0.75
-  damagesPlayer: 1
-  affectsEnemiesOnly: 0

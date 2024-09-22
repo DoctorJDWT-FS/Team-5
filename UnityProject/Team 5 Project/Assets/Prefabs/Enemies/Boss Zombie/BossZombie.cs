@@ -13,6 +13,9 @@ public class BossZombieAI : MonoBehaviour, IDamage
     [SerializeField] private int maxHP = 300;
     [SerializeField] private float rageDuration = 15f;
     [SerializeField] private float rageMultiplier = 2f;
+    private float originalSpeedWalking;
+    private float originalSpeedSprinting;
+    private bool isStunned;
 
     // Attack settings for different attacks, including range, cooldowns, damage, and animation durations.
     [Header("--- Attack Settings ---")]
@@ -195,6 +198,35 @@ public class BossZombieAI : MonoBehaviour, IDamage
             voiceAudioSource.clip = entranceSound;
             voiceAudioSource.Play();
         }
+    }
+
+    // Grenade effects
+    public void applySlow(float slowAmount, float duration)
+    {
+        walkingSpeed /= slowAmount;
+        sprintSpeed /= slowAmount;
+        StartCoroutine(RemoveSlowAfterDuration(duration));
+    }
+    public void applyStun(float duration)
+    {
+        isStunned = true;
+        StartCoroutine(RemoveStunAfterDuration(duration));
+    }
+    private IEnumerator RemoveSlowAfterDuration(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        walkingSpeed = originalSpeedWalking;
+        sprintSpeed = originalSpeedSprinting;
+    }
+
+    private IEnumerator RemoveStunAfterDuration(float duration)
+    {
+        walkingSpeed = 0;
+        sprintSpeed = 0;
+        yield return new WaitForSeconds(duration);
+        isStunned = false;
+        walkingSpeed = originalSpeedWalking;
+        sprintSpeed = originalSpeedSprinting;
     }
 
     // Plays a random pain sound from the array if available.

@@ -154,16 +154,7 @@ public class playerController : MonoBehaviour, IDamage
         currentGun = GetComponentInChildren<gun>();
         UpdateWeaponType();
     }
-    public void heavySlow()
-    {
-        speed = originalSpeed / 2;
-        return;
-    }
-    public void heavyReturn()
-    {
-        speed = originalSpeed;
-        return;
-    }
+    
     // Method to handle player movement and jumping
     void movement()
     {
@@ -540,7 +531,10 @@ public class playerController : MonoBehaviour, IDamage
             yield return new WaitForSeconds(1f);
         }
     }
+    public void applySlow(float i, float b)
+    {
 
+    }
     public void addAmmo(int _Ammo, int _Mags)
     {
         if (currentGun.maxMagazines <= currentGun.currentMagazines + _Mags)

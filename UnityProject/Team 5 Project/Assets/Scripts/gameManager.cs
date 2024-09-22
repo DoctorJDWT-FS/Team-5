@@ -58,12 +58,14 @@ public class gameManager : MonoBehaviour
     public TMP_Text currentObjective;
 
     [Header("----- Grenades -----")]
-    public int maxFireGrenades = 3;
-    public int maxIceGrenades = 3;
-    public int maxEMPGrenades = 3;
+    public int maxFireGrenades = 9;
+    public int maxIceGrenades = 9;
+    public int maxEMPGrenades = 9;
 
-    public int currentGrenadeIndex = 0;
-    public string[] grenadeTypes = { "Fire", "Ice", "EMP" };
+    public int curFireGrenades = 0;
+    public int curIceGrenades = 0;
+    public int curEMPGrenades = 0;
+
     [SerializeField] public Image fireGrenade, iceGrenade, empGrenade;
 
 
@@ -264,10 +266,21 @@ public class gameManager : MonoBehaviour
             shopInteractable.instance.powerupItems.SetActive(true);
         }
     }
-    public void UpdateGrenadeCount(string grenadeType, int amount)
+
+    public void UpdateGrenadeImages(int currentGrenadeIndex)
     {
-        
+        fireGrenade.gameObject.SetActive(currentGrenadeIndex == 0);
+        iceGrenade.gameObject.SetActive(currentGrenadeIndex == 1);
+        empGrenade.gameObject.SetActive(currentGrenadeIndex == 2);
     }
+
+    public void UpdateGrenadeCountDisplay()
+    {
+        fireGrenade.transform.GetChild(0).GetComponent<TMP_Text>().text = curFireGrenades.ToString();
+        iceGrenade.transform.GetChild(0).GetComponent<TMP_Text>().text = curIceGrenades.ToString();
+        empGrenade.transform.GetChild(0).GetComponent<TMP_Text>().text = curEMPGrenades.ToString();
+    }
+
 
     public void SetDrone(helperBot bot)
     {

@@ -1470,7 +1470,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: oo
+  m_text: 00
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2261,7 +2261,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: oo
+  m_text: 00
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6152,14 +6152,12 @@ MonoBehaviour:
   playerShieldBar: {fileID: 7577441197721526432}
   playerCreditCount: {fileID: 0}
   currentObjective: {fileID: 2214299418831851610}
-  maxFireGrenades: 3
-  maxIceGrenades: 3
-  maxEMPGrenades: 3
-  currentGrenadeIndex: 0
-  grenadeTypes:
-  - Fire
-  - Ice
-  - EMP
+  maxFireGrenades: 9
+  maxIceGrenades: 9
+  maxEMPGrenades: 9
+  curFireGrenades: 0
+  curIceGrenades: 0
+  curEMPGrenades: 0
   fireGrenade: {fileID: 4064101626962670618}
   iceGrenade: {fileID: 656261704958676650}
   empGrenade: {fileID: 18810250087506614}
@@ -6182,7 +6180,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   throwGrenadeScript: {fileID: 0}
-  powerupScript: {fileID: 0}
   mainSlider: {fileID: 3992948687502168994}
   upgradeTutorialButtons: []
   disableButtonColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
@@ -6720,7 +6717,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -149.8, y: 132.2}
+  m_AnchoredPosition: {x: -147, y: 162}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &157209549536644705
@@ -6795,7 +6792,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 128.4, y: 10.3}
+  m_AnchoredPosition: {x: 156, y: -4}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6906569515760893500
@@ -6826,7 +6823,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: oo
+  m_text: 00
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

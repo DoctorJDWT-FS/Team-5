@@ -13,14 +13,13 @@ MonoBehaviour:
   m_Name: Grenade - Fire
   m_EditorClassIdentifier: 
   grenadeType: 0
-  grenadeModel: {fileID: 6556270204824609090, guid: c1432f3fbde1b8d4799e0c60716bef28, type: 3}
-  explosionDamage: 50
+  grenadeModel: {fileID: 8275998922597439019, guid: 95cfb9a904af36d4a97258487a71d93e, type: 3}
+  explosionDamage: 10
   explosionRadius: 5
   throwForce: 10
+  floorEffect: 2
   effectDuration: 8
   explosionEffect: {fileID: 100008, guid: 1ae4db7b36e51124b89d2b32303a7a0b, type: 3}
-  floorEffect: {fileID: 100002, guid: 34fd02ac9d79ecc48959596089be08ca, type: 3}
-  explosionSound: {fileID: 0}
+  floorEffectStyle: {fileID: 100002, guid: 34fd02ac9d79ecc48959596089be08ca, type: 3}
+  explosionSound: {fileID: 8300000, guid: 1fd31868d68903d4f9e2c4a3b7ef98f3, type: 3}
   explosionVolume: 0.75
-  damagesPlayer: 1
-  affectsEnemiesOnly: 0

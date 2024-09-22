@@ -9,6 +9,7 @@ public class Throwgrenade : MonoBehaviour
     [SerializeField] playerController playerScript;
     [SerializeField] cameraController cameraScript;
     [SerializeField] PlayerSettings playerSettings;
+    [SerializeField] basicZombieAI zombieScript;
 
     [Header("----- Grenade Items -----")]
     [SerializeField] Transform grenadeThrowPos;
@@ -49,15 +50,25 @@ public class Throwgrenade : MonoBehaviour
     {
         if (Input.GetKey(playerSettings.grenade))
         {
-            if (Input.GetAxis("Mouse ScrollWheel") > 0 && currentGrenadeIndex < grenadeStatTypes.Count - 1)
+            if (Input.GetAxis("Mouse ScrollWheel") > 0)
             {
-                currentGrenadeIndex = (currentGrenadeIndex + 1) % grenadeStatTypes.Count;
+                currentGrenadeIndex++;
+                if (currentGrenadeIndex >= grenadeStatTypes.Count)
+                {
+                    currentGrenadeIndex = 0;
+                }
                 currentGrenadeStats = grenadeStatTypes[currentGrenadeIndex];
+                gameManager.instance.UpdateGrenadeImages(currentGrenadeIndex);
             }
-            else if (Input.GetAxis("Mouse ScrollWheel") < 0 && currentGrenadeIndex > 0)
+            else if (Input.GetAxis("Mouse ScrollWheel") < 0)
             {
-                currentGrenadeIndex = (currentGrenadeIndex - 1 + grenadeStatTypes.Count) % grenadeStatTypes.Count;
+                currentGrenadeIndex--;
+                if (currentGrenadeIndex < 0)
+                {
+                    currentGrenadeIndex = grenadeStatTypes.Count - 1;
+                }
                 currentGrenadeStats = grenadeStatTypes[currentGrenadeIndex];
+                gameManager.instance.UpdateGrenadeImages(currentGrenadeIndex);
             }
 
             startHoldingGrenade(grenadeStatTypes[currentGrenadeIndex]);
@@ -105,6 +116,22 @@ public class Throwgrenade : MonoBehaviour
 
     public void throwGrenade()
     {
+        if (currentGrenadeStats.grenadeType == grenadeStats.GrenadeType.Fire && gameManager.instance.curFireGrenades <= 0)
+        {
+            Debug.Log("No Fire grenades available to throw!");
+            return;
+        }
+        else if (currentGrenadeStats.grenadeType == grenadeStats.GrenadeType.Ice && gameManager.instance.curIceGrenades <= 0)
+        {
+            Debug.Log("No Ice grenades available to throw!");
+            return;
+        }
+        else if (currentGrenadeStats.grenadeType == grenadeStats.GrenadeType.EMP && gameManager.instance.curEMPGrenades <= 0)
+        {
+            Debug.Log("No EMP grenades available to throw!");
+            return;
+        }
+
         grenadeStats grenadeToThrow = currentGrenadeStats.Clone();
         GameObject grenade = Instantiate(grenadeToThrow.grenadeModel, grenadeThrowPos.position, Quaternion.identity);
         Rigidbody grenadeRb = grenade.GetComponent<Rigidbody>();
@@ -117,8 +144,25 @@ public class Throwgrenade : MonoBehaviour
 
         StartCoroutine(HandleExplosionAfterGrenadeDestruction(grenade, grenadeToThrow));
 
+        switch (currentGrenadeIndex)
+        {
+            case 0:
+                gameManager.instance.curFireGrenades--;
+                gameManager.instance.UpdateGrenadeCountDisplay();
+                break;
+            case 1:
+                gameManager.instance.curIceGrenades--;
+                gameManager.instance.UpdateGrenadeCountDisplay();
+                break;
+            case 2:
+                gameManager.instance.curEMPGrenades--;
+                gameManager.instance.UpdateGrenadeCountDisplay();
+                break;
+        }
+
         Debug.Log(grenadeToThrow.grenadeType + " Grenade Thrown");
     }
+
 
     IEnumerator HandleExplosionAfterGrenadeDestruction(GameObject grenade, grenadeStats grenadeStats)
     {
@@ -150,9 +194,19 @@ public class Throwgrenade : MonoBehaviour
 
         GameObject floorEffect = Instantiate(grenadeStats.floorEffectStyle, explosionPosition, Quaternion.identity);
 
-        if (grenadeStats.grenadeType == grenadeStats.GrenadeType.Fire) 
+        switch (currentGrenadeIndex)
         {
-            DealDamageOverTime(explosionPosition, grenadeStats.effectDuration, grenadeStats.floorEffect);
+            case 0:
+                DealDamageOverTime(explosionPosition, grenadeStats.effectDuration, currentGrenadeStats.floorEffect);
+                break;
+
+            case 1:
+                ApplySlowEffect(explosionPosition, grenadeStats.effectDuration, currentGrenadeStats.floorEffect);
+                break;
+
+            case 2:
+                ApplyStunEffect(explosionPosition, grenadeStats.effectDuration);
+                break;
         }
 
         Destroy(floorEffect, grenadeStats.effectDuration);
@@ -179,6 +233,42 @@ public class Throwgrenade : MonoBehaviour
                 }
             }
             yield return new WaitForSeconds(1f);
+        }
+    }
+
+    private void ApplySlowEffect(Vector3 position, float duration, float slowAmount)
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(position, currentGrenadeStats.explosionRadius);
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider.CompareTag("Player"))
+            {
+                playerScript.applySlow(slowAmount, duration); 
+            }
+            else if (hitCollider.CompareTag("Zombie"))
+            {
+                var enemy = hitCollider.GetComponent<basicZombieAI>();
+                if (enemy != null)
+                {
+                    enemy.applySlow(slowAmount, duration);
+                }
+            }
+        }
+    }
+
+    private void ApplyStunEffect(Vector3 position, float duration)
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(position, currentGrenadeStats.explosionRadius);
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider.CompareTag("Zombie"))
+            {
+                var enemy = hitCollider.GetComponent<basicZombieAI>();
+                if (enemy != null)
+                {
+                    enemy.applyStun(duration);
+                }
+            }
         }
     }
 }
