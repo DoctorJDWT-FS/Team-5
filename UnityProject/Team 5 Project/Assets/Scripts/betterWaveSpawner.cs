@@ -19,7 +19,7 @@ public class betterWaveSpawner : MonoBehaviour
     [SerializeField] GameObject waveCountdown;
 
     private GameObject[] spawnPoints;
-    private bool isSpawning;
+    public bool isSpawning;
     private bool isCounting;
     private float currentTime;
     private int[] assignedWeights;
