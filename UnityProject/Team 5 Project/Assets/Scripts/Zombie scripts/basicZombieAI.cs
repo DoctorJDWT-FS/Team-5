@@ -48,7 +48,7 @@ public class basicZombieAI : MonoBehaviour, IDamage
     protected Color colorigin;
     protected Color coloriginHead;
     protected Animator myAnimator;
-    protected bool isStunned;
+    protected bool isStunned = false;
     protected float originalSpeedWalking;
     protected float originalSpeedSprinting;
 
@@ -82,26 +82,17 @@ public class basicZombieAI : MonoBehaviour, IDamage
     protected virtual void Update()
     {
         //if player is close, they will run else walk 
-        if (!isDead)
+        if (!isDead && !isStunned)  // Check if not stunned before allowing movement
         {
             agent.speed = playerInRange ? sprintSpeed : walkingSpeed;
-            //get agent speed
             float agentSpeed = agent.velocity.magnitude;
-            //lerp from one animation to the next
             myAnimator.SetFloat("Speed", Mathf.Lerp(myAnimator.GetFloat("Speed"), agentSpeed, Time.deltaTime * speedTrans));
-            //zombie will always be chasing player at different speed 
             agent.SetDestination(gameManager.instance.player.transform.position);
 
             if (playerInRange && isAttacking)
             {
-
                 facePlayer();
-
             }
-        }
-        else
-        {
-            
         }
 
     }
@@ -161,6 +152,7 @@ public class basicZombieAI : MonoBehaviour, IDamage
 
     protected IEnumerator StunnedState()
     {
+
         float tempSprintSpeed = sprintSpeed;
         float tempWalkingSpeed = walkingSpeed;
         float tempSpeedTrans = speedTrans;

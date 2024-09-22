@@ -11,7 +11,7 @@ public class HeadShot : MonoBehaviour, IDamage
     
     public void takeDamage(int damage)
     {
-        Debug.Log("Head-Shot!");
+       // Debug.Log("Head-Shot!");
         parent.takeDamage(damage*2);
        
     }

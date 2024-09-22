@@ -118,17 +118,17 @@ public class Throwgrenade : MonoBehaviour
     {
         if (currentGrenadeStats.grenadeType == grenadeStats.GrenadeType.Fire && gameManager.instance.curFireGrenades <= 0)
         {
-            Debug.Log("No Fire grenades available to throw!");
+            //Debug.Log("No Fire grenades available to throw!");
             return;
         }
         else if (currentGrenadeStats.grenadeType == grenadeStats.GrenadeType.Ice && gameManager.instance.curIceGrenades <= 0)
         {
-            Debug.Log("No Ice grenades available to throw!");
+           // Debug.Log("No Ice grenades available to throw!");
             return;
         }
         else if (currentGrenadeStats.grenadeType == grenadeStats.GrenadeType.EMP && gameManager.instance.curEMPGrenades <= 0)
         {
-            Debug.Log("No EMP grenades available to throw!");
+            //Debug.Log("No EMP grenades available to throw!");
             return;
         }
 
@@ -160,7 +160,7 @@ public class Throwgrenade : MonoBehaviour
                 break;
         }
 
-        Debug.Log(grenadeToThrow.grenadeType + " Grenade Thrown");
+        //Debug.Log(grenadeToThrow.grenadeType + " Grenade Thrown");
     }
 
 

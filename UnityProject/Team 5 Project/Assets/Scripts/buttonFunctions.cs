@@ -23,6 +23,7 @@ public class buttonFunctions : MonoBehaviour
         DisableButtons(upgradeTutorialButtons);
 
     }
+    
 
     private void DisableButtons(Button[] buttonList)
     {
@@ -116,6 +117,7 @@ public class buttonFunctions : MonoBehaviour
             {
 
                 gameManager.instance.playerScript.increaseMaxHealth(5);
+                TutorialDone();
             }
 
         }
@@ -126,6 +128,7 @@ public class buttonFunctions : MonoBehaviour
                 if (playerWallet.SpendCredits(50))
                 {
                     FindObjectOfType<tutorialManager>().Upgradebrought();
+                    EnableButtons(upgradeTutorialButtons);
                     gameManager.instance.playerScript.increaseMaxHealth(5);
                 }
             }

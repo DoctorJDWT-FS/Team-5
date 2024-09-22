@@ -37,7 +37,7 @@ public class grenadeStats : ScriptableObject
             floorEffectStyle = this.floorEffectStyle,
             explosionSound = this.explosionSound,
             explosionVolume = this.explosionVolume,
-};
+         };
     }
 
 }

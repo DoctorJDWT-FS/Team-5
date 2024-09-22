@@ -82,7 +82,7 @@ public class WeaponHolster : MonoBehaviour
 
         timeSinceLastSwitch = 0f;
 
-        OnWeaponSelected();
+       // OnWeaponSelected();
     }
 
     private void OnWeaponSelected()

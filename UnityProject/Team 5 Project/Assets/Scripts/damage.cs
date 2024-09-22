@@ -12,7 +12,7 @@ public class damage : MonoBehaviour
     [SerializeField] int speed;
     [SerializeField] int destroyTime;
 
-    [SerializeField] GameObject bloodEffectvfx; 
+    [SerializeField] GameObject bloodEffectvfx = null; 
     [Range(0, 1)][SerializeField] float bleedChance = 0.5f;
 
 
@@ -46,7 +46,7 @@ public class damage : MonoBehaviour
 
         IDamage dmg = other.GetComponent<IDamage>();
 
-        if (dmg != null && other.CompareTag("Zombie"))
+        if (dmg != null && other.CompareTag("Zombie") && type == damageType.bullet || type == damageType.DroneBullet)
         {
             dmg.takeDamage(damageAmount);
             if (Random.value <= bleedChance)
@@ -56,9 +56,18 @@ public class damage : MonoBehaviour
                 GameObject bloodEffect = Instantiate(bloodEffectvfx, hitPoint, Quaternion.identity);
                 //attaches to body of zombie
                 bloodEffect.transform.SetParent(other.transform);
-                Destroy(bloodEffect, 0.5f); 
+                Destroy(bloodEffect, 0.5f);
             }
         }
-        Destroy(gameObject);
+        else
+        {
+            if (dmg != null)
+            {
+                dmg.takeDamage(damageAmount);
+
+            }
+        }
+            Destroy(gameObject);
+
     }
 }

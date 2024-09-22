@@ -73,7 +73,7 @@ public class gun : MonoBehaviour
         }
         else
         {
-            Debug.Log("No magazines left!");
+            
         }
 
         reloading = false;
@@ -83,8 +83,7 @@ public class gun : MonoBehaviour
 
     public void Shoot()
     {
-        Debug.Log("Shot Gun!");
-        Debug.Log("Current Ammo Before: " + currentAmmo);
+        
 
         if (currentAmmo > 0)
         {
@@ -92,11 +91,11 @@ public class gun : MonoBehaviour
             {
                 if (Physics.Raycast(muzzle.position, muzzle.forward, out RaycastHit hitInfo, maxDistance))
                 {
-                    Debug.Log(hitInfo.transform.name);
+                    
                 }
                 else
                 {
-                    Debug.Log("No hit detected");
+                    
                 }
 
                 GameObject bulletInstance = Instantiate(bullet, muzzle.position, muzzle.rotation);
@@ -110,7 +109,7 @@ public class gun : MonoBehaviour
         }
         else
         {
-            Debug.Log("Out of ammo, reload needed.");
+           
         }
     }
 
@@ -135,7 +134,7 @@ public class gun : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Audio source or clip is not assigned.");
+            
         }
     }
 

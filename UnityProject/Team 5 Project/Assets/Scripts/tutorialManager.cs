@@ -27,7 +27,7 @@ public class tutorialManager : MonoBehaviour
 
     void Start()
     {
-        buttonFuncScript = FindObjectOfType<buttonFunctions>();
+        
         playerSettings = FindObjectOfType<PlayerSettings>();
         //grabs the script from the player settng and adust the button 
         objectives.Add($"Press {playerSettings.moveForward}, {playerSettings.strafeLeft}, {playerSettings.moveBackward}, {playerSettings.strafeRight} to Move Around");
@@ -117,6 +117,7 @@ public class tutorialManager : MonoBehaviour
         if (Input.GetKey(playerSettings.punch))
         {
             MissionComplete();
+            gameManager.instance.curFireGrenades = gameManager.instance.maxFireGrenades;
         }
     }
     void GrenadeMission()
@@ -165,7 +166,7 @@ public class tutorialManager : MonoBehaviour
         {
             currentMission.text = "FIND AN EXIT";
             inTutorialMode = false;
-            buttonFuncScript.TutorialDone();
+            
         }
 
     }
