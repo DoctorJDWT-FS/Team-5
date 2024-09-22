@@ -632,63 +632,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1985423686793296104}
   m_Enabled: 1
---- !u!1 &2068889140946742336
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6331144477083645728}
-  - component: {fileID: 538552108427565001}
-  m_Layer: 0
-  m_Name: EMP
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6331144477083645728
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2068889140946742336}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4423697698445456523}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &538552108427565001
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2068889140946742336}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36902decae3e78e4ca7eb5c2d57505a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerScript: {fileID: 2823294014843151721}
-  cameraScript: {fileID: 8077685216331894476}
-  grenadeThrowPos: {fileID: 2166709927435974102}
-  currentGrenadeStats: {fileID: 11400000, guid: 5b0bc351fa3f62d45b229c0d7902be29, type: 2}
-  grenadeLandingPrefab: {fileID: 8607466623545022079, guid: 94266c336f26fee4aa5cb161ffcd3fcf, type: 3}
-  destroyTime: 3
-  minThrowAngle: -0.3
-  minDistanceFromPlayer: 2.75
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 1
-  damageInterval: 0.5
-  damagePerInterval: 5
 --- !u!1 &2087157172225645421
 GameObject:
   m_ObjectHideFlags: 0
@@ -1385,7 +1328,7 @@ MonoBehaviour:
   audioSource: {fileID: 1010188559744870041}
   myAnimator: {fileID: 2353229144212733786}
   playerSettings: {fileID: 2080928529483966168}
-  grenade: {fileID: 4699635609645507981}
+  grenade: {fileID: 0}
   shieldBreakSound: {fileID: 8300000, guid: 9f9ec736ec0154c9b8b210d69cfc496e, type: 3}
   shieldChargedSound: {fileID: 0}
   takeDamageSounds:
@@ -1978,63 +1921,6 @@ Transform:
   - {fileID: 7143619858287347144}
   m_Father: {fileID: 5083045487205004147}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &4791805267879460152
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1575386071313068112}
-  - component: {fileID: 4699635609645507981}
-  m_Layer: 0
-  m_Name: Fire
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1575386071313068112
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4791805267879460152}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4423697698445456523}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4699635609645507981
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4791805267879460152}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36902decae3e78e4ca7eb5c2d57505a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerScript: {fileID: 2823294014843151721}
-  cameraScript: {fileID: 8077685216331894476}
-  grenadeThrowPos: {fileID: 2166709927435974102}
-  currentGrenadeStats: {fileID: 11400000, guid: 671b99a26e7fe254197b407a8cd8de54, type: 2}
-  grenadeLandingPrefab: {fileID: 5239025729904925024}
-  destroyTime: 3
-  minThrowAngle: -0.3
-  minDistanceFromPlayer: 2.75
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 1
-  damageInterval: 0.5
-  damagePerInterval: 5
 --- !u!1 &4846398598160681904
 GameObject:
   m_ObjectHideFlags: 0
@@ -2220,13 +2106,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5265166540250356256}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.34707522, y: -0.6160671, z: -0.6160672, w: 0.34707534}
-  m_LocalPosition: {x: 6.5352545, y: 0.91934776, z: -18.690186}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.256, y: 0.152, z: -0.145}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4423697698445456523}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &4647465715578780484
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2270,7 +2156,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.15, y: 0.15}
   m_EdgeRadius: 0
 --- !u!1 &5352951540265717493
 GameObject:
@@ -3361,15 +3247,13 @@ Transform:
   m_GameObject: {fileID: 7726738060357367053}
   serializedVersion: 2
   m_LocalRotation: {x: -0.19020611, y: 0.6810446, z: 0.6810446, w: -0.19020611}
-  m_LocalPosition: {x: -3.8249006, y: 19.322737, z: -0.7423458}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2166709927435974102}
   - {fileID: 5422004860618420974}
   - {fileID: 6075231670621418962}
-  - {fileID: 1575386071313068112}
-  - {fileID: 6331144477083645728}
   m_Father: {fileID: 4810343652495511113}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7810333383140173934
@@ -3994,7 +3878,7 @@ GameObject:
   - component: {fileID: 6075231670621418962}
   - component: {fileID: 1939051040844311671}
   m_Layer: 0
-  m_Name: Ice
+  m_Name: GrenadeTypes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4030,16 +3914,17 @@ MonoBehaviour:
   playerScript: {fileID: 2823294014843151721}
   cameraScript: {fileID: 8077685216331894476}
   grenadeThrowPos: {fileID: 2166709927435974102}
-  currentGrenadeStats: {fileID: 11400000, guid: 8479616f824dee0498828785077976c0, type: 2}
+  currentGrenadeStats: {fileID: 0}
   grenadeLandingPrefab: {fileID: 5239025729904925024}
+  fireGrenadeStats: {fileID: 11400000, guid: 671b99a26e7fe254197b407a8cd8de54, type: 2}
+  iceGrenadeStats: {fileID: 11400000, guid: 8479616f824dee0498828785077976c0, type: 2}
+  empGrenadeStats: {fileID: 11400000, guid: 5b0bc351fa3f62d45b229c0d7902be29, type: 2}
   destroyTime: 3
   minThrowAngle: -0.3
   minDistanceFromPlayer: 2.75
   groundMask:
     serializedVersion: 2
     m_Bits: 1
-  damageInterval: 0.5
-  damagePerInterval: 5
 --- !u!1 &8856726918747861806
 GameObject:
   m_ObjectHideFlags: 0

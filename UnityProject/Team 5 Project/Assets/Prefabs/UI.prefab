@@ -5714,7 +5714,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3551209361444932613
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6152,6 +6152,12 @@ MonoBehaviour:
   playerShieldBar: {fileID: 7577441197721526432}
   playerCreditCount: {fileID: 0}
   currentObjective: {fileID: 2214299418831851610}
+  maxFireGrenades: 3
+  maxIceGrenades: 3
+  maxEMPGrenades: 3
+  fireGrenadeCount: 0
+  iceGrenadeCount: 0
+  empGrenadeCount: 0
   invertY: 0
   isPaused: 0
   playerHp: 0
@@ -6170,6 +6176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  throwGrenadeScript: {fileID: 0}
   powerupScript: {fileID: 0}
   mainSlider: {fileID: 3992948687502168994}
   upgradeTutorialButtons: []

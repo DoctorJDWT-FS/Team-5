@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class buttonFunctions : MonoBehaviour
 {
     public playerController player;
+    public Throwgrenade throwGrenadeScript;
     public Powerups powerupScript;
     public Slider mainSlider;
     private iWallet playerWallet;
@@ -200,22 +201,12 @@ public class buttonFunctions : MonoBehaviour
     }
     public void buyGrenade(int kind)
     {
-        if (kind == 1)
+        if (playerWallet.SpendCredits(100))
         {
-            if (playerWallet.SpendCredits(100))
-                Debug.Log("Fire Grenade Bought");
-        }
-        else if (kind == 2)
-        {
-            if (playerWallet.SpendCredits(100))
-                Debug.Log("Ice Grenade Bought");
-        }
-        else
-        {
-            if (playerWallet.SpendCredits(100))
-                Debug.Log("EMP Grenade Bought");
+            //throwGrenadeScript.BuyGrenade(kind);
         }
     }
+
     public void SpawnDrone()
     {
         if (gameManager.instance.Drone == null)

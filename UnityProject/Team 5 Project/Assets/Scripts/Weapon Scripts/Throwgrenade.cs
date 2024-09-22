@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Throwgrenade : MonoBehaviour
@@ -6,10 +8,13 @@ public class Throwgrenade : MonoBehaviour
     [Header("----- Scripts -----")]
     [SerializeField] playerController playerScript;
     [SerializeField] cameraController cameraScript;
+    [SerializeField] PlayerSettings playerSettings;
 
     [Header("----- Grenade Items -----")]
     [SerializeField] Transform grenadeThrowPos;
-    [SerializeField] grenadeStats currentGrenadeStats;
+    [SerializeField] public grenadeStats currentGrenadeStats;
+    [SerializeField] public List<grenadeStats> grenadeStatTypes = new List<grenadeStats>();
+    public int currentGrenadeIndex = 0;
     [SerializeField] GameObject grenadeLandingPrefab;
 
     [Header("----- Settings -----")]
@@ -17,8 +22,6 @@ public class Throwgrenade : MonoBehaviour
     [SerializeField] float minThrowAngle = -0.3f;
     [SerializeField] float minDistanceFromPlayer = 2.75f;
     [SerializeField] LayerMask groundMask;
-    [SerializeField] float damageInterval = 0.5f;
-    [SerializeField] int damagePerInterval = 5;
 
     private GameObject grenadeLanding;
     private bool isHoldingGrenade;
@@ -27,23 +30,39 @@ public class Throwgrenade : MonoBehaviour
     {
         grenadeLanding = Instantiate(grenadeLandingPrefab);
         grenadeLanding.SetActive(false);
-    }
 
-    public void startHoldingGrenade()
+        currentGrenadeStats = grenadeStatTypes[currentGrenadeIndex];
+    }
+    public void startHoldingGrenade(grenadeStats grenadeType)
     {
         isHoldingGrenade = true;
         grenadeLanding.SetActive(true);
+        currentGrenadeStats = grenadeType;
     }
-
     public void stopHoldingGrenade()
     {
         isHoldingGrenade = false;
         grenadeLanding.SetActive(false);
         throwGrenade();
     }
-
     private void Update()
     {
+        if (Input.GetKey(playerSettings.grenade))
+        {
+            if (Input.GetAxis("Mouse ScrollWheel") > 0 && currentGrenadeIndex < grenadeStatTypes.Count - 1)
+            {
+                currentGrenadeIndex = (currentGrenadeIndex + 1) % grenadeStatTypes.Count;
+                currentGrenadeStats = grenadeStatTypes[currentGrenadeIndex];
+            }
+            else if (Input.GetAxis("Mouse ScrollWheel") < 0 && currentGrenadeIndex > 0)
+            {
+                currentGrenadeIndex = (currentGrenadeIndex - 1 + grenadeStatTypes.Count) % grenadeStatTypes.Count;
+                currentGrenadeStats = grenadeStatTypes[currentGrenadeIndex];
+            }
+
+            startHoldingGrenade(grenadeStatTypes[currentGrenadeIndex]);
+        }
+
         if (isHoldingGrenade)
         {
             updateGrenadeLandingPos();
@@ -86,78 +105,80 @@ public class Throwgrenade : MonoBehaviour
 
     public void throwGrenade()
     {
-        GameObject grenade = Instantiate(currentGrenadeStats.grenadeModel, grenadeThrowPos.position, Quaternion.identity);
+        grenadeStats grenadeToThrow = currentGrenadeStats.Clone();
+        GameObject grenade = Instantiate(grenadeToThrow.grenadeModel, grenadeThrowPos.position, Quaternion.identity);
         Rigidbody grenadeRb = grenade.GetComponent<Rigidbody>();
 
         if (grenadeRb != null)
         {
             Vector3 throwDirection = cameraScript.transform.forward;
-
-            grenadeRb.AddForce(throwDirection * currentGrenadeStats.throwForce, ForceMode.VelocityChange);
+            grenadeRb.AddForce(throwDirection * grenadeToThrow.throwForce, ForceMode.VelocityChange);
         }
 
-        StartCoroutine(HandleExplosionAfterGrenadeDestruction(grenade));
+        StartCoroutine(HandleExplosionAfterGrenadeDestruction(grenade, grenadeToThrow));
 
-        Debug.Log(currentGrenadeStats.grenadeType + " Grenade Thrown");
+        Debug.Log(grenadeToThrow.grenadeType + " Grenade Thrown");
     }
 
-
-    IEnumerator HandleExplosionAfterGrenadeDestruction(GameObject grenade)
+    IEnumerator HandleExplosionAfterGrenadeDestruction(GameObject grenade, grenadeStats grenadeStats)
     {
         yield return new WaitForSeconds(destroyTime);
         Vector3 explosionPosition = grenade.transform.position;
 
         Destroy(grenade);
 
-        GameObject explosion = Instantiate(currentGrenadeStats.explosionEffect, explosionPosition, Quaternion.identity);
+        GameObject explosion = Instantiate(grenadeStats.explosionEffect, explosionPosition, Quaternion.identity);
 
-        if (currentGrenadeStats.explosionSound != null)
+        if (grenadeStats.explosionSound != null)
         {
-            AudioSource.PlayClipAtPoint(currentGrenadeStats.explosionSound, explosionPosition, currentGrenadeStats.explosionVolume);
+            AudioSource.PlayClipAtPoint(grenadeStats.explosionSound, explosionPosition, grenadeStats.explosionVolume);
         }
 
-        Collider[] hitColliders = Physics.OverlapSphere(explosionPosition, currentGrenadeStats.explosionRadius);
+        Collider[] hitColliders = Physics.OverlapSphere(explosionPosition, grenadeStats.explosionRadius);
         foreach (var hitCollider in hitColliders)
         {
             IDamage target = hitCollider.GetComponent<IDamage>();
             if (target != null)
             {
-                target.takeDamage((int)currentGrenadeStats.explosionDamage);
+                target.takeDamage((int)grenadeStats.explosionDamage);
             }
         }
 
         Destroy(explosion, 2f);
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(.5f);
 
-        GameObject floorEffect = Instantiate(currentGrenadeStats.floorEffect, explosionPosition, Quaternion.identity);
+        GameObject floorEffect = Instantiate(grenadeStats.floorEffectStyle, explosionPosition, Quaternion.identity);
 
-        BoxCollider boxCollider = floorEffect.GetComponent<BoxCollider>();
-        if (boxCollider != null)
+        if (grenadeStats.grenadeType == grenadeStats.GrenadeType.Fire) 
         {
-            boxCollider.enabled = true;
-            StartCoroutine(HandleTriggerDamage(boxCollider));
+            DealDamageOverTime(explosionPosition, grenadeStats.effectDuration, grenadeStats.floorEffect);
         }
 
-        Destroy(floorEffect, currentGrenadeStats.effectDuration);
+        Destroy(floorEffect, grenadeStats.effectDuration);
     }
 
-    IEnumerator HandleTriggerDamage(BoxCollider boxCollider)
+    private void DealDamageOverTime(Vector3 position, float duration, float damagePerSecond)
     {
-        float elapsedTime = 0;
-        while (elapsedTime < currentGrenadeStats.effectDuration)
+        StartCoroutine(DamageCoroutine(position, duration, damagePerSecond));
+    }
+
+    private IEnumerator DamageCoroutine(Vector3 position, float duration, float damagePerSecond)
+    {
+        float endTime = Time.time + duration;
+
+        while (Time.time < endTime)
         {
-            Collider[] hitColliders = Physics.OverlapBox(boxCollider.bounds.center, boxCollider.bounds.extents, boxCollider.transform.rotation);
+            Collider[] hitColliders = Physics.OverlapSphere(position, 1f);
             foreach (var hitCollider in hitColliders)
             {
                 IDamage target = hitCollider.GetComponent<IDamage>();
                 if (target != null)
                 {
-                    target.takeDamage(damagePerInterval);
+                    target.takeDamage((int)damagePerSecond);
                 }
             }
-            elapsedTime += damageInterval;
-            yield return new WaitForSeconds(damageInterval);
+            yield return new WaitForSeconds(1f);
         }
     }
 }

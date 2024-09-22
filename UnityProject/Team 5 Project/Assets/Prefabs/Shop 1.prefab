@@ -154,7 +154,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &173222982970313734
 RectTransform:
   m_ObjectHideFlags: 0
@@ -457,6 +457,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  throwGrenadeScript: {fileID: 0}
   powerupScript: {fileID: 0}
   mainSlider: {fileID: 0}
   upgradeTutorialButtons: []
@@ -474,12 +475,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b438e9115961c8479fdbe9dea237d37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interact: {fileID: 0}
-  shopCanvas: {fileID: 0}
+  interact: {fileID: 4070050429185616085}
+  shopCanvas: {fileID: 4542145028160972857}
   UIComplete: {fileID: 0}
-  upgradeItems: {fileID: 0}
-  weaponItems: {fileID: 0}
-  powerupItems: {fileID: 0}
+  upgradeItems: {fileID: 8909031972393588999}
+  weaponItems: {fileID: 4147318444204829431}
+  powerupItems: {fileID: 791106607072696179}
   oneTimeButtons:
   - {fileID: 7264446333531125644}
   - {fileID: 7469135173674836136}
@@ -4070,7 +4071,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2077721497034097450
 RectTransform:
   m_ObjectHideFlags: 0

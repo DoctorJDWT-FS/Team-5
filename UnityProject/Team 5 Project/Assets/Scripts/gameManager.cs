@@ -29,8 +29,6 @@ public class gameManager : MonoBehaviour
     [SerializeField] TMP_Text playerHealthText;
     [SerializeField] TMP_Text playerSheildText;
 
-
-
     //player info
     [Header("----- Player -----")]
     public playerController playerScript;
@@ -58,6 +56,16 @@ public class gameManager : MonoBehaviour
     public Image playerShieldBar;
     public Image playerCreditCount;
     public TMP_Text currentObjective;
+
+    [Header("----- Grenades -----")]
+    public int maxFireGrenades = 3;
+    public int maxIceGrenades = 3;
+    public int maxEMPGrenades = 3;
+
+    public int currentGrenadeIndex = 0;
+    public string[] grenadeTypes = { "Fire", "Ice", "EMP" };
+    [SerializeField] public Image fireGrenade, iceGrenade, empGrenade;
+
 
     public bool invertY;
     public bool isPaused;
@@ -255,6 +263,10 @@ public class gameManager : MonoBehaviour
             shopInteractable.instance.weaponItems.SetActive(false);
             shopInteractable.instance.powerupItems.SetActive(true);
         }
+    }
+    public void UpdateGrenadeCount(string grenadeType, int amount)
+    {
+        
     }
 
     public void SetDrone(helperBot bot)

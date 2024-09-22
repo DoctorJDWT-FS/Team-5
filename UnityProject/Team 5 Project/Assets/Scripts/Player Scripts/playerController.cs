@@ -593,11 +593,11 @@ public class playerController : MonoBehaviour, IDamage
 
     public void throwGrenade()
     {
-        if(!isDead && !isSprinting && !isDashing && !isShooting)
+        if (!isDead && !isSprinting && !isDashing && !isShooting)
         {
-            if (Input.GetKeyDown(playerSettings.grenade)) 
+            if (Input.GetKeyDown(playerSettings.grenade))
             {
-                grenade.startHoldingGrenade();
+                grenade.startHoldingGrenade(grenade.currentGrenadeStats);
             }
             if (Input.GetKeyUp(playerSettings.grenade))
             {
