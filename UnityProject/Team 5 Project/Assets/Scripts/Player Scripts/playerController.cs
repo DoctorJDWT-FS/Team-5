@@ -152,7 +152,7 @@ public class playerController : MonoBehaviour, IDamage
             UpdateDashTimer();
             HandlePunch();
             throwGrenade();
-            if (!isRegenerating && shield <= (shieldOrig - 5))
+            if (!isRegenerating && shield <= (shieldOrig - 5) && regenEnabled)
             {
                 StartCoroutine(Regen(3, 5));
             }
