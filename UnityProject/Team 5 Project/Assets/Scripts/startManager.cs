@@ -20,6 +20,7 @@ public class startManager : MonoBehaviour
     [SerializeField] GameObject settingsLabel;
     [SerializeField] GameObject creditsLabel;
     [SerializeField] GameObject loadingScreen;
+    [SerializeField] GameObject difficulties;
 
 
     [Header("----- Camera Items -----")]
@@ -119,6 +120,11 @@ public class startManager : MonoBehaviour
     {
         Keybindings.SetActive(false);
         settingsLabel.SetActive(true);
+    }
+    public void OpenDifficulties()
+    {
+        difficulties.SetActive(true);
+        startLabel.SetActive(false);
     }
     public void startGame()
     {

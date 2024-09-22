@@ -46,7 +46,9 @@ public class buttonFunctions : MonoBehaviour
     }
     public void StartButton()
     {
-        startManager.instance.startGame();
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        if (currentSceneIndex == 0)
+            startManager.instance.OpenDifficulties();
     }
 
     public void resume()
@@ -293,5 +295,20 @@ public class buttonFunctions : MonoBehaviour
     public void TutorialDone()
     {
         EnableButtons(upgradeTutorialButtons);
+    }
+    public void Easy()
+    {
+        GameObject.Find("Difficulty Storage").GetComponent<difficultyStorage>().difficulty = 1;
+        startManager.instance.startGame();
+    }
+    public void Medium()
+    {
+        GameObject.Find("Difficulty Storage").GetComponent<difficultyStorage>().difficulty = 2;
+        startManager.instance.startGame();
+    }
+    public void Hard()
+    {
+        GameObject.Find("Difficulty Storage").GetComponent<difficultyStorage>().difficulty = 3;
+        startManager.instance.startGame();
     }
 }
