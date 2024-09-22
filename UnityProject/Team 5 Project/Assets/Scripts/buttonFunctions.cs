@@ -84,7 +84,7 @@ public class buttonFunctions : MonoBehaviour
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         if (currentSceneIndex == 0)
-            startManager.instance.ChangeKeybindings();
+            startManager.instance.OpenChangeKeybindings();
     }
     public void onToggleChange()
     {

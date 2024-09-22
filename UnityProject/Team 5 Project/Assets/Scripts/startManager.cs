@@ -29,6 +29,29 @@ public class startManager : MonoBehaviour
     [Header("----- Audio -----")]
     [SerializeField] AudioClip backgroundMusic;
 
+    [Header("----- KeyBindingsText -----")]
+    [SerializeField] TMP_Text sprintKeyText;
+    [SerializeField] TMP_Text slideKeyText;
+    [SerializeField] TMP_Text dashKeyText;
+    [SerializeField] TMP_Text jumpKeyText;
+    [SerializeField] TMP_Text moveForwardKeyText;
+    [SerializeField] TMP_Text moveBackwardKeyText;
+    [SerializeField] TMP_Text strafeLeftKeyText;
+    [SerializeField] TMP_Text strafeRightKeyText;
+    [SerializeField] TMP_Text enterKeyText;
+    [SerializeField] TMP_Text exitKeyText;
+    [SerializeField] TMP_Text upKeyText;
+    [SerializeField] TMP_Text downKeyText;
+    [SerializeField] TMP_Text leftKeyText;
+    [SerializeField] TMP_Text rightKeyText;
+    [SerializeField] TMP_Text shootKeyText;
+    [SerializeField] TMP_Text aimKeyText;
+    [SerializeField] TMP_Text reloadKeyText;
+    [SerializeField] TMP_Text interactKeyText;
+    [SerializeField] TMP_Text punchKeyText;
+    [SerializeField] TMP_Text grenadeKeyText;
+    [SerializeField] TMP_Text displayPlayerStatsKeyText;
+
 
     int MenuPosition;
     private Image currentHighlight;
@@ -86,10 +109,16 @@ public class startManager : MonoBehaviour
         invertY = PlayerPrefs.GetInt("InvertY", 0) == 1;
         int sensitivity = PlayerPrefs.GetInt("Sensitivity", 600);
     }
-    public void ChangeKeybindings()
+    public void OpenChangeKeybindings()
     {
         settingsLabel.SetActive(false);
         Keybindings.SetActive(true);
+    }
+
+    public void CloseChangeKeyBindings()
+    {
+        Keybindings.SetActive(false);
+        settingsLabel.SetActive(true);
     }
     public void startGame()
     {
@@ -104,5 +133,29 @@ public class startManager : MonoBehaviour
         SceneManager.LoadScene(1);
         AudioManager.instance.PlayGameplayMusic();
     }
-    
+
+    public void UpdateKeybindings()
+    {
+        sprintKeyText.text = PlayerPrefs.GetString("sprint");
+        slideKeyText.text = PlayerPrefs.GetString("slide");
+        dashKeyText.text = PlayerPrefs.GetString("dash");
+        jumpKeyText.text = PlayerPrefs.GetString("jump");
+        moveForwardKeyText.text = PlayerPrefs.GetString("moveForward");
+        moveBackwardKeyText.text = PlayerPrefs.GetString("moveBackwards");
+        strafeLeftKeyText.text = PlayerPrefs.GetString("strafeLeft");
+        strafeRightKeyText.text = PlayerPrefs.GetString("strafeRight");
+        enterKeyText.text = PlayerPrefs.GetString("enter");
+        exitKeyText.text = PlayerPrefs.GetString("exit");
+        upKeyText.text = PlayerPrefs.GetString("up");
+        downKeyText.text = PlayerPrefs.GetString("down");
+        leftKeyText.text = PlayerPrefs.GetString("left");
+        rightKeyText.text = PlayerPrefs.GetString("right");
+        shootKeyText.text = PlayerPrefs.GetString("shoot");
+        aimKeyText.text = PlayerPrefs.GetString("aim");
+        reloadKeyText.text = PlayerPrefs.GetString("reload");
+        interactKeyText.text = PlayerPrefs.GetString("interact");
+        punchKeyText.text = PlayerPrefs.GetString("punch");
+        grenadeKeyText.text = PlayerPrefs.GetString("grenade");
+        displayPlayerStatsKeyText.text = PlayerPrefs.GetString("displayPlayerStats");
+    }
 }

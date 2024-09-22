@@ -103,11 +103,13 @@ public class basicZombieAI : MonoBehaviour, IDamage
     protected virtual void facePlayer()
     {
         audPlayer.clip = walkingSounds;
+        audPlayer.loop = true;
         audPlayer.Play();
         playerDir = gameManager.instance.player.transform.position - headPos.position;
         Quaternion rot = Quaternion.LookRotation(playerDir);
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * facePlayerSpeed);
-
+        audPlayer.loop = false;
+        audPlayer.Stop();
     }
 
     public virtual void takeDamage(int amount)

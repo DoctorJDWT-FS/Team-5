@@ -28,7 +28,8 @@ public class gameManager : MonoBehaviour
     [SerializeField] TMP_Text creditCountText;
     [SerializeField] TMP_Text playerHealthText;
     [SerializeField] TMP_Text playerSheildText;
-    
+
+
 
     //player info
     [Header("----- Player -----")]

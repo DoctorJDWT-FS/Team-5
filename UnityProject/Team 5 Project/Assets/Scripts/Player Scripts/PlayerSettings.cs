@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerSettings : MonoBehaviour
@@ -30,6 +31,30 @@ public class PlayerSettings : MonoBehaviour
     public KeyCode interact = KeyCode.E;
     public KeyCode punch = KeyCode.V; // Added punch key
     public KeyCode grenade = KeyCode.G; // Added grenade key
+
+    [SerializeField] TMP_Text sprintKeyText;
+    [SerializeField] TMP_Text slideKeyText;
+    [SerializeField] TMP_Text dashKeyText;
+    [SerializeField] TMP_Text jumpKeyText;
+    [SerializeField] TMP_Text moveForwardKeyText;
+    [SerializeField] TMP_Text moveBackwardKeyText;
+    [SerializeField] TMP_Text strafeLeftKeyText;
+    [SerializeField] TMP_Text strafeRightKeyText;
+    [SerializeField] TMP_Text enterKeyText;
+    [SerializeField] TMP_Text exitKeyText;
+    [SerializeField] TMP_Text upKeyText;
+    [SerializeField] TMP_Text downKeyText;
+    [SerializeField] TMP_Text leftKeyText;
+    [SerializeField] TMP_Text rightKeyText;
+    [SerializeField] TMP_Text shootKeyText;
+    [SerializeField] TMP_Text aimKeyText;
+    [SerializeField] TMP_Text reloadKeyText;
+    [SerializeField] TMP_Text interactKeyText;
+    [SerializeField] TMP_Text punchKeyText;
+    [SerializeField] TMP_Text grenadeKeyText;
+    [SerializeField] TMP_Text displayPlayerStatsKeyText;
+
+
     void Start()
     {
         // Load settings from player preferences

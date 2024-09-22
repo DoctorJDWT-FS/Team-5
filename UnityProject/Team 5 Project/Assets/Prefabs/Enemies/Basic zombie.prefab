@@ -1056,7 +1056,7 @@ MonoBehaviour:
   attackRangeTrigger: {fileID: 9139719332782997733}
   visionRangeTrigger: {fileID: 5809235043359408288}
   audPlayer: {fileID: -6810581214350217356}
-  walkingSounds: {fileID: 8300000, guid: ff8240148ee026c4babb53949381e1cd, type: 3}
+  walkingSounds: {fileID: 8300000, guid: df874be086de9441a8ef805bd42d0fff, type: 3}
   runningSounds: {fileID: 8300000, guid: d108e9ae3908d4d479e1e41cca0188a3, type: 3}
   attackingSounds: {fileID: 8300000, guid: 4fb45f9472f5e554c82a5a9c7ba4c739, type: 3}
   damagedSounds: {fileID: 8300000, guid: 0547b940dba4d964e9e447af1dc0759a, type: 3}

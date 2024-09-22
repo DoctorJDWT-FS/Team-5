@@ -1252,7 +1252,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &152374560567787465
 Transform:
   m_ObjectHideFlags: 0
@@ -1329,6 +1329,27 @@ MonoBehaviour:
   interact: 101
   punch: 118
   grenade: 103
+  sprintKeyText: {fileID: 0}
+  slideKeyText: {fileID: 0}
+  dashKeyText: {fileID: 0}
+  jumpKeyText: {fileID: 0}
+  moveForwardKeyText: {fileID: 0}
+  moveBackwardKeyText: {fileID: 0}
+  strafeLeftKeyText: {fileID: 0}
+  strafeRightKeyText: {fileID: 0}
+  enterKeyText: {fileID: 0}
+  exitKeyText: {fileID: 0}
+  upKeyText: {fileID: 0}
+  downKeyText: {fileID: 0}
+  leftKeyText: {fileID: 0}
+  rightKeyText: {fileID: 0}
+  shootKeyText: {fileID: 0}
+  aimKeyText: {fileID: 0}
+  reloadKeyText: {fileID: 0}
+  interactKeyText: {fileID: 0}
+  punchKeyText: {fileID: 0}
+  grenadeKeyText: {fileID: 0}
+  displayPlayerStatsKeyText: {fileID: 0}
 --- !u!114 &2466636926843170607
 MonoBehaviour:
   m_ObjectHideFlags: 0
