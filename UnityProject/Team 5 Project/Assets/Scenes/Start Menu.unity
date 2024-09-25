@@ -2499,6 +2499,7 @@ MonoBehaviour:
   throwGrenadeScript: {fileID: 0}
   mainSlider: {fileID: 1902211734}
   upgradeTutorialButtons: []
+  healthButton: {fileID: 0}
   disableButtonColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   enableButtonColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!224 &306160055
