@@ -12,9 +12,11 @@ public class buttonFunctions : MonoBehaviour
     public Slider mainSlider;
     private iWallet playerWallet;
     private int x = 0, y = 0, z = 0;
-    public Button[] upgradeTutorialButtons;
+    public List<Button> upgradeTutorialButtons;
+    public Button healthButton;
     public Color disableButtonColor = Color.gray;
     public Color enableButtonColor = Color.white;
+    
 
 
     public void Start()
@@ -25,7 +27,7 @@ public class buttonFunctions : MonoBehaviour
     }
     
 
-    private void DisableButtons(Button[] buttonList)
+    private void DisableButtons(List<Button> buttonList)
     {
         foreach (Button button in buttonList)
         {
@@ -35,7 +37,7 @@ public class buttonFunctions : MonoBehaviour
             button.colors = cb;
         }
     }
-    private void EnableButtons(Button[] buttonList)
+    private void EnableButtons(List<Button> buttonList)
     {
         foreach (Button button in buttonList)
         {
@@ -117,7 +119,7 @@ public class buttonFunctions : MonoBehaviour
             {
 
                 gameManager.instance.playerScript.increaseMaxHealth(5);
-                TutorialDone();
+                
             }
 
         }
@@ -128,8 +130,11 @@ public class buttonFunctions : MonoBehaviour
                 if (playerWallet.SpendCredits(50))
                 {
                     FindObjectOfType<tutorialManager>().Upgradebrought();
-                    EnableButtons(upgradeTutorialButtons);
+                    
+                    //EnableButtons(upgradeTutorialButtons);
                     gameManager.instance.playerScript.increaseMaxHealth(5);
+                    upgradeTutorialButtons.Add(healthButton);
+                    DisableButtons(upgradeTutorialButtons);
                 }
             }
         }
@@ -291,14 +296,12 @@ public class buttonFunctions : MonoBehaviour
     }
 
     //this fucntion will be called after the tutorial is done 
-    public void TutorialModeON()
-    {
-        DisableButtons(upgradeTutorialButtons);
-    }
-    public void TutorialDone()
+    public void TutorialModeComplete()
     {
         EnableButtons(upgradeTutorialButtons);
     }
+
+  
     public void Easy()
     {
         GameObject.Find("Difficulty Storage").GetComponent<difficultyStorage>().difficulty = 1;

@@ -57,6 +57,9 @@ public class gameManager : MonoBehaviour
     public Image playerCreditCount;
     public TMP_Text currentObjective;
 
+    [Header("----- Tutorial -----")]
+    public buttonFunctions buttonTutorial;
+
     [Header("----- Grenades -----")]
     public int maxFireGrenades = 9;
     public int maxIceGrenades = 9;

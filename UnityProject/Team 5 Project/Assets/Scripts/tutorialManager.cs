@@ -150,6 +150,7 @@ public class tutorialManager : MonoBehaviour
         if (doorOpen)
         {
             MissionComplete();
+            gameManager.instance.buttonTutorial.TutorialModeComplete();
         }
     }
 

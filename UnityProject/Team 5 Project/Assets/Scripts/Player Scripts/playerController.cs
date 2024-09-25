@@ -91,6 +91,7 @@ public class playerController : MonoBehaviour, IDamage
     private bool canPunch = true;
     public gun currentGun; // Current gun equipped by the player
 
+   
     void Start()
     {
         // Initialize player stats and components
