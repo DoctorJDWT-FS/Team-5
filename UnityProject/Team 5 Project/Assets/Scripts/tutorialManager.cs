@@ -118,6 +118,7 @@ public class tutorialManager : MonoBehaviour
         {
             MissionComplete();
             gameManager.instance.curFireGrenades = gameManager.instance.maxFireGrenades;
+            gameManager.instance.UpdateGrenadeCountDisplay();
         }
     }
     void GrenadeMission()
