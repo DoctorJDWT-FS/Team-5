@@ -71,6 +71,7 @@ public class shopInteractable : MonoBehaviour
             shopCanvas.SetActive(false);
             upgradeItems.SetActive(false);
             weaponItems.SetActive(false);
+            powerupItems.SetActive(false);
             gameManager.instance.menuActive = null;
         }
         else
@@ -83,6 +84,7 @@ public class shopInteractable : MonoBehaviour
             shopCanvas.SetActive(true);
             upgradeItems.SetActive(true);
             weaponItems.SetActive(false);
+            powerupItems.SetActive(false);
             gameManager.instance.menuActive = shopCanvas;
             gameManager.instance.statePause();
         }
