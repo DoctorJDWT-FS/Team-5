@@ -332,7 +332,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4810343652495511113}
   - component: {fileID: 48806041691173699}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: SK_Soldier_Torso
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1397,6 +1397,8 @@ MonoBehaviour:
   magCount: {fileID: 0}
   HPOrig: 0
   isDead: 0
+  regenEnabled: 0
+  infiniteAmmo: 0
   currentGun: {fileID: 0}
 --- !u!114 &5888396753514558309
 MonoBehaviour:
@@ -3914,6 +3916,7 @@ MonoBehaviour:
   playerScript: {fileID: 2823294014843151721}
   cameraScript: {fileID: 8077685216331894476}
   playerSettings: {fileID: 2080928529483966168}
+  zombieScript: {fileID: 0}
   grenadeThrowPos: {fileID: 2166709927435974102}
   currentGrenadeStats: {fileID: 11400000, guid: 671b99a26e7fe254197b407a8cd8de54, type: 2}
   grenadeStatTypes:
