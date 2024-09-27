@@ -41,6 +41,7 @@ public class cameraController : MonoBehaviour
 
         // Rotate the PLAYER on the y-axis
         transform.parent.Rotate(Vector3.up * mouseX);
+
     }
 
     public void SetSensitivity(int newSensitivity)

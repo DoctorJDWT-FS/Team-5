@@ -58,7 +58,6 @@ public class AudioManager : MonoBehaviour
     {
         audioSource.UnPause();
     }
-
     public void SetVolume(float volume)
     {
         audioSource.volume = Mathf.Clamp(volume, 0f, 1f);

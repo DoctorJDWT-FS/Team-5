@@ -14,6 +14,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] AudioSource audioSource; // Audio source for playing sound effects
     [SerializeField] Animator myAnimator; // Animator for handling player animations
     [SerializeField] PlayerSettings playerSettings; // Reference to PlayerSettings
+    [SerializeField] public GameObject cameraPos;
     [SerializeField] Throwgrenade grenade; // Reference to ThrowGrenade
 
     [Header("----- Shield Sound Effects -----")]
@@ -125,6 +126,8 @@ public class playerController : MonoBehaviour, IDamage
         transform.position = gameManager.instance.playerSpawnPos.transform.position;
 
         isDead = false;
+        mainCamera.gameObject.SetActive(true);
+        deathCamera.gameObject.SetActive(false);
         myAnimator.SetBool("Dead", false);
         myAnimator.Play("Grounded");
 

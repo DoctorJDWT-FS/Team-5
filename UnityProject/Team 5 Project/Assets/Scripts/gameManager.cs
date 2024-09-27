@@ -114,6 +114,8 @@ public class gameManager : MonoBehaviour
 
     private void HandleReticleRaycast()
     {
+        if (playerScript.isDead)
+            return;
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
         RaycastHit hit;
 
