@@ -104,6 +104,11 @@ public class startManager : MonoBehaviour
         difficulties.SetActive(true);
         startLabel.SetActive(false);
     }
+    public void CloseDifficulties()
+    {
+        difficulties.SetActive(false);
+        startLabel.SetActive(true);
+    }
     public void startGame()
     {
         StartCoroutine(load());
