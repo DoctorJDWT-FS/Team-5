@@ -479,7 +479,7 @@ public class playerController : MonoBehaviour, IDamage
             updatePlayerUI();
             StartCoroutine(shieldDamage());
         }
-        else
+        else if (!isDead)
         {
             // If no shield, apply damage to health
             HP -= amount;

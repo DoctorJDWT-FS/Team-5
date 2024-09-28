@@ -146,7 +146,7 @@ public class gameManager : MonoBehaviour
 
     public void UpdateHealthCount()
     { 
-        if (gameManager.instance.playerScript.HP != 0)
+        if (gameManager.instance.playerScript.HP >= 0)
         {
             playerHealthText.text = gameManager.instance.playerScript.HP.ToString();
         }
