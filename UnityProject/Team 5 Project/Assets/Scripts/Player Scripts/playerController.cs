@@ -125,7 +125,6 @@ public class playerController : MonoBehaviour, IDamage
         updatePlayerUI();
         transform.position = gameManager.instance.playerSpawnPos.transform.position;
 
-        isDead = false;
         mainCamera.gameObject.SetActive(true);
         deathCamera.gameObject.SetActive(false);
         myAnimator.SetBool("Dead", false);
@@ -143,6 +142,10 @@ public class playerController : MonoBehaviour, IDamage
 
         gameManager.instance.loadSettings();
         StartCoroutine(InvincibilityPeriod());
+
+        if (isDead)
+            gameManager.instance.stateUnpause();
+        isDead = false;
     }
 
     void Update()
@@ -488,7 +491,7 @@ public class playerController : MonoBehaviour, IDamage
         }
 
         // Check if player has died
-        if (HP <= 0)
+        if (HP <= 0 && !isDead)
         {
             StartCoroutine(HandleDeath());
         }

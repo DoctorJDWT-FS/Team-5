@@ -171,7 +171,7 @@ public class gameManager : MonoBehaviour
         Time.timeScale = 1;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        menuActive.SetActive(isPaused);
+        menuActive.SetActive(false);
         menuActive = null;
     }
     public void openSettingsMenu()
