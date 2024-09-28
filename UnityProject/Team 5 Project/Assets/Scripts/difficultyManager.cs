@@ -18,7 +18,8 @@ public class difficultyManager : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        difficulty = GameObject.Find("Difficulty Storage").GetComponent<difficultyStorage>().difficulty;
+        if (GameObject.Find("Difficulty Storage"))
+            difficulty = GameObject.Find("Difficulty Storage").GetComponent<difficultyStorage>().difficulty;
         Destroy(GameObject.Find("Difficulty Storage"));
         countdown = GameObject.Find("countdown");
         counter = countdown.GetComponent<countDown>();
