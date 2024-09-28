@@ -2497,6 +2497,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 2823294014843151721, guid: bb3ec219994711d499ed027dfafc44aa, type: 3}
   throwGrenadeScript: {fileID: 0}
+  playerCameraController: {fileID: 0}
   mainSlider: {fileID: 1902211734}
   upgradeTutorialButtons: []
   healthButton: {fileID: 0}
@@ -2543,27 +2544,6 @@ MonoBehaviour:
   sensitivity: 600
   invertY: 0
   backgroundMusic: {fileID: 8300000, guid: 755dbd80f017f98448e8d146fc59b5af, type: 3}
-  sprintKeyText: {fileID: 2022077976}
-  slideKeyText: {fileID: 1739869744}
-  dashKeyText: {fileID: 1154500087}
-  jumpKeyText: {fileID: 1182969422}
-  moveForwardKeyText: {fileID: 1590834648}
-  moveBackwardKeyText: {fileID: 1162595793}
-  strafeLeftKeyText: {fileID: 334694208}
-  strafeRightKeyText: {fileID: 1829158167}
-  enterKeyText: {fileID: 1876416579}
-  exitKeyText: {fileID: 1917879775}
-  upKeyText: {fileID: 1590834648}
-  downKeyText: {fileID: 1162595793}
-  leftKeyText: {fileID: 334694208}
-  rightKeyText: {fileID: 1829158167}
-  shootKeyText: {fileID: 1711253653}
-  aimKeyText: {fileID: 36598231}
-  reloadKeyText: {fileID: 1134500610}
-  interactKeyText: {fileID: 960580721}
-  punchKeyText: {fileID: 1201670064}
-  grenadeKeyText: {fileID: 1124445212}
-  displayPlayerStatsKeyText: {fileID: 826624780}
 --- !u!114 &306160058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2592,7 +2572,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.15
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
