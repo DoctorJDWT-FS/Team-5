@@ -79,20 +79,6 @@ public class PlayerSettings : MonoBehaviour
                 currkey.transform.GetChild(0).GetComponent<TMP_Text>().text = e.keyCode.ToString();
                 currkey = null;
             }
-            if (e.isMouse)
-            {
-                if (e.IsRightMouseButton())
-                {
-                    keys[currkey.name] = KeyCode.Mouse1;
-                    currkey = null;
-                }
-                if (e.isMouse && !e.IsRightMouseButton())
-                {
-                    keys[currkey.name] = KeyCode.Mouse0;
-                    currkey = null;
-                }
-
-            }
         }
     }
     public void ChangeKey(GameObject clicked)
