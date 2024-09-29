@@ -11,13 +11,15 @@ public class buttonFunctions : MonoBehaviour
     public Throwgrenade throwGrenadeScript;
     public cameraController playerCameraController;
     public Slider mainSlider;
+    public Toggle invertYToggle;
     private iWallet playerWallet;
     private int x = 0, y = 0, z = 0;
     public List<Button> upgradeTutorialButtons;
     public Button healthButton;
     public Color disableButtonColor = Color.gray;
     public Color enableButtonColor = Color.white;
-
+    public bool inverted;
+    public float sliderVal;
 
 
     public void Start()
@@ -93,17 +95,30 @@ public class buttonFunctions : MonoBehaviour
     }
     public void onToggleChange()
     {
+        bool isInverted = PlayerPrefs.GetInt("InvertY", 0) == 1;
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+
         if (currentSceneIndex == 0)
+        {
             startManager.instance.toggleInvertY();
+        }
         else
+        {
             gameManager.instance.toggleInvertY();
+        }
+
+        PlayerPrefs.SetInt("InvertY", inverted ? 1 : 0);
+        PlayerPrefs.Save();
     }
+
     public void OnSliderValueChanged()
     {
         if (mainSlider != null)
         {
-            float sliderVal = mainSlider.value;
+            sliderVal = mainSlider.value;
+            PlayerPrefs.SetFloat("SliderValue", sliderVal); 
+            PlayerPrefs.Save();
+
             int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
             if (currentSceneIndex == 0)
                 startManager.instance.UpdateSliderValue(sliderVal);
@@ -111,7 +126,7 @@ public class buttonFunctions : MonoBehaviour
                 gameManager.instance.UpdateSliderValue(sliderVal);
         }
     }
-    public void healthUp()
+        public void healthUp()
     {
         if (!FindObjectOfType<tutorialManager>().TutorialMode())
         {
@@ -301,7 +316,7 @@ public class buttonFunctions : MonoBehaviour
         EnableButtons(upgradeTutorialButtons);
     }
 
-
+    
     public void Easy()
     {
         GameObject.Find("Difficulty Storage").GetComponent<difficultyStorage>().difficulty = 1;

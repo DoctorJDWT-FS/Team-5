@@ -82927,6 +82927,10 @@ PrefabInstance:
       propertyPath: buttonTutorial
       value: 
       objectReference: {fileID: 319179757}
+    - target: {fileID: 1047261992625395684, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
+      propertyPath: playerSpawnPos
+      value: 
+      objectReference: {fileID: 198725024}
     - target: {fileID: 1257905837200499927, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
       propertyPath: audPlayer
       value: 
@@ -83018,6 +83022,14 @@ PrefabInstance:
     - target: {fileID: 3621125850506969293, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3992948687502168994, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
+      propertyPath: m_Value
+      value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 3992948687502168994, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
+      propertyPath: m_MaxValue
+      value: 2000
       objectReference: {fileID: 0}
     - target: {fileID: 5603982849030855033, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
       propertyPath: m_IsActive

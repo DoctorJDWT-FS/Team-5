@@ -22,10 +22,10 @@ public class startManager : MonoBehaviour
     [SerializeField] GameObject loadingScreen;
     [SerializeField] GameObject difficulties;
 
-
     [Header("----- Camera Items -----")]
+    [SerializeField] cameraController cameraScript;
     [SerializeField] int sensitivity = 600;
-    [SerializeField] bool invertY = false;
+    [SerializeField] public bool invertY = false;
 
     [Header("----- Audio -----")]
     [SerializeField] AudioClip backgroundMusic;
@@ -38,7 +38,7 @@ public class startManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-        
+        loadSettings();
     }
 
     private void Start()
@@ -76,7 +76,17 @@ public class startManager : MonoBehaviour
         PlayerPrefs.SetInt("InvertY", invertY ? 1 : 0);
         PlayerPrefs.Save();
 
+        if (cameraScript != null)
+            cameraScript.invertY = invertY;
+
+        if (gameManager.instance != null)
+        {
+            gameManager.instance.invertY = invertY;
+            gameManager.instance.ApplyInvertY();
+        }
     }
+
+    
     public void UpdateSliderValue(float sens)
     {
         sensitivity = Mathf.RoundToInt(sens);
@@ -86,7 +96,12 @@ public class startManager : MonoBehaviour
     public void loadSettings()
     {
         invertY = PlayerPrefs.GetInt("InvertY", 0) == 1;
-        int sensitivity = PlayerPrefs.GetInt("Sensitivity", 600);
+        sensitivity = PlayerPrefs.GetInt("Sensitivity", 600);
+        if (cameraScript != null)
+        {
+            cameraScript.invertY = invertY;
+            cameraScript.SetSensitivity(sensitivity);
+        }
     }
     public void OpenChangeKeybindings()
     {
@@ -113,7 +128,7 @@ public class startManager : MonoBehaviour
     {
         StartCoroutine(load());
     }
-   IEnumerator load()
+    IEnumerator load()
     {
         loadingScreen.SetActive(true);
         startLabel.SetActive(false);

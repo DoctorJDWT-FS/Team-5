@@ -118,27 +118,33 @@ public class Throwgrenade : MonoBehaviour
     {
         if (currentGrenadeStats.grenadeType == grenadeStats.GrenadeType.Fire && gameManager.instance.curFireGrenades <= 0)
         {
-            //Debug.Log("No Fire grenades available to throw!");
             return;
         }
         else if (currentGrenadeStats.grenadeType == grenadeStats.GrenadeType.Ice && gameManager.instance.curIceGrenades <= 0)
         {
-           // Debug.Log("No Ice grenades available to throw!");
             return;
         }
         else if (currentGrenadeStats.grenadeType == grenadeStats.GrenadeType.EMP && gameManager.instance.curEMPGrenades <= 0)
         {
-            //Debug.Log("No EMP grenades available to throw!");
             return;
         }
 
         grenadeStats grenadeToThrow = currentGrenadeStats.Clone();
-        GameObject grenade = Instantiate(grenadeToThrow.grenadeModel, grenadeThrowPos.position, Quaternion.identity);
+        Vector3 throwDirection = cameraScript.transform.forward;
+        Vector3 throwPosition = grenadeThrowPos.position;
+
+        float checkDistance = 0.5f;
+        if (Physics.Raycast(throwPosition, Vector3.down, checkDistance, groundMask))
+        {
+            throwPosition += Vector3.up * (checkDistance);
+        }
+
+        GameObject grenade = Instantiate(grenadeToThrow.grenadeModel, throwPosition, Quaternion.identity);
         Rigidbody grenadeRb = grenade.GetComponent<Rigidbody>();
 
         if (grenadeRb != null)
         {
-            Vector3 throwDirection = cameraScript.transform.forward;
+            grenadeRb.collisionDetectionMode = CollisionDetectionMode.Continuous;
             grenadeRb.AddForce(throwDirection * grenadeToThrow.throwForce, ForceMode.VelocityChange);
         }
 
@@ -159,10 +165,7 @@ public class Throwgrenade : MonoBehaviour
                 gameManager.instance.UpdateGrenadeCountDisplay();
                 break;
         }
-
-        //Debug.Log(grenadeToThrow.grenadeType + " Grenade Thrown");
     }
-
 
     IEnumerator HandleExplosionAfterGrenadeDestruction(GameObject grenade, grenadeStats grenadeStats)
     {

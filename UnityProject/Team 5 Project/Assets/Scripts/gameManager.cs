@@ -10,7 +10,6 @@ public class gameManager : MonoBehaviour
 {
     public static gameManager instance;
 
-
     [Header("----- Menu Items -----")]
     [SerializeField] public GameObject menuActive;
     [SerializeField] GameObject menuPause;
@@ -71,23 +70,26 @@ public class gameManager : MonoBehaviour
 
     [SerializeField] public Image fireGrenade, iceGrenade, empGrenade;
 
-
     public bool invertY;
     public bool isPaused;
 
     public int playerHp;
     public int playerShield;
     public int enemyCount;
-   
+
     void Awake()
     {
         instance = this;
         levelMusic.Play();
 
+        loadSettings();
+        LoadSliderValue();
+
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<playerController>();
         playerWallet = player.GetComponent<iWallet>();
-        playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
+        cameraScript = player.GetComponentInChildren<cameraController>();
+        
     }
 
     // Update is called once per frame
@@ -109,7 +111,6 @@ public class gameManager : MonoBehaviour
         }
 
         UpdateCreditDisplay();
-
     }
 
     private void HandleReticleRaycast()
@@ -179,7 +180,10 @@ public class gameManager : MonoBehaviour
         menuActive.SetActive(false);
         menuActive = menuSettings;
         menuSettings.SetActive(true);
+        LoadSliderValue();
+        UpdateInvertYToggleUI();
     }
+
     public void updateGameGoal(int amount)
     {
         enemyCount += amount; 
@@ -225,30 +229,57 @@ public class gameManager : MonoBehaviour
 
     public void toggleInvertY()
     {
-        invertY = !invertY; 
-        if (cameraScript != null)
-            cameraScript.invertY = invertY;
+        invertY = !invertY;
         PlayerPrefs.SetInt("InvertY", invertY ? 1 : 0);
         PlayerPrefs.Save();
+        ApplyInvertY();
+    }
+    public void ApplyInvertY()
+    {
+        if (cameraScript != null)
+        {
+            cameraScript.invertY = invertY;
+        }
     }
     public void UpdateSliderValue(float sens)
     {
         int sensitivity = Mathf.RoundToInt(sens);
         if (cameraScript != null)
+        {
             cameraScript.SetSensitivity(sensitivity);
+        }
         PlayerPrefs.SetInt("Sensitivity", sensitivity);
         PlayerPrefs.Save();
     }
+    public void LoadSliderValue()
+    {
+        if (PlayerPrefs.HasKey("SliderValue"))
+        {
+            float loadedValue = PlayerPrefs.GetFloat("SliderValue");
+            if (buttonTutorial.mainSlider != null)
+            {
+                buttonTutorial.mainSlider.value = loadedValue;
+                buttonTutorial.mainSlider.value = buttonTutorial.sliderVal;
+                UpdateSliderValue(loadedValue);
+            }
+        }
+    }
+
     public void loadSettings()
     {
         invertY = PlayerPrefs.GetInt("InvertY", 0) == 1;
         if (cameraScript != null)
+        {
             cameraScript.invertY = invertY;
-
-
-        int sensitivity = PlayerPrefs.GetInt("Sensitivity", 600);
-        if (cameraScript != null)
-            cameraScript.SetSensitivity(sensitivity);
+        }
+        UpdateInvertYToggleUI();
+    }
+    private void UpdateInvertYToggleUI()
+    {
+        if (buttonTutorial.invertYToggle != null) 
+        {
+            buttonTutorial.invertYToggle.isOn = invertY;
+        }
     }
     public void shopMenu(int menu)
     {
@@ -286,7 +317,7 @@ public class gameManager : MonoBehaviour
         empGrenade.transform.GetChild(0).GetComponent<TMP_Text>().text = curEMPGrenades.ToString();
     }
 
-
+    
     public void SetDrone(helperBot bot)
     {
         Drone = bot;

@@ -322,15 +322,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1047261992625395684, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
       propertyPath: curEMPGrenades
-      value: 0
+      value: 9999
       objectReference: {fileID: 0}
     - target: {fileID: 1047261992625395684, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
       propertyPath: curIceGrenades
-      value: 0
+      value: 9999
+      objectReference: {fileID: 0}
+    - target: {fileID: 1047261992625395684, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
+      propertyPath: maxEMPGrenades
+      value: 9999
+      objectReference: {fileID: 0}
+    - target: {fileID: 1047261992625395684, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
+      propertyPath: maxIceGrenades
+      value: 9999
       objectReference: {fileID: 0}
     - target: {fileID: 1047261992625395684, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
       propertyPath: curFireGrenades
-      value: 0
+      value: 9999
+      objectReference: {fileID: 0}
+    - target: {fileID: 1047261992625395684, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
+      propertyPath: maxFireGrenades
+      value: 9999
       objectReference: {fileID: 0}
     - target: {fileID: 2273504044316298060, guid: 256c462535e0df74bb6ca568aa461701, type: 3}
       propertyPath: m_Name
