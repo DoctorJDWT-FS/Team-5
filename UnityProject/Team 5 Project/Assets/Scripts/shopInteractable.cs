@@ -30,7 +30,7 @@ public class shopInteractable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isPlayerInRange && Input.GetKeyDown(KeyCode.E))
+        if (isPlayerInRange && Input.GetKeyDown(KeyCode.E) && !gameManager.instance.isPaused)
         {
             shopInteraction(true);
         }
