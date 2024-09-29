@@ -28,8 +28,11 @@ public class trapDoor : MonoBehaviour
             GameObject[] zombies = GameObject.FindGameObjectsWithTag("Zombie");
             for (int i = 0; i < zombies.Length; i++)
             {
-                Destroy(zombies[i]);
-                gameManager.instance.updateGameGoal(-1);
+                if (zombies[i].GetComponent<basicZombieAI>())
+                {
+                    Destroy(zombies[i]);
+                    gameManager.instance.updateGameGoal(-1);
+                }
             }
             gameObject.GetComponent<Animator>().SetBool("Closed", true);
             for (int i = 0; i < enableList.Length; i++)
