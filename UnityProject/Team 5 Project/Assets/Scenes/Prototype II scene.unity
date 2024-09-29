@@ -7836,6 +7836,10 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2823294014843151721, guid: bb3ec219994711d499ed027dfafc44aa, type: 3}
+      propertyPath: gravity
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 2823294014843151721, guid: bb3ec219994711d499ed027dfafc44aa, type: 3}
       propertyPath: magCount
       value: 
       objectReference: {fileID: 809439382}
@@ -7843,6 +7847,10 @@ PrefabInstance:
       propertyPath: ammoCount
       value: 
       objectReference: {fileID: 146602853}
+    - target: {fileID: 2823294014843151721, guid: bb3ec219994711d499ed027dfafc44aa, type: 3}
+      propertyPath: jumpSpeed
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 3423192051991701679, guid: bb3ec219994711d499ed027dfafc44aa, type: 3}
       propertyPath: m_Name
       value: Player Aimable
