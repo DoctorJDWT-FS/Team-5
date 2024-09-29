@@ -332,4 +332,8 @@ public class buttonFunctions : MonoBehaviour
         GameObject.Find("Difficulty Storage").GetComponent<difficultyStorage>().difficulty = 3;
         startManager.instance.startGame();
     }
+    public void quitToMain()
+    {
+        SceneManager.LoadScene(0);
+    }
 }

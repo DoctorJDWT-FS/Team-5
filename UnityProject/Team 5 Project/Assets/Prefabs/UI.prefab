@@ -628,7 +628,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8265741120035955584}
         m_TargetAssemblyTypeName: buttonFunctions, Assembly-CSharp
-        m_MethodName: quit
+        m_MethodName: quitToMain
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5489,7 +5489,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Quit
+  m_text: 'Quit to menu
 
 '
   m_isRightToLeft: 0
@@ -6152,6 +6152,7 @@ MonoBehaviour:
   playerShieldBar: {fileID: 7577441197721526432}
   playerCreditCount: {fileID: 0}
   currentObjective: {fileID: 2214299418831851610}
+  buttonTutorial: {fileID: 0}
   maxFireGrenades: 9
   maxIceGrenades: 9
   maxEMPGrenades: 9
@@ -6180,10 +6181,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   throwGrenadeScript: {fileID: 0}
+  playerCameraController: {fileID: 0}
   mainSlider: {fileID: 3992948687502168994}
+  invertYToggle: {fileID: 0}
   upgradeTutorialButtons: []
+  healthButton: {fileID: 0}
   disableButtonColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   enableButtonColor: {r: 1, g: 1, b: 1, a: 1}
+  inverted: 0
+  sliderVal: 0
 --- !u!82 &1261435946664127645
 AudioSource:
   m_ObjectHideFlags: 0
@@ -9122,7 +9128,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8265741120035955584}
         m_TargetAssemblyTypeName: buttonFunctions, Assembly-CSharp
-        m_MethodName: quit
+        m_MethodName: quitToMain
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
