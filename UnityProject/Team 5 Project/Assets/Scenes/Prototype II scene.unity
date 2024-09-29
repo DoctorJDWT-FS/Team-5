@@ -7831,6 +7831,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2466636926843170607, guid: bb3ec219994711d499ed027dfafc44aa, type: 3}
+      propertyPath: startingCredits
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 2823294014843151721, guid: bb3ec219994711d499ed027dfafc44aa, type: 3}
       propertyPath: HP
       value: 20
@@ -10692,7 +10696,7 @@ GameObject:
   - component: {fileID: 266592669}
   m_Layer: 0
   m_Name: GameObject
-  m_TagString: Untagged
+  m_TagString: Zombie spawn point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41301,7 +41305,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -41322,7 +41326,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -60264,7 +60268,7 @@ GameObject:
   - component: {fileID: 1452772449}
   m_Layer: 0
   m_Name: GameObject (2)
-  m_TagString: Untagged
+  m_TagString: Zombie spawn point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75462,7 +75466,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -75483,7 +75487,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -78142,6 +78146,10 @@ PrefabInstance:
       propertyPath: doorCostStatUI
       value: 
       objectReference: {fileID: 1998209153}
+    - target: {fileID: 5783009662536515243, guid: 2d927feb0fbf1a7429c095369d395de7, type: 3}
+      propertyPath: ignoreTutorial
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5783009662536515243, guid: 2d927feb0fbf1a7429c095369d395de7, type: 3}
       propertyPath: enableList.Array.size
       value: 0
@@ -84474,7 +84482,7 @@ GameObject:
   - component: {fileID: 2098223641}
   m_Layer: 0
   m_Name: GameObject (1)
-  m_TagString: Untagged
+  m_TagString: Zombie spawn point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
