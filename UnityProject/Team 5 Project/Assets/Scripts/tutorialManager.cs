@@ -29,8 +29,8 @@ public class tutorialManager : MonoBehaviour
     {
         
         playerSettings = FindObjectOfType<PlayerSettings>();
-        //grabs the script from the player settng and adust the button 
-        objectives.Add($"Press {gameManager.instance.playerSettings.keys["moveForward"]}, {gameManager.instance.playerSettings.keys["strafeleft"]}, {gameManager.instance.playerSettings.keys["moveBackwards"]}, {gameManager.instance.playerSettings.keys["straferight"]} to Move Around");
+        //grabs the script from the player setting and adjust the button 
+        objectives.Add($"Press {gameManager.instance.playerSettings.keys["moveForward"]}, {gameManager.instance.playerSettings.keys["strafeLeft"]}, {gameManager.instance.playerSettings.keys["moveBackwards"]}, {gameManager.instance.playerSettings.keys["strafeRight"]} to Move Around");
         objectives.Add($"Press {gameManager.instance.playerSettings.keys["sprint"]} to Sprint");
         objectives.Add($"Press {gameManager.instance.playerSettings.keys["dash"]} to Dash");
         objectives.Add($"Press {gameManager.instance.playerSettings.keys["jump"]} to Jump");
