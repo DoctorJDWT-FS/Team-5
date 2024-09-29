@@ -188,7 +188,7 @@ public class playerController : MonoBehaviour, IDamage
         myAnimator.SetFloat("LR", moveX);
         myAnimator.SetFloat("FB", moveZ);
 
-        if (Input.GetKeyDown(playerSettings.jump) && jumpCount < jumpMax)
+        if (Input.GetKeyDown(gameManager.instance.playerSettings.keys["jump"]) && jumpCount < jumpMax)
         {
             jumpCount++;
             playerVel.y = jumpSpeed;
@@ -201,7 +201,7 @@ public class playerController : MonoBehaviour, IDamage
     // Method to handle sliding input
     void Slide()
     {
-        if (Input.GetKeyDown(playerSettings.slide) && canSlide && isSprinting && !isSliding)
+        if (Input.GetKeyDown(gameManager.instance.playerSettings.keys["slide"]) && canSlide && isSprinting && !isSliding)
         {
             StartCoroutine(PerformSlide());
         }
@@ -234,15 +234,15 @@ public class playerController : MonoBehaviour, IDamage
     // Method to handle dash and sprint input
     void HandleDashAndSprint()
     {
-        if (Input.GetKeyDown(playerSettings.dash) && canDash && !isSprinting && !isDashing)
+        if (Input.GetKeyDown(gameManager.instance.playerSettings.keys["dash"]) && canDash && !isSprinting && !isDashing)
         {
             StartCoroutine(PerformDash());
         }
-        else if (Input.GetKey(playerSettings.sprint) && !isDashing && !isSliding && IsMovingForwardOnly())
+        else if (Input.GetKey(gameManager.instance.playerSettings.keys["sprint"]) && !isDashing && !isSliding && IsMovingForwardOnly())
         {
             StartSprinting();
         }
-        else if (Input.GetKeyUp(playerSettings.sprint))
+        else if (Input.GetKeyUp(gameManager.instance.playerSettings.keys["sprint"]))
         {
             StopSprinting();
         }
@@ -318,7 +318,7 @@ public class playerController : MonoBehaviour, IDamage
     // Method to handle punch input
     void HandlePunch()
     {
-        if (Input.GetKeyDown(playerSettings.punch))
+        if (Input.GetKeyDown(gameManager.instance.playerSettings.keys["punch"]))
         {
             Punch();
         }
@@ -385,14 +385,14 @@ public class playerController : MonoBehaviour, IDamage
         if (gameManager.instance.isPaused || (shopInteractable.instance != null && shopInteractable.instance.isPaused))
             return;
 
-        if (Input.GetKey(playerSettings.shoot) && !isSprinting && !isReloading)
+        if (Input.GetKey(gameManager.instance.playerSettings.keys["shoot"]) && !isSprinting && !isReloading)
         {
             //Debug.Log("Shoot Input Detected");
             myAnimator.SetTrigger("Shoot");
             shootInput?.Invoke();
         }
 
-        if (Input.GetKeyDown(playerSettings.reload))
+        if (Input.GetKeyDown(gameManager.instance.playerSettings.keys["reload"]))
         {
             //Debug.Log("Reload Input Detected");
             reloadInput?.Invoke();
@@ -603,11 +603,11 @@ public class playerController : MonoBehaviour, IDamage
     {
         if (!isDead && !isSprinting && !isDashing && !isShooting)
         {
-            if (Input.GetKeyDown(playerSettings.grenade))
+            if (Input.GetKeyDown(gameManager.instance.playerSettings.keys["grenade"]))
             {
                 grenade.startHoldingGrenade(grenade.currentGrenadeStats);
             }
-            if (Input.GetKeyUp(playerSettings.grenade))
+            if (Input.GetKeyUp(gameManager.instance.playerSettings.keys["grenade"]))
             {
                 grenade.stopHoldingGrenade();
             }

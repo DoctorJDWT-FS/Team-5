@@ -48,7 +48,7 @@ public class Throwgrenade : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKey(playerSettings.grenade))
+        if (Input.GetKey(gameManager.instance.playerSettings.keys["grenade"]))
         {
             if (Input.GetAxis("Mouse ScrollWheel") > 0)
             {

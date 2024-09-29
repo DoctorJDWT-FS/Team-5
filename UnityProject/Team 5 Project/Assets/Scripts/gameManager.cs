@@ -32,6 +32,7 @@ public class gameManager : MonoBehaviour
     [Header("----- Player -----")]
     public playerController playerScript;
     public cameraController cameraScript;
+    public PlayerSettings playerSettings;
     public iWallet playerWallet;
 
     [Header("----- Reticle -----")]
@@ -89,6 +90,7 @@ public class gameManager : MonoBehaviour
         playerScript = player.GetComponent<playerController>();
         playerWallet = player.GetComponent<iWallet>();
         cameraScript = player.GetComponentInChildren<cameraController>();
+        playerSettings = player.GetComponent<PlayerSettings>();
         
     }
 

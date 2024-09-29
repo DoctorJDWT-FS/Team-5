@@ -11,7 +11,7 @@ public class tutorialManager : MonoBehaviour
 
     [SerializeField] TMP_Text currentMission;
     [SerializeField] buttonFunctions buttonFuncScript;
-    [SerializeField] PlayerSettings playerSettings;
+    [SerializeField] public PlayerSettings playerSettings;
     [SerializeField] AudioSource audPlayer;
     [SerializeField] AudioClip taskSound;
 
@@ -30,13 +30,13 @@ public class tutorialManager : MonoBehaviour
         
         playerSettings = FindObjectOfType<PlayerSettings>();
         //grabs the script from the player settng and adust the button 
-        objectives.Add($"Press {playerSettings.moveForward}, {playerSettings.strafeLeft}, {playerSettings.moveBackward}, {playerSettings.strafeRight} to Move Around");
-        objectives.Add($"Press {playerSettings.sprint} to Sprint");
-        objectives.Add($"Press {playerSettings.dash} to Dash");
-        objectives.Add($"Press {playerSettings.jump} to Jump");
-        objectives.Add($"Press {playerSettings.punch} to Punch");
-        objectives.Add($"Press {playerSettings.grenade} to throw a grenade");
-        objectives.Add($"Click {playerSettings.shoot} to Shoot");
+        objectives.Add($"Press {gameManager.instance.playerSettings.keys["moveForward"]}, {gameManager.instance.playerSettings.keys["strafeleft"]}, {gameManager.instance.playerSettings.keys["moveBackwards"]}, {gameManager.instance.playerSettings.keys["straferight"]} to Move Around");
+        objectives.Add($"Press {gameManager.instance.playerSettings.keys["sprint"]} to Sprint");
+        objectives.Add($"Press {gameManager.instance.playerSettings.keys["dash"]} to Dash");
+        objectives.Add($"Press {gameManager.instance.playerSettings.keys["jump"]} to Jump");
+        objectives.Add($"Press {gameManager.instance.playerSettings.keys["punch"]} to Punch");
+        objectives.Add($"Press {gameManager.instance.playerSettings.keys["grenade"]} to throw a grenade");
+        objectives.Add($"Click {gameManager.instance.playerSettings.keys["shoot"]} to Shoot");
         objectives.Add("Buy a health upgrade at the store");
         objectives.Add("Open a Door");
         currentMission.text = objectives[currentObjective];
@@ -84,14 +84,14 @@ public class tutorialManager : MonoBehaviour
 
     void movementMission()
     {
-        if (Input.GetKey(playerSettings.moveForward) || Input.GetKey(playerSettings.strafeLeft) || Input.GetKey(playerSettings.moveBackward) || Input.GetKey(playerSettings.strafeRight))
+        if (Input.GetKey(gameManager.instance.playerSettings.keys["moveForward"]) || Input.GetKey(gameManager.instance.playerSettings.keys["strafeLeft"]) || Input.GetKey(gameManager.instance.playerSettings.keys["moveBackwards"]) || Input.GetKey(gameManager.instance.playerSettings.keys["strafeRight"]))
         {
             MissionComplete();
         }
     }
     void SprintMission()
     {
-        if (Input.GetKey(playerSettings.sprint))
+        if (Input.GetKey(gameManager.instance.playerSettings.keys["sprint"]))
         {
             MissionComplete();
         }
@@ -99,14 +99,14 @@ public class tutorialManager : MonoBehaviour
 
     void DashMission()
     {
-        if (Input.GetKey(playerSettings.dash))
+        if (Input.GetKey(gameManager.instance.playerSettings.keys["dash"]))
         {
             MissionComplete();
         }
     }
     void JumpMission()
     {
-        if (Input.GetKey(playerSettings.jump))
+        if (Input.GetKey(gameManager.instance.playerSettings.keys["jump"]))
         {
             MissionComplete();
         }
@@ -114,7 +114,7 @@ public class tutorialManager : MonoBehaviour
 
     void MeleeMission()
     {
-        if (Input.GetKey(playerSettings.punch))
+        if (Input.GetKey(gameManager.instance.playerSettings.keys["punch"]))
         {
             MissionComplete();
             gameManager.instance.curFireGrenades = gameManager.instance.maxFireGrenades;
@@ -123,14 +123,14 @@ public class tutorialManager : MonoBehaviour
     }
     void GrenadeMission()
     {
-        if (Input.GetKey(playerSettings.grenade))
+        if (Input.GetKey(gameManager.instance.playerSettings.keys["grenade"]))
         {
             MissionComplete();
         }
     }
     void ShootMission()
     {
-        if (Input.GetKey(playerSettings.shoot))
+        if (Input.GetKey(gameManager.instance.playerSettings.keys["shoot"]))
         {
             MissionComplete();
             storeMission = true;

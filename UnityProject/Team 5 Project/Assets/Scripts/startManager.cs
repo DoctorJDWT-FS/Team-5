@@ -38,14 +38,11 @@ public class startManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-        loadSettings();
     }
 
     private void Start()
     {
-        playerSettings = GetComponent<PlayerSettings>();
         AudioManager.instance.PlayMainMenuMusic();
-        playerSettings.LoadSettings();
     }
 
 
