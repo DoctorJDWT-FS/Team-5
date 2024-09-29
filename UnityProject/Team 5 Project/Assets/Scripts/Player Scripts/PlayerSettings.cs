@@ -115,4 +115,29 @@ public class PlayerSettings : MonoBehaviour
         // Ensure the settings are saved
         PlayerPrefs.Save();
     }
+
+    void UpdateSettings()
+    {
+        sprintKeyText.text = sprint.ToString();
+        slideKeyText.text = slide.ToString();
+        dashKeyText.text = dash.ToString();
+        jumpKeyText.text = jump.ToString();
+        moveForwardKeyText.text = moveBackward.ToString();
+        moveBackwardKeyText.text = moveBackward.ToString();
+        strafeLeftKeyText.text = strafeLeft.ToString();
+        strafeRightKeyText.text = strafeRight.ToString();
+        enterKeyText.text = enter.ToString();
+        exitKeyText.text = exit.ToString();
+        upKeyText.text = up.ToString();
+        downKeyText.text = down.ToString();
+        leftKeyText.text = strafeLeft.ToString();
+        rightKeyText.text = strafeRight.ToString();
+        shootKeyText.text = shoot.ToString();
+        aimKeyText.text = aim.ToString();
+        reloadKeyText.text = reload.ToString();
+        interactKeyText.text = interact.ToString();
+        punchKeyText.text = punch.ToString();
+        grenadeKeyText.text = grenade.ToString();
+        displayPlayerStatsKeyText.text = displayPlayerStats.ToString();
+    }
 }

@@ -31,7 +31,7 @@ public class startManager : MonoBehaviour
     [SerializeField] AudioClip backgroundMusic;
 
 
-
+    PlayerSettings playerSettings;
     int MenuPosition;
     private Image currentHighlight;
 
@@ -43,7 +43,9 @@ public class startManager : MonoBehaviour
 
     private void Start()
     {
+        playerSettings = GetComponent<PlayerSettings>();
         AudioManager.instance.PlayMainMenuMusic();
+        playerSettings.LoadSettings();
     }
 
 
