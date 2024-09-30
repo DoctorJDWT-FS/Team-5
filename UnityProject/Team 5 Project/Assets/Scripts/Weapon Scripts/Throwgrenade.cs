@@ -20,7 +20,6 @@ public class Throwgrenade : MonoBehaviour
 
     [Header("----- Settings -----")]
     [SerializeField] float destroyTime = 3f;
-    [SerializeField] float minThrowAngle = -0.3f;
     [SerializeField] float minDistanceFromPlayer = 2.75f;
     [SerializeField] LayerMask groundMask;
 

@@ -15,7 +15,6 @@ public class BossZombieAI : MonoBehaviour, IDamage
     [SerializeField] private float rageMultiplier = 2f;
     private float originalSpeedWalking;
     private float originalSpeedSprinting;
-    private bool isStunned;
 
     // Attack settings for different attacks, including range, cooldowns, damage, and animation durations.
     [Header("--- Attack Settings ---")]
@@ -209,7 +208,6 @@ public class BossZombieAI : MonoBehaviour, IDamage
     }
     public void applyStun(float duration)
     {
-        isStunned = true;
         StartCoroutine(RemoveStunAfterDuration(duration));
     }
     private IEnumerator RemoveSlowAfterDuration(float duration)
@@ -224,7 +222,6 @@ public class BossZombieAI : MonoBehaviour, IDamage
         walkingSpeed = 0;
         sprintSpeed = 0;
         yield return new WaitForSeconds(duration);
-        isStunned = false;
         walkingSpeed = originalSpeedWalking;
         sprintSpeed = originalSpeedSprinting;
     }

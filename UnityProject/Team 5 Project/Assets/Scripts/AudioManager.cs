@@ -16,8 +16,8 @@ public class AudioManager : MonoBehaviour
         {
             instance = this;
 
-            // Ensure the object is at the root level before calling DontDestroyOnLoad
-            transform.parent = null;
+            // Use SetParent instead of setting parent directly
+            transform.SetParent(null, false);
             DontDestroyOnLoad(gameObject);
 
             audioSource = GetComponent<AudioSource>();
