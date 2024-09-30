@@ -118,7 +118,7 @@ public class basicZombieAI : MonoBehaviour, IDamage
         HP -= amount;
         audPlayer.clip = damagedSounds;
         audPlayer.Play();
-        StartCoroutine(StunnedState());
+        //StartCoroutine(StunnedState());
         StartCoroutine(flashDamage());
 
         if (HP <= 0)
@@ -163,7 +163,6 @@ public class basicZombieAI : MonoBehaviour, IDamage
         sprintSpeed = tempSprintSpeed;
         walkingSpeed = tempWalkingSpeed;
         speedTrans = tempSpeedTrans;
-
     }
 
     public  virtual int getMeleeDmg()
