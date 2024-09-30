@@ -21,23 +21,27 @@ public class grenadeStats : ScriptableObject
     public GameObject floorEffectStyle;
     public AudioClip explosionSound;
     public float explosionVolume;
+
+
     public grenadeStats Clone()
     {
-        return new grenadeStats
-        {
-            grenadeModel = this.grenadeModel,
+        grenadeStats clonedStats = ScriptableObject.CreateInstance<grenadeStats>();
 
-            explosionDamage = this.explosionDamage,
-            explosionRadius = this.explosionRadius,
-            throwForce = this.throwForce,
-            floorEffect = this.floorEffect,
+        clonedStats.grenadeModel = this.grenadeModel;
+        clonedStats.explosionDamage = this.explosionDamage;
+        clonedStats.explosionRadius = this.explosionRadius;
+        clonedStats.throwForce = this.throwForce;
+        clonedStats.floorEffect = this.floorEffect;
 
-            effectDuration = this.effectDuration,
-            explosionEffect = this.explosionEffect,
-            floorEffectStyle = this.floorEffectStyle,
-            explosionSound = this.explosionSound,
-            explosionVolume = this.explosionVolume,
-         };
+        clonedStats.effectDuration = this.effectDuration;
+        clonedStats.explosionEffect = this.explosionEffect;
+        clonedStats.floorEffectStyle = this.floorEffectStyle;
+        clonedStats.explosionSound = this.explosionSound;
+        clonedStats.explosionVolume = this.explosionVolume;
+
+        return clonedStats;
     }
+
+
 
 }
