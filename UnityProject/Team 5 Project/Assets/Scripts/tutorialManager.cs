@@ -30,13 +30,13 @@ public class tutorialManager : MonoBehaviour
         
         playerSettings = FindObjectOfType<PlayerSettings>();
         //grabs the script from the player setting and adjust the button 
-        objectives.Add($"Press {gameManager.instance.playerSettings.keys["moveForward"]}, {gameManager.instance.playerSettings.keys["strafeLeft"]}, {gameManager.instance.playerSettings.keys["moveBackwards"]}, {gameManager.instance.playerSettings.keys["strafeRight"]} to Move Around");
-        objectives.Add($"Press {gameManager.instance.playerSettings.keys["sprint"]} to Sprint");
-        objectives.Add($"Press {gameManager.instance.playerSettings.keys["dash"]} to Dash");
-        objectives.Add($"Press {gameManager.instance.playerSettings.keys["jump"]} to Jump");
-        objectives.Add($"Press {gameManager.instance.playerSettings.keys["punch"]} to Punch");
-        objectives.Add($"Press {gameManager.instance.playerSettings.keys["grenade"]} to throw a grenade");
-        objectives.Add($"Click {gameManager.instance.playerSettings.keys["shoot"]} to Shoot");
+        objectives.Add("Press W, A, S, D to Move Around");
+        objectives.Add("Press Left Shift to Sprint");
+        objectives.Add("Press Left Control to Dash");
+        objectives.Add("Press Space to Jump");
+        objectives.Add("Press V to Punch");
+        objectives.Add("Press G to throw a grenade");
+        objectives.Add("Click Left Mouse Button to Shoot");
         objectives.Add("Buy a health upgrade at the store");
         objectives.Add("Open a Door");
         currentMission.text = objectives[currentObjective];
