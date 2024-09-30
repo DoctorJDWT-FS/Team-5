@@ -8,7 +8,7 @@ public class AudioManager : MonoBehaviour
 
     [Header("----- Music Clips -----")]
     public AudioClip mainMenuMusic;
-    public AudioClip gameplayMusic;  
+    public AudioClip gameplayMusic;
 
     void Awake()
     {
@@ -16,7 +16,10 @@ public class AudioManager : MonoBehaviour
         {
             instance = this;
 
+            // Ensure the object is at the root level before calling DontDestroyOnLoad
+            transform.parent = null;
             DontDestroyOnLoad(gameObject);
+
             audioSource = GetComponent<AudioSource>();
         }
         else
