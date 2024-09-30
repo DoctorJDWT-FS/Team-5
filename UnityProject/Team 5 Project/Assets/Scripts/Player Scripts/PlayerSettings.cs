@@ -1,101 +1,106 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
+
 using UnityEngine;
 
 public class PlayerSettings : MonoBehaviour
 {
+    [Header("----- Movement Controls -----")]
+    public KeyCode sprint = KeyCode.LeftShift;
+    public KeyCode slide = KeyCode.C;
+    public KeyCode dash = KeyCode.LeftControl;
+    public KeyCode jump = KeyCode.Space;
+    public KeyCode moveForward = KeyCode.W;
+    public KeyCode moveBackward = KeyCode.S;
+    public KeyCode strafeLeft = KeyCode.A;
+    public KeyCode strafeRight = KeyCode.D;
 
-    public Dictionary<string, KeyCode> keys = new Dictionary<string, KeyCode>();
+    [Header("----- Menu Navigation Controls -----")]
+    public KeyCode enter = KeyCode.Return;
+    public KeyCode exit = KeyCode.Escape;
+    public KeyCode up = KeyCode.W;
+    public KeyCode down = KeyCode.S;
+    public KeyCode left = KeyCode.A;
+    public KeyCode right = KeyCode.D;
+    public KeyCode displayPlayerStats = KeyCode.Tilde; // added stat screen menu
 
-    [SerializeField] public TMP_Text sprint, slide, dash, jump, moveForward, moveBackward, strafeLeft, strafeRight, enter, exit,
-        up, down, left, right, shoot, aim, reload, interact, punch, grenade, displayPlayerStats;
+    [Header("----- Combat Controls -----")]
+    public KeyCode shoot = KeyCode.Mouse0;
+    public KeyCode aim = KeyCode.Mouse1;
+    public KeyCode reload = KeyCode.R;
+    public KeyCode interact = KeyCode.E;
+    public KeyCode punch = KeyCode.V; // Added punch key
+    public KeyCode grenade = KeyCode.G; // Added grenade key
 
-    private GameObject currkey;
-    // Start is called before the first frame update
+
+
+
+
     void Start()
     {
-        keys.Add("sprint", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("sprint", KeyCode.LeftShift.ToString())));
-        keys.Add("slide", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("slide", KeyCode.C.ToString())));
-        keys.Add("dash", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("dash", KeyCode.LeftControl.ToString())));
-        keys.Add("jump", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("jump", KeyCode.Space.ToString())));
-        keys.Add("moveForward", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("moveForward", KeyCode.W.ToString())));
-        keys.Add("moveBackwards", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("moveBackward", KeyCode.S.ToString())));
-        keys.Add("strafeLeft", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("strafeLeft", KeyCode.A.ToString())));
-        keys.Add("strafeRight", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("strafeRight", KeyCode.D.ToString())));
-        keys.Add("enter", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("enter", KeyCode.Return.ToString())));
-        keys.Add("exit", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("exit", KeyCode.Escape.ToString())));
-        keys.Add("up", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("up", KeyCode.W.ToString())));
-        keys.Add("down", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("down", KeyCode.S.ToString())));
-        keys.Add("right", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("right", KeyCode.D.ToString())));
-        keys.Add("left", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("left", KeyCode.A.ToString())));
-        keys.Add("displayPlayerStats", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("displayPlayerStats", KeyCode.Tilde.ToString()))); // Load stat menu key
-        keys.Add("shoot", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("shoot", KeyCode.Mouse0.ToString())));
-        keys.Add("aim", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("aim", KeyCode.Mouse1.ToString())));
-        keys.Add("reload", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("reload", KeyCode.R.ToString())));
-        keys.Add("interact", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("interact", KeyCode.E.ToString())));
-        keys.Add("punch", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("punch", KeyCode.V.ToString()))); // Load punch key
-        keys.Add("grenade", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("grenade", KeyCode.G.ToString()))); // Load grenade key
-
-        sprint.text = keys["sprint"].ToString();
-        slide.text = keys["slide"].ToString();
-        dash.text = keys["dash"].ToString();
-        jump.text = keys["jump"].ToString();
-        moveForward.text = keys["moveForward"].ToString();
-        moveBackward.text = keys["moveBackwards"].ToString();
-        strafeLeft.text = keys["strafeLeft"].ToString();
-        strafeRight.text = keys["strafeRight"].ToString();
-        enter.text = keys["enter"].ToString();
-        exit.text = keys["exit"].ToString();
-        up.text = keys["up"].ToString();
-        down.text = keys["down"].ToString();
-        left.text = keys["left"].ToString();
-        right.text = keys["right"].ToString();
-        displayPlayerStats.text = keys["displayPlayerStats"].ToString();
-        shoot.text = keys["shoot"].ToString();
-        aim.text = keys["aim"].ToString();
-        reload.text = keys["reload"].ToString();
-        interact.text = keys["interact"].ToString();
-        punch.text = keys["punch"].ToString();
-        grenade.text = keys["grenade"].ToString();
-
+        // Load settings from player preferences
+        LoadSettings();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    public void LoadSettings()
 
+    {
+        // Load each setting from player preferences, or use the default if not set
+        sprint = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("sprint", sprint.ToString()));
+        slide = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("slide", slide.ToString()));
+        dash = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("dash", dash.ToString()));
+        jump = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("jump", jump.ToString()));
+        moveForward = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("moveForward", moveForward.ToString()));
+        moveBackward = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("moveBackward", moveBackward.ToString()));
+        strafeLeft = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("strafeLeft", strafeLeft.ToString()));
+        strafeRight = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("strafeRight", strafeRight.ToString()));
+        enter = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("enter", enter.ToString()));
+        exit = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("exit", exit.ToString()));
+        up = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("up", up.ToString()));
+        down = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("down", down.ToString()));
+        left = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("left", left.ToString()));
+        right = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("right", right.ToString()));
+        shoot = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("shoot", shoot.ToString()));
+        aim = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("aim", aim.ToString()));
+        reload = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("reload", reload.ToString()));
+        interact = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("interact", interact.ToString()));
+        punch = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("punch", punch.ToString())); // Load punch key
+        grenade = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("grenade", grenade.ToString())); // Load grenade key
+        displayPlayerStats = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("displayPlayerStats", displayPlayerStats.ToString())); // Load stat menu key
     }
 
-    private void OnGUI()
+    public void SaveSettings()
     {
-        if (currkey != null)
-        {
-            Event e = Event.current;
-            if (e.isKey)
-            {
-                keys[currkey.name] = e.keyCode;
-                currkey.transform.GetChild(0).GetComponent<TMP_Text>().text = e.keyCode.ToString();
-                currkey = null;
-            }
-        }
-    }
-    public void ChangeKey(GameObject clicked)
-    {
-        currkey = clicked;
-    }
-
-    public void SaveKeys()
-    {
-        foreach (var key in keys)
-        {
-            // Save each setting to player preferences
-            PlayerPrefs.SetString(key.Key, key.Value.ToString());
-        }
+        // Save each setting to player preferences
+        PlayerPrefs.SetString("sprint", sprint.ToString());
+        PlayerPrefs.SetString("slide", slide.ToString());
+        PlayerPrefs.SetString("dash", dash.ToString());
+        PlayerPrefs.SetString("jump", jump.ToString());
+        PlayerPrefs.SetString("moveForward", moveForward.ToString());
+        PlayerPrefs.SetString("moveBackward", moveBackward.ToString());
+        PlayerPrefs.SetString("strafeLeft", strafeLeft.ToString());
+        PlayerPrefs.SetString("strafeRight", strafeRight.ToString());
+        PlayerPrefs.SetString("enter", enter.ToString());
+        PlayerPrefs.SetString("exit", exit.ToString());
+        PlayerPrefs.SetString("up", up.ToString());
+        PlayerPrefs.SetString("down", down.ToString());
+        PlayerPrefs.SetString("left", left.ToString());
+        PlayerPrefs.SetString("right", right.ToString());
+        PlayerPrefs.SetString("shoot", shoot.ToString());
+        PlayerPrefs.SetString("aim", aim.ToString());
+        PlayerPrefs.SetString("reload", reload.ToString());
+        PlayerPrefs.SetString("interact", interact.ToString());
+        PlayerPrefs.SetString("punch", punch.ToString()); // Save punch key
+        PlayerPrefs.SetString("grenade", grenade.ToString()); // Save grenade key
+        PlayerPrefs.SetString("displayPlayerStats", displayPlayerStats.ToString()); // save stat menu key
 
         // Ensure the settings are saved
         PlayerPrefs.Save();
+
+
+
+
     }
-    
+
 }
