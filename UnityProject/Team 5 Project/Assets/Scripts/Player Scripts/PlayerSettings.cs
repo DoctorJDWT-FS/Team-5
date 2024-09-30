@@ -38,28 +38,27 @@ public class PlayerSettings : MonoBehaviour
         keys.Add("punch", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("punch", KeyCode.V.ToString()))); // Load punch key
         keys.Add("grenade", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("grenade", KeyCode.G.ToString()))); // Load grenade key
 
-        sprint.text = keys["sprint"].ToString();
-        slide.text = keys["slide"].ToString();
-        dash.text = keys["dash"].ToString();
-        jump.text = keys["jump"].ToString();
-        moveForward.text = keys["moveForward"].ToString();
-        moveBackward.text = keys["moveBackwards"].ToString();
-        strafeLeft.text = keys["strafeLeft"].ToString();
-        strafeRight.text = keys["strafeRight"].ToString();
-        enter.text = keys["enter"].ToString();
-        exit.text = keys["exit"].ToString();
-        up.text = keys["up"].ToString();
-        down.text = keys["down"].ToString();
-        left.text = keys["left"].ToString();
-        right.text = keys["right"].ToString();
-        displayPlayerStats.text = keys["displayPlayerStats"].ToString();
-        shoot.text = keys["shoot"].ToString();
-        aim.text = keys["aim"].ToString();
-        reload.text = keys["reload"].ToString();
-        interact.text = keys["interact"].ToString();
-        punch.text = keys["punch"].ToString();
-        grenade.text = keys["grenade"].ToString();
-
+        if (sprint != null) sprint.text = keys["sprint"].ToString();
+        if (slide != null) slide.text = keys["slide"].ToString();
+        if (dash != null) dash.text = keys["dash"].ToString();
+        if (jump != null) jump.text = keys["jump"].ToString();
+        if (moveForward != null) moveForward.text = keys["moveForward"].ToString();
+        if (moveBackward != null) moveBackward.text = keys["moveBackwards"].ToString();
+        if (strafeLeft != null) strafeLeft.text = keys["strafeLeft"].ToString();
+        if (strafeRight != null) strafeRight.text = keys["strafeRight"].ToString();
+        if (enter != null) enter.text = keys["enter"].ToString();
+        if (exit != null) exit.text = keys["exit"].ToString();
+        if (up != null) up.text = keys["up"].ToString();
+        if (down != null) down.text = keys["down"].ToString();
+        if (left != null) left.text = keys["left"].ToString();
+        if (right != null) right.text = keys["right"].ToString();
+        if (displayPlayerStats != null) displayPlayerStats.text = keys["displayPlayerStats"].ToString();
+        if (shoot != null) shoot.text = keys["shoot"].ToString();
+        if (aim != null) aim.text = keys["aim"].ToString();
+        if (reload != null) reload.text = keys["reload"].ToString();
+        if (interact != null) interact.text = keys["interact"].ToString();
+        if (punch != null) punch.text = keys["punch"].ToString();
+        if (grenade != null) grenade.text = keys["grenade"].ToString();
     }
 
     // Update is called once per frame
