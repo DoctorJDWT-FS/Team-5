@@ -1,0 +1,51 @@
+// Inside Update_VulkanRenderer
+// After binding vertex and index buffers
+
+// Create a group of all entities with GeometryData and GPUInstance
+auto instances = registry.group<GeometryData, GPUInstance>();
+
+// Sort the group by GeometryData to batch similar meshes
+instances.sort<GeometryData>([](const GeometryData& a, const GeometryData& b) {
+  return a < b;
+});
+
+// Prepare containers for our draw calls
+std::map<GeometryData, int> geometryMap;
+std::vector<GPUInstance> instanceData;
+
+// Populate our containers
+for (auto entity : instances) {
+  const auto& geometry = instances.get<GeometryData>(entity);
+  const auto& instance = instances.get<GPUInstance>(entity);
+  
+  instanceData.push_back(instance);
+  
+  auto it = geometryMap.find(geometry);
+  if (it != geometryMap.end()) {
+    it->second++; // Increment instance count for this geometry
+  } else {
+    geometryMap[geometry] = 1; // First instance of this geometry
+  }
+}
+
+// Update GPU buffer with instance data
+registry.emplace<std::vector<GPUInstance>>(renderer, instanceData);
+registry.patch<VulkanGPUInstanceBuffer>(renderer);
+
+// Bind descriptor sets
+// ...
+
+// Draw all geometries
+int instanceOffset = 0;
+for (const auto& [geometry, instanceCount] : geometryMap) {
+  vkCmdDrawIndexed(
+    commandBuffer,
+    geometry.indexCount,
+    instanceCount,
+    geometry.indexStart,
+    0,
+    instanceOffset
+  );
+  
+  instanceOffset += instanceCount;
+}

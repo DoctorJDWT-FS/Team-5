@@ -1,0 +1,11 @@
+// In the GraphicsBehavior() function, add these lines where the TODOs are for emplacing components:
+
+// Get level data from the config
+std::string jsonPath = (*config)["Level1"]["json"].String();
+std::string modelFolder = (*config)["Level1"]["models"].String();
+
+// Emplace CPU Level component
+registry.emplace<CPULevel>(renderer, jsonPath, modelFolder);
+
+// Emplace GPU Level component
+registry.emplace<GPULevel>(renderer);
