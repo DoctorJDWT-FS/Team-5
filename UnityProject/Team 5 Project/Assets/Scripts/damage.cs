@@ -22,17 +22,17 @@ public class damage : MonoBehaviour
 
         if(type == damageType.bullet)
         {
-            rb.velocity = transform.forward * speed;
+            rb.linearVelocity = transform.forward * speed;
             Destroy(gameObject, destroyTime);
         }
         if(type == damageType.enemyBullet)
         {
-            rb.velocity = (gameManager.instance.player.transform.position - (transform.position - new Vector3(0, 1, 0))).normalized * speed;
+            rb.linearVelocity = (gameManager.instance.player.transform.position - (transform.position - new Vector3(0, 1, 0))).normalized * speed;
             Destroy(gameObject, destroyTime);
         }
         if(type == damageType.DroneBullet)
         {
-            rb.velocity = (transform.forward - new Vector3(0, .1f, 0)).normalized * speed;
+            rb.linearVelocity = (transform.forward - new Vector3(0, .1f, 0)).normalized * speed;
             Destroy(gameObject, destroyTime);
         }
     }
